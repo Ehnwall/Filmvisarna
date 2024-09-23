@@ -3,7 +3,7 @@ import { Container, Row, Col, Button, Image, Card } from 'react-bootstrap'
 
 const ConfirmationPage = () => {
   return (
-    <Container className="mt-3 p-4 bg-body-tertiary">
+    <Container className="mt-3 p-4 mb-5 bg-body-tertiary">
       <Card className="mb-6 text-center">
         <Card.Body>
           <Card.Title>Din bokning är nu klar</Card.Title>
@@ -32,7 +32,7 @@ const ConfirmationPage = () => {
           <Image
             src="https://img.fruugo.com/product/7/41/14532417_max.jpg"
             rounded
-            alt="Confirmation"
+            alt="Confirmed movie picture"
             style={{ width: '250px', height: '250px' }}
           />
         </Col>
