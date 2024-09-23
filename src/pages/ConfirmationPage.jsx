@@ -14,26 +14,26 @@ const ConfirmationPage = () => {
       <Row>
         <Col md={6} className="d-flex justify-content-center p-5">
           <div>
-            <h5>Title:</h5>
-            <ul className="list-unstyled">
-              <li>Datum och tid:</li>
-              <li>Plats:</li>
+            <h5>Title: Avengers</h5>
+            <ul className="list-unstyled ">
+              <li>Datum och tid: 2024-09-23</li>
+              <li>Plats: Sturegatan 21</li>
               <li>
-                <h5>Stolsnummer:</h5>
+                <h5>Stolsnummer: 34</h5>
               </li>
-              <li className="pt-5">Total summa:</li>
+              <li className="pt-5">Total summa: 240kr</li>
               <li>
                 <p>En orderbekräftelse kommer på mailen</p>
               </li>
             </ul>
           </div>
         </Col>
-        <Col md={6} className="d-flex justify-content-center pt-4">
+        <Col md={6} className="d-flex justify-content-center pt-4 ">
           <Image
             src="https://img.fruugo.com/product/7/41/14532417_max.jpg"
-            rounded
             alt="Confirmed movie picture"
-            style={{ width: '250px', height: '250px' }}
+            className="img-fluid w-100 w-md-25 p-3"
+            style={{ maxWidth: '300px', height: 'auto' }}
           />
         </Col>
       </Row>
