@@ -1,0 +1,28 @@
+$transition: 0.3s ease;
+
+@each $color, $value in $theme-colors {
+    .btn-#{$color} {
+        position: relative;
+        &::after {
+            content: '';
+            z-index: -1;
+            position: absolute;
+            inset: -2px;
+            transition: background-color $transition, filter $transition;
+        }
+        &:hover::after {
+            background-color: $value;
+            filter: blur(0.5rem);
+        }
+    }
+}
+.mockup-flex {
+    display: flex;
+    gap: 1rem;
+}
+.card-img-top {
+    transition: scale $transition;
+}
+.card:hover .card-img-top {
+    scale: 1.05;
+}
