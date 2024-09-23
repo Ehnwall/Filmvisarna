@@ -1,0 +1,26 @@
+.datepicker-input::-webkit-calendar-picker-indicator {
+    color: lime;
+}
+
+input[type='date'] {
+    padding: 5px;
+    padding-inline: 10px;
+    border: 2px solid $primary;
+    font-size: 18px;
+    outline: none;
+    border-radius: 5px;
+    width: 15rem;
+}
+
+.horizontal-scrollable > .rowcard {
+    display: flex;
+    gap: 0.8rem;
+    overflow-x: auto;
+    scroll-snap-type: mandatory;
+    white-space: nowrap;
+}
+
+.horizontal-scrollable > .rowcard > .colcard {
+    display: inline-block;
+    float: none;
+}

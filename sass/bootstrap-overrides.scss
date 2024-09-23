@@ -30,3 +30,15 @@ $container-max-widths: (
 $card-border-width: 0;
 $card-spacer-x: 1rem;
 $card-spacer-y: 1.5rem;
+
+//carussel
+
+$carousel-indicator-width: 5rem;
+$carousel-indicator-height: 0.5rem;
+$carousel-indicator-hit-area-height: 10px;
+$carousel-indicator-spacer: 3px;
+
+$carousel-control-icon-width: 5rem;
+
+$carousel-dark-indicator-active-bg: $primary;
+$carousel-dark-caption-color: $body-color;
