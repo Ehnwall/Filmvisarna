@@ -1,0 +1,14 @@
+{
+  "semi": false,
+  "printWidth": 120,
+  "tabWidth": 4,
+  "singleQuote": true,
+  "overrides": [
+    {
+      "files": "*.jsx",
+      "options": {
+        "tabWidth": 2
+      }
+    }
+  ]
+}
