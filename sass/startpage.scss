@@ -30,3 +30,11 @@ input[type='date'] {
     display: inline-block;
     float: none;
 }
+
+.card-dates {
+    cursor: pointer;
+    transition: background-color $transition;
+    &:hover {
+        background-color: $primary;
+    }
+}

@@ -32,7 +32,7 @@ $card-spacer-x: 1rem;
 $card-spacer-y: 1.5rem;
 
 //carussel
-
+$carousel-control-color: $primary;
 $carousel-indicator-width: 3rem;
 $carousel-indicator-height: 0.2rem;
 $carousel-indicator-hit-area-height: 10px;
@@ -42,3 +42,4 @@ $carousel-control-icon-width: 5rem;
 
 $carousel-dark-indicator-active-bg: $primary;
 $carousel-dark-caption-color: $body-color;
+$carousel-dark-control-icon-filter: $primary;
