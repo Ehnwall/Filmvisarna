@@ -11,6 +11,18 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import { BsArrowDown, BsArrowDownCircle, BsClock, BsCalendar } from 'react-icons/bs'
 import Badge from 'react-bootstrap/Badge'
 
+const booking = {
+    title: 'Avengers',
+    timeHour: 2,
+    timeMin: 15,
+    type: 'Action',
+    age: 15,
+    dates: '24/09',
+    sceenTime: '19:30',
+}
+
+const ages = ['6-12', '12-25', '25-65', 'Alla åldrar']
+
 export default function StartPage() {
     return (
         <>
@@ -47,21 +59,26 @@ export default function StartPage() {
                 </Carousel.Item>
             </Carousel>
 
-            <Container className="py-5">
+            <Container className="py-4">
                 <div className="d-flex justify-content-center">
                     <h1>Aktuella filmer</h1>
                 </div>
 
-                <Stack className="mb-2" direction="horizontal" gap={3}>
+                <Stack className="mb-2 mt-3" direction="horizontal" gap={3}>
                     <Dropdown>
-                        <Dropdown.Toggle className="btn-filter" variant="primary" id="dropdown-basic">
+                        <Dropdown.Toggle
+                            className="btn-filter d-flex align-items-center"
+                            variant="primary"
+                            id="dropdown-basic"
+                        >
                             Åldrar <BsArrowDown />
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">6-12</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">12-25</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">25-65</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Alla åldrar</Dropdown.Item>
+                            {ages.map((ages, index) => (
+                                <Dropdown.Item href="/" key={index}>
+                                    {ages}
+                                </Dropdown.Item>
+                            ))}
                         </Dropdown.Menu>
                     </Dropdown>
                     <Button className="btn-filter" variant="secondary">
@@ -78,12 +95,14 @@ export default function StartPage() {
                                         src="https://img.fruugo.com/product/7/41/14532417_max.jpg"
                                     />
                                 </div>
-                                <Card.Body className="">
-                                    <Card.Title>Avengers</Card.Title>
-                                    <Card.Text>Action</Card.Text>
+                                <Card.Body>
+                                    <Card.Title>{booking.title}</Card.Title>
+                                    <Card.Text>{booking.type}</Card.Text>
                                     <Stack>
-                                        <p className="text-muted">2 tim 15 min</p>
-                                        <p className="text-muted">Från 15 År</p>
+                                        <p className="text-muted">
+                                            {booking.timeHour} tim {booking.timeMin} min
+                                        </p>
+                                        <p className="text-muted">Från {booking.age} År</p>
                                     </Stack>
                                 </Card.Body>
                                 <Card.Link className="stretched-link" href="#"></Card.Link>
@@ -92,7 +111,7 @@ export default function StartPage() {
                     ))}
                 </Row>
             </Container>
-            <Container>
+            <Container className="py-5">
                 <h4 className="py-2 ps-2 bg-primary text-dark">Välj ett datum för bio </h4>
                 <Dropdown className="py-2">
                     <Dropdown.Toggle className="btn-filter" variant="primary" id="dropdown-basic">
@@ -112,7 +131,7 @@ export default function StartPage() {
                                 <Card.Body>
                                     <Card.Title>Tisdag</Card.Title>
                                     <Badge className="py-2 d-inline-flex align-items-center " bg="secondary">
-                                        <BsCalendar className="me-2" /> 25/09
+                                        <BsCalendar className="me-2" /> {booking.dates}
                                     </Badge>
                                 </Card.Body>
                             </Card>
@@ -134,11 +153,11 @@ export default function StartPage() {
                                         />
                                     </div>
                                     <Card.Body className="text-left">
-                                        <Card.Title>Avengers</Card.Title>
-                                        <Card.Text>Action</Card.Text>
+                                        <Card.Title>{booking.title}</Card.Title>
+                                        <Card.Text>{booking.type}</Card.Text>
                                         <Badge className="py-2 d-inline-flex align-items-center " bg="secondary">
                                             <BsClock className="me-2" />
-                                            19:30
+                                            {booking.sceenTime}
                                         </Badge>
                                     </Card.Body>
 
@@ -165,11 +184,11 @@ export default function StartPage() {
                                         />
                                     </div>
                                     <Card.Body className="text-left">
-                                        <Card.Title>Avengers</Card.Title>
-                                        <Card.Text>Action</Card.Text>
+                                        <Card.Title>{booking.title}</Card.Title>
+                                        <Card.Text>{booking.type}</Card.Text>
                                         <Badge className="py-2 d-inline-flex align-items-center " bg="secondary">
                                             <BsClock className="me-2" />
-                                            19:30
+                                            {booking.sceenTime}
                                         </Badge>
                                     </Card.Body>
                                     <Button className="mx-2 mb-2" variant="outline-primary">
