@@ -6,13 +6,13 @@ import {
   BsGeoAlt,
   BsPersonDown,
   BsCameraReels,
-  BsReceipt,
   BsArrowRightShort,
+  BsPersonPlus,
 } from 'react-icons/bs'
 
 const ConfirmationPage = () => {
   return (
-    <Container className="mt-2 p-3 mb-3 bg-body-tertiary">
+    <Container className="mt-1 p-3 mb-1 bg-body-tertiary">
       <Card className="mb-6 text-center  bg-opacity-25">
         <Card.Body>
           <Card.Title>
@@ -32,16 +32,19 @@ const ConfirmationPage = () => {
             <ul className="list-unstyled">
               <li className="d-flex align-items-center justify-content-left my-1">
                 <BsCalendar size={18} className="text-primary me-2" />
-                25/09 tisdag
+                25/09 Tisdag
               </li>
               <li className="d-flex align-items-center justify-content-left my-1">
                 <BsGeoAlt size={18} className="text-primary me-2" />
-                Sturegatan 21
+                Sturegatan 31
+              </li>
+              <li className="d-flex align-items-center justify-content-left my-1">
+                <BsPersonPlus size={18} className="text-primary me-2" />1 barnbiljet och 1 vuxen
               </li>
               <li className="d-flex align-items-center justify-content-left my-1">
                 <h6 className="d-flex align-items-center">
                   <BsPersonDown size={18} className="text-primary me-2" />
-                  rad: 12 <BsArrowRightShort size={18} className="text-primary mx-1" /> plats: 32,33
+                  Rad: 12 <BsArrowRightShort size={18} className="text-primary mx-1" /> Plats: 32,33
                 </h6>
               </li>
               <li className="pt-5 d-flex align-items-center justify-content-left">
@@ -64,11 +67,8 @@ const ConfirmationPage = () => {
       </Row>
 
       <Row className="mt-4">
-        <Col className="d-flex justify-content-around">
-          <Button variant="outline-danger" className="mx-2 g-1">
-            Avbryt bokning
-          </Button>
-          <Button variant="outline-primary" className="mx-2 ">
+        <Col className="d-flex justify-content-center">
+          <Button variant="outline-primary" className="mx-2">
             Bekräfta
           </Button>
         </Col>
