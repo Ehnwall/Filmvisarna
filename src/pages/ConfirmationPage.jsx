@@ -3,7 +3,7 @@ import { Container, Row, Col, Button, Image, Card } from 'react-bootstrap'
 
 const ConfirmationPage = () => {
   return (
-    <Container className="mt-3 p-4 mb-5 bg-body-tertiary">
+    <Container className="mt-3 p-4 mb-5 bg-body-tertiary ">
       <Card className="mb-6 text-center">
         <Card.Body>
           <Card.Title>Din bokning är nu klar</Card.Title>
@@ -13,15 +13,17 @@ const ConfirmationPage = () => {
 
       <Row>
         <Col md={6} className="d-flex justify-content-center p-5">
-          <div>
-            <h5>Title: Avengers</h5>
+          <div className="mt-5">
+            <h5 className="mt-4">Title: Avengers</h5>
             <ul className="list-unstyled ">
               <li>Datum och tid: 2024-09-23</li>
               <li>Plats: Sturegatan 21</li>
               <li>
-                <h5>Stolsnummer: 34</h5>
+                <h6>Stolsnummer: 34</h6>
               </li>
-              <li className="pt-5">Total summa: 240kr</li>
+              <li className="pt-5">
+                <h6>Total summa: 240kr</h6>
+              </li>
               <li>
                 <p>En orderbekräftelse kommer på mailen</p>
               </li>
@@ -40,10 +42,10 @@ const ConfirmationPage = () => {
 
       <Row className="mt-4">
         <Col className="d-flex justify-content-around">
-          <Button variant="primary" className="mx-2 g-1">
+          <Button variant="outline-danger" className="mx-2 g-1">
             Avbryt bokning
           </Button>
-          <Button variant="primary" className="mx-2 ">
+          <Button variant="outline-primary" className="mx-2 ">
             Bekräfta
           </Button>
         </Col>
