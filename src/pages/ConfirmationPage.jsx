@@ -1,31 +1,58 @@
 import React from 'react'
 import { Container, Row, Col, Button, Image, Card } from 'react-bootstrap'
+import {
+  BsCalendar,
+  BsCreditCard2Back,
+  BsGeoAlt,
+  BsPersonDown,
+  BsCameraReels,
+  BsReceipt,
+  BsArrowRightShort,
+} from 'react-icons/bs'
 
 const ConfirmationPage = () => {
   return (
-    <Container className="mt-3 p-4 mb-5 bg-body-tertiary ">
-      <Card className="mb-6 text-center">
+    <Container className="mt-3 p-3 mb-3 bg-body-tertiary">
+      <Card className="mb-6 text-center  bg-opacity-25">
         <Card.Body>
-          <Card.Title>Din bokning är nu klar</Card.Title>
+          <Card.Title>
+            <h1>Din bokning är nu klar</h1>
+          </Card.Title>
           <Card.Text>Du får en bokningsbekäftelse på mailen med information om din bokning</Card.Text>
         </Card.Body>
       </Card>
 
       <Row>
         <Col md={6} className="d-flex justify-content-center p-5">
-          <div className="mt-5">
-            <h5 className="mt-4">Title: Avengers</h5>
-            <ul className="list-unstyled ">
-              <li>Datum och tid: 2024-09-23</li>
-              <li>Plats: Sturegatan 21</li>
-              <li>
-                <h6>Stolsnummer: 34</h6>
+          <div className="mt-5 text-center">
+            <h2 className="mt-4 d-flex align-items-center justify-content-left">
+              <BsCameraReels size={18} className="text-primary me-2" />
+              Avengers
+            </h2>
+            <ul className="list-unstyled">
+              <li className="d-flex align-items-center justify-content-left my-1">
+                <BsCalendar size={18} className="text-primary me-2" />
+                25/09 tisdag
               </li>
-              <li className="pt-5">
-                <h6>Total summa: 240kr</h6>
+              <li className="d-flex align-items-center justify-content-left my-1">
+                <BsGeoAlt size={18} className="text-primary me-2" />
+                Sturegatan 21
               </li>
-              <li>
-                <p>En orderbekräftelse kommer på mailen</p>
+              <li className="d-flex align-items-center justify-content-left my-1">
+                <BsReceipt size={18} className="text-primary me-2" />
+                Order: 1234
+              </li>
+              <li className="d-flex align-items-center justify-content-left my-1">
+                <h6 className="d-flex align-items-center">
+                  <BsPersonDown size={18} className="text-primary me-2" />
+                  rad: 12 <BsArrowRightShort size={18} className="text-primary mx-1" /> plats: 32
+                </h6>
+              </li>
+              <li className="pt-5 d-flex align-items-center justify-content-left">
+                <h6 className="d-flex align-items-center">
+                  <BsCreditCard2Back size={18} className="text-primary me-2" />
+                  240kr
+                </h6>
               </li>
             </ul>
           </div>
