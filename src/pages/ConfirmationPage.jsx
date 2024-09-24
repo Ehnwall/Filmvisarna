@@ -12,13 +12,13 @@ import {
 
 const ConfirmationPage = () => {
   return (
-    <Container className="mt-3 p-3 mb-3 bg-body-tertiary">
+    <Container className="mt-2 p-3 mb-3 bg-body-tertiary">
       <Card className="mb-6 text-center  bg-opacity-25">
         <Card.Body>
           <Card.Title>
             <h1>Din bokning är nu klar</h1>
           </Card.Title>
-          <Card.Text>Du får en bokningsbekäftelse på mailen med information om din bokning</Card.Text>
+          <Card.Text>Du får en bokningsbekräftelse på mailen med information om din bokning på order: 1234</Card.Text>
         </Card.Body>
       </Card>
 
@@ -39,19 +39,15 @@ const ConfirmationPage = () => {
                 Sturegatan 21
               </li>
               <li className="d-flex align-items-center justify-content-left my-1">
-                <BsReceipt size={18} className="text-primary me-2" />
-                Order: 1234
-              </li>
-              <li className="d-flex align-items-center justify-content-left my-1">
                 <h6 className="d-flex align-items-center">
                   <BsPersonDown size={18} className="text-primary me-2" />
-                  rad: 12 <BsArrowRightShort size={18} className="text-primary mx-1" /> plats: 32
+                  rad: 12 <BsArrowRightShort size={18} className="text-primary mx-1" /> plats: 32,33
                 </h6>
               </li>
               <li className="pt-5 d-flex align-items-center justify-content-left">
                 <h6 className="d-flex align-items-center">
                   <BsCreditCard2Back size={18} className="text-primary me-2" />
-                  240kr
+                  Totalt: 240kr
                 </h6>
               </li>
             </ul>
