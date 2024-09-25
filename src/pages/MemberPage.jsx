@@ -47,7 +47,7 @@ const MemberPage = () => {
             <Row className="">
               {bookings.map((booking, index) => (
                 <Col key={index} sm={6} lg={4} xl={3} className="g-4">
-                  <Card className="border" style={{ height: '480px' }}>
+                  <Card className="border h-100">
                     <Card.Body className="d-flex flex-column">
                       <Card.Title>{booking.title}</Card.Title>
                       <Card.Text className="flex-grow-1">
@@ -129,7 +129,7 @@ const MemberPage = () => {
             <Row>
               {bookings.map((booking, index) => (
                 <Col key={index} sm={6} lg={4} xl={3} className="g-4 ">
-                  <Card style={{ height: '380px' }} className="border">
+                  <Card className="border h-100">
                     <Card.Body>
                       <Card.Title className="mt-0">{booking.title}</Card.Title>
                       <Card.Text>
@@ -182,15 +182,17 @@ const MemberPage = () => {
                                   ))}
                                 </div>
                               </li>
-                              <li className="mt-3">
-                                <BsCreditCard2Back size={18} className="text-primary me-2" />
-                                <span>Totalt: 240kr</span>
-                              </li>
                             </ul>
                           </Col>
                         </Row>
                       </Card.Text>
                     </Card.Body>
+                    <Row className="mx-1 mb-3">
+                      <Col className="">
+                        <BsCreditCard2Back size={18} className="text-primary me-2" />
+                        <span>Totalt: 240kr</span>
+                      </Col>
+                    </Row>
                   </Card>
                 </Col>
               ))}
