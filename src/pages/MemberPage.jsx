@@ -6,9 +6,9 @@ import {
   BsPin,
   BsReceipt,
   BsCreditCard2Back,
-  BsPersonDown,
+  BsPersonCircle,
   BsArrowRightShort,
-  BsPersonPlus,
+  BsBuildingDown,
 } from 'react-icons/bs'
 
 const MemberPage = () => {
@@ -72,7 +72,7 @@ const MemberPage = () => {
                                 <span>{booking.salong}</span>
                               </li>
                               <li>
-                                <BsPersonPlus size={18} className="text-primary me-2" />
+                                <BsPersonCircle size={18} className="text-primary me-2" />
                                 <span>21 biljetter</span>
                               </li>
                             </ul>
@@ -81,7 +81,6 @@ const MemberPage = () => {
                             <img
                               className="img-fluid"
                               src="https://img.fruugo.com/product/7/41/14532417_max.jpg"
-                              style={{ maxHeight: '140px' }}
                               alt="Booking Image"
                             />
                           </Col>
@@ -90,7 +89,7 @@ const MemberPage = () => {
                           <Col xs={12}>
                             <ul className="list-unstyled m-0">
                               <li>
-                                <BsPersonDown size={18} className="text-primary me-2" />
+                                <BsBuildingDown size={18} className="text-primary me-2" />
                                 Rad: 12 <BsArrowRightShort size={18} className="text-primary mx-1" />
                                 <div className="d-flex flex-wrap gap-2 mt-1">
                                   {booking.seatNumbers.map((seat, index) => (
@@ -154,7 +153,7 @@ const MemberPage = () => {
                                 <span>{booking.salong}</span>
                               </li>
                               <li>
-                                <BsPersonPlus size={18} className="text-primary me-2" />
+                                <BsPersonCircle size={18} className="text-primary me-2" />
                                 <span>21 biljetter</span>
                               </li>
                             </ul>
@@ -163,7 +162,6 @@ const MemberPage = () => {
                             <img
                               className="img-fluid rounded"
                               src="https://img.fruugo.com/product/7/41/14532417_max.jpg"
-                              style={{ maxHeight: '140px' }}
                               alt="Booking Image"
                             />
                           </Col>
@@ -172,7 +170,7 @@ const MemberPage = () => {
                           <Col xs={12}>
                             <ul className="list-unstyled m-0">
                               <li>
-                                <BsPersonDown size={18} className="text-primary me-2" />
+                                <BsBuildingDown size={18} className="text-primary me-2" />
                                 Rad: 12 <BsArrowRightShort size={18} className="text-primary mx-1" />
                                 <div className="d-flex flex-wrap gap-2 mt-1">
                                   {booking.seatNumbers.map((seat, index) => (
