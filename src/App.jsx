@@ -13,9 +13,6 @@ export default function App() {
       <main>
         <Outlet />
       </main>
-      <section>
-        <ConfirmationPage />
-      </section>
     </>
   )
 }
