@@ -186,9 +186,9 @@ export default function StartPage() {
                 <Row xs={2} xl={4} className="g-2 gy-2">
                     {Object.values(movies).map((movie, idx) => (
                         <Col key={idx}>
-                            <Card className="border">
-                                <div className="overflow-hidden rounded-bottom-0 rounded">
-                                    <Card.Img variant="top" src={movie.poster.stående} />
+                            <Card className="border h-100">
+                                <div className="overflow-hidden rounded-bottom-0 rounded h-100">
+                                    <Card.Img variant="top" src={movie.poster.stående} className="h-100" />
                                 </div>
                                 <Card.Body>
                                     <Card.Title>{movie.title}</Card.Title>
