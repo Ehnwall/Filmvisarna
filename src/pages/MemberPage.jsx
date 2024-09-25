@@ -13,7 +13,7 @@ import {
 
 const MemberPage = () => {
   const booking = {
-    title: 'Avengers',
+    title: "C'est arrivé près de chez vous",
     bookingNumber: '1234',
     date: '25/09',
     day: 'Måndag',
@@ -22,7 +22,7 @@ const MemberPage = () => {
     salong: 'Södra',
     seatNumbers: ['23', '23', '23', '23', '23', '23', '23', '23', '23', '23', '23', '23', '23', '23', '23', '23'],
   }
-  const hej = {
+  const booking2 = {
     title: 'Avengers',
     bookingNumber: '1234',
     date: '25/09',
@@ -33,7 +33,7 @@ const MemberPage = () => {
     seatNumbers: ['23', '23', '23', '23', '23', '23'],
   }
 
-  const bookings = [booking, hej, booking, booking, hej, booking, booking, hej]
+  const bookings = [booking, booking2, booking, booking, booking2, booking, booking, booking2]
 
   return (
     <>
@@ -47,10 +47,10 @@ const MemberPage = () => {
             <Row className="">
               {bookings.map((booking, index) => (
                 <Col key={index} sm={6} lg={4} xl={3} className="g-4">
-                  <Card className="border">
-                    <Card.Body>
+                  <Card className="border" style={{ height: '480px' }}>
+                    <Card.Body className="d-flex flex-column">
                       <Card.Title>{booking.title}</Card.Title>
-                      <Card.Text>
+                      <Card.Text className="flex-grow-1">
                         <Row>
                           <Col xs={7} className="d-flex align-items-center">
                             <ul className="list-unstyled m-0">
@@ -100,16 +100,16 @@ const MemberPage = () => {
                                   ))}
                                 </div>
                               </li>
-                              <li className="mt-4">
-                                <BsCreditCard2Back size={18} className="text-primary me-2" />
-                                <span>Totalt: 240kr</span>
-                              </li>
                             </ul>
                           </Col>
                         </Row>
                       </Card.Text>
-                      <div className="d-grid mt-5">
-                        <Button variant="outline-danger" onClick={() => alert('Filmen är avbokad')}>
+                      <div>
+                        <BsCreditCard2Back size={18} className="text-primary me-2" />
+                        <span>Totalt: 240kr</span>
+                      </div>
+                      <div className="d-grid mt-4">
+                        <Button className="mt-auto" variant="outline-danger" onClick={() => alert('Filmen är avbokad')}>
                           Avboka
                         </Button>
                       </div>
@@ -129,9 +129,9 @@ const MemberPage = () => {
             <Row>
               {bookings.map((booking, index) => (
                 <Col key={index} sm={6} lg={4} xl={3} className="g-4 ">
-                  <Card className="border">
+                  <Card style={{ height: '380px' }} className="border">
                     <Card.Body>
-                      <Card.Title className="m-0">{booking.title}</Card.Title>
+                      <Card.Title className="mt-0">{booking.title}</Card.Title>
                       <Card.Text>
                         <Row>
                           <Col xs={7} className="d-flex align-items-center">
@@ -143,7 +143,7 @@ const MemberPage = () => {
                               <li>
                                 <BsCalendar size={18} className="text-primary me-2" />
                                 <span>{booking.date}</span>
-                                <span>{booking.year}</span>
+                                <span> {booking.year}</span>
                               </li>
                               <li>
                                 <BsClock size={18} className="text-primary me-2" />
@@ -161,7 +161,7 @@ const MemberPage = () => {
                           </Col>
                           <Col xs={5} className="d-flex flex-column align-items-end">
                             <img
-                              className="img-fluid"
+                              className="img-fluid rounded"
                               src="https://img.fruugo.com/product/7/41/14532417_max.jpg"
                               style={{ maxHeight: '140px' }}
                               alt="Booking Image"
@@ -182,7 +182,7 @@ const MemberPage = () => {
                                   ))}
                                 </div>
                               </li>
-                              <li className="mt-4">
+                              <li className="mt-3">
                                 <BsCreditCard2Back size={18} className="text-primary me-2" />
                                 <span>Totalt: 240kr</span>
                               </li>
