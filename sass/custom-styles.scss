@@ -26,3 +26,11 @@ $transition: 0.3s ease;
 .card:hover .card-img-top {
     scale: 1.05;
 }
+
+.link-form {
+    transition: color $transition;
+    cursor: pointer;
+    &:hover {
+        color: $primary;
+    }
+}
