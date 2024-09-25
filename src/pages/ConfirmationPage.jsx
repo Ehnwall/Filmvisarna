@@ -4,10 +4,10 @@ import {
   BsCalendar,
   BsCreditCard2Back,
   BsGeoAlt,
-  BsPersonDown,
+  BsBuildingDown,
   BsCameraReels,
   BsArrowRightShort,
-  BsPersonPlus,
+  BsPersonCircle,
 } from 'react-icons/bs'
 
 const ConfirmationPage = () => {
@@ -25,10 +25,10 @@ const ConfirmationPage = () => {
       <Row>
         <Col md={6} className="d-flex justify-content-center p-5">
           <div className="mt-5 text-center">
-            <h2 className="mt-4 d-flex align-items-center justify-content-left">
+            <div className="mt-4 d-flex align-items-center justify-content-left">
               <BsCameraReels size={18} className="text-primary me-2" />
-              Avengers
-            </h2>
+              <h2>Avengers</h2>
+            </div>
             <ul className="list-unstyled">
               <li className="d-flex align-items-center justify-content-left my-1">
                 <BsCalendar size={18} className="text-primary me-2" />
@@ -39,11 +39,11 @@ const ConfirmationPage = () => {
                 Sturegatan 31
               </li>
               <li className="d-flex align-items-center justify-content-left my-1">
-                <BsPersonPlus size={18} className="text-primary me-2" />1 barnbiljet och 1 vuxen
+                <BsPersonCircle size={18} className="text-primary me-2" />1 barnbiljet och 1 vuxen
               </li>
               <li className="d-flex align-items-center justify-content-left my-1">
                 <h6 className="d-flex align-items-center">
-                  <BsPersonDown size={18} className="text-primary me-2" />
+                  <BsBuildingDown size={18} className="text-primary me-2" />
                   Rad: 12 <BsArrowRightShort size={18} className="text-primary mx-1" /> Plats: 32,33
                 </h6>
               </li>
