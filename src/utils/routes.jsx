@@ -14,4 +14,5 @@ export default [
   { path: '/Member', element: <MemberPage />, menuLabel: '' },
   { path: '/individual', element: <IndividualMovie /> },
   { path: '/Sign-In', element: <SignIn /> },
+  { path: '/Register', element: <Register /> },
 ]
