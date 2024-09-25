@@ -5,7 +5,7 @@ import IndividualMovie from '../pages/IndividualMovie'
 import React from 'react'
 import ConfirmationPage from '../pages/ConfirmationPage'
 import ForgotPasswordMail from '../pages/ForgotPasswordMail'
-import NewPasswordMail from '../pages/forgotPasswordForm'
+import NewPasswordMail from '../pages/NewPasswordMail'
 
 // paths to use with the router and with the main menu
 export default [
