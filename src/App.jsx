@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import React from 'react'
 import ConfirmationPage from './pages/ConfirmationPage'
+import Footer from './pages/footer'
 
 export default function App() {
   // watch for route changes
@@ -13,6 +14,7 @@ export default function App() {
       <main>
         <Outlet />
       </main>
+      <Footer />
     </>
   )
 }
