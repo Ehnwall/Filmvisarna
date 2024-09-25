@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import React from 'react'
+import ConfirmationPage from './pages/ConfirmationPage'
 
 export default function App() {
   // watch for route changes
