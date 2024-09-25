@@ -44,4 +44,12 @@ input[type='date'] {
         padding-inline: 0.2rem !important;
         padding-block: 0.2rem !important;
     }
+
+    .card-horizontal__scroll {
+        width: 13rem !important;
+    }
+    .card-badge {
+        flex-direction: column;
+        align-items: start;
+    }
 }
