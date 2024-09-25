@@ -18,8 +18,8 @@ function ForgotPasswordMail() {
                   <Form.Control className="p-2" type="email" placeholder="Ange din e-postadress" />
                 </Form.Group>
                 <div className="d-flex justify-content-between mt-4">
-                  <Button variant="secondary">Tillbaka</Button>
-                  <Button variant="primary">Skicka</Button>
+                  <Button variant="primary">Tillbaka</Button>
+                  <Button variant="outline-primary">Skicka</Button>
                 </div>
               </Form>
             </div>
