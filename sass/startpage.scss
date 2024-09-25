@@ -4,19 +4,6 @@
     object-fit: cover;
     opacity: 0.4;
 }
-.datepicker-input::-webkit-calendar-picker-indicator {
-    color: lime;
-}
-
-input[type='date'] {
-    padding: 5px;
-    padding-inline: 10px;
-    border: 2px solid $primary;
-    font-size: 18px;
-    outline: none;
-    border-radius: 5px;
-    width: 15rem;
-}
 
 .horizontal-scrollable > .rowcard {
     display: flex;
@@ -26,9 +13,9 @@ input[type='date'] {
     white-space: nowrap;
 }
 
-.horizontal-scrollable > .rowcard > .colcard {
-    display: inline-block;
-    float: none;
+.card-horizontal__scroll {
+    min-width: 13rem;
+    max-width: 20rem;
 }
 
 .card-dates {
@@ -45,9 +32,9 @@ input[type='date'] {
         padding-block: 0.2rem !important;
     }
 
-    .card-horizontal__scroll {
-        width: 13rem !important;
-    }
+    // .card-horizontal__scroll {
+    //     width: 13rem !important;
+    // }
     .card-badge {
         flex-direction: column;
         align-items: start;

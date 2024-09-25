@@ -241,34 +241,32 @@ export default function StartPage() {
                 <div className="horizontal-scrollable">
                     <div className="g-3 py-2 rowcard ">
                         {Array.from({ length: 4 }).map((_, idx) => (
-                            <div className="horizontal-card" key={idx}>
-                                <Card style={{ width: '13rem' }} className="border card-horizontal__scroll">
-                                    <div className="overflow-hidden rounded-bottom-0 rounded">
-                                        <Card.Img variant="top" src={movies.avengers.poster.stående} />
-                                    </div>
-                                    <Card.Body className="text-left">
-                                        <Card.Title>{movies.avengers.title}</Card.Title>
-                                        <Card.Text>{movies.avengers.type}</Card.Text>
-                                        <Badge className="py-1 d-inline-flex align-items-center " bg="secondary">
-                                            <BsClock className="me-2" />
-                                            {movies.avengers.sceenTime}
+                            <Card key={idx} className="border card-horizontal__scroll">
+                                <div className="overflow-hidden rounded-bottom-0 rounded">
+                                    <Card.Img variant="top" src={movies.avengers.poster.stående} />
+                                </div>
+                                <Card.Body>
+                                    <Card.Title>{movies.avengers.title}</Card.Title>
+                                    <Card.Text>{movies.avengers.type}</Card.Text>
+                                    <Badge className="py-1 d-inline-flex align-items-center " bg="secondary">
+                                        <BsClock className="me-2" />
+                                        {movies.avengers.sceenTime}
+                                    </Badge>
+                                    <Stack direction="horizontal" gap={3} className="mt-2">
+                                        <Badge bg="none" className="border">
+                                            {movies.avengers.timeHour} tim {movies.avengers.timeMin} min
                                         </Badge>
-                                        <Stack direction="horizontal" gap={3} className="mt-2">
-                                            <Badge bg="none" className="border">
-                                                {movies.avengers.timeHour} tim {movies.avengers.timeMin} min
-                                            </Badge>
 
-                                            <Badge bg="none" className="border">
-                                                Från {movies.avengers.age} År
-                                            </Badge>
-                                        </Stack>
-                                    </Card.Body>
+                                        <Badge bg="none" className="border">
+                                            Från {movies.avengers.age} År
+                                        </Badge>
+                                    </Stack>
+                                </Card.Body>
 
-                                    <Button className="mx-2 mb-2" variant="outline-primary">
-                                        Boka
-                                    </Button>
-                                </Card>
-                            </div>
+                                <Button className="mx-2 mb-2" variant="outline-primary">
+                                    Boka
+                                </Button>
+                            </Card>
                         ))}
                     </div>
                 </div>
@@ -278,34 +276,32 @@ export default function StartPage() {
                 <div className="horizontal-scrollable">
                     <div className="g-3 py-2 rowcard ">
                         {Array.from({ length: 12 }).map((_, idx) => (
-                            <div className="colcard" key={idx}>
-                                <Card className="border card-horizontal__scroll ">
-                                    <div className="overflow-hidden rounded-bottom-0 rounded">
-                                        <Card.Img variant="top" src={movies.avengers.poster.stående} />
-                                    </div>
-                                    <Card.Body className="text-left">
-                                        <Card.Title>{movies.avengers.title}</Card.Title>
-                                        <Card.Text>{movies.avengers.type}</Card.Text>
+                            <Card key={idx} className="border card-horizontal__scroll  ">
+                                <div className="overflow-hidden rounded-bottom-0 rounded">
+                                    <Card.Img variant="top" src={movies.avengers.poster.stående} />
+                                </div>
+                                <Card.Body>
+                                    <Card.Title>{movies.avengers.title}</Card.Title>
+                                    <Card.Text>{movies.avengers.type}</Card.Text>
 
-                                        <Badge className="py- d-inline-flex align-items-center " bg="secondary">
-                                            <BsClock className="me-2" />
-                                            {movies.avengers.sceenTime}
+                                    <Badge className="py-1 d-inline-flex align-items-center " bg="secondary">
+                                        <BsClock className="me-2" />
+                                        {movies.avengers.sceenTime}
+                                    </Badge>
+                                    <Stack direction="horizontal" gap={3} className="mt-2">
+                                        <Badge bg="none" className="border">
+                                            {movies.avengers.timeHour} tim {movies.avengers.timeMin} min
                                         </Badge>
-                                        <Stack direction="horizontal" gap={3} className="mt-2">
-                                            <Badge bg="none" className="border">
-                                                {movies.avengers.timeHour} tim {movies.avengers.timeMin} min
-                                            </Badge>
 
-                                            <Badge bg="none" className="border">
-                                                Från {movies.avengers.age} År
-                                            </Badge>
-                                        </Stack>
-                                    </Card.Body>
-                                    <Button className="mx-2 mb-2" variant="outline-primary">
-                                        Boka
-                                    </Button>
-                                </Card>
-                            </div>
+                                        <Badge bg="none" className="border">
+                                            Från {movies.avengers.age} År
+                                        </Badge>
+                                    </Stack>
+                                </Card.Body>
+                                <Button className="mx-2 mb-2" variant="outline-primary">
+                                    Boka
+                                </Button>
+                            </Card>
                         ))}
                     </div>
                 </div>
