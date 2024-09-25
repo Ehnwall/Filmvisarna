@@ -18,19 +18,19 @@ export default function SignIn() {
                   <Form.Label>Lösenord</Form.Label>
                   <Form.Control type="password" placeholder="Ange lösenord" />
                 </Form.Group>
-                <Row>
-                  <Col>
+                <Stack direction="horizontal">
+                  <div>
                     <Button variant="outline-primary" type="submit">
                       Logga in
                     </Button>
-                  </Col>
-                  <Col className="d-flex justify-content-end">
-                    <Form.Text className="link-form">Glömt Lösenord?</Form.Text>
-                  </Col>
-                </Row>
+                  </div>
+                  <div className="d-flex justify-content-end ms-auto">
+                    <Button variant="link">Glömt Lösenord?</Button>
+                  </div>
+                </Stack>
                 <Row className="mt-3">
                   <Col>
-                    <Form.Text className="link-form ">Ny här? Bli medlem</Form.Text>
+                    <Button variant="link link-form ">Ny här? Bli medlem</Button>
                   </Col>
                 </Row>
               </Form>
