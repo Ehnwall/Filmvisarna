@@ -6,6 +6,9 @@ import React from 'react'
 import ConfirmationPage from '../pages/ConfirmationPage'
 import ForgotPasswordMail from '../pages/ForgotPasswordMail'
 import NewPasswordMail from '../pages/NewPasswordMail'
+import SignIn from '../pages/SignIn'
+import Register from '../pages/Register'
+
 
 // paths to use with the router and with the main menu
 export default [
@@ -15,4 +18,6 @@ export default [
   { path: '/NewPasswordMail', element: <NewPasswordMail />, menuLabel: 'NewPasswordMail' },
   { path: '/Member', element: <MemberPage />, menuLabel: '' },
   { path: '/individual', element: <IndividualMovie /> },
+  { path: '/Sign-In', element: <SignIn /> },
+  { path: '/Register', element: <Register /> },
 ]
