@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="bg-primary text-black mt-5 p-5">
       <Container>
         <Row>
-          <Col md={4} sm={12}>
+          <Col md={4} sm={12} className="pb-3">
             <h5>Om oss</h5>
             <ul className="list-unstyled">
               <li className="mb-2">
@@ -16,7 +16,7 @@ const Footer = () => {
               </li>
             </ul>
           </Col>
-          <Col md={4} sm={12}>
+          <Col md={4} sm={12} className="pb-3">
             <h5>Kontakt</h5>
             <ul className="list-unstyled">
               <li className="mb-2">
