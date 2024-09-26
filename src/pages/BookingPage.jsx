@@ -13,19 +13,19 @@ export default function BookingPage() {
             <Row className="gy-4">
               <Col xs={12}>
                 <Card>
-                  <Card.Header className="bg-primary">
-                    <h1 className="mb-0 text-dark">Marvels Avengers</h1>
+                  <Card.Header className="bg-primary ">
+                    <h1 className="mb-0 text-dark ">Marvels Avengers</h1>
                   </Card.Header>
                   <Card.Body>
-                    <div className="d-flex align-items-center">
+                    <div className="d-flex align-items-center py-1">
                       <BsCalendar size={18} className="text-primary me-2" />
                       <span className="me-2">Tisdag 10/15</span>
                     </div>
-                    <div className="d-flex align-items-center">
+                    <div className="d-flex align-items-center py-1">
                       <BsClock size={18} className="text-primary me-2" />
                       <span className="me-2">18:00</span>
                     </div>
-                    <div className="d-flex align-items-center">
+                    <div className="d-flex align-items-center py-1">
                       <BsPin size={18} className="text-primary me-2" />
                       <span className="me-2">Stockholm, Sergels torg</span>
                     </div>
@@ -34,17 +34,17 @@ export default function BookingPage() {
               </Col>
               <Col xs={12}>
                 <Card>
-                  <Card.Header className="bg-primary">
+                  <Card.Header className="bg-primary ">
                     <h3 className="mb-0 text-dark">Antal Biljetter</h3>
                   </Card.Header>
                   <Card.Body xs={4}>
-                    <Row className="g-0 r">
-                      <Col xs={12} lg={8} className="d-flex justify-content-left mb-3 custom-gap">
+                    <Row className="g-0">
+                      <Col xs={12} lg={8} className="d-flex justify-content-left mb-3">
                         <div className="fw-bold" style={{ minWidth: '100px' }}>
                           Barn
                         </div>
-                        <div className="text-center mx-auto">60 kr</div>
-                        <ButtonGroup className="btn-group-sm">
+                        <div className="text-center">60 kr</div>
+                        <ButtonGroup className="btn-group-sm ms-5">
                           <Button variant="outline-primary px-3">-</Button>
                           <Button className="bg-body-tertiary pb-2" variant="outline-primary px-3">
                             0
@@ -52,12 +52,12 @@ export default function BookingPage() {
                           <Button variant="outline-primary px-3">+</Button>
                         </ButtonGroup>
                       </Col>
-                      <Col xs={12} lg={8} className="d-flex justify-content-left mb-3 custom-gap">
+                      <Col xs={12} lg={8} className="d-flex justify-content-left mb-3">
                         <div className="fw-bold" style={{ minWidth: '100px' }}>
                           Pensionär
                         </div>
-                        <div className="text-center mx-auto">80 kr</div>
-                        <ButtonGroup className="btn-group-sm">
+                        <div className="text-center ">80 kr</div>
+                        <ButtonGroup className="btn-group-sm ms-5">
                           <Button variant="outline-primary px-3">-</Button>
                           <Button className="bg-body-tertiary" variant="outline-primary px-3">
                             0
@@ -65,12 +65,12 @@ export default function BookingPage() {
                           <Button variant="outline-primary px-3">+</Button>
                         </ButtonGroup>
                       </Col>
-                      <Col xs={12} lg={8} className="d-flex justify-content-left mb-3 custom-gap">
-                        <div className="fw-bold" style={{ minWidth: '100px' }}>
+                      <Col xs={12} lg={8} className="d-flex justify-content-left mb-3">
+                        <div className="fw-bold" style={{ minWidth: '83px' }}>
                           Vuxen
                         </div>
-                        <div className="text-center mx-auto">120 kr</div>
-                        <ButtonGroup className="btn-group-sm">
+                        <div className="text-center ms-2">120 kr</div>
+                        <ButtonGroup className="btn-group-sm ms-5">
                           <Button variant="outline-primary px-3">-</Button>
                           <Button className="bg-body-tertiary" variant="outline-primary px-3">
                             0
@@ -103,28 +103,24 @@ export default function BookingPage() {
           </div>
         </div>
         <Row className="gy-4">
-          <Col xs={12} className="d-flex justify-content-center mb-3">
-            <h2>Ange dina uppgifter</h2>
-          </Col>
-          <div xs={12}>
-            <Col xs={12} md={3} className="mb-3">
-              <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"></input>
-                <label for="floatingInput">Namn</label>
-              </div>
-            </Col>
-            <Col xs={12} md={3} className="mb-3">
-              <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"></input>
-                <label for="floatingInput">Email</label>
-              </div>
-            </Col>
-            <Col xs={12} md={3} className="mb-3">
-              <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"></input>
-                <label for="floatingInput">Telefon</label>
-              </div>
-            </Col>
+          <Card>
+            <Card.Header className="bg-primary rounded">
+              <h3 className="mb-0 text-dark text-center">Ange dina uppgifter</h3>
+            </Card.Header>
+          </Card>
+          <div className="d-flex flex-column align-items-center">
+            {[
+              { label: 'Namn', type: 'text' },
+              { label: 'E-post', type: 'email' },
+              { label: 'Telefon', type: 'tel' },
+            ].map(({ label, type }) => (
+              <Col md={4} key={label}>
+                <Form.Group className="mb-3">
+                  <Form.Label>{label}</Form.Label>
+                  <Form.Control type={type} placeholder={`Ange ditt ${label.toLowerCase()}`} />
+                </Form.Group>
+              </Col>
+            ))}
           </div>
           <Col className="d-flex justify-content-center">
             <Button variant="outline-primary">Boka Platser</Button>
