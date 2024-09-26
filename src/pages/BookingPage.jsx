@@ -9,7 +9,7 @@ export default function BookingPage() {
     <>
       <Container className="py-4">
         <Row>
-          <Col xs={9}>
+          <Col xs={12} md={9}>
             <Row className="gy-4">
               <Col xs={12}>
                 <Card>
@@ -37,15 +37,26 @@ export default function BookingPage() {
                   <Card.Header className="bg-primary">
                     <h3 className="mb-0 text-dark">Antal Biljetter</h3>
                   </Card.Header>
-                  <Card.Body>
-                    <Row className=" g-0  align-items-center">
-                      <Col xs={1}>
-                        <p className="fw-bold">Barn</p>
+                  <Card.Body xs={4}>
+                    <Row className="g-0 r">
+                      <Col xs={12} lg={8} className="d-flex justify-content-left mb-3 custom-gap">
+                        <div className="fw-bold" style={{ minWidth: '100px' }}>
+                          Barn
+                        </div>
+                        <div className="text-center mx-auto">60 kr</div>
+                        <ButtonGroup className="btn-group-sm">
+                          <Button variant="outline-primary px-3">-</Button>
+                          <Button className="bg-body-tertiary pb-2" variant="outline-primary px-3">
+                            0
+                          </Button>
+                          <Button variant="outline-primary px-3">+</Button>
+                        </ButtonGroup>
                       </Col>
-                      <Col xs={2}>
-                        <p>60 kr</p>
-                      </Col>
-                      <Col xs={9}>
+                      <Col xs={12} lg={8} className="d-flex justify-content-left mb-3 custom-gap">
+                        <div className="fw-bold" style={{ minWidth: '100px' }}>
+                          Pensionär
+                        </div>
+                        <div className="text-center mx-auto">80 kr</div>
                         <ButtonGroup className="btn-group-sm">
                           <Button variant="outline-primary px-3">-</Button>
                           <Button className="bg-body-tertiary" variant="outline-primary px-3">
@@ -54,13 +65,11 @@ export default function BookingPage() {
                           <Button variant="outline-primary px-3">+</Button>
                         </ButtonGroup>
                       </Col>
-                      <Col xs={1}>
-                        <p className="fw-bold">Pensionär</p>
-                      </Col>
-                      <Col xs={2}>
-                        <p>80 kr</p>
-                      </Col>
-                      <Col xs={9}>
+                      <Col xs={12} lg={8} className="d-flex justify-content-left mb-3 custom-gap">
+                        <div className="fw-bold" style={{ minWidth: '100px' }}>
+                          Vuxen
+                        </div>
+                        <div className="text-center mx-auto">120 kr</div>
                         <ButtonGroup className="btn-group-sm">
                           <Button variant="outline-primary px-3">-</Button>
                           <Button className="bg-body-tertiary" variant="outline-primary px-3">
@@ -68,27 +77,6 @@ export default function BookingPage() {
                           </Button>
                           <Button variant="outline-primary px-3">+</Button>
                         </ButtonGroup>
-                      </Col>
-                      <Col xs={1}>
-                        <p className="fw-bold">Vuxen</p>
-                      </Col>
-                      <Col xs={2}>
-                        <p>120 kr</p>
-                      </Col>
-                      <Col xs={9}>
-                        <ButtonGroup className="btn-group-sm">
-                          <Button variant="outline-primary px-3">-</Button>
-                          <Button className="bg-body-tertiary" variant="outline-primary px-3">
-                            0
-                          </Button>
-                          <Button variant="outline-primary px-3">+</Button>
-                        </ButtonGroup>
-                      </Col>
-                      <Col xs={3} className="mt-5">
-                        <h3>Totalt:</h3>
-                      </Col>
-                      <Col xs={1}>
-                        <p className="text-center mt-5">1200 kr</p>
                       </Col>
                     </Row>
                   </Card.Body>
@@ -96,8 +84,8 @@ export default function BookingPage() {
               </Col>
             </Row>
           </Col>
-          <Col>
-            <Card className="" style={{ width: '18rem' }}>
+          <Col xs={12} md={3}>
+            <Card className="mt-4 mt-md-0" style={{ width: '100%' }}>
               <Image className="rounded" src="https://img.fruugo.com/product/7/41/14532417_max.jpg" />
             </Card>
           </Col>
