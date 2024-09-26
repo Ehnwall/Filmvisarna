@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { Container, Row, Col, Card, Nav } from 'react-bootstrap'
-import Navbar from 'react-bootstrap/Navbar'
+import { Container, Row, Col, Card } from 'react-bootstrap'
 import Carousel from 'react-bootstrap/Carousel'
 import Image from 'react-bootstrap/Image'
 import Stack from 'react-bootstrap/Stack'
@@ -124,27 +123,6 @@ const ages = ['6-12', '12-25', '25-65', 'Alla åldrar']
 export default function StartPage() {
     return (
         <>
-            <Navbar expand="lg" className="bg-body-tertiary" sticky="top">
-                <Container>
-                    <Navbar.Brand href="#home" className="text-primary">
-                        Filmvisarna
-                    </Navbar.Brand>
-                    <Navbar.Toggle className="text-primary" aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="ms-auto text-primary">
-                            <Nav.Link className="text-primary" href="#home">
-                                Boka
-                            </Nav.Link>
-                            <Nav.Link className="text-primary" href="#link">
-                                Medlem
-                            </Nav.Link>
-                            <Nav.Link className="text-primary" href="#">
-                                Se filmer
-                            </Nav.Link>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
             <Carousel>
                 <Carousel.Item interval={5000}>
                     <Image src={movies.shangchi.poster.liggande} />

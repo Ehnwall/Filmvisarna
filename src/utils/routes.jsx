@@ -7,8 +7,8 @@ import ConfirmationPage from '../pages/ConfirmationPage'
 
 // paths to use with the router and with the main menu
 export default [
-  { path: '/', element: <StartPage />, menuLabel: 'Start' },
-  { path: '/ConfirmationPage', element: <ConfirmationPage />, menuLabel: 'ConfirmationPage' },
-  { path: '/Member', element: <MemberPage />, menuLabel: '' },
+  { path: '/', element: <StartPage />, menuLabel: 'Hem' },
+  { path: '/ConfirmationPage', element: <ConfirmationPage /> },
+  { path: '/Member', element: <MemberPage /> },
   { path: '/individual', element: <IndividualMovie /> },
 ]
