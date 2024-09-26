@@ -5,7 +5,7 @@ function ForgotPasswordMail() {
   return (
     <>
       <Container>
-        <Row className="d-flex justify-content-center align-items-center  vh-100">
+        <Row className="d-flex justify-content-center align-items-center flex-column" style={{ minHeight: '100vh' }}>
           <Col xs={12} md={8} lg={6} xl={5}>
             <div className="p-5 custom-box-shadow bg-body-tertiary rounded-3">
               <h1 className="text-center ">Glömt lösenord</h1>
