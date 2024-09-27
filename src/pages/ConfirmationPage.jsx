@@ -8,6 +8,7 @@ import {
   BsCameraReels,
   BsArrowRightShort,
   BsPersonCircle,
+  BsClock,
 } from 'react-icons/bs'
 
 const ConfirmationPage = () => {
@@ -41,6 +42,11 @@ const ConfirmationPage = () => {
               <li className="d-flex align-items-center justify-content-left my-1">
                 <BsPersonCircle size={18} className="text-primary me-2" />1 barnbiljet och 1 vuxen
               </li>
+              <li className="d-flex align-items-center justify-content-left my-1">
+                <BsClock size={18} className="text-primary me-2" />
+                20:30 <BsArrowRightShort size={18} className="text-primary mx-1" /> 22:30
+              </li>
+
               <li className="d-flex align-items-center justify-content-left my-1">
                 <h6 className="d-flex align-items-center">
                   <BsBuildingDown size={18} className="text-primary me-2" />
