@@ -13,7 +13,7 @@ export default function StartPage() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              <Nav.Link href="/BookingPage">Boka</Nav.Link>
+              <Nav.Link href="#home">Boka</Nav.Link>
               <Nav.Link href="#link">Medlem</Nav.Link>
               <Nav.Link href="#">Se filmer</Nav.Link>
             </Nav>
