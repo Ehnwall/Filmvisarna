@@ -31,7 +31,7 @@ $card-border-width: 0;
 $card-spacer-x: 1rem;
 $card-spacer-y: 1.5rem;
 
-//carussel
+// Carousel
 $carousel-control-color: $primary;
 $carousel-indicator-width: 3rem;
 $carousel-indicator-height: 0.2rem;
@@ -43,3 +43,10 @@ $carousel-control-icon-width: 3rem;
 $carousel-dark-indicator-active-bg: $primary;
 $carousel-dark-caption-color: $body-color;
 $carousel-dark-control-icon-filter: $primary;
+
+// Nav
+$navbar-dark-color: $primary;
+$navbar-light-brand-color: $primary;
+$navbar-light-brand-hover-color: rgba($primary, 0.8);
+$navbar-light-color: $primary;
+$navbar-light-hover-color: rgba($primary, 0.8);

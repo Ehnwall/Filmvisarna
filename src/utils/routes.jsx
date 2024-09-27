@@ -10,16 +10,15 @@ import NewPasswordMail from '../pages/NewPasswordMail'
 import SignIn from '../pages/SignIn'
 import Register from '../pages/Register'
 
-
 // paths to use with the router and with the main menu
 export default [
-  { path: '/', element: <StartPage />, menuLabel: 'Start' },
+  { path: '/', element: <StartPage />, menuLabel: 'Hem' },
   { path: '/BookingPage', element: <BookingPage /> },
-  { path: '/ConfirmationPage', element: <ConfirmationPage />, menuLabel: 'ConfirmationPage' },
-  { path: '/ForgotPasswordMail', element: <ForgotPasswordMail />, menuLabel: 'ForgotPasswordMail' },
-  { path: '/NewPasswordMail', element: <NewPasswordMail />, menuLabel: 'NewPasswordMail' },
-  { path: '/Member', element: <MemberPage />, menuLabel: '' },
+  { path: '/ConfirmationPage', element: <ConfirmationPage /> },
+  { path: '/ForgotPasswordMail', element: <ForgotPasswordMail /> },
+  { path: '/NewPasswordMail', element: <NewPasswordMail /> },
+  { path: '/Member', element: <MemberPage /> },
   { path: '/individual', element: <IndividualMovie /> },
-  { path: '/Sign-In', element: <SignIn /> },
+  { path: '/Sign-In', element: <SignIn />, menuLabel: 'Medlem' },
   { path: '/Register', element: <Register /> },
 ]
