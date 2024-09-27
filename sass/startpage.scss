@@ -1,0 +1,34 @@
+.carousel-item > img {
+    width: 100%;
+    aspect-ratio: 16/7;
+    object-fit: cover;
+    opacity: 0.4;
+}
+
+.horizontal-scrollable > .rowcard {
+    display: flex;
+    gap: 0.8rem;
+    overflow-x: auto;
+    scroll-snap-type: mandatory;
+    white-space: nowrap;
+}
+
+.card-horizontal__scroll {
+    min-width: 13rem;
+    max-width: 20rem;
+}
+
+.card-dates {
+    cursor: pointer;
+    transition: background-color $transition;
+    &:hover {
+        background-color: $primary;
+    }
+}
+
+@include media-breakpoint-down(md) {
+    .card-badge {
+        flex-direction: column;
+        align-items: start;
+    }
+}
