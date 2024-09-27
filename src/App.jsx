@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import React from 'react'
 import ConfirmationPage from './pages/ConfirmationPage'
-import Footer from './pages/footer'
+import Footer from './components/Footer'
 
 export default function App() {
   // watch for route changes
