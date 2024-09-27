@@ -1,0 +1,25 @@
+.seat-row {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.seat-row :hover {
+    cursor: pointer;
+}
+
+.seat-picker__container {
+    min-width: 35rem;
+}
+
+.cinema.cinema {
+    margin-bottom: 5rem;
+}
+.seats {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+.form-check-input {
+    font-size: 2rem;
+}

@@ -1,16 +1,12 @@
-import { Outlet, useLocation } from 'react-router-dom'
-import React from 'react'
-import ConfirmationPage from './pages/ConfirmationPage'
+import { Outlet } from 'react-router-dom'
+import Header from './components/Header'
 import Footer from './components/Footer'
 
+
 export default function App() {
-  // watch for route changes
-  const { pathname } = useLocation()
-
-  // scroll to top on route changes
-
   return (
     <>
+      <Header />
       <main>
         <Outlet />
       </main>
