@@ -90,7 +90,7 @@ export default function BookingPage() {
             </Card>
           </Col>
         </Row>
-        <div className="seat-picker p-5 rounded-3 overflow-auto py-5">
+        <div className="seat-picker rounded-3 overflow-auto my-5">
           <div className="seat-picker__container bg-body-tertiary py-5 rounded">
             <div className="mx-auto bg-light pb-4 mb-5 rounded-5 w-50 "></div>
             {seatArray.map((row, rowIndex) => (
