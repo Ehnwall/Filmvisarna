@@ -1,15 +1,13 @@
-import { Navbar, Nav, Container, NavLink } from 'react-bootstrap'
+import { Navbar, Nav, Container, NavDropdown, NavLink } from 'react-bootstrap'
 import routes from '../utils/routes'
 export default function Header() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary" sticky="top">
       <Container>
-        <Navbar.Brand href="#home" className="text-primary">
-          Filmvisarna
-        </Navbar.Brand>
-        <Navbar.Toggle className="text-primary" aria-controls="basic-navbar-nav" />
+        <Navbar.Brand href="#home">Filmvisarna</Navbar.Brand>
+        <Navbar.Toggle className="" aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto text-primary">
+          <Nav className="ms-auto">
             {routes
               .filter((x) => x.menuLabel)
               .map(({ path, menuLabel }, i) => (
