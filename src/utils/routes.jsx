@@ -11,6 +11,7 @@ import SignIn from '../pages/SignIn'
 import Register from '../pages/Register'
 
 // paths to use with the router and with the main menu
+// change the routes later to swedish.
 export default [
   { path: '/', element: <StartPage />, menuLabel: 'Hem' },
   { path: '/booking-page', element: <BookingPage /> },

@@ -1,5 +1,7 @@
 import React from 'react'
 import { Container, Row, Col, Card, Button } from 'react-bootstrap'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import {
   BsCalendar,
   BsClock,
@@ -34,7 +36,7 @@ const MemberPage = () => {
   }
 
   const bookings = [booking, booking2, booking, booking, booking2, booking, booking, booking2]
-
+  const notify = () => toast.success('Filmen är nu avbokad!')
   return (
     <>
       <Container className="py-5">
@@ -108,9 +110,10 @@ const MemberPage = () => {
                         <span>Totalt: 240kr</span>
                       </div>
                       <div className="d-grid mt-4">
-                        <Button className="mt-auto" variant="outline-danger" onClick={() => alert('Filmen är avbokad')}>
+                        <Button className="mt-auto" variant="outline-danger" onClick={notify}>
                           Avboka
                         </Button>
+                        <ToastContainer />
                       </div>
                     </Card.Body>
                   </Card>
