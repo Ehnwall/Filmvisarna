@@ -1,3 +1,10 @@
+.carusel-header {
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    bottom: unset !important;
+}
+
 .carousel-item > img {
     width: 100%;
     aspect-ratio: 16/7;

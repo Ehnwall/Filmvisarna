@@ -61,9 +61,9 @@ export default function IndividualMovie() {
                                 <BsPin size={18} className="text-primary me-2" />
                                 <span>Södra</span>
                               </div>
-                              <Button variant="outline-primary" className="mt-auto w-100">
+                              <Card.Link className="btn btn-outline-primary mt-auto w-100" href="/booking-page">
                                 Boka
-                              </Button>
+                              </Card.Link>
                             </Card.Body>
                           </Card>
                         </Col>

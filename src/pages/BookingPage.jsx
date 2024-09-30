@@ -123,7 +123,9 @@ export default function BookingPage() {
             ))}
           </div>
           <Col className="d-flex justify-content-center">
-            <Button variant="outline-primary">Boka Platser</Button>
+            <a className="btn btn-outline-primary" href="/confirmation-page">
+              Boka Platser
+            </a>
           </Col>
         </Row>
       </Container>

@@ -20,17 +20,21 @@ export default function SignIn() {
                 </Form.Group>
                 <Stack direction="horizontal">
                   <div>
-                    <Button variant="outline-primary" type="submit">
+                    <a className="btn btn-outline-primary" type="submit" href="/member">
                       Logga in
-                    </Button>
+                    </a>
                   </div>
                   <div className="d-flex justify-content-end ms-auto">
-                    <Button variant="link">Glömt Lösenord?</Button>
+                    <a className="btn btn-link p-0" href="/forgot-password">
+                      Glömt Lösenord?
+                    </a>
                   </div>
                 </Stack>
                 <Row className="mt-3">
                   <Col>
-                    <Button variant="link link-form ">Ny här? Bli medlem</Button>
+                    <a className="btn btn-link p-0" href="/register">
+                      Ny här? Bli medlem
+                    </a>
                   </Col>
                 </Row>
               </Form>

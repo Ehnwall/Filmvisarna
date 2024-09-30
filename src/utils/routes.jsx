@@ -11,14 +11,15 @@ import SignIn from '../pages/SignIn'
 import Register from '../pages/Register'
 
 // paths to use with the router and with the main menu
+// change the routes later to swedish.
 export default [
   { path: '/', element: <StartPage />, menuLabel: 'Hem' },
-  { path: '/BookingPage', element: <BookingPage /> },
-  { path: '/ConfirmationPage', element: <ConfirmationPage /> },
-  { path: '/ForgotPasswordMail', element: <ForgotPasswordMail /> },
-  { path: '/NewPasswordMail', element: <NewPasswordMail /> },
-  { path: '/Member', element: <MemberPage /> },
+  { path: '/booking-page', element: <BookingPage /> },
+  { path: '/confirmation-page', element: <ConfirmationPage /> },
+  { path: '/forgot-password', element: <ForgotPasswordMail /> },
+  { path: '/new-password', element: <NewPasswordMail /> },
+  { path: '/member', element: <MemberPage /> },
   { path: '/individual', element: <IndividualMovie /> },
-  { path: '/Sign-In', element: <SignIn />, menuLabel: 'Medlem' },
-  { path: '/Register', element: <Register /> },
+  { path: '/sign-in', element: <SignIn />, menuLabel: 'Medlem' },
+  { path: '/register', element: <Register /> },
 ]
