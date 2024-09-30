@@ -33,7 +33,9 @@ export default function Register() {
                   <ToastContainer />
                 </Col>
                 <Col className="d-flex justify-content-end">
-                  <Button variant="link">Logga in</Button>
+                  <a className="btn btn-link" href="/sign-in">
+                    Logga in
+                  </a>
                 </Col>
               </Row>
             </Form>

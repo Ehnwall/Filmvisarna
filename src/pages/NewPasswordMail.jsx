@@ -19,7 +19,9 @@ function NewPasswordMail() {
                   <Form.Control className="p-2" type="text" placeholder="Upprepa lösenord" />
                 </Form.Group>
                 <div className="d-flex justify-content-between mt-4">
-                  <Button variant="outline-primary">Uppdatera</Button>
+                  <a className="btn btn-outline-primary" href="/sign-in">
+                    Uppdatera
+                  </a>
                 </div>
               </Form>
             </div>

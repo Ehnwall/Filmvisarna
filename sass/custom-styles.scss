@@ -27,6 +27,13 @@ $transition: 0.3s ease;
     scale: 1.05;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+:target {
+    scroll-margin-block: 5ex;
+}
+
 /*custom shadow*/
 
 .custom-box-shadow {

@@ -18,8 +18,12 @@ function ForgotPasswordMail() {
                   <Form.Control className="p-2" type="email" placeholder="Ange din e-postadress" />
                 </Form.Group>
                 <div className="d-flex justify-content-between mt-4">
-                  <Button variant="primary">Tillbaka</Button>
-                  <Button variant="outline-primary">Skicka</Button>
+                  <a className="btn btn-primary" href="/sign-in">
+                    Tillbaka
+                  </a>
+                  <a className="btn btn-outline-primary" href="/new-password">
+                    Skicka
+                  </a>
                 </div>
               </Form>
             </div>

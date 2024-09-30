@@ -74,9 +74,9 @@ const ConfirmationPage = () => {
 
       <Row className="mt-4">
         <Col className="d-flex justify-content-center">
-          <Button variant="outline-primary" className="mx-2">
+          <a className=" btn btn-outline-primary mx-2" href="/">
             Bekräfta
-          </Button>
+          </a>
         </Col>
       </Row>
     </Container>
