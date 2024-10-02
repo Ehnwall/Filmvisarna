@@ -85,7 +85,7 @@ export default function BookingPage() {
                         </ButtonGroup>
                       </Col>
                       <div className="fw-bold" style={{ minWidth: '83px' }}>
-                        Total pris: 120 kr
+                        Totalpriset: 120 kr
                       </div>
                     </Row>
                   </Card.Body>
