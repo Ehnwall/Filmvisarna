@@ -4,13 +4,16 @@
     justify-content: center;
 }
 
-.seat-row :hover {
+.form-check-input:hover {
     cursor: pointer;
 }
-div > .form-check-input:disabled {
-    background-color: red;
-    cursor: none;
+.form-check-input:disabled {
+    background-color: rgb(184, 0, 0);
+    cursor: not-allowed;
+    border: none;
+    pointer-events: auto;
 }
+
 .seat-picker__container {
     min-width: 35rem;
 }
