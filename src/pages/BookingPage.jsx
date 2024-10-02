@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Row, Col, Image, Button, ButtonGroup, Card, Form } from 'react-bootstrap'
-import { BsCalendar, BsClock, BsPin } from 'react-icons/bs'
+import { BsCalendar, BsClock, BsPin, BsCreditCard2Back } from 'react-icons/bs'
 
 export default function BookingPage() {
   const rowSizes = [8, 9, 10, 10, 10, 10, 12, 13]
@@ -85,7 +85,8 @@ export default function BookingPage() {
                         </ButtonGroup>
                       </Col>
                       <div className="fw-bold" style={{ minWidth: '83px' }}>
-                        Totalpriset: 120 kr
+                        <BsCreditCard2Back size={18} className="text-primary me-2" />
+                        Total: 120 kr
                       </div>
                     </Row>
                   </Card.Body>

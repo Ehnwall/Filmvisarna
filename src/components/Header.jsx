@@ -10,7 +10,11 @@ export default function Header() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            {routes
+            <a href="/" className="nav-link">
+              Hem
+            </a>
+
+            {/* {routes
               .filter((x) => x.menuLabel)
               .map(({ path, menuLabel }, i) => (
                 <li className="nav-item">
@@ -18,7 +22,7 @@ export default function Header() {
                     {menuLabel}
                   </NavLink>
                 </li>
-              ))}
+              ))} */}
             <Link to="/#movies" className="nav-link">
               {' '}
               Se filmer
@@ -27,6 +31,9 @@ export default function Header() {
               {' '}
               Boka film
             </Link>
+            <a href="/sign-in" className="nav-link">
+              Medlem
+            </a>
           </Nav>
         </Navbar.Collapse>
       </Container>

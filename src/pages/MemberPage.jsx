@@ -15,7 +15,7 @@ import {
 
 const MemberPage = () => {
   const booking = {
-    title: "C'est arrivé près de chez vous",
+    title: 'Avengers',
     bookingNumber: '1234',
     date: '25/09',
     day: 'Måndag',
