@@ -62,8 +62,8 @@ const MemberPage = () => {
                               </li>
                               <li>
                                 <BsCalendar size={18} className="text-primary me-2" />
+                                <span>{booking.day} </span>
                                 <span>{booking.date}</span>
-                                <span> {booking.day}</span>
                               </li>
                               <li>
                                 <BsClock size={18} className="text-primary me-2" />

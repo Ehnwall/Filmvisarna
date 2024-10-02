@@ -33,7 +33,7 @@ const ConfirmationPage = () => {
             <ul className="list-unstyled">
               <li className="d-flex align-items-center justify-content-left my-1">
                 <BsCalendar size={18} className="text-primary me-2" />
-                25/09 Tisdag
+                Tisdag 25/09
               </li>
               <li className="d-flex align-items-center justify-content-left my-1">
                 <BsGeoAlt size={18} className="text-primary me-2" />
