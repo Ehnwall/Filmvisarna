@@ -4,7 +4,9 @@ import { BsCalendar, BsClock, BsPin } from 'react-icons/bs'
 
 export default function BookingPage() {
   const rowSizes = [8, 9, 10, 10, 10, 10, 12, 13]
-  const seatArray = rowSizes.map((size) => new Array(size).fill(null))
+  const seatArray = rowSizes.map(
+    (size) => new Array(size).fill(null).map(() => ({ booked: Math.random() < 0.3 })) // Randomly mark some seats as booked
+  )
   return (
     <>
       <Container className="py-4">
@@ -94,9 +96,9 @@ export default function BookingPage() {
           <div className="seat-picker__container bg-body-tertiary py-5 rounded">
             <div className="mx-auto bg-light pb-4 mb-5 rounded-5 w-50 "></div>
             {seatArray.map((row, rowIndex) => (
-              <div key={rowIndex} className="seats py-1">
-                {row.map((_, colIndex) => (
-                  <Form.Check key={colIndex} />
+              <div key={rowIndex} className="seat-row">
+                {row.map((seat, seatIndex) => (
+                  <Form.Check key={seatIndex} type="checkbox" disabled={seat.booked} />
                 ))}
               </div>
             ))}
