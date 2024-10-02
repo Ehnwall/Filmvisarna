@@ -25,7 +25,11 @@ export default function BookingPage() {
                     </div>
                     <div className="d-flex align-items-center py-1">
                       <BsClock size={18} className="text-primary me-2" />
-                      <span className="me-2">18:00</span>
+                      <span className="me-2">18:00 </span>
+                    </div>
+                    <div className="d-flex align-items-center py-1">
+                      <BsClock size={18} className="text-primary me-2" />
+                      <span>2 tim 2 min</span>
                     </div>
                     <div className="d-flex align-items-center py-1">
                       <BsPin size={18} className="text-primary me-2" />
@@ -80,6 +84,9 @@ export default function BookingPage() {
                           <Button variant="outline-primary px-3">+</Button>
                         </ButtonGroup>
                       </Col>
+                      <div className="fw-bold" style={{ minWidth: '83px' }}>
+                        Total pris: 120 kr
+                      </div>
                     </Row>
                   </Card.Body>
                 </Card>
