@@ -19,7 +19,7 @@ export default function BookingPage() {
                   <Card.Body>
                     <div className="d-flex align-items-center py-1">
                       <BsCalendar size={18} className="text-primary me-2" />
-                      <span className="me-2">Tisdag 10/15</span>
+                      <span className="me-2">Tisdag 25/10</span>
                     </div>
                     <div className="d-flex align-items-center py-1">
                       <BsClock size={18} className="text-primary me-2" />
