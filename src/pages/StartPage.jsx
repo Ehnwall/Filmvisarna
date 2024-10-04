@@ -19,7 +19,7 @@ const movies = {
     timeMin: 15,
     type: 'Action',
     age: 15,
-    dates: '24/09',
+    dates: '24 Sep',
     sceenTime: '19:30',
   },
   interstellar: {
@@ -33,7 +33,7 @@ const movies = {
     timeMin: 20,
     type: 'Action',
     age: 15,
-    dates: '24/09',
+    dates: '24 Sep',
     sceenTime: '19:30',
   },
   shangchi: {
@@ -46,7 +46,7 @@ const movies = {
     timeMin: 20,
     type: 'Action',
     age: 15,
-    dates: '24/09',
+    dates: '24 Sep',
     sceenTime: '19:30',
   },
   StarWars: {
@@ -59,7 +59,7 @@ const movies = {
     timeMin: 50,
     type: 'Action',
     age: 15,
-    dates: '24/09',
+    dates: '24 Sep',
     sceenTime: '19:30',
   },
 
@@ -73,7 +73,7 @@ const movies = {
     timeMin: 50,
     type: 'Action',
     age: 15,
-    dates: '24/09',
+    dates: '24 Sep',
     sceenTime: '19:30',
   },
   StarWars3: {
@@ -86,7 +86,7 @@ const movies = {
     timeMin: 50,
     type: 'Action',
     age: 15,
-    dates: '24/09',
+    dates: '24 Sep',
     sceenTime: '19:30',
   },
   StarWars4: {
@@ -99,7 +99,7 @@ const movies = {
     timeMin: 50,
     type: 'Action',
     age: 15,
-    dates: '24/09',
+    dates: '24 Sep',
     sceenTime: '19:30',
   },
   StarWars5: {
@@ -112,7 +112,7 @@ const movies = {
     timeMin: 50,
     type: 'Action',
     age: 15,
-    dates: '24/09',
+    dates: '24 Sep',
     sceenTime: '19:30',
   },
 }
@@ -158,7 +158,7 @@ export default function StartPage() {
             </Dropdown.Menu>
           </Dropdown>
           <Button className="btn-filter" variant="secondary">
-            Barn Filmer
+            Barnfilmer
           </Button>
         </Stack>
         <Row xs={2} xl={4} className="g-2 gy-2">
@@ -215,7 +215,7 @@ export default function StartPage() {
         </Row>
       </Container>
       <Container className="py-5">
-        <h2>Salong nr 1</h2>
+        <h2>Lilla Salongen</h2>
         <div className="horizontal-scrollable">
           <div className="g-3 py-2 rowcard ">
             {Array.from({ length: 4 }).map((_, idx) => (
@@ -250,7 +250,7 @@ export default function StartPage() {
         </div>
       </Container>
       <Container className="py-5">
-        <h2>Salong nr 2</h2>
+        <h2>Stora Salongen</h2>
         <div className="horizontal-scrollable">
           <div className="g-3 py-2 rowcard ">
             {Array.from({ length: 12 }).map((_, idx) => (

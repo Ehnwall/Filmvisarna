@@ -50,7 +50,7 @@ export default function IndividualMovie() {
                                 <div className="d-flex align-items-center">
                                   <BsCalendar size={18} className="text-primary me-2" />
                                   <span className="fw-bold me-2">Tisdag </span>
-                                  <Badge bg="secondary">{25 + index}/09</Badge>
+                                  <Badge bg="secondary">{24 + index} Sep</Badge>
                                 </div>
                               </div>
                               <div className="d-flex align-items-center mb-3">
@@ -59,7 +59,7 @@ export default function IndividualMovie() {
                               </div>
                               <div className="d-flex align-items-center mb-3">
                                 <BsPin size={18} className="text-primary me-2" />
-                                <span>Södra</span>
+                                <span>Stora Salongen</span>
                               </div>
                               <Card.Link className="btn btn-outline-primary mt-auto w-100" href="/booking-page">
                                 Boka
@@ -79,9 +79,9 @@ export default function IndividualMovie() {
                     <Accordion.Body>
                       <Stack gap={3}>
                         <p>
-                          Arthur Fleck, a party clown and a failed stand-up comedian, leads an impoverished life with
-                          his ailing mother. However, when society shuns him and brands him as a freak, he decides to
-                          embrace the life of crime and chaos in Gotham City.
+                          Arthur Fleck, en festclown och misslyckad ståuppkomiker, lever ett fattigt liv med sin sjuka
+                          mor. Men när samhället stöter bort honom och stämplar honom som en galning, bestämmer han sig
+                          för att omfamna ett liv av brott och kaos i Gotham City.
                         </p>
                         <Row>
                           <Col sm={6} md={4}>

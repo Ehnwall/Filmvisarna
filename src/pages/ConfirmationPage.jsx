@@ -33,14 +33,14 @@ const ConfirmationPage = () => {
             <ul className="list-unstyled">
               <li className="d-flex align-items-center justify-content-left my-1">
                 <BsCalendar size={18} className="text-primary me-2" />
-                25/09 Tisdag
+                Tisdag 24 Sep
               </li>
               <li className="d-flex align-items-center justify-content-left my-1">
                 <BsGeoAlt size={18} className="text-primary me-2" />
-                Sturegatan 31
+                Stora Salongen
               </li>
               <li className="d-flex align-items-center justify-content-left my-1">
-                <BsPersonCircle size={18} className="text-primary me-2" />1 barnbiljet och 1 vuxen
+                <BsPersonCircle size={18} className="text-primary me-2" />1 barnbiljett och 1 vuxen
               </li>
               <li className="d-flex align-items-center justify-content-left my-1">
                 <BsClock size={18} className="text-primary me-2" />
@@ -56,7 +56,7 @@ const ConfirmationPage = () => {
               <li className="pt-5 d-flex align-items-center justify-content-left">
                 <h6 className="d-flex align-items-center">
                   <BsCreditCard2Back size={18} className="text-primary me-2" />
-                  Totalt: 240kr
+                  Totalt: 240 kr
                 </h6>
               </li>
             </ul>
