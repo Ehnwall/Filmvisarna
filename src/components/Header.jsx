@@ -27,7 +27,7 @@ export default function Header() {
               {' '}
               Se filmer
             </Link>
-            <Link to="/#booking" className="nav-link">
+            <Link to="/#book" className="nav-link">
               {' '}
               Boka film
             </Link>
