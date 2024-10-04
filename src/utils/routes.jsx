@@ -9,6 +9,7 @@ import ForgotPasswordMail from '../pages/ForgotPasswordMail'
 import NewPasswordMail from '../pages/NewPasswordMail'
 import SignIn from '../pages/SignIn'
 import Register from '../pages/Register'
+import CancelMovie from '../pages/CancelMovie'
 
 // paths to use with the router and with the main menu
 // change the routes later to swedish.
@@ -22,4 +23,5 @@ export default [
   { path: '/individual', element: <IndividualMovie /> },
   { path: '/sign-in', element: <SignIn />, menuLabel: 'Medlem' },
   { path: '/register', element: <Register /> },
+  { path: '/avboka-film', element: <CancelMovie /> },
 ]

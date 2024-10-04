@@ -21,7 +21,7 @@ export default function BookingPage() {
                   <Card.Body>
                     <div className="d-flex align-items-center py-1">
                       <BsCalendar size={18} className="text-primary me-2" />
-                      <span className="me-2">Tisdag 25/10</span>
+                      <span className="me-2">Tisdag 24 Sep</span>
                     </div>
                     <div className="d-flex align-items-center py-1">
                       <BsClock size={18} className="text-primary me-2" />
@@ -33,7 +33,7 @@ export default function BookingPage() {
                     </div>
                     <div className="d-flex align-items-center py-1">
                       <BsPin size={18} className="text-primary me-2" />
-                      <span className="me-2">Stockholm, Sergels torg</span>
+                      <span className="me-2">Stora Salongen</span>
                     </div>
                   </Card.Body>
                 </Card>
@@ -49,7 +49,7 @@ export default function BookingPage() {
                         <div className="fw-bold" style={{ minWidth: '100px' }}>
                           Barn
                         </div>
-                        <div className="text-center">60 kr</div>
+                        <div className="text-center">80 kr</div>
                         <ButtonGroup className="btn-group-sm ms-5">
                           <Button variant="outline-primary px-3">-</Button>
                           <Button className="bg-body-tertiary pb-2" variant="outline-primary px-3">
@@ -59,10 +59,10 @@ export default function BookingPage() {
                         </ButtonGroup>
                       </Col>
                       <Col xs={12} lg={8} className="d-flex justify-content-left mb-3">
-                        <div className="fw-bold" style={{ minWidth: '100px' }}>
+                        <div className="fw-bold" style={{ minWidth: '91px' }}>
                           Pensionär
                         </div>
-                        <div className="text-center ">80 kr</div>
+                        <div className="text-center ">120 kr</div>
                         <ButtonGroup className="btn-group-sm ms-5">
                           <Button variant="outline-primary px-3">-</Button>
                           <Button className="bg-body-tertiary" variant="outline-primary px-3">
@@ -75,7 +75,7 @@ export default function BookingPage() {
                         <div className="fw-bold" style={{ minWidth: '83px' }}>
                           Vuxen
                         </div>
-                        <div className="text-center ms-2">120 kr</div>
+                        <div className="text-center ms-2">140 kr</div>
                         <ButtonGroup className="btn-group-sm ms-5">
                           <Button variant="outline-primary px-3">-</Button>
                           <Button className="bg-body-tertiary" variant="outline-primary px-3">
@@ -114,13 +114,14 @@ export default function BookingPage() {
         </div>
         <Row className="gy-4">
           <Card>
-            <Card.Header className="bg-primary rounded">
+            <Card.Header className="bg-primary ">
               <h3 className="mb-0 text-dark text-center">Ange dina uppgifter</h3>
             </Card.Header>
           </Card>
           <div className="d-flex flex-column align-items-center">
             {[
               { label: 'Namn', type: 'text' },
+              { label: 'Efternamn', type: 'text' },
               { label: 'E-post', type: 'email' },
               { label: 'Telefon', type: 'tel' },
             ].map(({ label, type }) => (

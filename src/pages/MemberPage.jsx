@@ -17,21 +17,21 @@ const MemberPage = () => {
   const booking = {
     title: 'Avengers',
     bookingNumber: '1234',
-    date: '25/09',
+    date: '24 Sep',
     day: 'Måndag',
     year: '2023',
     time: '18:00',
-    salong: 'Södra',
+    salong: 'Stora Salongen',
     seatNumbers: ['23', '23', '23', '23', '23', '23', '23', '23', '23', '23', '23', '23', '23', '23', '23', '23'],
   }
   const booking2 = {
     title: 'Avengers',
     bookingNumber: '1234',
-    date: '25/09',
+    date: '24 Sep',
     day: 'Måndag',
     year: '2023',
     time: '18:00',
-    salong: 'Södra',
+    salong: 'Stora Salongen',
     seatNumbers: ['23', '23', '23', '23', '23', '23'],
   }
 
@@ -107,7 +107,7 @@ const MemberPage = () => {
                       </Card.Text>
                       <div>
                         <BsCreditCard2Back size={18} className="text-primary me-2" />
-                        <span>Totalt: 240kr</span>
+                        <span>Totalt: 240 kr</span>
                       </div>
                       <div className="d-grid mt-4">
                         <Button className="mt-auto" variant="outline-danger" onClick={notify}>
@@ -191,7 +191,7 @@ const MemberPage = () => {
                     <Row className="mx-1 mb-3">
                       <Col className="">
                         <BsCreditCard2Back size={18} className="text-primary me-2" />
-                        <span>Totalt: 240kr</span>
+                        <span>Totalt: 240 kr</span>
                       </Col>
                     </Row>
                   </Card>
