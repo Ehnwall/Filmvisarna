@@ -10,3 +10,17 @@ if (!fs.existsSync(dir)) {
 }
 
 const db = new database(dbPath)
+const cinemasTableQuery = `
+CREATE TABLE IF NOT EXISTS cinemas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL
+);
+`
+const insertCinemasQuery = `
+INSERT INTO cinemas(name) VALUES
+('Stora salongen'),
+('Lilla salongen');
+`
+db.exec(cinemasTableQuery)
+// db.exec(insertCinemasQuery)
+console.log(cinemasTableQuery)
