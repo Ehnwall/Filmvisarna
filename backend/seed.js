@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS bookings (
 /*  FOREIGN KEY (userId) REFERENCES users(Id),
     FOREIGN KEY (showId) REFERENCES shows(Id)*/
 
-const bookingTestData = `
+/* const bookingTestData = `
 INSERT INTO bookings (userId, showId, bookingNumberId) VALUES
 (1, 1, 'BN001'),
 (2, 2, 'BN002'),
@@ -50,10 +50,10 @@ INSERT INTO shows (movieId, time, cinemaId) VALUES
 (3, '2024-10-09 16:00', 3),
 (2, '2024-10-10 19:30', 2);
 
-`
+` */
 
 db.exec(createShows)
 db.exec(createBookings)
 
-db.exec(showTestData)
-db.exec(bookingTestData)
+/* db.exec(showTestData)
+db.exec(bookingTestData) */
