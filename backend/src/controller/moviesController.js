@@ -1,4 +1,4 @@
-import service from '../service/service.js'
+import service from '../service/moviesService.js'
 
 const getAllMovies = (req, res) => {
     const movies = service.getMovies()
@@ -7,7 +7,7 @@ const getAllMovies = (req, res) => {
         return res.status(204).send({ msg: 'No movies' })
     }
 
-    res.send(movies)
+    res.status(200).send(movies)
 }
 
 export default { getAllMovies }

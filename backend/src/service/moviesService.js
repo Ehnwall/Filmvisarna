@@ -1,6 +1,4 @@
-import betterSqlite from 'better-sqlite3'
-
-const db = betterSqlite('../db/db.sqlite3')
+import { db } from '../../server.js'
 
 const getMovies = () => {
     const stmt = db.prepare('SELECT * FROM movies').all()

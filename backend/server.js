@@ -1,11 +1,14 @@
 import express from 'express'
-import router from './src/router/routes.js'
+import movieRouter from './src/router/moviesRoutes.js'
+import betterSqlite from 'better-sqlite3'
+
+export const db = betterSqlite('./backend/db/db.sqlite3')
 
 const port = 4000
 const app = express()
 
 app.use(express.json())
-app.use(router)
+app.use(movieRouter)
 
 app.listen(port, async () => {
     console.log(`Server is alive at http://localhost:${port}`)
