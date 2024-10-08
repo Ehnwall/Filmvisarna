@@ -11,7 +11,14 @@ if (!fs.existsSync(dir)) {
 
 const db = new database(dbPath)
 
-const moviesTableQuery = `CREATE TABLE IF NOT EXISTS movies(Id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, durationMin INTEGER NOT NULL, ageLimit INTEGER NOT NULL, description TEXT NOT NULL, trailerUrl TEXT NOT NULL, posterUrl TEXT NOT NULL );`
+const moviesTableQuery = `CREATE TABLE IF NOT EXISTS movies
+(Id INTEGER PRIMARY KEY AUTOINCREMENT, 
+title TEXT NOT NULL,
+durationMin INTEGER NOT NULL,
+ageLimit INTEGER NOT NULL, 
+description TEXT NOT NULL, 
+trailerUrl TEXT NOT NULL, 
+posterUrl TEXT NOT NULL );`
 
 // CREATE TABLES
 db.exec(moviesTableQuery)
@@ -105,7 +112,13 @@ const movies = [
     },
 ]
 
-const movieQuery = `INSERT INTO movies (title, durationMin, ageLimit, description, trailerUrl, posterUrl) VALUES (?,?,?,?,?,?)`
+const movieQuery = `INSERT INTO 
+movies 
+(title, durationMin, 
+ageLimit, description, 
+trailerUrl, posterUrl) 
+VALUES 
+(?,?,?,?,?,?)`
 
 movies.forEach((movie) => {
     db.prepare(movieQuery).run(
@@ -117,13 +130,3 @@ movies.forEach((movie) => {
         movie.trailerUrl
     )
 })
-
-const getAllMovies = () => {
-    const query = `SELECT * FROM movies`
-
-    const movies = db.prepare(query).all()
-
-    return movies
-}
-
-console.log(getAllMovies())
