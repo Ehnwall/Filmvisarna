@@ -14,7 +14,7 @@ const db = new database(dbPath)
 // Skapa biografernas tabell
 const cinemasTableQuery = `
 CREATE TABLE IF NOT EXISTS cinemas(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL
 );
 `
@@ -29,17 +29,17 @@ INSERT INTO cinemas(name) VALUES
 // Skapa sittplatsernas tabell
 const cinemaSeatsTableQuery = `
 CREATE TABLE IF NOT EXISTS cinema_seats(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    cinema_id INTEGER NOT NULL,
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cinemaId INTEGER NOT NULL,
     seatRow INTEGER NOT NULL,
     seatNumber INTEGER NOT NULL,
-    FOREIGN KEY(cinema_id) REFERENCES cinemas(id)
+    FOREIGN KEY(cinemaId) REFERENCES cinemas(Id)
 );
 `
 
 // Sätt in sittplatser
 const insertCinemaSeatsQuery = `
-INSERT INTO cinema_seats (cinema_id, seatRow, seatNumber) VALUES (?, ?, ?)
+INSERT INTO cinemaSeats (cinemaId, seatRow, seatNumber) VALUES (?, ?, ?)
 `
 
 // Kör SQL-frågor för att skapa tabeller och sätta in biografer
