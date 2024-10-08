@@ -13,26 +13,26 @@ const db = new database(dbPath)
 
 const createShows = `
 CREATE TABLE IF NOT EXISTS shows (
-    ID INTEGER PRIMARY KEY AUTOINCREMENT,
-    movieID INTEGER,
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    movieId INTEGER,
     time TEXT,
-    cinemaID INTEGER
+    cinemaId INTEGER
 );
 `
-/*   FOREIGN KEY (movieID) REFERENCES movies(ID),
-    FOREIGN KEY (cinemaID) REFERENCES cinemas(ID)*/
+/*   FOREIGN KEY (movieId) REFERENCES movies(Id),
+    FOREIGN KEY (cinemaId) REFERENCES cinemas(Id)*/
 
 const createBookings = `
 CREATE TABLE IF NOT EXISTS bookings (
-    ID INTEGER PRIMARY KEY AUTOINCREMENT,
-    userID INTEGER,
-    showID INTEGER,
-    booking_number TEXT
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    userId INTEGER,
+    showId INTEGER,
+    bookingNumberId TEXT
 );
 
 `
-/*  FOREIGN KEY (userID) REFERENCES users(ID),
-    FOREIGN KEY (showID) REFERENCES shows(ID)*/
+/*  FOREIGN KEY (userId) REFERENCES users(Id),
+    FOREIGN KEY (showId) REFERENCES shows(Id)*/
 
 db.exec(createShows)
 db.exec(createBookings)
