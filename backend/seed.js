@@ -28,7 +28,7 @@ INSERT INTO cinemas(name) VALUES
 
 // Skapa sittplatsernas tabell
 const cinemaSeatsTableQuery = `
-CREATE TABLE IF NOT EXISTS cinema_seats(
+CREATE TABLE IF NOT EXISTS cinemaSeats(
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
     cinemaId INTEGER NOT NULL,
     seatRow INTEGER NOT NULL,
