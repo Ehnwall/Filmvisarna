@@ -43,9 +43,9 @@ INSERT INTO cinema_seats (cinema_id, seatRow, seatNumber) VALUES (?, ?, ?)
 `
 
 // Kör SQL-frågor för att skapa tabeller och sätta in biografer
-// db.exec(cinemasTableQuery)
-// db.exec(insertCinemasQuery)
-// db.exec(cinemaSeatsTableQuery)
+db.exec(cinemasTableQuery)
+db.exec(insertCinemasQuery)
+db.exec(cinemaSeatsTableQuery)
 
 // Funktion för att sätta in sittplatser för en viss biograf
 function insertSeats(cinemaId, rowSizes) {
@@ -57,15 +57,18 @@ function insertSeats(cinemaId, rowSizes) {
     })
 
     const rows = []
+    let seatNumber = 1 // Global räknare för alla säten
+
     rowSizes.forEach((seatsInRow, rowIndex) => {
-        for (let seat = 1; seat <= seatsInRow; seat++) {
-            rows.push({ cinemaId: cinemaId, rowIndex: rowIndex + 1, seat: seat })
+        for (let seat = 0; seat < seatsInRow; seat++) {
+            // Skapa ett objekt för varje stol med global seatNumber
+            rows.push({ cinemaId: cinemaId, rowIndex: rowIndex + 1, seat: seatNumber })
+            seatNumber++ // Öka sätesnumret för nästa stol
         }
     })
+
     insertMany(rows)
 }
-
-// Sittplatskonfigurationer för båda biograferna
 
 // Stora salongen
 const storaSalongenRowSizes = [8, 9, 10, 10, 10, 10, 12, 12]
