@@ -11,9 +11,9 @@ const getMovies = () => {
 const getShowsByMovie = (id) => {
     try {
         const showByMovies = db.prepare(
-            'SELECT movies.*, shows.*, cinemas.* FROM movies INNER JOIN shows ON shows.movieId = movies.id INNER JOIN cinemas ON cinemas.id = shows.id WHERE movies.Id = ?'
+            'SELECT movies.*, shows.id AS show_id, shows.time  AS show_time, cinemas.name FROM movies INNER JOIN shows ON shows.movieId = movies.id INNER JOIN cinemas ON cinemas.id = shows.cinemaId WHERE movies.Id = ?'
         )
-        const result = showByMovies.get(id)
+        const result = showByMovies.all(id)
         return result
     } catch (error) {
         console.error('Error finding Shows')
