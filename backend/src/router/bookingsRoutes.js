@@ -1,8 +1,8 @@
 import express from 'express'
 import bookingsController from '../controller/bookingsController.js'
 
-const router = express.Router()
+const bookingRouter = express.Router()
 
-router.get('/api/bookings/:Id', bookingsController.getBookings)
+bookingRouter.get('/api/bookings/:bookingId', bookingsController.getBookingsFromId)
 
-export default router
+export default bookingRouter
