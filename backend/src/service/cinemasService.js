@@ -7,7 +7,7 @@ const seatsByCinemaId = (id) => {
     ORDER BY seatNumber ASC`
     const stmt = db.prepare(allSeats).all(id)
     if (stmt.length === 0) {
-        throw new Error('No seats found')
+        throw new Error('No seats found on cinema with id ' + id)
     }
     return stmt
 }
