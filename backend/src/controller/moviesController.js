@@ -10,4 +10,14 @@ const getAllMovies = (req, res) => {
     res.status(200).send(movies)
 }
 
-export default { getAllMovies }
+const getShowByMovieId = (req, res) => {
+    const movieId = parseInt(req.params.id, 10)
+    try {
+        const show = service.getShowsByMovie(movieId)
+        res.status(200).send(show)
+    } catch (e) {
+        res.status(404).send({ msg: 'No shows Found' })
+    }
+}
+
+export default { getAllMovies, getShowByMovieId }
