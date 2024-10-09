@@ -10,6 +10,7 @@ export const getBookingsByUserId = (userId) => {
             movies.title AS movieTitle,
             movies.posterUrl AS moviePosterUrl,
             ticketTypes.ticketType AS ticketType,
+            ticketTypes.price AS ticketPrice,
             cinemaSeats.seatRow,
             cinemaSeats.seatNumber
         FROM bookings
@@ -31,6 +32,8 @@ export const getBookingsByUserId = (userId) => {
             bookingsMap[bookingId].seats.push({
                 seatRow: parseInt(booking.seatRow, 10),
                 seatNumber: parseInt(booking.seatNumber, 10),
+                ticketType: booking.ticketType,
+                ticketPrice: booking.ticketPrice,
             })
         } else {
             bookingsMap[bookingId] = {
@@ -40,11 +43,12 @@ export const getBookingsByUserId = (userId) => {
                 cinemaName: booking.cinemaName,
                 movieTitle: booking.movieTitle,
                 movieUrl: booking.moviePosterUrl,
-                ticketType: booking.ticketType,
                 seats: [
                     {
                         seatRow: parseInt(booking.seatRow, 10),
                         seatNumber: parseInt(booking.seatNumber, 10),
+                        ticketType: booking.ticketType,
+                        ticketPrice: booking.ticketPrice,
                     },
                 ],
             }
