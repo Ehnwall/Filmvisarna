@@ -2,6 +2,10 @@ export const signupData = ({ email, firstName, lastName, password }) => {
     const emailRegex = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$', 'g')
     const passwordRegex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$', 'g')
 
+    if (!email || !firstName || !lastName || !password) {
+        throw new Error('All fields are required')
+    }
+
     if (!email.trim() || !firstName.trim() || !lastName.trim() || !password) {
         throw new Error('All fields are required')
     }
