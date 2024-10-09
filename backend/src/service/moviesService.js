@@ -1,7 +1,8 @@
 import { db } from '../../server.js'
 
 const getMovies = () => {
-    const stmt = db.prepare('SELECT * FROM movies').all()
+    const allMovies = 'SELECT * FROM movies'
+    const stmt = db.prepare(allMovies).all()
 
     return stmt
 }
