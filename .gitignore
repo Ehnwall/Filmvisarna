@@ -1,5 +1,5 @@
 # Database
-db/live/db.sqlite3
+../../db/live/db.sqlite3
 
 # Logs
 logs
