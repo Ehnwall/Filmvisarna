@@ -3,6 +3,6 @@ import { deleteBooking } from '../controller/bookingsController.js'
 
 const router = express.Router()
 
-router.get('/api/bookings/:id', deleteBooking)
+router.delete('/api/bookings/:id', deleteBooking)
 
 export default router
