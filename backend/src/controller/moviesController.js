@@ -10,4 +10,24 @@ const getAllMovies = (req, res) => {
     res.status(200).send(movies)
 }
 
-export default { getAllMovies }
+const getOneMovie = (req, res) => {
+    const movieId = parseInt(req.params.id, 10) // Hämtar id från URL Parametern, gör om det till en Integer
+    try {
+        const movie = service.getMovieById(movieId)
+        res.status(200).send(movie)
+    } catch (e) {
+        res.status(404).send({ msg: 'Movie not found' })
+    }
+}
+
+const getShowByMovieID = (req, res) => {
+    const movieId = parseInt(req.params.id, 10)
+    try {
+        const show = service.getShowsByMovie(movieId)
+        res.status(200).send(show)
+    } catch (e) {
+        res.status(404).send({ msg: 'No shows Found' })
+    }
+}
+
+export default { getAllMovies, getOneMovie, getShowByMovieID }
