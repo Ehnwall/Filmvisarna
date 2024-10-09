@@ -10,17 +10,19 @@ if (!fs.existsSync(dir)) {
 }
 const db = new database(dbPath)
 
-const moviesTableQuery = `CREATE TABLE IF NOT EXISTS movies
-(Id INTEGER PRIMARY KEY AUTOINCREMENT, 
-title TEXT NOT NULL,
-durationMin INTEGER NOT NULL,
-ageLimit INTEGER NOT NULL, 
-description TEXT NOT NULL, 
-trailerUrl TEXT NOT NULL, 
-posterUrl TEXT NOT NULL );`
+const moviesTableQuery = `
+CREATE TABLE IF NOT EXISTS movies(
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    durationMin INTEGER NOT NULL,
+    ageLimit INTEGER NOT NULL, 
+    description TEXT NOT NULL, 
+    trailerUrl TEXT NOT NULL, 
+    posterUrl TEXT NOT NULL
+);
+`
 
 // CREATE TABLES
-db.exec(moviesTableQuery)
 
 const movies = [
     {
@@ -119,16 +121,6 @@ trailerUrl, posterUrl)
 VALUES 
 (?,?,?,?,?,?)`
 
-movies.forEach((movie) => {
-    db.prepare(movieQuery).run(
-        movie.title,
-        movie.durationMin,
-        movie.ageLimit,
-        JSON.stringify(movie.description),
-        movie.posterUrl,
-        movie.trailerUrl
-    )
-})
 // Skapa biografernas tabell
 const cinemasTableQuery = `
 CREATE TABLE IF NOT EXISTS cinemas(
@@ -160,11 +152,6 @@ const insertCinemaSeatsQuery = `
 INSERT INTO cinemaSeats (cinemaId, seatRow, seatNumber) VALUES (?, ?, ?)
 `
 
-// Kör SQL-frågor för att skapa tabeller och sätta in biografer
-db.exec(cinemasTableQuery)
-db.exec(insertCinemasQuery)
-db.exec(cinemaSeatsTableQuery)
-
 // Funktion för att sätta in sittplatser för en viss biograf
 function insertSeats(cinemaId, rowSizes) {
     const insert = db.prepare(insertCinemaSeatsQuery)
@@ -188,62 +175,46 @@ function insertSeats(cinemaId, rowSizes) {
     insertMany(rows)
 }
 
-// Stora salongen
-const storaSalongenRowSizes = [8, 9, 10, 10, 10, 10, 12, 12]
-insertSeats(1, storaSalongenRowSizes) // Biograf-ID 1 för Stora salongen
-
-// Lilla salongen
-const lillaSalongenRowSizes = [6, 8, 9, 10, 10, 12]
-insertSeats(2, lillaSalongenRowSizes) // Biograf-ID 2 för Lilla salongen
-
-console.log('Seat data inserted successfully.')
-
 const createShows = `
 CREATE TABLE IF NOT EXISTS shows (
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
     movieId INTEGER,
     time TEXT,
-    cinemaId INTEGER
+    cinemaId INTEGER,
+    FOREIGN KEY (movieId) REFERENCES movies(Id),
+    FOREIGN KEY (cinemaId) REFERENCES cinemas(Id)
 );
 `
-/*   FOREIGN KEY (movieId) REFERENCES movies(Id),
-    FOREIGN KEY (cinemaId) REFERENCES cinemas(Id)*/
 
 const createBookings = `
 CREATE TABLE IF NOT EXISTS bookings (
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
     userId INTEGER,
     showId INTEGER,
-    bookingNumberId TEXT
+    bookingNumberId TEXT,
+    FOREIGN KEY (userId) REFERENCES users(Id),
+    FOREIGN KEY (showId) REFERENCES shows(Id)
 );
 
 `
-/*  FOREIGN KEY (userId) REFERENCES users(Id),
-    FOREIGN KEY (showId) REFERENCES shows(Id)*/
 
-/* const bookingTestData = `
+const bookingTestData = `
 INSERT INTO bookings (userId, showId, bookingNumberId) VALUES
 (1, 1, 'BN001'),
-(2, 2, 'BN002'),
-(3, 3, 'BN003'),
-(4, 1, 'BN004'),
-(5, 4, 'BN005');
+(2, 1, 'BN002'),
+(3, 2, 'BN003'),
+(4, 3, 'BN004'),
+(5, 3, 'BN005');
 `
 const showTestData = `
 INSERT INTO shows (movieId, time, cinemaId) VALUES
 (1, '2024-10-08 15:30', 1),
 (2, '2024-10-08 18:00', 2),
 (1, '2024-10-09 20:00', 1),
-(3, '2024-10-09 16:00', 3),
-(2, '2024-10-10 19:30', 2);
+(3, '2024-10-09 16:00', 2),
+(4, '2024-10-10 19:30', 2);
+`
 
-` */
-
-db.exec(createShows)
-db.exec(createBookings)
-
-/* db.exec(showTestData)
-db.exec(bookingTestData) */
 const createUserTable = `
     CREATE TABLE IF NOT EXISTS users (
         Id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -255,14 +226,14 @@ const createUserTable = `
     );
 `
 
-// const userQuery = `
-//     INSERT INTO users (email, password, firstName, lastName, role) VALUES
-//     ('eric.classon@example.com', 'hashedPassword1', 'Erik', 'Classon', 'admin'),
-//     ('alvin.samuelsson@example.com', 'hashedPassword2', 'Alvin', 'Samuelsson', 'user'),
-//     ('dennis.ehnwall@example.com', 'hashedPassword3', 'Dennis', 'Ehnwall', 'user'),
-//     ('kalle.pettersson@example.com', 'hashedPassword4', 'Kalle', 'Pettersson', 'user'),
-//     ('pontus.boman@example.com', 'hashedPassword5', 'Pontus', 'Boman', 'user');
-// `
+const userQuery = `
+    INSERT INTO users (email, password, firstName, lastName, role) VALUES
+    ('eric.classon@example.com', 'hashedPassword1', 'Erik', 'Classon', 'admin'),
+    ('alvin.samuelsson@example.com', 'hashedPassword2', 'Alvin', 'Samuelsson', 'user'),
+    ('dennis.ehnwall@example.com', 'hashedPassword3', 'Dennis', 'Ehnwall', 'user'),
+    ('kalle.pettersson@example.com', 'hashedPassword4', 'Kalle', 'Pettersson', 'user'),
+    ('pontus.boman@example.com', 'hashedPassword5', 'Pontus', 'Boman', 'user');
+`
 
 const createTicketTypeTable = `CREATE TABLE IF NOT EXISTS ticketTypes (
         Id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -270,12 +241,76 @@ const createTicketTypeTable = `CREATE TABLE IF NOT EXISTS ticketTypes (
         price INTEGER NOT NULL
     );`
 
-// const ticketTypeQuery = `INSERT INTO ticketTypes (ticketType, price) VALUES ('Barn', 80 ), ('Vuxen',  140), ('Pensionär', 120)`
+const ticketTypeQuery = `INSERT INTO ticketTypes (ticketType, price) VALUES ('Barn', 80 ), ('Vuxen',  140), ('Pensionär', 120)`
 
+const bookingXseatsXticketQuery = `
+CREATE TABLE IF NOT EXISTS bookingXseatsXticket (
+    bookingID INTEGER NOT NULL,
+    cinemaSeatsID INTEGER NOT NULL,
+    ticketTypeID INTEGER NOT NULL,
+    FOREIGN KEY (bookingID) REFERENCES bookings(Id),
+    FOREIGN KEY (cinemaSeatsID) REFERENCES cinemaSeats(Id),
+    FOREIGN KEY (ticketTypeID) REFERENCES ticketTypes(Id)
+);
+`
+const insertBookingXSeatsXTicketQuery = `
+INSERT INTO bookingXseatsXticket (bookingID, cinemaSeatsID, ticketTypeID) VALUES (?, ?, ?)
+`
+
+const bookingXSeatsXTicketData = [
+    { bookingID: 1, cinemaSeatsID: 1, ticketTypeID: 1 },
+    { bookingID: 1, cinemaSeatsID: 2, ticketTypeID: 1 },
+    { bookingID: 2, cinemaSeatsID: 3, ticketTypeID: 2 },
+    { bookingID: 3, cinemaSeatsID: 4, ticketTypeID: 3 },
+    { bookingID: 4, cinemaSeatsID: 5, ticketTypeID: 2 },
+    { bookingID: 5, cinemaSeatsID: 6, ticketTypeID: 1 },
+]
+
+// CREATE TABLES:
+db.exec(moviesTableQuery)
 db.exec(createUserTable)
 db.exec(createTicketTypeTable)
-// db.exec(ticketTypeQuery)
-// db.exec(userQuery)
+db.exec(createShows)
+db.exec(createBookings)
+// Kör SQL-frågor för att skapa tabeller och sätta in biografer
+db.exec(cinemasTableQuery)
+// CREATE cinema seats TABLE
+db.exec(cinemaSeatsTableQuery)
+db.exec(bookingXseatsXticketQuery)
 
+// INSERTS:
+// INSERT movies
+movies.forEach((movie) => {
+    db.prepare(movieQuery).run(
+        movie.title,
+        movie.durationMin,
+        movie.ageLimit,
+        JSON.stringify(movie.description),
+        movie.posterUrl,
+        movie.trailerUrl
+    )
+})
+// INSERT users
+db.exec(userQuery)
+// INSERT Ticket types
+db.exec(ticketTypeQuery)
+// INSERT cinemas
+db.exec(insertCinemasQuery)
+// INSERT shows
+db.exec(showTestData)
+// INSERT bookings
+db.exec(bookingTestData)
+
+// INSERT to Stora salongen
+const storaSalongenRowSizes = [8, 9, 10, 10, 10, 10, 12, 12]
+insertSeats(1, storaSalongenRowSizes) // Biograf-ID 1 för Stora salongen
+
+// ISNERT to Lilla salongen
+const lillaSalongenRowSizes = [6, 8, 9, 10, 10, 12]
+insertSeats(2, lillaSalongenRowSizes) // Biograf-ID 2 för Lilla salongen
+
+bookingXSeatsXTicketData.forEach((data) => {
+    db.prepare(insertBookingXSeatsXTicketQuery).run(data.bookingID, data.cinemaSeatsID, data.ticketTypeID)
+})
 db.close()
-
+console.log('Seat data inserted successfully.')
