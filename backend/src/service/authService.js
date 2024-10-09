@@ -1,11 +1,19 @@
 import { db } from '../../server.js'
-const create = ({ email, firstName, lastName, password }) => {
-    // console.log(email, firstName, lastName, password)
-    const checkIfUserExists = 'SELECT * FROM users WHERE email = ?'
-    const stmt = db.prepare(checkIfUserExists).get(email)
+import bcrypt from 'bcryptjs'
+
+const create = async ({ email, firstName, lastName, password, role = 'user' }) => {
+    const checkIfUserExistsQuery = 'SELECT * FROM users WHERE email = ?'
+    const insertUserQuery = 'INSERT INTO users (email, firstName, lastName, password, role) VALUES (?, ?, ?, ?, ?)'
+
+    const stmt = db.prepare(checkIfUserExistsQuery).get(email)
     if (stmt) {
         throw new Error('User already exists')
     }
+
+    const salt = await bcrypt.genSalt(12)
+    const hash = await bcrypt.hash(password, salt)
+    const result = db.prepare(insertUserQuery).run(email, firstName, lastName, hash, role)
+    return result
 }
 
 export default { create }
