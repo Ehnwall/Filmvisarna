@@ -1,3 +1,5 @@
+import authService from '../service/authService.js'
+
 const signup = (req, res) => {
     const { email, firstName, lastName, password } = req.body
     const emailRegex = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$', 'g')
@@ -14,6 +16,12 @@ const signup = (req, res) => {
         return res
             .status(400)
             .send({ msg: 'Password must contain at least 8 characters, one lowercase, one uppercase and one number' })
+    }
+
+    try {
+        authService.create({ email, firstName, lastName, password })
+    } catch (e) {
+        return res.status(400).send({ msg: e.message })
     }
 
     return res.status(201).send({ msg: 'Account was successfully created' })
