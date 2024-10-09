@@ -1,5 +1,5 @@
-const register = (req, res) => {
+const signup = (req, res) => {
     res.status(201).send({ msg: 'User registered' })
 }
 
-export default { register }
+export default { signup }
