@@ -5,6 +5,7 @@ export const getBookingsByUserId = (userId) => {
             SELECT
             bookings.Id AS bookingId,
             bookings.bookingNumberId,
+            bookings.userId,
             shows.time AS showTime,
             cinemas.name AS cinemaName,
             movies.title AS movieTitle,
@@ -39,6 +40,7 @@ export const getBookingsByUserId = (userId) => {
             bookingsMap[bookingId] = {
                 bookingId: bookingId,
                 bookingNumberId: booking.bookingNumberId,
+                userId: booking.userId,
                 showTime: booking.showTime,
                 cinemaName: booking.cinemaName,
                 movieTitle: booking.movieTitle,
