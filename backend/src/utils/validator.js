@@ -21,13 +21,19 @@ export const signupData = ({ email, firstName, lastName, password }) => {
     if (password.length > 128) {
         throw new Error('Password is too long')
     }
-    
-    if(firstName.length > 50){
+
+    if (firstName.length > 50) {
         throw new Error('First name is too long')
     }
 
-    if(lastName.length > 50){
+    if (lastName.length > 50) {
         throw new Error('Last name is too long')
     }
 }
-export default { signupData }
+
+const signinData = ({ email, password }) => {
+    if (!email || !password) {
+        throw new Error('All fields are required')
+    }
+}
+export default { signupData, signinData }

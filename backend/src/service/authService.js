@@ -17,7 +17,6 @@ const exists = async ({ email, password }) => {
                     email,
                     role: user.role,
                 })
-                console.log(token)
                 resolve(token)
             } else {
                 reject(new Error('Invalid password'))

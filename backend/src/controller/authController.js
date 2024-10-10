@@ -16,12 +16,12 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
     const { email, password } = req.body
     try {
+        validate.signinData({ email, password })
         const result = await authService.exists({ email, password })
         return res.status(200).send(result)
     } catch (e) {
         return res.status(400).send({ msg: e.message })
     }
-    return res.send('login')
 }
 
 export default { signup, login }
