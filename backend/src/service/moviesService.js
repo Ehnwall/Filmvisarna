@@ -8,14 +8,13 @@ const getMovies = () => {
 }
 
 const getMovieById = (id) => {
-    try {
-        const movieById = db.prepare('SELECT * FROM movies WHERE Id = ?')
-        const result = movieById.get(id)
-        return result
-    } catch (error) {
-        console.error('Error finding movie:', error)
-        return false
+    const movieById = db.prepare('SELECT * FROM movies WHERE Id = ?')
+    const result = movieById.get(id)
+
+    if (result.length === 0) {
+        throw new Error({ msg: 'Movie not found' })
     }
+    return result
 }
 
 export default { getMovies, getMovieById }
