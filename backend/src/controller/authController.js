@@ -18,7 +18,7 @@ const login = async (req, res) => {
     try {
         validate.signinData({ email, password })
         const result = await authService.exists({ email, password })
-        return res.status(200).send(result)
+        return res.status(200).send({ bearer: result })
     } catch (e) {
         return res.status(400).send({ msg: e.message })
     }
