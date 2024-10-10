@@ -7,4 +7,14 @@ const getMovies = () => {
     return stmt
 }
 
-export default { getMovies }
+const getMovieById = (id) => {
+    const movieById = db.prepare('SELECT * FROM movies WHERE Id = ?')
+    const result = movieById.get(id)
+
+    if (result.length === 0) {
+        throw new Error({ msg: 'Movie not found' })
+    }
+    return result
+}
+
+export default { getMovies, getMovieById }
