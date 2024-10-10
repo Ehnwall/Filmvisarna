@@ -1,14 +1,23 @@
 import { db } from '../../server.js'
 
-export const getBookingsByUserId = (userId) => {
-    const query = `
-        SELECT
-            *
+export const getBookings = (email, role) => {
+    let booking
+    if (role === 'admin') {
+        const query = `
+        SELECT *
         FROM userBookings
-        WHERE userId = ?;
     `
+        booking = db.prepare(query).all()
+    } else {
+        const query = `
+        SELECT *
+        FROM userBookings
+        WHERE userEmail = ?
+    `
+        booking = db.prepare(query).all(email)
+    }
 
-    const result = db.prepare(query).all(userId)
+    const result = booking
 
     const bookingsMap = {}
 
