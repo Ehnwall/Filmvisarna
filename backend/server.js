@@ -1,5 +1,6 @@
 import express from 'express'
 import movieRouter from './src/router/moviesRoutes.js'
+import authRouter from './src/router/authRoutes.js'
 import showRouter from './src/router/showsRoutes.js'
 import betterSqlite from 'better-sqlite3'
 
@@ -10,6 +11,7 @@ const app = express()
 
 app.use(express.json())
 app.use(movieRouter)
+app.use(authRouter)
 app.use(showRouter)
 
 app.listen(port, async () => {
