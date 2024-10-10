@@ -5,7 +5,8 @@ export const getBookingsByUserId = (userId) => {
             SELECT
             bookings.Id AS bookingId,
             bookings.bookingNumberId,
-            bookings.userId,
+            users.Id AS userId,
+            users.email AS userEmail,
             shows.time AS showTime,
             cinemas.name AS cinemaName,
             movies.title AS movieTitle,
@@ -16,6 +17,7 @@ export const getBookingsByUserId = (userId) => {
             cinemaSeats.seatNumber
         FROM bookings
         JOIN shows ON bookings.showId = shows.Id
+        JOIN users ON booking.userId = user.Id
         JOIN movies ON shows.movieId = movies.Id
         JOIN cinemas ON shows.cinemaId = cinemas.Id
         JOIN bookingXseatsXticket ON bookings.Id = bookingXseatsXticket.bookingID
@@ -41,6 +43,7 @@ export const getBookingsByUserId = (userId) => {
                 bookingId: bookingId,
                 bookingNumberId: booking.bookingNumberId,
                 userId: booking.userId,
+                userEmail: booking.userEmail,
                 showTime: booking.showTime,
                 cinemaName: booking.cinemaName,
                 movieTitle: booking.movieTitle,

@@ -9,7 +9,7 @@ export const getUserBookings = async (req, res) => {
         if (bookings.length > 0) {
             res.status(200).json(bookings)
         } else {
-            res.status(404).json({ message: 'No bookings found for this user' })
+            res.status(404).json({ msg: 'No bookings found for this user' })
         }
     } catch (error) {
         console.error('Error fetching bookings:', error)
