@@ -1,9 +1,9 @@
 import { getBookings } from '../service/bookingsService.js'
 
-export const getAllBookings = async (req, res) => {
+export const getAllBookings = (req, res) => {
     try {
         const { email, role } = req.user
-        const bookings = await getBookings(email, role)
+        const bookings = getBookings(email, role)
 
         if (bookings.length > 0) {
             res.status(200).json(bookings)
