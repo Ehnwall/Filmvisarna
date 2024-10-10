@@ -13,4 +13,15 @@ const signup = async (req, res) => {
     }
 }
 
-export default { signup }
+const login = async (req, res) => {
+    const { email, password } = req.body
+    try {
+        validate.signinData({ email, password })
+        const result = await authService.exists({ email, password })
+        return res.status(200).send({ bearer: result })
+    } catch (e) {
+        return res.status(400).send({ msg: e.message })
+    }
+}
+
+export default { signup, login }
