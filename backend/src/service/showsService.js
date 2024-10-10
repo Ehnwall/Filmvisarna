@@ -12,7 +12,9 @@ const getShowById = (id) => {
     WHERE shows.Id = ?`
 
     const stmt = db.prepare(showById).get(id)
-    console.log(stmt)
+    if (!stmt) {
+        throw new Error('Show not found')
+    }
     return stmt
 }
 export default { getShowById }

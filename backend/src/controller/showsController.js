@@ -2,13 +2,12 @@ import showsService from '../service/showsService.js'
 
 const getShowById = (req, res) => {
     const id = parseInt(req.params.id)
-    console.log(id)
-    const show = showsService.getShowById(id)
 
-    if (!show) {
-        return res.status(404).send({ msg: 'Show not found' })
+    try {
+        const show = showsService.getShowById(id)
+        res.status(200).send(show)
+    } catch (error) {
+        res.status(404).send({ msg: error.message })
     }
-
-    res.status(200).send(show)
 }
 export default { getShowById }
