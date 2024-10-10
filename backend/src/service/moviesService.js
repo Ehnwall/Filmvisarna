@@ -10,21 +10,14 @@ const getMovies = () => {
 const getShowsByMovie = (id) => {
     const allShows = db.prepare('SELECT * FROM shows')
 
-    try {
-        const showByMovies = db.prepare(
-            'SELECT movies.*, shows.id AS showId, shows.time  AS showTime, cinemas.name AS cinemaName, cinemas.id AS cinemaId FROM movies INNER JOIN shows ON shows.movieId = movies.id INNER JOIN cinemas ON cinemas.id = shows.cinemaId WHERE movies.Id = ?'
-        )
-        if (id > allShows.length) {
-            throw new Error(
-                `The movie ID exceeds the number of available shows. There are only ${allShows.length} shows.`
-            )
-        }
-        const result = showByMovies.all(id)
-        return result
-    } catch (e) {
-        console.error('Error finding Shows', e.message)
-        return false
+    const showByMovies = db.prepare(
+        'SELECT movies.*, shows.id AS showId, shows.time  AS showTime, cinemas.name AS cinemaName, cinemas.id AS cinemaId FROM movies INNER JOIN shows ON shows.movieId = movies.id INNER JOIN cinemas ON cinemas.id = shows.cinemaId WHERE movies.Id = ?'
+    )
+    const result = showByMovies.all(id)
+    if (result.length === 0) {
+        throw new Error('No show found on mov with id ' + id)
     }
+    return result
 }
 
 export default { getMovies, getShowsByMovie }
