@@ -5,7 +5,7 @@ const getAllShowsController = (req, res) => {
         const shows = service.getAllShows()
         res.status(200).send(shows)
     } catch (e) {
-        res.status(404).send({ msg: e.messaqe })
+        res.status(404).send({ msg: e.message })
     }
 }
 
