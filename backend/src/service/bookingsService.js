@@ -57,4 +57,18 @@ const getBookings = (email, role) => {
     return Object.values(bookingsMap)
 }
 
-export default { getBookings }
+const getAllTickets = () => {
+    const sql = `SELECT
+    id,
+    ticketType,
+    price
+    FROM ticketTypes `
+
+    const stmt = db.prepare(sql).all()
+    if (!stmt) {
+        throw new Error('No tickets available')
+    }
+    return stmt
+}
+
+export default { getAllTickets, getBookings }
