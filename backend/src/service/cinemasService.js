@@ -19,7 +19,6 @@ const getSeatStatus = (showId, cinemaId) => {
     if (occupiedSeats.length === 0) {
         throw new Error('No occupied seats found')
     }
-
     return occupiedSeats
 }
 
