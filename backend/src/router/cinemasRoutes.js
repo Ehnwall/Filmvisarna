@@ -3,6 +3,6 @@ import getSeatsController from '../controller/cinemasController.js'
 
 const router = express.Router()
 
-router.get('api/shows/:Id', getSeatsController)
+router.get('/api/shows/:Id', getSeatsController)
 
 export default router
