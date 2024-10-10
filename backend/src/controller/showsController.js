@@ -1,5 +1,16 @@
 import service from '../service/showsService.js'
 
+const getShowById = (req, res) => {
+    const id = parseInt(req.params.id)
+
+    try {
+        const show = service.getShowById(id)
+        res.status(200).send(show)
+    } catch (error) {
+        res.status(404).send({ msg: error.message })
+    }
+}
+
 const getAllShowsController = (req, res) => {
     try {
         const shows = service.getAllShows()
@@ -9,4 +20,5 @@ const getAllShowsController = (req, res) => {
     }
 }
 
-export default { getAllShowsController }
+export default { getAllShowsController, getShowById }
+
