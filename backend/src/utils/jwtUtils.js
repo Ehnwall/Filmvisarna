@@ -10,5 +10,8 @@ const generate = (claims) => {
     }
     return jwt.sign(claims, SUPER_SECRET, options)
 }
+function verify(token) {
+    return jwt.verify(token, SUPER_SECRET)
+}
 
-export default { generate }
+export default { generate, verify }

@@ -4,7 +4,7 @@ import authFilter from '../middleware/jwtfilter.js'
 
 const router = express.Router()
 
-router.get('/api/bookings', bookingsController.getAllBookings)
-router.get('/api/tickets', authFilter.authourize(), bookingsController.getAllTickets)
+router.get('/api/bookings', authFilter.authourize(), bookingsController.getAllBookings)
+router.get('/api/tickets', bookingsController.getAllTickets)
 
 export default router
