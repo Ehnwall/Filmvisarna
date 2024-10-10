@@ -1,13 +1,16 @@
 import { db } from '../../server.js'
 
-const getAllTickets = (id) => {
+const getAllTickets = () => {
     const sql = `SELECT
     id,
     ticketType,
     price
     FROM ticketTypes `
+
     const stmt = db.prepare(sql).all()
-    console.log(stmt)
+    if (!stmt) {
+        throw new Error('No tickets available')
+    }
     return stmt
 }
 

@@ -1,12 +1,12 @@
 import bookingsService from '../service/bookingsService.js'
 
 const getAllTickets = (req, res) => {
-    const ticket = bookingsService.getAllTickets()
-    if (!ticket) {
-        return res.status(404).send({ msg: 'Ticket not found' })
+    try {
+        const ticket = bookingsService.getAllTickets()
+        res.status(200).json(ticket)
+    } catch (error) {
+        res.status(404).json({ message: error.message })
     }
-
-    res.status(200).send(ticket)
 }
 
 export default { getAllTickets }
