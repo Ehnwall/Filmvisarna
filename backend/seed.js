@@ -15,9 +15,9 @@ CREATE TABLE IF NOT EXISTS movies(
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
     durationMin INTEGER NOT NULL,
-    ageLimit INTEGER NOT NULL, 
-    description TEXT NOT NULL, 
-    trailerUrl TEXT NOT NULL, 
+    ageLimit INTEGER NOT NULL,
+    description TEXT NOT NULL,
+    trailerUrl TEXT NOT NULL,
     posterUrl TEXT NOT NULL
 );
 `
@@ -113,12 +113,12 @@ const movies = [
     },
 ]
 
-const movieQuery = `INSERT INTO 
-movies 
-(title, durationMin, 
-ageLimit, description, 
-trailerUrl, posterUrl) 
-VALUES 
+const movieQuery = `INSERT INTO
+movies
+(title, durationMin,
+ageLimit, description,
+trailerUrl, posterUrl)
+VALUES
 (?,?,?,?,?,?)`
 
 // Skapa biografernas tabell
@@ -300,6 +300,32 @@ db.exec(insertCinemasQuery)
 db.exec(showTestData)
 // INSERT bookings
 db.exec(bookingTestData)
+
+const userBookings = `CREATE VIEW userBookings AS
+SELECT
+    bookings.Id AS bookingId,
+    bookings.bookingNumberId,
+    users.Id AS userId,
+    users.email AS userEmail,
+    users.firstName AS userFirstname,
+    users.lastName AS userLastname,
+    shows.time AS showTime,
+    cinemas.name AS cinemaName,
+    movies.title AS movieTitle,
+    movies.posterUrl AS moviePosterUrl,
+    ticketTypes.ticketType AS ticketType,
+    ticketTypes.price AS ticketPrice,
+    cinemaSeats.seatRow,
+    cinemaSeats.seatNumber
+FROM bookings
+JOIN shows ON bookings.showId = shows.Id
+JOIN users ON bookings.userId = users.Id
+JOIN movies ON shows.movieId = movies.Id
+JOIN cinemas ON shows.cinemaId = cinemas.Id
+JOIN bookingXseatsXticket ON bookings.Id = bookingXseatsXticket.bookingID
+JOIN cinemaSeats ON bookingXseatsXticket.cinemaSeatsID = cinemaSeats.Id
+JOIN ticketTypes ON bookingXseatsXticket.ticketTypeID = ticketTypes.Id;`
+db.exec(userBookings)
 
 // INSERT to Stora salongen
 const storaSalongenRowSizes = [8, 9, 10, 10, 10, 10, 12, 12]
