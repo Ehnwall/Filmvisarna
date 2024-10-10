@@ -1,9 +1,9 @@
-import { getBookings } from '../service/bookingsService.js'
+import bookingsService from '../service/bookingsService.js'
 
-export const getAllBookings = (req, res) => {
+const getAllBookings = (req, res) => {
     try {
         const { email, role } = req.user
-        const bookings = getBookings(email, role)
+        const bookings = bookingsService.getBookings(email, role)
 
         if (bookings.length > 0) {
             res.status(200).json(bookings)
@@ -15,3 +15,5 @@ export const getAllBookings = (req, res) => {
         res.status(500).json({ error: 'Something went wrong' })
     }
 }
+
+export default { getAllBookings }

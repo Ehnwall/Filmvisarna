@@ -1,6 +1,6 @@
 import { db } from '../../server.js'
 
-export const getBookings = (email, role) => {
+const getBookings = (email, role) => {
     let booking
     if (role === 'admin') {
         const query = `
@@ -56,3 +56,5 @@ export const getBookings = (email, role) => {
 
     return Object.values(bookingsMap)
 }
+
+export default { getBookings }
