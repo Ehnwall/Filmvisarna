@@ -25,4 +25,14 @@ const getAllTickets = (req, res) => {
     }
 }
 
-export default { getAllTickets, getAllBookings }
+const getBookingsFromId = (req, res) => {
+    const { bookingId } = req.params
+    try {
+        const specifikBooking = bookingsService.getBookingFs(bookingId)
+        res.status(200).send(specifikBooking)
+    } catch (error) {
+        res.status(404).send({ msg: error.message })
+    }
+}
+
+export default { getBookingsFromId, getAllTickets, getAllBookings }
