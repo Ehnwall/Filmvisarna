@@ -1,25 +1,15 @@
 import { db } from '../../server.js'
 
-const getSeatStatus = (showId, cinemaId) => {
-    const SeatInfo = `
-        SELECT 
-            cinemaSeats.Id,
-            cinemaSeats.seatRow,
-            cinemaSeats.seatNumber
-        FROM cinemaSeats
-        INNER JOIN bookingXseatsXticket 
-            ON cinemaSeats.Id = bookingXseatsXticket.cinemaSeatsID
-        INNER JOIN bookings 
-            ON bookingXseatsXticket.bookingID = bookings.Id 
-            AND bookings.showId = ?
-        WHERE cinemaSeats.cinemaId = ?;
+const getSeatStatus = (showId) => {
+    console.log(showId)
+    const getBookedSeats = `
+    SELECT * FROM bookings
+    JOIN bookingXseatsXticket ON bookings.Id = bookingXseatsXticket.bookingID
+    JOIN cinemaSeats ON bookingXseatsXticket.cinemaSeatsID = cinemaSeats.Id
+    WHERE showId = ?
     `
-    const occupiedSeats = db.prepare(SeatInfo).all(showId, cinemaId)
-
-    if (occupiedSeats.length === 0) {
-        throw new Error('No occupied seats found')
-    }
-    return occupiedSeats
+    const occupiedSeatsStmt = db.prepare(getBookedSeats).all(showId)
+    return occupiedSeatsStmt.map((seat) => seat.seatNumber)
 }
 
 export default { getSeatStatus }
