@@ -228,11 +228,11 @@ const createUserTable = `
 
 const userQuery = `
     INSERT INTO users (email, password, firstName, lastName, role) VALUES
-    ('eric.classon@example.com', 'hashedPassword1', 'Erik', 'Classon', 'admin'),
-    ('alvin.samuelsson@example.com', 'hashedPassword2', 'Alvin', 'Samuelsson', 'user'),
-    ('dennis.ehnwall@example.com', 'hashedPassword3', 'Dennis', 'Ehnwall', 'user'),
-    ('kalle.pettersson@example.com', 'hashedPassword4', 'Kalle', 'Pettersson', 'user'),
-    ('pontus.boman@example.com', 'hashedPassword5', 'Pontus', 'Boman', 'user');
+    ('eric.classon@example.com', '$2a$12$vPbTAC0yc6LkJjvEJ1iNAe6m6mjs2cDvKikhVf5.xJDZxepV3Slbi', 'Erik', 'Classon', 'admin'),
+    ('alvin.samuelsson@example.com', '$2a$12$vPbTAC0yc6LkJjvEJ1iNAe6m6mjs2cDvKikhVf5.xJDZxepV3Slbi', 'Alvin', 'Samuelsson', 'user'),
+    ('dennis.ehnwall@example.com', '$2a$12$vPbTAC0yc6LkJjvEJ1iNAe6m6mjs2cDvKikhVf5.xJDZxepV3Slbi', 'Dennis', 'Ehnwall', 'user'),
+    ('kalle.pettersson@example.com', '$2a$12$vPbTAC0yc6LkJjvEJ1iNAe6m6mjs2cDvKikhVf5.xJDZxepV3Slbi', 'Kalle', 'Pettersson', 'user'),
+    ('pontus.boman@example.com', '$2a$12$vPbTAC0yc6LkJjvEJ1iNAe6m6mjs2cDvKikhVf5.xJDZxepV3Slbi', 'Pontus', 'Boman', 'user');
 `
 
 const createTicketTypeTable = `CREATE TABLE IF NOT EXISTS ticketTypes (
