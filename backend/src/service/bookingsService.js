@@ -1,5 +1,6 @@
 import { db } from '../../server.js'
 import mapBookings from '../utils/mapBookings.js'
+import bookingNumber from '../utils/bookingNumber.js'
 
 const getBookings = (email, role) => {
     let booking
@@ -49,4 +50,20 @@ const getBookingFs = (bookingId) => {
     return mapBookings(statement)
 }
 
-export default { getBookingFs, getAllTickets, getBookings }
+const createBooking = (showId, seats, email) => {
+    const insertNewBooking = `
+    INSERT INTO bookings (userId, showId, bookingNumberId) VALUES (?, ?, ?)
+    `
+    const booking = db.prepare(insertNewBooking).run(2, showId, bookingNumber.generateString(3, 3))
+
+    const insertSeats = `
+    INSERT INTO bookingXseatsXticket (bookingID, cinemaSeatsID, ticketTypeID) VALUES (?, ?, ?)
+    `
+    seats.forEach((seat) => {
+        db.prepare(insertSeats).run(booking.lastInsertRowid, seat.seatId, seat.ticketTypeId)
+    })
+
+    return 'we good?'
+}
+
+export default { getBookingFs, getAllTickets, getBookings, createBooking }

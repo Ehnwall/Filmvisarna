@@ -35,4 +35,15 @@ const getBookingsFromId = (req, res) => {
     }
 }
 
-export default { getBookingsFromId, getAllTickets, getAllBookings }
+const createBooking = (req, res) => {
+    const { showId, seats } = req.body
+    const { email, role } = req.user
+    try {
+        const newBooking = bookingsService.createBooking(showId, seats, email)
+        return res.status(200).send(newBooking)
+    } catch (e) {
+        return res.status(400).send({ msg: e.message })
+    }
+}
+
+export default { getBookingsFromId, getAllTickets, getAllBookings, createBooking }
