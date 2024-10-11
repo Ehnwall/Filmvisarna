@@ -51,10 +51,37 @@ const getBookingFs = (bookingId) => {
 }
 
 const createBooking = (showId, seats, email) => {
+    const checkShow = `
+    SELECT * FROM shows
+    WHERE Id = ?
+    `
+    const show = db.prepare(checkShow).get(showId)
+    if (!show) {
+        throw new Error(`No show avalible on id:${showId}`)
+    }
+
+    const checkSeats = `
+    SELECT * FROM cinemaSeats
+    WHERE Id = ?
+    `
+
+    seats.forEach((seat) => {
+        if (!db.prepare(checkSeats).get(seat.seatId)) {
+            throw new Error(`No seat avalible on id:${seat.seatId}`)
+        }
+    })
+
+    const getUserId = `
+    SELECT * FROM users
+    WHERE email = ?
+    `
+    const userId = db.prepare(getUserId).get(email).Id
+
     const insertNewBooking = `
     INSERT INTO bookings (userId, showId, bookingNumberId) VALUES (?, ?, ?)
     `
-    const booking = db.prepare(insertNewBooking).run(2, showId, bookingNumber.generateString(3, 3))
+    const bookingNr = bookingNumber.generateString(3, 3)
+    const booking = db.prepare(insertNewBooking).run(userId, showId, bookingNr)
 
     const insertSeats = `
     INSERT INTO bookingXseatsXticket (bookingID, cinemaSeatsID, ticketTypeID) VALUES (?, ?, ?)
@@ -63,7 +90,7 @@ const createBooking = (showId, seats, email) => {
         db.prepare(insertSeats).run(booking.lastInsertRowid, seat.seatId, seat.ticketTypeId)
     })
 
-    return 'we good?'
+    return bookingNr
 }
 
 export default { getBookingFs, getAllTickets, getBookings, createBooking }

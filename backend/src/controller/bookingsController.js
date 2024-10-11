@@ -38,9 +38,10 @@ const getBookingsFromId = (req, res) => {
 const createBooking = (req, res) => {
     const { showId, seats } = req.body
     const { email, role } = req.user
+
     try {
         const newBooking = bookingsService.createBooking(showId, seats, email)
-        return res.status(200).send(newBooking)
+        return res.status(200).send({ msg: 'Booking successfully created', bookingNumber: newBooking })
     } catch (e) {
         return res.status(400).send({ msg: e.message })
     }
