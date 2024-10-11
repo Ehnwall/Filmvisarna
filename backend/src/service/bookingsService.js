@@ -39,10 +39,13 @@ const getBookingFs = (bookingId) => {
     const getSpecificBooking = `
     SELECT *
         FROM userBookings
-    WHERE 
+    WHERE
     bookingId = ?`
 
     const statement = db.prepare(getSpecificBooking).all(bookingId)
+    if (statement.length === 0) {
+        throw new Error('no booking found')
+    }
     return mapBookings(statement)
 }
 

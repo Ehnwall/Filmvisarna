@@ -27,13 +27,12 @@ const getAllTickets = (req, res) => {
 
 const getBookingsFromId = (req, res) => {
     const { bookingId } = req.params
-    const specifikBooking = bookingsService.getBookingFs(bookingId)
-
-    if (!specifikBooking) {
-        return res.status(204).send({ msg: 'No booking found' })
+    try {
+        const specifikBooking = bookingsService.getBookingFs(bookingId)
+        res.status(200).send(specifikBooking)
+    } catch (error) {
+        res.status(404).send({ msg: error.message })
     }
-
-    res.status(200).send(specifikBooking)
 }
 
 export default { getBookingsFromId, getAllTickets, getAllBookings }
