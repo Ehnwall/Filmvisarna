@@ -70,6 +70,23 @@ const createBooking = (showId, seats, email) => {
             throw new Error(`No seat avalible on id:${seat.seatId}`)
         }
     })
+    const getBookedSeats = `
+    SELECT * FROM bookings
+    JOIN bookingXseatsXticket ON bookings.Id = bookingXseatsXticket.bookingID
+    JOIN cinemaSeats ON bookingXseatsXticket.cinemaSeatsID = cinemaSeats.Id
+    WHERE showId = ?
+    `
+    const occupiedSeatsStmt = db.prepare(getBookedSeats).all(showId)
+
+    if (occupiedSeatsStmt.length > 0) {
+        occupiedSeatsStmt.forEach((occupiedSeat) => {
+            seats.forEach((seat) => {
+                if (occupiedSeat.cinemaSeatsID === seat.seatId) {
+                    throw new Error(`Seat ${seat.seatId} is already booked`)
+                }
+            })
+        })
+    }
 
     const getUserId = `
     SELECT * FROM users
