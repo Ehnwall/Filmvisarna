@@ -7,6 +7,7 @@ const getMovies = () => {
     return stmt
 }
 
+/*<3*/
 
 const getShowsByMovie = (id) => {
     const showByMovies = db.prepare(
@@ -16,7 +17,7 @@ const getShowsByMovie = (id) => {
     if (result.length === 0) {
         throw new Error('No show found on mov with id ' + id)
     }
-  return result
+    return result
 }
 const getMovieById = (id) => {
     const movieById = db.prepare('SELECT * FROM movies WHERE Id = ?')
@@ -24,10 +25,8 @@ const getMovieById = (id) => {
 
     if (result.length === 0) {
         throw new Error({ msg: 'Movie not found' })
-
     }
     return result
 }
 
-export default { getMovies, getShowsByMovie, getMovieById}
-
+export default { getMovies, getShowsByMovie, getMovieById }

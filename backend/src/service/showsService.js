@@ -29,5 +29,15 @@ const getAllShows = () => {
     return stmt
 }
 
-export default { getAllShows, getShowById }
+const getSeatStatus = (showId) => {
+    const getBookedSeats = `
+    SELECT * FROM bookings
+    JOIN bookingXseatsXticket ON bookings.Id = bookingXseatsXticket.bookingID
+    JOIN cinemaSeats ON bookingXseatsXticket.cinemaSeatsID = cinemaSeats.Id
+    WHERE showId = ?
+    `
+    const occupiedSeatsStmt = db.prepare(getBookedSeats).all(showId)
+    return occupiedSeatsStmt.map((seat) => seat.seatNumber)
+}
 
+export default { getAllShows, getSeatStatus, getShowById }
