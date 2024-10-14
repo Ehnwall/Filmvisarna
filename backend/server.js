@@ -5,7 +5,6 @@ import bookingRouter from './src/router/bookingsRoutes.js'
 import showsRouter from './src/router/showsRoutes.js'
 import authRouter from './src/router/authRoutes.js'
 import betterSqlite from 'better-sqlite3'
-import bookingRouter from './src/router/bookingsRoutes.js'
 
 export const db = betterSqlite('./backend/db/db.sqlite3')
 

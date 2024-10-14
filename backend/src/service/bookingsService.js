@@ -110,7 +110,21 @@ const createBooking = (showId, seats, email) => {
     return booking
 }
 
-const deleteBookingById = (bookingId) => {
+const deleteBookingById = (bookingId, email, role) => {
+    const booking = db.prepare('SELECT * FROM bookings WHERE bookings.id = ?').get(bookingId)
+
+    if (!booking) {
+        throw new Error('Booking not found')
+    }
+
+    const bookingEmail = db
+        .prepare('SELECT *, users.email  FROM bookings JOIN users ON bookings.userId = users.Id WHERE bookings.id = ?')
+        .get(bookingId)
+
+    if (role !== 'admin' && bookingEmail.email !== email) {
+        throw new Error('You are not authorized to delete this booking')
+    }
+
     const deleteSeatsAndTicketsQuery = `
         DELETE FROM bookingXseatsXticket
         WHERE bookingID = ?
@@ -122,11 +136,10 @@ const deleteBookingById = (bookingId) => {
     `
     db.transaction(() => {
         db.prepare(deleteSeatsAndTicketsQuery).run(bookingId)
-
         db.prepare(deleteBookingQuery).run(bookingId)
     })()
 
-    return { message: 'Booking deleted successfully', bookingId }
+    return { bookingId }
 }
 
 export default { getBookingFs, getAllTickets, getBookings, createBooking, deleteBookingById }

@@ -8,6 +8,6 @@ router.get('/api/bookings', authFilter.authourize(), bookingsController.getAllBo
 router.get('/api/tickets', bookingsController.getAllTickets)
 router.get('/api/bookings/:bookingId', bookingsController.getBookingsFromId)
 router.post('/api/bookings', authFilter.authourize(), bookingsController.createBooking)
-router.delete('/api/bookings/:id', authFilter.authourize(), deleteBooking)
+router.delete('/api/bookings/:id', authFilter.authourize(), bookingsController.deleteBooking)
 
 export default router

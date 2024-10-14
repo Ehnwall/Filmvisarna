@@ -1,20 +1,10 @@
 import bookingsService from '../service/bookingsService.js'
 
-export const deleteBooking = (req, res) => {
-    const bookingId = req.params.id
-
-    try {
-        const result = deleteBookingById(bookingId)
-        res.status(200).json(result)
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to delete booking' })
-    }
-}
-
 const getAllBookings = (req, res) => {
     try {
-        const { email, role } = req.user
         const bookings = bookingsService.getBookings(email, role)
+        console.log('User data:', req.user)
+        const { email, role } = req.user
 
         if (bookings.length > 0) {
             res.status(200).json(bookings)
@@ -58,4 +48,18 @@ const createBooking = (req, res) => {
     }
 }
 
-export default { getBookingsFromId, getAllTickets, getAllBookings, createBooking }
+const deleteBooking = (req, res) => {
+    const bookingId = req.params.id
+
+    const { email, role } = req.user
+
+    try {
+        const result = bookingsService.deleteBookingById(bookingId, email, role)
+        res.status(200).json({ msg: 'Booking deleted successfully', result })
+    } catch (error) {
+        console.error(error)
+        res.status(403).json({ msg: error.message })
+    }
+}
+
+export default { getBookingsFromId, getAllTickets, getAllBookings, createBooking, deleteBooking }
