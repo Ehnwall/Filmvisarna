@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
-
-const SUPER_SECRET = 'supersecretsecret'
+import dotenv from 'dotenv'
+dotenv.config()
+const SUPER_SECRET = process.env.jwtSecret
 
 const generate = (claims) => {
     let options = {
