@@ -41,7 +41,7 @@ const createBooking = (req, res) => {
 
     try {
         const newBooking = bookingsService.createBooking(showId, seats, email)
-        return res.status(200).send({ msg: 'Booking successfully created', bookingNumber: newBooking })
+        return res.status(200).send({ msg: 'Booking successfully created', bookingId: newBooking.lastInsertRowid })
     } catch (e) {
         return res.status(400).send({ msg: e.message })
     }

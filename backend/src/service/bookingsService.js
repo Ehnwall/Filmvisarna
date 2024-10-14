@@ -90,7 +90,7 @@ const createBooking = (showId, seats, email) => {
         db.prepare(insertSeats).run(booking.lastInsertRowid, seat.seatId, seat.ticketTypeId)
     })
 
-    return bookingNr
+    return booking
 }
 
 export default { getBookingFs, getAllTickets, getBookings, createBooking }
