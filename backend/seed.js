@@ -286,8 +286,8 @@ movies.forEach((movie) => {
         movie.durationMin,
         movie.ageLimit,
         JSON.stringify(movie.description),
-        movie.posterUrl,
-        movie.trailerUrl
+        movie.trailerUrl,
+        movie.posterUrl
     )
 })
 // INSERT users
