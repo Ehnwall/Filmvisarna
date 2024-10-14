@@ -30,7 +30,6 @@ const getAllShows = () => {
 }
 
 const getSeatStatus = (showId) => {
-    console.log(showId)
     const getBookedSeats = `
     SELECT * FROM bookings
     JOIN bookingXseatsXticket ON bookings.Id = bookingXseatsXticket.bookingID
