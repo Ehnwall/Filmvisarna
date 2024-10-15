@@ -1,11 +1,9 @@
 import bookingsService from '../service/bookingsService.js'
 
 const getAllBookings = (req, res) => {
+    const { email, role } = req.user
     try {
         const bookings = bookingsService.getBookings(email, role)
-        console.log('User data:', req.user)
-        const { email, role } = req.user
-
         if (bookings.length > 0) {
             res.status(200).json(bookings)
         } else {

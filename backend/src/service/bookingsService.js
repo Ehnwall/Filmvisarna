@@ -1,6 +1,7 @@
 import { db } from '../../server.js'
 import mapBookings from '../utils/mapBookings.js'
 import bookingNumber from '../utils/bookingNumber.js'
+import confirmMail from '../utils/sendEmail.js'
 
 const getBookings = (email, role) => {
     let booking
@@ -106,6 +107,18 @@ const createBooking = (showId, seats, email) => {
     seats.forEach((seat) => {
         db.prepare(insertSeats).run(booking.lastInsertRowid, seat.seatId, seat.ticketTypeId)
     })
+
+    const getSpecificBooking = `
+    SELECT *
+        FROM userBookings
+    WHERE
+    bookingNumberId = ?`
+
+    const statement = db.prepare(getSpecificBooking).all(bookingNr)
+
+    const confirmed = mapBookings(statement)
+
+    confirmMail.sendBookingConfirm(confirmed, bookingNr, email)
 
     return booking
 }
