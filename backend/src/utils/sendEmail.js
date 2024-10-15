@@ -1,4 +1,9 @@
 import nodemailer from 'nodemailer'
+import dotenv from 'dotenv'
+dotenv.config()
+
+const emailAdress = process.env.EMAIL_ADRESS_SECRET
+const appKey = process.env.SECRET_KEY_PASSWORD
 
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -6,8 +11,8 @@ const transporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-        user: 'filmvisarnabiograf@gmail.com',
-        pass: 'ytng mntn ncll vcza',
+        user: emailAdress,
+        pass: appKey,
     },
 })
 
@@ -26,7 +31,7 @@ function sendBookingConfirm(confirmed, bookingNr, email) {
         .join('')
 
     const mailOptions = {
-        from: 'filmvisarnabiograf@gmail.com',
+        from: emailAdress,
         to: 'filmvisarnabiograf@gmail.com',
         subject: 'Din boking är bekräftad från Filmvisarna',
         html: `
