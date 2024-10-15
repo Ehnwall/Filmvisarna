@@ -52,7 +52,6 @@ const getBookingFs = (bookingId) => {
 }
 
 const createBooking = (showId, seats, user) => {
-
     // Check if seats are already booked
     const getBookedSeats = `
     SELECT * FROM bookings
@@ -95,6 +94,12 @@ const createBooking = (showId, seats, user) => {
 
     // Create a guest user if user is not logged in
     if (user.firstName && user.lastName) {
+        const checkIfUserExistsQuery = 'SELECT * FROM users WHERE email = ?'
+        const stmt = db.prepare(checkIfUserExistsQuery).get(user.email.toLowerCase())
+
+        if (stmt && !(stmt.role === 'guest')) {
+            throw new Error('User already has an acoount')
+        }
         const insertUser = `
         INSERT INTO users (email, password, firstName, lastName, role) VALUES (?, 'ThisMustBeChanged', ?, ?, 'guest')
         `
@@ -135,7 +140,7 @@ const createBooking = (showId, seats, user) => {
 
     const confirmed = mapBookings(statement)
 
-    confirmMail.sendBookingConfirm(confirmed, bookingNr, email)
+    confirmMail.sendBookingConfirm(confirmed, bookingNr, user.email)
 
     return booking
 }
