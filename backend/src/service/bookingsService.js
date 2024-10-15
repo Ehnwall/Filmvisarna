@@ -1,7 +1,7 @@
 import { db } from '../../server.js'
 import mapBookings from '../utils/mapBookings.js'
 import bookingNumber from '../utils/bookingNumber.js'
-import transporter from '../utils/sendEmail.js'
+import confirmMail from '../utils/sendEmail.js'
 
 const getBookings = (email, role) => {
     let booking
@@ -118,45 +118,7 @@ const createBooking = (showId, seats, email) => {
 
     const confirmed = mapBookings(statement)
 
-    let seatsHTML = confirmed[0].seats
-        .map((seat) => {
-            return `<p> Row: <strong>${seat.seatRow}</strong> & Number: <strong>${seat.seatNumber}</strong>.</p>`
-        })
-        .join('')
-
-    const mailOptions = {
-        from: 'filmvisarnabiograf@gmail.com',
-        to: 'filmvisarnabiograf@gmail.com',
-        subject: 'Din boking är bekräftad från Filmvisarna',
-        html: `
-    <body style="height: 100%; width: 100%; background-color: #ebe9e4; color: #0D1B2A; display: flex; justify-content: center; align-items: center; text-align: center;">
-        <div>
-            <h1 style="color: #ebe9e4;">Filmvisarna</h1>
-            <div>
-                <h3>Din bokning är bekräftad. Ditt bokningsnummer är: <strong>${bookingNr}</strong>.</h3>
-
-                 <div>
-                 <p>Your seats are: </p>
-                ${seatsHTML} 
-            </div>
-            
-           <div>
-     <p>AVBRYT DIN BOKNING NEDNA </P>
-            <button style="background-color: #d49537; padding: 3px; color: #ebe9e4; "> Avboka </button>
-    </div>
-            </div>
-        </div>
-    </body>
-    `,
-    }
-
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.error('Error occurred:', error)
-        } else {
-            console.log(`Email sent successfully to: ${email}`, info.response)
-        }
-    })
+    confirmMail.sendBookingConfirm(confirmed, bookingNr, email)
 
     return booking
 }
