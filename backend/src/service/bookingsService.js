@@ -100,7 +100,7 @@ const createBooking = (showId, seats, user) => {
     SELECT * FROM users
     WHERE email = ?
     `
-    const userId = db.prepare(getUserId).get(user.email).Id
+    const userId = db.prepare(getUserId).get(user.email.toLowerCase()).Id
 
     const insertNewBooking = `
     INSERT INTO bookings (userId, showId, bookingNumberId) VALUES (?, ?, ?)
