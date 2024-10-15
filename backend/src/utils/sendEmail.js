@@ -17,9 +17,10 @@ function sendBookingConfirm(confirmed, bookingNr, email) {
             return `<p> Row: <strong>${seat.seatRow}</strong> & Number: <strong>${seat.seatNumber}</strong>.</p>`
         })
         .join('')
-
+    let totalPrice = 0
     let ticketTypes = confirmed[0].seats
         .map((tickets) => {
+            totalPrice += parseFloat(tickets.ticketPrice)
             return `<p> Tickets: <strong>${tickets.ticketType}</strong> & Pris: <strong>${tickets.ticketPrice}</strong>.</p>`
         })
         .join('')
@@ -29,23 +30,29 @@ function sendBookingConfirm(confirmed, bookingNr, email) {
         to: 'filmvisarnabiograf@gmail.com',
         subject: 'Din boking är bekräftad från Filmvisarna',
         html: `
-    <body style="height: 100%; width: 100%; background-color: #ebe9e4; color: #0D1B2A; display: flex; justify-content: center; align-items: center; text-align: center;">
+    <body style="height: 100%; width: 100%; background-color: #0D1B2A; color: #ebe9e4; display: flex; justify-content: center; align-items: center; text-align: center;">
         <div>
-            <h1 style="color: #0D1B2A;">Filmvisarna</h1>
+            <h1 style="color: #ebe9e4;">Filmvisarna</h1>
             <div>
                 <h3>Din bokning är bekräftad. Ditt bokningsnummer är: <strong>${bookingNr}</strong>.</h3>
-
-                 <div>
-                 <p>Your seats are: </p>
-                ${seatsHTML} 
-                <p>Your tickets are: </p>
-                ${ticketTypes}
             </div>
-            
             <div>
-            <p>AVBRYT DIN BOKNING NEDNA </P>
-            <button style="background-color: #d49537; padding: 3px; color: #ebe9e4; "> Avboka </button>
+                <p>Email: <strong>${confirmed[0].userEmail}</strong></p>
+                <p>Name: <strong>${confirmed[0].userFirstname}</strong> <strong>${
+            confirmed[0].userLastname
+        }</strong></p>
+                <p>Film: <strong>${confirmed[0].movieTitle}</strong></p>
+                <p>Salong: <strong>${confirmed[0].cinemaName}</strong></p>
+                <p>Show tid: <strong>${confirmed[0].showTime}</strong></p>
+                <p>Your seats are:</p>
+                ${seatsHTML}
+                <p>Your tickets are:</p>
+                ${ticketTypes}
+                <p>Totalpris: <strong>${totalPrice.toFixed(2)}</strong> SEK</p>
             </div>
+            <div style="margin-bottom: 10px;" >
+                <p>AVBRYT DIN BOKNING NEDAN</p>
+                <button style="background-color: #d49537; padding-inline: 10px; border: none; color: #ebe9e4;">Avboka</button>
             </div>
         </div>
     </body>
