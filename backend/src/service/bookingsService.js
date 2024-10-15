@@ -50,7 +50,25 @@ const getBookingFs = (bookingId) => {
     return mapBookings(statement)
 }
 
-const createBooking = (showId, seats, email) => {
+const createBooking = (showId, seats, user) => {
+    const getBookedSeats = `
+    SELECT * FROM bookings
+    JOIN bookingXseatsXticket ON bookings.Id = bookingXseatsXticket.bookingID
+    JOIN cinemaSeats ON bookingXseatsXticket.cinemaSeatsID = cinemaSeats.Id
+    WHERE showId = ?
+    `
+    const occupiedSeatsStmt = db.prepare(getBookedSeats).all(showId)
+
+    if (occupiedSeatsStmt.length > 0) {
+        occupiedSeatsStmt.forEach((occupiedSeat) => {
+            seats.forEach((seat) => {
+                if (occupiedSeat.cinemaSeatsID === seat.seatId) {
+                    throw new Error(`Seat ${seat.seatId} is already booked`)
+                }
+            })
+        })
+    }
+
     const checkShow = `
     SELECT * FROM shows
     WHERE Id = ?
@@ -70,29 +88,19 @@ const createBooking = (showId, seats, email) => {
             throw new Error(`No seat avalible on id:${seat.seatId}`)
         }
     })
-    const getBookedSeats = `
-    SELECT * FROM bookings
-    JOIN bookingXseatsXticket ON bookings.Id = bookingXseatsXticket.bookingID
-    JOIN cinemaSeats ON bookingXseatsXticket.cinemaSeatsID = cinemaSeats.Id
-    WHERE showId = ?
-    `
-    const occupiedSeatsStmt = db.prepare(getBookedSeats).all(showId)
-
-    if (occupiedSeatsStmt.length > 0) {
-        occupiedSeatsStmt.forEach((occupiedSeat) => {
-            seats.forEach((seat) => {
-                if (occupiedSeat.cinemaSeatsID === seat.seatId) {
-                    throw new Error(`Seat ${seat.seatId} is already booked`)
-                }
-            })
-        })
+    if (user.firstName && user.lastName) {
+        const insertUser = `
+        INSERT INTO users (email, password, firstName, lastName, role) VALUES (?, 'ThisMustBeChanged', ?, ?, 'guest')
+        `
+        try {
+            db.prepare(insertUser).run(user.email.toLowerCase(), user.firstName, user.lastName)
+        } catch (error) {}
     }
-
     const getUserId = `
     SELECT * FROM users
     WHERE email = ?
     `
-    const userId = db.prepare(getUserId).get(email).Id
+    const userId = db.prepare(getUserId).get(user.email).Id
 
     const insertNewBooking = `
     INSERT INTO bookings (userId, showId, bookingNumberId) VALUES (?, ?, ?)
@@ -106,7 +114,6 @@ const createBooking = (showId, seats, email) => {
     seats.forEach((seat) => {
         db.prepare(insertSeats).run(booking.lastInsertRowid, seat.seatId, seat.ticketTypeId)
     })
-
     return booking
 }
 
