@@ -1,4 +1,5 @@
 import bookingsService from '../service/bookingsService.js'
+import validator from '../utils/validator.js'
 
 const getAllBookings = (req, res) => {
     const { email, role } = req.user
@@ -36,10 +37,18 @@ const getBookingsFromId = (req, res) => {
 
 const createBooking = (req, res) => {
     const { showId, seats } = req.body
-    const { email, role } = req.user
 
     try {
-        const newBooking = bookingsService.createBooking(showId, seats, email)
+        if (!showId || !seats) {
+            throw new Error('ShowId and seats are required')
+        }
+        if (req.body.user) {
+            validator.signupGuest(req.body.user)
+            req.user.email = req.body.user.email
+            req.user.firstName = req.body.user.firstName
+            req.user.lastName = req.body.user.lastName
+        }
+        const newBooking = bookingsService.createBooking(showId, seats, req.user)
         return res.status(200).send({ msg: 'Booking successfully created', bookingId: newBooking.lastInsertRowid })
     } catch (e) {
         return res.status(400).send({ msg: e.message })
