@@ -51,6 +51,8 @@ const getBookingFs = (bookingId) => {
 }
 
 const createBooking = (showId, seats, user) => {
+
+    // Check if seats are already booked
     const getBookedSeats = `
     SELECT * FROM bookings
     JOIN bookingXseatsXticket ON bookings.Id = bookingXseatsXticket.bookingID
@@ -69,6 +71,7 @@ const createBooking = (showId, seats, user) => {
         })
     }
 
+    // Check if show exists
     const checkShow = `
     SELECT * FROM shows
     WHERE Id = ?
@@ -78,16 +81,18 @@ const createBooking = (showId, seats, user) => {
         throw new Error(`No show avalible on id:${showId}`)
     }
 
+    // Check if seats exists
     const checkSeats = `
     SELECT * FROM cinemaSeats
     WHERE Id = ?
     `
-
     seats.forEach((seat) => {
         if (!db.prepare(checkSeats).get(seat.seatId)) {
             throw new Error(`No seat avalible on id:${seat.seatId}`)
         }
     })
+
+    // Create a guest user if user is not logged in
     if (user.firstName && user.lastName) {
         const insertUser = `
         INSERT INTO users (email, password, firstName, lastName, role) VALUES (?, 'ThisMustBeChanged', ?, ?, 'guest')
@@ -96,15 +101,19 @@ const createBooking = (showId, seats, user) => {
             db.prepare(insertUser).run(user.email.toLowerCase(), user.firstName, user.lastName)
         } catch (error) {}
     }
+
+    // Get userId
     const getUserId = `
     SELECT * FROM users
     WHERE email = ?
     `
     const userId = db.prepare(getUserId).get(user.email.toLowerCase()).Id
 
+    // Create booking
     const insertNewBooking = `
     INSERT INTO bookings (userId, showId, bookingNumberId) VALUES (?, ?, ?)
     `
+    // Generate booking number
     const bookingNr = bookingNumber.generateString(3, 3)
     const booking = db.prepare(insertNewBooking).run(userId, showId, bookingNr)
 
