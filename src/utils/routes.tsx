@@ -13,6 +13,7 @@ import StartPage from '../pages/StartPage'
 
 // paths to use with the router and with the main menu
 // change the routes later to swedish.
+
 export default [
     { path: '/', element: <StartPage />, menuLabel: 'Hem' },
     // { path: '/booking-page', element: <BookingPage /> },
