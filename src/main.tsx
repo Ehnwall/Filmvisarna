@@ -10,16 +10,16 @@ import App from './App'
 
 // create a router
 const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-    children: routes,
-  },
+    {
+        path: '/',
+        element: <App />,
+        children: routes,
+    },
 ])
 
 // create the React root element
 ReactDOM.createRoot(document.querySelector('#root')).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+    <React.StrictMode>
+        <RouterProvider router={router} />
+    </React.StrictMode>
 )

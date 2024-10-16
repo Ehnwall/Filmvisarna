@@ -1,0 +1,31 @@
+.seat-row {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.form-check-input:hover {
+    cursor: pointer;
+}
+.form-check-input:disabled {
+    background-color: rgb(184, 0, 0);
+    cursor: not-allowed;
+    border: none;
+    pointer-events: auto;
+}
+
+.seat-picker__container {
+    min-width: 35rem;
+}
+
+.cinema.cinema {
+    margin-bottom: 5rem;
+}
+.seats {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+.form-check-input {
+    font-size: 2rem;
+}
