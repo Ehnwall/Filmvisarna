@@ -4,7 +4,7 @@ import jwtUtils from '../utils/jwtUtils.js'
 
 const exists = async ({ email, password }) => {
     const checkIfUserExistsQuery = 'SELECT * FROM users WHERE email = ?'
-    const user = db.prepare(checkIfUserExistsQuery).get(email)
+    const user = db.prepare(checkIfUserExistsQuery).get(email.toLowerCase())
     if (!user) {
         throw new Error('User does not exists')
     }
@@ -14,7 +14,7 @@ const exists = async ({ email, password }) => {
                 reject(new Error(err.message))
             } else if (res) {
                 const token = jwtUtils.generate({
-                    email,
+                    email: email.toLowerCase(),
                     role: user.role,
                 })
                 resolve(token)
@@ -39,10 +39,10 @@ const create = async ({ email, firstName, lastName, password, role = 'user' }) =
     const hash = await bcrypt.hash(password, salt)
 
     if (stmt && stmt.role === 'guest') {
-        const result = db.prepare(updateUserQuery).run(firstName, lastName, hash, role, email)
+        const result = db.prepare(updateUserQuery).run(firstName, lastName, hash, role, email.toLowerCase())
         return result
     } else {
-        const result = db.prepare(insertUserQuery).run(email, firstName, lastName, hash, role)
+        const result = db.prepare(insertUserQuery).run(email.toLowerCase(), firstName, lastName, hash, role)
         return result
     }
 }
