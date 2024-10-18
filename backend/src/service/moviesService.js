@@ -3,15 +3,8 @@ import { db } from '../../server.js'
 const getMovies = () => {
     const allMovies = 'SELECT * FROM movies'
     const stmt = db.prepare(allMovies).all()
-    const parsedMovies = stmt.map((movie) => {
-        try {
-            movie.description = JSON.parse(movie.description)
-        } catch (error) {
-            console.error('Error parsing description:', error)
-        }
-        return movie
-    })
-    return parsedMovies
+
+    return stmt
 }
 
 /*<3*/
@@ -22,14 +15,14 @@ const getShowsByMovie = (id) => {
     )
     const result = showByMovies.all(id)
     if (result.length === 0) {
-        throw new Error('No show found on movie with id ' + id)
+        throw new Error('No show found on mov with id ' + id)
     }
     return result
 }
 const getMovieById = (id) => {
     const movieById = db.prepare('SELECT * FROM movies WHERE Id = ?')
-    let result = movieById.get(id)
-    result.description = JSON.parse(result.description)
+    const result = movieById.get(id)
+
     if (result.length === 0) {
         throw new Error({ msg: 'Movie not found' })
     }
