@@ -18,15 +18,45 @@ const getShowById = (id) => {
     return stmt
 }
 
-const getAllShows = () => {
-    const allshows =
-        'SELECT cinemas.name AS cinemaName, cinemas.Id AS cinemaId, shows.Id AS showId, shows.time AS showTime, movies.*  FROM shows INNER JOIN movies ON movieId = movies.id INNER JOIN cinemas ON shows.cinemaId = cinemas.id ORDER BY cinemas.name '
-    const stmt = db.prepare(allshows).all()
-
-    if (stmt.length === 0) {
-        throw new Error({ msg: 'No shows found' })
+const getAllShows = (startDate, endDate) => {
+    try {
+        let shows
+        let stmt
+        if (startDate || endDate) {
+            shows = `SELECT cinemas.name AS cinemaName, 
+                cinemas.Id AS cinemaId, 
+                shows.Id AS showId, 
+                shows.time AS showTime, 
+                movies.*  
+                FROM shows 
+                INNER JOIN movies ON movieId = movies.id 
+                INNER JOIN cinemas ON shows.cinemaId = cinemas.id
+                WHERE shows.time BETWEEN datetime(?) AND datetime(?)
+                ORDER BY cinemas.name, shows.time`
+            stmt = db.prepare(shows).all(startDate, endDate)
+        } else {
+            shows = `SELECT cinemas.name AS cinemaName, 
+                cinemas.Id AS cinemaId, 
+                shows.Id AS showId, 
+                shows.time AS showTime, 
+                movies.*  
+                FROM shows 
+                INNER JOIN movies ON movieId = movies.id 
+                INNER JOIN cinemas ON shows.cinemaId = cinemas.id
+                ORDER BY cinemas.name, shows.time`
+            stmt = db.prepare(shows).all()
+        }
+        if (stmt.length === 0) {
+            throw new Error('No shows found')
+        }
+        return stmt
+    } catch (e) {
+        if (e.message === 'No shows found') {
+            throw e
+        } else {
+            throw new Error('Invalid date format')
+        }
     }
-    return stmt
 }
 
 const getSeatStatus = (showId) => {
