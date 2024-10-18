@@ -1,4 +1,5 @@
 import { db } from '../../server.js'
+import { formatShow } from '../utils/formatShow.js'
 const getShowById = (id) => {
     const showById = `SELECT
     shows.Id AS showId,
@@ -49,7 +50,8 @@ const getAllShows = (startDate, endDate) => {
         if (stmt.length === 0) {
             throw new Error('No shows found')
         }
-        return stmt
+        const formatedShow = formatShow(stmt)
+        return formatedShow
     } catch (e) {
         if (e.message === 'No shows found') {
             throw e
