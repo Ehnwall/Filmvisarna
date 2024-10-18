@@ -9,6 +9,7 @@ export const formatShow = (shows) => {
             ageLimit: show.ageLimit,
             movieTitle: show.title,
             cinemaName: show.cinemaName,
+            cinemaId: show.cinemaId,
         }
     })
 }
