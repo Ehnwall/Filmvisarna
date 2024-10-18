@@ -12,11 +12,18 @@ const getShowById = (req, res) => {
 }
 
 const getAllShowsController = (req, res) => {
+    const { startDate, endDate } = req.query
     try {
-        const shows = showService.getAllShows()
+        const start = startDate ? new Date(startDate).toISOString() : null
+        const end = endDate ? new Date(endDate).toISOString() : null
+        const shows = showService.getAllShows(start, end)
         res.status(200).send(shows)
     } catch (e) {
-        res.status(404).send({ msg: e.message })
+        if (e.message === 'No shows found') {
+            res.status(404).send({ msg: e.message })
+        } else {
+            res.status(400).send({ msg: e.message })
+        }
     }
 }
 
