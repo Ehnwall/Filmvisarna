@@ -10,11 +10,13 @@ const getAllMovies = (req, res) => {
     res.status(200).send(movies)
 }
 
-
 const getShowByMovieId = (req, res) => {
     const movieId = parseInt(req.params.id, 10)
+    const { startDate, endDate } = req.query
     try {
-        const show = service.getShowsByMovie(movieId)
+        const start = startDate ? new Date(startDate).toISOString() : null
+        const end = endDate ? new Date(endDate).toISOString() : null
+        const show = service.getShowsByMovie(movieId, start, end)
         res.status(200).send(show)
     } catch (e) {
         res.status(404).send({ msg: 'No shows Found' })

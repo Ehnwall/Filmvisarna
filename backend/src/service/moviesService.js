@@ -9,15 +9,45 @@ const getMovies = () => {
 
 /*<3*/
 
-const getShowsByMovie = (id) => {
-    const showByMovies = db.prepare(
-        'SELECT movies.*, shows.id AS showId, shows.time  AS showTime, cinemas.name AS cinemaName, cinemas.id AS cinemaId FROM movies INNER JOIN shows ON shows.movieId = movies.id INNER JOIN cinemas ON cinemas.id = shows.cinemaId WHERE movies.Id = ?'
-    )
-    const result = showByMovies.all(id)
-    if (result.length === 0) {
-        throw new Error('No show found on mov with id ' + id)
+const getShowsByMovie = (id, start, end) => {
+    try {
+        let shows
+        let stmt
+        if (start || end) {
+            shows = `
+            SELECT movies.Id AS movieId, shows.id AS showId, shows.time  AS showTime, cinemas.name AS cinemaName, cinemas.id AS cinemaId
+            FROM movies
+            INNER JOIN shows
+            ON shows.movieId = movies.id
+            INNER JOIN cinemas
+            ON cinemas.id = shows.cinemaId
+            WHERE movies.Id = ? AND shows.time BETWEEN datetime(?) AND datetime(?)
+            `
+            stmt = db.prepare(shows).all(id, start, end)
+        } else {
+            shows = `
+            SELECT movies.Id AS movieId, shows.id AS showId, shows.time  AS showTime, cinemas.name AS cinemaName, cinemas.id AS cinemaId
+            FROM movies
+            INNER JOIN shows
+            ON shows.movieId = movies.id
+            INNER JOIN cinemas
+            ON cinemas.id = shows.cinemaId
+            WHERE movies.Id = ?
+            `
+            stmt = db.prepare(shows).all(id)
+        }
+        const result = stmt
+        if (result.length === 0) {
+            throw new Error('No show found on mov with id ' + id)
+        }
+        return result
+    } catch (e) {
+        if (e.message === 'No show found on mov with id ' + id) {
+            throw e
+        } else {
+            throw new Error('Invalid date format')
+        }
     }
-    return result
 }
 const getMovieById = (id) => {
     const movieById = db.prepare('SELECT * FROM movies WHERE Id = ?')
