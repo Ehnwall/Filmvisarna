@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query'
 import axios from 'axios'
-import { MOVIE } from '../types/Types'
+import { MOVIE } from '../../types/Types'
 
 const QUERY_KEY = ['movies']
 
@@ -10,6 +10,6 @@ const fetchMovie = async (): Promise<MOVIE> => {
     return data
 }
 
-export const useGetMovie = () => {
+export const useGetMovies = () => {
     return useQuery<MOVIE, Error>(QUERY_KEY, () => fetchMovie())
 }
