@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query'
 import axios from 'axios'
-import { MOVIE } from '../../types/Types'
+import { MOVIE } from '../../types/types'
 
 const QUERY_KEY = ['movies']
 
