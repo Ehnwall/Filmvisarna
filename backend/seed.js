@@ -10,6 +10,21 @@ if (!fs.existsSync(dir)) {
 }
 const db = new database(dbPath)
 
+// TA BORT ALLA TABELLER OCH VYER
+const dropTablesQuery = `
+    DROP TABLE IF EXISTS bookingXseatsXticket;
+    DROP TABLE IF EXISTS bookings;
+    DROP TABLE IF EXISTS shows;
+    DROP TABLE IF EXISTS cinemaSeats;
+    DROP TABLE IF EXISTS cinemas;
+    DROP TABLE IF EXISTS ticketTypes;
+    DROP TABLE IF EXISTS users;
+    DROP TABLE IF EXISTS movies;
+    DROP VIEW IF EXISTS userBookings;
+`
+
+db.exec(dropTablesQuery)
+
 const moviesTableQuery = `
 CREATE TABLE IF NOT EXISTS movies(
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -206,13 +221,26 @@ INSERT INTO bookings (userId, showId, bookingNumberId) VALUES
 (4, 3, 'BN004'),
 (5, 3, 'BN005');
 `
+
+function getLocalISOString(daysOffset, hours, minutes) {
+    const now = new Date()
+    const targetDate = new Date(now)
+    targetDate.setDate(now.getDate() + daysOffset)
+    targetDate.setHours(hours, minutes, 0, 0)
+
+    // Adjust for timezone offset
+    const timezoneOffset = targetDate.getTimezoneOffset() * 60000
+    const localTargetDate = new Date(targetDate.getTime() - timezoneOffset)
+
+    return localTargetDate.toISOString()
+}
 const showTestData = `
 INSERT INTO shows (movieId, time, cinemaId) VALUES
-(1, '2024-10-08 15:30', 1),
-(2, '2024-10-08 18:00', 2),
-(1, '2024-10-09 20:00', 1),
-(3, '2024-10-09 16:00', 2),
-(4, '2024-10-10 19:30', 2);
+    (1, '${getLocalISOString(1, '18', '30')}', 1),
+    (2, '${getLocalISOString(1, '18', '30')}', 2),
+    (1, '${getLocalISOString(2, '16', '30')}', 1),
+    (3, '${getLocalISOString(2, '13', '30')}', 2),
+    (4, '${getLocalISOString(2, '18', '30')}', 2);
 `
 
 const createUserTable = `
