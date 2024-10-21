@@ -5,6 +5,7 @@ import jwtUtils from '../utils/jwtUtils.js'
 const exists = async ({ email, password }) => {
     const checkIfUserExistsQuery = 'SELECT * FROM users WHERE email = ?'
     const user = db.prepare(checkIfUserExistsQuery).get(email.toLowerCase())
+
     if (!user) {
         throw new Error('User does not exists')
     }
@@ -17,7 +18,7 @@ const exists = async ({ email, password }) => {
                     email: email.toLowerCase(),
                     role: user.role,
                 })
-                resolve(token)
+                resolve({ token, firstName: user.firstName, lastName: user.lastName })
             } else {
                 reject(new Error('Invalid password'))
             }
