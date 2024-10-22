@@ -28,9 +28,7 @@ const MemberPage = () => {
                     <Row>
                         {isLoading ? (
                             <Col className="text-center py-4">
-                                <Spinner animation="border" role="status">
-                                    <span className="visually-hidden">Laddar...</span>
-                                </Spinner>
+                                <Spinner animation="border" role="status"></Spinner>
                             </Col>
                         ) : error ? (
                             <Col className="text-center py-4">
@@ -57,9 +55,17 @@ const MemberPage = () => {
                 </Card.Header>
                 <Card.Body className="p-0">
                     <Row>
-                        {pastBookings.length > 0 ? (
+                        {isLoading ? (
+                            <Col className="text-center py-4">
+                                <Spinner animation="border" role="status"></Spinner>
+                            </Col>
+                        ) : error ? (
+                            <Col className="text-center py-4">
+                                <span>Kunde inte ladda aktuella bokningar. Försök igen senare.</span>
+                            </Col>
+                        ) : pastBookings.length > 0 ? (
                             pastBookings.map((booking: USERBOOKING) => (
-                                <MemberBookingCard key={booking.bookingId} booking={booking} isCurrent={false} />
+                                <MemberBookingCard key={booking.bookingId} booking={booking} isCurrent={true} />
                             ))
                         ) : (
                             <Col className="text-center py-4">
