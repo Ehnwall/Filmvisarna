@@ -7,3 +7,24 @@ export type MOVIE = {
     trailerUrl: string
     posterUrl: string
 }
+
+export type SEAT = {
+    seatRow: number
+    seatNumber: number
+    ticketType: string
+    ticketPrice: number
+}
+
+export type USERBOOKING = {
+    bookingId: number
+    bookingNumberId: string
+    userId: number
+    userEmail: string
+    userFirstname: string
+    userLastname: string
+    showTime: string
+    cinemaName: string
+    movieTitle: string
+    movieUrl: string
+    seats: SEAT[]
+}
