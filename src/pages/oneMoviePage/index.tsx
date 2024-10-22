@@ -1,9 +1,11 @@
 import { Container, Row, Col, Card, Stack, Accordion, Badge, Button, ButtonGroup } from 'react-bootstrap'
 import { BsCalendar, BsClock, BsPin } from 'react-icons/bs'
 import { useGetOneMovie } from '../../utils/api/movies/useGetOneMovie'
+import { useGetShowsOnMovie } from '../../utils/api/movies/useGetShowsOnMovie'
 
 export default function IndividualMovie() {
     const { data: movie, isLoading: isMovieLoading, isError: isMovieError } = useGetOneMovie()
+    const { data: show } = useGetShowsOnMovie()
 
     if (isMovieLoading) {
         return <div></div>
@@ -23,6 +25,8 @@ export default function IndividualMovie() {
     }
 
     let min = movie?.durationMin
+
+    const times = show?.showTime
 
     const time = convertMinutesToHoursAndMinutes(min)
 
@@ -72,7 +76,7 @@ export default function IndividualMovie() {
                                                                         size={18}
                                                                         className="text-primary me-2"
                                                                     />
-                                                                    <span className="fw-bold me-2">Tisdag </span>
+                                                                    <span className="fw-bold me-2">Tisdag</span>
                                                                     <Badge bg="secondary">{25 + index}/09</Badge>
                                                                 </div>
                                                             </div>

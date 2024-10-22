@@ -15,7 +15,7 @@ export const useGetOneMovie = () => {
         console.log(data)
         return data
     }
-    console.log(movieId)
+
     return useQuery({
         queryKey: [movieQueryKeys.byId, movieId],
         queryFn: fetchOneMovie,
