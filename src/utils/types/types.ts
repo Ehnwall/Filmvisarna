@@ -7,3 +7,15 @@ export type MOVIE = {
     trailerUrl: string
     posterUrl: string
 }
+
+export type SHOWS = {
+    showId: number
+    showTime: string
+    posterURL: string
+    genre: string[]
+    duration: number
+    agelimit: number
+    movieTitle: string
+    cinemaName: string
+    cinemaId: number
+}
