@@ -12,7 +12,6 @@ export const useGetOneMovie = () => {
     const { movieId } = useParams()
     const fetchOneMovie = async (): Promise<MOVIE> => {
         const { data } = await axios.get(`/api/movies/${movieId}`)
-        console.log(data)
         return data
     }
 

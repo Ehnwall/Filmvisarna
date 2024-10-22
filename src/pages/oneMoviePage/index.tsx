@@ -2,10 +2,11 @@ import { Container, Row, Col, Card, Stack, Accordion, Badge, Button, ButtonGroup
 import { BsCalendar, BsClock, BsPin } from 'react-icons/bs'
 import { useGetOneMovie } from '../../utils/api/movies/useGetOneMovie'
 import { useGetShowsOnMovie } from '../../utils/api/movies/useGetShowsOnMovie'
+import { SHOWSONMOVIE } from '@/utils/types/types'
 
 export default function IndividualMovie() {
     const { data: movie, isLoading: isMovieLoading, isError: isMovieError } = useGetOneMovie()
-    const { data: show } = useGetShowsOnMovie()
+    const { data: shows } = useGetShowsOnMovie()
 
     if (isMovieLoading) {
         return <div></div>
@@ -26,7 +27,23 @@ export default function IndividualMovie() {
 
     let min = movie?.durationMin
 
-    const times = show?.showTime
+    console.log()
+
+    const getWeekDay = (dateString: string) => {
+        const weekDaysMap: { [key: string]: string } = {
+            '0': 'Söndag',
+            '1': 'Måndag',
+            '2': 'Tisdag',
+            '3': 'Onsdag',
+            '4': 'Torsdag',
+            '5': 'Fredag',
+            '6': 'Lördag',
+        }
+        const newDate = new Date(dateString).getDay()
+        const dayOfWeek = weekDaysMap[newDate]
+
+        return dayOfWeek
+    }
 
     const time = convertMinutesToHoursAndMinutes(min)
 
@@ -43,8 +60,8 @@ export default function IndividualMovie() {
                     <span>Från {movie?.ageLimit} år</span>
                 </div>
                 <Row className="g-1">
-                    {movie?.description?.genre?.map((genre: any, index: any) => (
-                        <Col xs="auto" key={index}>
+                    {movie?.description?.genre?.map((genre: string) => (
+                        <Col xs="auto" key={genre}>
                             <Badge bg="primary" className="mb-4 fs-6 text-dark">
                                 {genre}
                             </Badge>
@@ -66,8 +83,8 @@ export default function IndividualMovie() {
                                     </Card.Header>
                                     <Card.Body className="p-0 pt-3">
                                         <Row className="g-3">
-                                            {[...Array(6)].map((_, index) => (
-                                                <Col key={index} xs={12} sm={6} md={4}>
+                                            {shows?.map((show: SHOWSONMOVIE) => (
+                                                <Col key={show.showId} xs={12} sm={6} md={4}>
                                                     <Card className="h-100 border-1">
                                                         <Card.Body className="d-flex flex-column">
                                                             <div className="d-flex justify-content-between align-items-center mb-3">
@@ -76,7 +93,9 @@ export default function IndividualMovie() {
                                                                         size={18}
                                                                         className="text-primary me-2"
                                                                     />
-                                                                    <span className="fw-bold me-2">Tisdag</span>
+                                                                    <span className="fw-bold me-2">
+                                                                        {getWeekDay(show.showTime)}
+                                                                    </span>
                                                                     <Badge bg="secondary">{25 + index}/09</Badge>
                                                                 </div>
                                                             </div>
@@ -86,7 +105,7 @@ export default function IndividualMovie() {
                                                             </div>
                                                             <div className="d-flex align-items-center mb-3">
                                                                 <BsPin size={18} className="text-primary me-2" />
-                                                                <span>Södra</span>
+                                                                <span>{show.cinemaName}</span>
                                                             </div>
                                                             <Card.Link
                                                                 className="btn btn-outline-primary mt-auto w-100"
@@ -116,8 +135,8 @@ export default function IndividualMovie() {
                                                     </Col>
                                                     <Col sm={6} md={4}>
                                                         <h5>Skådespelare</h5>
-                                                        {movie?.description.cast.map((cast, index) => (
-                                                            <p key={index}> {cast}</p>
+                                                        {movie?.description.cast.map((cast) => (
+                                                            <p key={cast}> {cast}</p>
                                                         ))}
                                                     </Col>
                                                     <Col sm={6} md={4}>
@@ -126,8 +145,8 @@ export default function IndividualMovie() {
                                                     </Col>
                                                     <Col sm={6} md={4}>
                                                         <h5>Originalspråk</h5>
-                                                        {movie?.description.language.map((lang, index) => (
-                                                            <p key={index}>{lang}</p>
+                                                        {movie?.description.language.map((lang) => (
+                                                            <p key={lang}>{lang}</p>
                                                         ))}
                                                     </Col>
                                                     <Col sm={12} md={8}>
