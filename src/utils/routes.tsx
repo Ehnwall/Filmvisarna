@@ -1,7 +1,11 @@
 // pages/routes
 import StartPage from '../pages/startPage/StartPage'
+import IndividualMovie from '../pages/oneMoviePage'
 
-export default [{ path: '/', element: <StartPage />, menuLabel: 'Hem' }]
+export default [
+    { path: '/', element: <StartPage />, menuLabel: 'Hem' },
+    { path: '/film/:movieId', element: <IndividualMovie /> },
+]
 
 //Paths
 // startpage url: `/`
