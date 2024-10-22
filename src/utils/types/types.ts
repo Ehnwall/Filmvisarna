@@ -27,3 +27,8 @@ export type SHOWS = {
     cinemaName: string
     cinemaId: number
 }
+export type TICKETS = {
+    Id: number
+    ticketType: string
+    price: number
+}

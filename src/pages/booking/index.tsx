@@ -1,15 +1,18 @@
 import { Container, Row, Col, Image, Button, ButtonGroup, Card, Form } from 'react-bootstrap'
 import { BsCalendar, BsClock, BsPin, BsCreditCard2Back } from 'react-icons/bs'
 import { useGetShow } from '../../utils/api/booking/useGetShow'
+import { useGetTickets } from '../../utils/api/booking/useGetTicket'
 import ErrorBooking from './ErrorBooking'
 import LoadingBooking from './LoadingBooking'
 
 export default function BookingPage() {
-    const getShow = useGetShow()
-    console.log(getShow.data)
-    if (getShow.isLoading) return <LoadingBooking />
-    if (getShow.isError) return <ErrorBooking />
-    const show = getShow.data
+    const { data: show, isLoading: isShowLoading, isError: isShowError } = useGetShow()
+    const { data: tickets, isLoading: isTicketsLoading, isError: isTicketsError } = useGetTickets()
+    if (isShowLoading) return <LoadingBooking />
+    if (isShowError) return <ErrorBooking />
+    if (isTicketsLoading) return <LoadingBooking />
+    if (isTicketsError) return <ErrorBooking />
+    console.log(tickets)
     const rowSizes = [8, 9, 10, 10, 10, 10, 12, 13]
     const seatArray = rowSizes.map(
         (size) => new Array(size).fill(null).map(() => ({ booked: Math.random() < 0.3 })) // Randomly mark some seats as booked
@@ -44,8 +47,7 @@ export default function BookingPage() {
                                             <span className="me-2">{show?.cinemaName}</span>
                                         </div>
                                     </Card.Body>
-                                </Card>
-                                0{' '}
+                                </Card>{' '}
                             </Col>
                             <Col xs={12}>
                                 <Card>
@@ -56,9 +58,9 @@ export default function BookingPage() {
                                         <Row className="g-0">
                                             <Col xs={12} lg={8} className="d-flex justify-content-left mb-3">
                                                 <div className="fw-bold" style={{ minWidth: '100px' }}>
-                                                    Barn
+                                                    {tickets && tickets[0].ticketType}
                                                 </div>
-                                                <div className="text-center">80 kr</div>
+                                                <div className="text-center">{tickets && tickets[0].price}</div>
                                                 <ButtonGroup className="btn-group-sm ms-5">
                                                     <Button variant="outline-primary px-3">-</Button>
                                                     <Button
@@ -72,9 +74,9 @@ export default function BookingPage() {
                                             </Col>
                                             <Col xs={12} lg={8} className="d-flex justify-content-left mb-3">
                                                 <div className="fw-bold" style={{ minWidth: '91px' }}>
-                                                    Pensionär
+                                                    {tickets && tickets[2].ticketType}
                                                 </div>
-                                                <div className="text-center ">120 kr</div>
+                                                <div className="text-center ">{tickets && tickets[2].price}</div>
                                                 <ButtonGroup className="btn-group-sm ms-5">
                                                     <Button variant="outline-primary px-3">-</Button>
                                                     <Button className="bg-body-tertiary" variant="outline-primary px-3">
@@ -85,9 +87,9 @@ export default function BookingPage() {
                                             </Col>
                                             <Col xs={12} lg={8} className="d-flex justify-content-left mb-3">
                                                 <div className="fw-bold" style={{ minWidth: '83px' }}>
-                                                    Vuxen
+                                                    {tickets && tickets[1].ticketType}
                                                 </div>
-                                                <div className="text-center ms-2">140 kr</div>
+                                                <div className="text-center ms-2">{tickets && tickets[1].price}</div>
                                                 <ButtonGroup className="btn-group-sm ms-5">
                                                     <Button variant="outline-primary px-3">-</Button>
                                                     <Button className="bg-body-tertiary" variant="outline-primary px-3">
