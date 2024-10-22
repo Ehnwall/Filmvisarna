@@ -6,7 +6,6 @@ const QUERY_KEY = ['movies']
 
 const fetchMovie = async (): Promise<MOVIE> => {
     const { data } = await axios.get(`/api/movies`)
-    console.log(data)
     return data
 }
 
