@@ -1,6 +1,6 @@
-import React from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import RenderMovies from './utils/api/movies/renderMovies'
 
 const queryClient = new QueryClient()
 
@@ -14,6 +14,7 @@ export default function App() {
         <>
             <QueryClientProvider client={queryClient}>
                 <main>
+                    <RenderMovies />
                     <Outlet />
                 </main>
             </QueryClientProvider>
