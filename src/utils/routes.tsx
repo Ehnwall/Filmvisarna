@@ -1,7 +1,11 @@
 // pages/routes
+import Login from '../pages/authLogIn'
 import StartPage from '../pages/startPage/StartPage'
 
-export default [{ path: '/', element: <StartPage />, menuLabel: 'Hem' }]
+export default [
+    { path: '/', element: <StartPage />, menuLabel: 'Hem' },
+    { path: '/logga-in', element: <Login /> },
+]
 
 //Paths
 // startpage url: `/`
