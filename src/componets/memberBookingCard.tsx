@@ -29,23 +29,23 @@ const MemberBookingCard = ({ booking, isCurrent }: { booking: USERBOOKING; isCur
     const groupedSeats = groupSeatsByRow(booking.seats)
 
     return (
-        <Col key={booking.bookingId} sm={12} md={6} lg={4} xxl={3} className="g-4">
+        <Col key={booking.bookingId} xs={12} sm={12} md={6} lg={4} xxl={3} className="g-4">
             <Card className="border h-100">
                 <Card.Body className="d-flex flex-column">
                     <Card.Title>{booking.movieTitle}</Card.Title>
                     <Card.Text className="flex-grow-1">
                         <Row>
                             <Col xs={7} className="d-flex align-items-center">
-                                <ul className="list-unstyled m-0">
-                                    <li>
+                                <ul className="list-unstyled m-0 ">
+                                    <li className="mb-1 mb-sm-4 mb-md-1">
                                         <BsReceipt size={18} className="text-primary me-2" />
                                         <span>{booking.bookingNumberId}</span>
                                     </li>
-                                    <li>
+                                    <li className="mb-1 mb-sm-4 mb-md-1">
                                         <BsCalendar size={18} className="text-primary me-2" />
                                         <span>{new Date(booking.showTime).toLocaleDateString()}</span>
                                     </li>
-                                    <li>
+                                    <li className="mb-1 mb-sm-4 mb-md-1">
                                         <BsClock size={18} className="text-primary me-2" />
                                         <span>
                                             {new Date(booking.showTime).toLocaleTimeString([], {
@@ -54,11 +54,11 @@ const MemberBookingCard = ({ booking, isCurrent }: { booking: USERBOOKING; isCur
                                             })}
                                         </span>
                                     </li>
-                                    <li>
+                                    <li className="mb-1 mb-1 mb-sm-4 mb-md-1">
                                         <BsPin size={18} className="text-primary me-2" />
                                         <span>{booking.cinemaName}</span>
                                     </li>
-                                    <li>
+                                    <li className="mb-1 mb-sm-4 mb-md-1">
                                         <BsPersonCircle size={18} className="text-primary me-2" />
                                         <span>{booking.seats.length} biljetter</span>
                                     </li>
@@ -72,9 +72,10 @@ const MemberBookingCard = ({ booking, isCurrent }: { booking: USERBOOKING; isCur
                             <Col xs={12}>
                                 <ul className="list-unstyled m-0">
                                     {Object.keys(groupedSeats).map((row) => (
-                                        <li key={row}>
+                                        <li key={row} className="d-flex align-items-center mb-3 mb-md-0">
                                             <BsBuildingDown size={18} className="text-primary me-2" />
-                                            Rad: {row} <BsArrowRightShort size={18} className="text-primary mx-1" />
+                                            <span>Rad: {row}</span>
+                                            <BsArrowRightShort size={18} className="text-primary mx-1" />
                                             <div className="d-flex flex-wrap gap-2 mt-1">
                                                 {groupedSeats[parseInt(row)].map((seatNumber) => (
                                                     <span key={seatNumber} className="badge bg-primary text-black">
