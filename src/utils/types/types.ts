@@ -15,7 +15,7 @@ type Description = {
     speech: string[]
     language: string[]
     year: number
-
+}
 export type SHOWS = {
     showId: number
     showTime: string
