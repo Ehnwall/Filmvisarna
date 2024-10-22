@@ -1,10 +1,10 @@
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import Stack from 'react-bootstrap/Stack'
-import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { BsArrowDown } from 'react-icons/bs'
 import Badge from 'react-bootstrap/Badge'
 import { useGetMovies } from './useGetMovies'
+import { useState } from 'react'
 
 const convertDuration = (duration: number) => {
     const hours = Math.floor(duration / 60)
@@ -15,6 +15,8 @@ const convertDuration = (duration: number) => {
 
 export default function RenderMovies() {
     const { data: movies, isLoading, isError } = useGetMovies()
+    const ages = ['6-12', '12-25', '25-65', 'Alla åldrar']
+    const [selectedAge, setSelectedAge] = useState('Alla åldrar')
 
     if (isLoading) {
         return <div>Loading...</div>
@@ -24,11 +26,25 @@ export default function RenderMovies() {
         return <div>Error loading movies...</div>
     }
 
-    const ages = ['6-12', '12-25', '25-65', 'Alla åldrar']
+    const handleAgeSelect = (age: string) => {
+        setSelectedAge(age)
+    }
+
+    const filteredMovies = movies?.filter((movie) => {
+        if (selectedAge === 'Alla åldrar') {
+            return true
+        }
+        return movie.ageLimit === selectedAge
+    })
+
+    /*
+    const [minAge, maxAge] = selectedAge.split('-').map(Number)
+    ageLimit >= minAge && ageLimit <= maxAge
+    */
 
     return (
         <>
-            <Container className="py-4 " id="movies">
+            <Container className="py-4" id="movies">
                 <div className="d-flex justify-content-center">
                     <h3>Aktuella filmer på bio</h3>
                 </div>
@@ -44,18 +60,17 @@ export default function RenderMovies() {
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
                             {ages.map((age, index) => (
-                                <Dropdown.Item href="/" key={index}>
+                                <Dropdown.Item key={index} onClick={() => handleAgeSelect(age)}>
                                     {age}
                                 </Dropdown.Item>
                             ))}
                         </Dropdown.Menu>
                     </Dropdown>
-                    <Button className="btn-filter" variant="secondary">
-                        Barnfilmer
-                    </Button>
+                    <h6>Ålder: {selectedAge}</h6>
                 </Stack>
+
                 <Row xs={2} xl={4} className="g-2 gy-2">
-                    {movies?.map((movie, idx) => {
+                    {filteredMovies?.map((movie, idx) => {
                         const { hours, minutes } = convertDuration(movie.durationMin)
                         return (
                             <Col key={idx}>

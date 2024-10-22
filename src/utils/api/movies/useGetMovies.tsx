@@ -9,13 +9,6 @@ const moviesQueryKeys = {
 export const useGetMovies = () => {
     const fetchMovies = async (): Promise<MOVIE[]> => {
         const { data } = await axios.get('/api/movies')
-
-        console.log('Fetched movies data:', data)
-
-        if (!Array.isArray(data)) {
-            throw new Error('Invalid data format: expected an array')
-        }
-
         return data
     }
     return useQuery({ queryKey: moviesQueryKeys.all, queryFn: fetchMovies })

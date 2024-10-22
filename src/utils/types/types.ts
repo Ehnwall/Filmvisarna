@@ -2,7 +2,7 @@ export type MOVIE = {
     id: number
     title: string
     durationMin: number
-    ageLimit: number
+    ageLimit: string
     description: Description
     trailerUrl: string
     posterUrl: string
