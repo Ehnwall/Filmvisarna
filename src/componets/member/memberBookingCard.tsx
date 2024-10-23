@@ -11,8 +11,9 @@ import {
     BsCreditCard2Back,
 } from 'react-icons/bs'
 import { USERBOOKING, SEAT } from '@/utils/types/types'
-import { useDeleteBooking } from '../utils/api/booking/useDeleteBookings'
-import ModalForDeleteBooking from './modalForDeleteBooking'
+import { useDeleteBooking } from '../../utils/api/booking/useDeleteBookings'
+import ModalForDeleteBooking from '../member/modalForDeleteBooking'
+
 const MemberBookingCard = ({ booking, isCurrent }: { booking: USERBOOKING; isCurrent: boolean }) => {
     const totalPrice = booking.seats.reduce((total, seat) => total + seat.ticketPrice, 0)
 
@@ -38,7 +39,6 @@ const MemberBookingCard = ({ booking, isCurrent }: { booking: USERBOOKING; isCur
         deleteBookingMutation.mutate(id)
         setShowModal(false)
     }
-
     return (
         <Col key={booking.bookingId} xs={12} sm={12} md={6} lg={4} xxl={3} className="g-4">
             <Card className="border h-100">

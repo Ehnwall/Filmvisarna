@@ -5,7 +5,7 @@ import SignIn from './api/auth/testAuth'
 
 export default [
     { path: '/', element: <StartPage />, menuLabel: 'Hem' },
-    { path: '/member', element: <MemberPage />, menuLabel: 'Medlem' },
+    { path: '/medlem', element: <MemberPage />, menuLabel: 'Medlem' },
     { path: '/sign-in', element: <SignIn />, menuLabel: 'Logga in' },
 ]
 

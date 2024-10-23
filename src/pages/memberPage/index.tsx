@@ -1,8 +1,7 @@
 import { useGetBookings } from '../../utils/api/booking/useGetBookings'
-import React from 'react'
 import { Container, Card, Row, Col, Spinner } from 'react-bootstrap'
 import { USERBOOKING } from '@/utils/types/types'
-import MemberBookingCard from '../../componets/memberBookingCard'
+import MemberBookingCard from '../../componets/member/memberBookingCard'
 import { BsTicket } from 'react-icons/bs'
 
 const MemberPage = () => {

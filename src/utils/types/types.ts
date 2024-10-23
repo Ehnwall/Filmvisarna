@@ -28,3 +28,9 @@ export type USERBOOKING = {
     movieUrl: string
     seats: SEAT[]
 }
+
+export type CONFIRMDELETEMODALPROPS = {
+    show: boolean
+    onHide: () => void
+    onConfirm: () => void
+}
