@@ -1,13 +1,14 @@
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
+import { USERBOOKING } from '@/utils/types/types'
 
 const QUERY_KEY = ['bookings']
 
-const fetchBookings = async (): Promise<any> => {
+const fetchBookings = async (): Promise<USERBOOKING[]> => {
     const token = localStorage.getItem('token')
 
     try {
-        const { data } = await axios.get('/api/bookings', {
+        const { data } = await axios.get<USERBOOKING[]>('/api/bookings', {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token || ''}`,

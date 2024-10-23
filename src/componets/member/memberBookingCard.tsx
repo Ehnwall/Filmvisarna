@@ -102,7 +102,7 @@ const MemberBookingCard = ({ booking, isCurrent }: { booking: USERBOOKING; isCur
                     </Card.Text>
                     <div>
                         <BsCreditCard2Back size={18} className="text-primary me-2" />
-                        <span>Totalpris: {totalPrice}</span>
+                        <span>Totalpris: {totalPrice} kr</span>
                     </div>
                     {isCurrent && (
                         <div className="d-grid mt-4">
