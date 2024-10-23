@@ -11,6 +11,7 @@ export const useGetShowsOnMovie = () => {
     console.log(movieId)
     const fetchShowsOnMovie = async (): Promise<SHOWSONMOVIE[]> => {
         const { data } = await axios.get(`/api/movies/${movieId}/shows?startDate=${today}&endDate=2025`)
+        console.log(data)
         return data
     }
 
