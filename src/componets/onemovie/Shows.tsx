@@ -4,7 +4,7 @@ import { SHOWSONMOVIE } from '@/utils/types/types'
 import { Row, Col, Card, Badge } from 'react-bootstrap'
 import { BsCalendar, BsClock, BsPin } from 'react-icons/bs'
 
-export default function Shows() {
+export function Shows() {
     const { data: shows } = useGetShowsOnMovie()
     const getWeekDay = (dateString: string) => {
         const weekDaysMap: { [key: string]: string } = {
@@ -62,7 +62,10 @@ export default function Shows() {
                                         <BsPin size={18} className="text-primary me-2" />
                                         <span>{show.cinemaName}</span>
                                     </div>
-                                    <Card.Link className="btn btn-outline-primary mt-auto w-100" href="/booking-page">
+                                    <Card.Link
+                                        className="btn btn-outline-primary mt-auto w-100"
+                                        href="/boka-film/:showId"
+                                    >
                                         Boka
                                     </Card.Link>
                                 </Card.Body>

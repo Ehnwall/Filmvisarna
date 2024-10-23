@@ -1,10 +1,11 @@
 import { Container, Row, Col } from 'react-bootstrap'
-import Shows from '../../componets/onemovie/shows'
-import { InfoMovieTrailer } from '../../componets/onemovie/InfoMovieTrailer'
-import { InfoMovieDescription } from '../../componets/onemovie/InfoMovieDescription'
-import { InfoMovieHeader } from '../../componets/onemovie/InfoMovieHeader'
-import { InfoMoviePoster } from '../../componets/onemovie/InfoMoviePoster'
-
+import {
+    InfoMovieDescription,
+    InfoMovieHeader,
+    InfoMoviePoster,
+    InfoMovieTrailer,
+    Shows,
+} from '../../componets/onemovie/index'
 export default function IndividualMovie() {
     return (
         <>
