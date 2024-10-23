@@ -1,14 +1,11 @@
 import { Container, Row, Col, Card, Stack, Accordion, Badge } from 'react-bootstrap'
 import Shows from '../../componets/onemovie/shows'
 import { InfoMovieTrailer } from '../../componets/onemovie/InfoMovieTrailer'
-import { useGetOneMovie } from '../../utils/api/movies/useGetOneMovie'
 import { InfoMovieDescription } from '../../componets/onemovie/InfoMovieDescription'
 import { InfoMovieHeader } from '../../componets/onemovie/InfoMovieHeader'
 import { InfoMoviePoster } from '../../componets/onemovie/InfoMoviePoster'
 
 export default function IndividualMovie() {
-    const { data: movie } = useGetOneMovie()
-
     return (
         <>
             <Container className="pt-5">
