@@ -4,8 +4,7 @@ import { MOVIE } from '../../types/types'
 
 const moviesQueryKeys = {
     all: ['movies'],
-
-
+}
 export const useGetMovies = () => {
     const fetchMovies = async (): Promise<MOVIE[]> => {
         const { data } = await axios.get('/api/movies')
