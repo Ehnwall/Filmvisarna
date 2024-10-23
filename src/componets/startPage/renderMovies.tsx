@@ -3,7 +3,7 @@ import Stack from 'react-bootstrap/Stack'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { BsArrowDown } from 'react-icons/bs'
 import Badge from 'react-bootstrap/Badge'
-import { useGetMovies } from './useGetMovies'
+import { useGetMovies } from '../../utils/api/movies/useGetMovies'
 import { useState } from 'react'
 
 const convertDuration = (duration: number) => {
@@ -35,7 +35,7 @@ export default function RenderMovies() {
             return true
         }
         if (selectedAge === 'Barnfilmer') {
-            return parseInt(movie.ageLimit) >= 0 && parseInt(movie.ageLimit) <= 7
+            return parseInt(movie.ageLimit) === 0
         }
         return parseInt(movie.ageLimit) === parseInt(selectedAge)
     })
