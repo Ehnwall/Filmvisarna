@@ -1,22 +1,13 @@
 import { useMutation } from '@tanstack/react-query'
+import { SIGNIN, SIGNINRESPONSE } from '../../types/types'
 import axios from 'axios'
 
-type SignIn = {
-    email: string
-    password: string
-}
-type SignInResponse = {
-    bearer: string
-    firstName: string
-    lastName: string
-}
-
-const signIn = async (userInformation: SignIn): Promise<SignInResponse> => {
-    const response = await axios.post<SignInResponse>('/api/login', userInformation)
+const signIn = async (userInformation: SIGNIN): Promise<SIGNINRESPONSE> => {
+    const response = await axios.post<SIGNINRESPONSE>('/api/login', userInformation)
     return response.data
 }
 export const useSignIn = () => {
-    return useMutation<SignInResponse, Error, SignIn>({
+    return useMutation<SIGNINRESPONSE, Error, SIGNIN>({
         mutationFn: signIn,
         onSuccess: (data) => {
             sessionStorage.setItem('token', JSON.stringify({ token: data.bearer }))

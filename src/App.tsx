@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { AuthProvider } from './context/authContext'
 
 const queryClient = new QueryClient()
 export default function App() {
@@ -11,9 +12,11 @@ export default function App() {
     return (
         <>
             <QueryClientProvider client={queryClient}>
-                <main>
-                    <Outlet />
-                </main>
+                <AuthProvider>
+                    <main>
+                        <Outlet />
+                    </main>
+                </AuthProvider>
             </QueryClientProvider>
         </>
     )
