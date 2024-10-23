@@ -3,17 +3,14 @@ import { BsCalendar, BsClock, BsPin, BsCreditCard2Back } from 'react-icons/bs'
 import { useGetShow } from '../../utils/api/booking/useGetShow'
 import ErrorBooking from './ErrorBooking'
 import LoadingBooking from './LoadingBooking'
+import BookingSeats from '../../componets/booking/bookingSeats'
 
 export default function BookingPage() {
     const getShow = useGetShow()
-    console.log(getShow.data)
     if (getShow.isLoading) return <LoadingBooking />
     if (getShow.isError) return <ErrorBooking />
     const show = getShow.data
-    const rowSizes = [8, 9, 10, 10, 10, 10, 12, 13]
-    const seatArray = rowSizes.map(
-        (size) => new Array(size).fill(null).map(() => ({ booked: Math.random() < 0.3 })) // Randomly mark some seats as booked
-    )
+
     return (
         <>
             <Container className="py-4">
@@ -112,18 +109,8 @@ export default function BookingPage() {
                         </Card>
                     </Col>
                 </Row>
-                <div className="seat-picker rounded-3 overflow-auto my-5">
-                    <div className="seat-picker__container bg-body-tertiary py-5 rounded">
-                        <div className="mx-auto bg-light pb-4 mb-5 rounded-5 w-50 "></div>
-                        {seatArray.map((row, rowIndex) => (
-                            <div key={rowIndex} className="seat-row">
-                                {row.map((seat, seatIndex) => (
-                                    <Form.Check key={seatIndex} type="checkbox" disabled={seat.booked} />
-                                ))}
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                <div className="seat-picker rounded-3 overflow-auto my-5"></div>
+                <BookingSeats />
                 <Row className="gy-4">
                     <Card>
                         <Card.Header className="bg-primary ">
