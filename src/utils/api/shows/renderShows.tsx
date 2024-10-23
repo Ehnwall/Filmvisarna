@@ -8,8 +8,9 @@ const MoviesWithCinnema = () => {
     if (isLoading) return <div>Loading...</div>
     if (error) return <div>Error fetching shows</div>
 
-    const lillaSalongenShows = shows?.filter((show) => show.cinemaName === 'Lilla Salongen').slice(0, 5)
-    const storaSalongenShows = shows?.filter((show) => show.cinemaName === 'Stora Salongen').slice(0, 5)
+    const lillaSalongenShows = shows?.filter((show) => show.cinemaName === 'Lilla salongen').slice(0, 5)
+
+    const storaSalongenShows = shows?.filter((show) => show.cinemaName === 'Stora salongen').slice(0, 5)
 
     return (
         <>
@@ -18,13 +19,13 @@ const MoviesWithCinnema = () => {
                 <div className="horizontal-scrollable">
                     <div className="g-3 py-2 rowcard">
                         {lillaSalongenShows?.map((show) => (
-                            <Card key={show.showId} className="border card-horizontal__scroll">
+                            <Card key={show.showId} className="border card-horizontal__scroll ">
                                 <div className="overflow-hidden rounded-bottom-0 rounded">
                                     <Card.Img variant="top" src={show.posterURL} alt={show.movieTitle} />
                                 </div>
                                 <Card.Body>
                                     <Card.Title>{show.movieTitle}</Card.Title>
-                                    <Card.Text>{show.genre}</Card.Text>
+                                    <Card.Text>{show.genre.join(' ')}</Card.Text>
                                     <Badge className="py-1 d-inline-flex align-items-center" bg="secondary">
                                         <BsClock className="me-2" />
                                         {show.showTime}
@@ -34,7 +35,7 @@ const MoviesWithCinnema = () => {
                                             {Math.floor(show.duration / 60)} tim {show.duration % 60} min
                                         </Badge>
                                         <Badge bg="none" className="border">
-                                            Från {show.agelimit} År
+                                            Från {show.ageLimit} År
                                         </Badge>
                                     </Stack>
                                 </Card.Body>
@@ -58,7 +59,7 @@ const MoviesWithCinnema = () => {
                                 </div>
                                 <Card.Body>
                                     <Card.Title>{show.movieTitle}</Card.Title>
-                                    <Card.Text>{show.genre}</Card.Text>
+                                    <Card.Text>{show.genre.join(' ')}</Card.Text>
                                     <Badge className="py-1 d-inline-flex align-items-center" bg="secondary">
                                         <BsClock className="me-2" />
                                         {show.showTime}
@@ -68,7 +69,7 @@ const MoviesWithCinnema = () => {
                                             {Math.floor(show.duration / 60)} tim {show.duration % 60} min
                                         </Badge>
                                         <Badge bg="none" className="border">
-                                            Från {show.agelimit} År
+                                            Från {show.ageLimit} År
                                         </Badge>
                                     </Stack>
                                 </Card.Body>

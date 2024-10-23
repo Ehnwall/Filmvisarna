@@ -22,7 +22,7 @@ export type SHOWS = {
     posterURL: string
     genre: string[]
     duration: number
-    agelimit: number
+    ageLimit: number
     movieTitle: string
     cinemaName: string
     cinemaId: number

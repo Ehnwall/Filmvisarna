@@ -9,6 +9,8 @@ const moviesQueryKeys = {
 export const useGetShows = () => {
     const fetchShow = async (): Promise<SHOWS[]> => {
         const { data } = await axios.get(`/api/shows`)
+        console.log(data)
+
         return data
     }
     return useQuery({
