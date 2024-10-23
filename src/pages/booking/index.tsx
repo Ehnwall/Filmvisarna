@@ -2,6 +2,7 @@ import { Container, Row, Col, Image, Button, ButtonGroup, Card, Form } from 'rea
 import { BsCalendar, BsClock, BsPin, BsCreditCard2Back } from 'react-icons/bs'
 import { useGetShow } from '../../utils/api/booking/useGetShow'
 import { useGetTickets } from '../../utils/api/booking/useGetTicket'
+import TicketTypeSelector from '../../componets/TicketTypeSelector'
 import ErrorBooking from './ErrorBooking'
 import LoadingBooking from './LoadingBooking'
 
@@ -50,61 +51,7 @@ export default function BookingPage() {
                                 </Card>{' '}
                             </Col>
                             <Col xs={12}>
-                                <Card>
-                                    <Card.Header className="bg-primary ">
-                                        <h3 className="mb-0 text-dark">Antal Biljetter</h3>
-                                    </Card.Header>
-                                    <Card.Body xs={4}>
-                                        <Row className="g-0">
-                                            <Col xs={12} lg={8} className="d-flex justify-content-left mb-3">
-                                                <div className="fw-bold" style={{ minWidth: '100px' }}>
-                                                    {tickets && tickets[0].ticketType}
-                                                </div>
-                                                <div className="text-center">{tickets && tickets[0].price}</div>
-                                                <ButtonGroup className="btn-group-sm ms-5">
-                                                    <Button variant="outline-primary px-3">-</Button>
-                                                    <Button
-                                                        className="bg-body-tertiary pb-2"
-                                                        variant="outline-primary px-3"
-                                                    >
-                                                        0
-                                                    </Button>
-                                                    <Button variant="outline-primary px-3">+</Button>
-                                                </ButtonGroup>
-                                            </Col>
-                                            <Col xs={12} lg={8} className="d-flex justify-content-left mb-3">
-                                                <div className="fw-bold" style={{ minWidth: '91px' }}>
-                                                    {tickets && tickets[2].ticketType}
-                                                </div>
-                                                <div className="text-center ">{tickets && tickets[2].price}</div>
-                                                <ButtonGroup className="btn-group-sm ms-5">
-                                                    <Button variant="outline-primary px-3">-</Button>
-                                                    <Button className="bg-body-tertiary" variant="outline-primary px-3">
-                                                        0
-                                                    </Button>
-                                                    <Button variant="outline-primary px-3">+</Button>
-                                                </ButtonGroup>
-                                            </Col>
-                                            <Col xs={12} lg={8} className="d-flex justify-content-left mb-3">
-                                                <div className="fw-bold" style={{ minWidth: '83px' }}>
-                                                    {tickets && tickets[1].ticketType}
-                                                </div>
-                                                <div className="text-center ms-2">{tickets && tickets[1].price}</div>
-                                                <ButtonGroup className="btn-group-sm ms-5">
-                                                    <Button variant="outline-primary px-3">-</Button>
-                                                    <Button className="bg-body-tertiary" variant="outline-primary px-3">
-                                                        0
-                                                    </Button>
-                                                    <Button variant="outline-primary px-3">+</Button>
-                                                </ButtonGroup>
-                                            </Col>
-                                            <div className="fw-bold" style={{ minWidth: '83px' }}>
-                                                <BsCreditCard2Back size={18} className="text-primary me-2" />
-                                                Total: 120 kr
-                                            </div>
-                                        </Row>
-                                    </Card.Body>
-                                </Card>
+                                <TicketTypeSelector ticketType={tickets} />
                             </Col>
                         </Row>
                     </Col>
