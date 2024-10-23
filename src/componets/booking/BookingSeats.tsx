@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Form } from 'react-bootstrap'
 import { useGetSeats } from '../../utils/api/cinemas/useGetSeats'
-import { CINEMASEATS } from '@/utils/types/types'
+import { CINEMASEATS } from '../../utils/types/types'
 
 export default function BookingSeats() {
     const { data: seats = [] } = useGetSeats()
@@ -15,7 +15,7 @@ export default function BookingSeats() {
         return acc
     }, {})
     const handleSeatChange = (seatNumber: number, seatRow: number) => {
-        console.log(`Clicked on seat: ${seatNumber} and row ${seatRow}`) // Log the clicked seat number
+        console.log(`Clicked on seat: ${seatNumber} and row ${seatRow}`)
     }
     return (
         <div className="seat-picker__container bg-body-tertiary py-5 rounded">
