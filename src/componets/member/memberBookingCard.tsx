@@ -12,7 +12,7 @@ import {
 } from 'react-icons/bs'
 import { USERBOOKING, SEAT } from '@/utils/types/types'
 import { useDeleteBooking } from '../../utils/api/booking/useDeleteBookings'
-import ModalForDeleteBooking from '../member/modalForDeleteBooking'
+import ModalForDeleteBooking from './modalForDeleteBooking'
 
 const MemberBookingCard = ({ booking, isCurrent }: { booking: USERBOOKING; isCurrent: boolean }) => {
     const totalPrice = booking.seats.reduce((total, seat) => total + seat.ticketPrice, 0)
