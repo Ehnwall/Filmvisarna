@@ -65,7 +65,7 @@ const MemberPage = () => {
                             </Col>
                         ) : pastBookings.length > 0 ? (
                             pastBookings.map((booking: USERBOOKING) => (
-                                <MemberBookingCard key={booking.bookingId} booking={booking} isCurrent={true} />
+                                <MemberBookingCard key={booking.bookingId} booking={booking} isCurrent={false} />
                             ))
                         ) : (
                             <Col className="text-center py-4">

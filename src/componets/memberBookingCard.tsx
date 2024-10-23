@@ -11,6 +11,7 @@ import {
     BsCreditCard2Back,
 } from 'react-icons/bs'
 import { USERBOOKING, SEAT } from '@/utils/types/types'
+import { useDeleteBooking } from '../utils/api/booking/useDeleteBookings'
 
 const MemberBookingCard = ({ booking, isCurrent }: { booking: USERBOOKING; isCurrent: boolean }) => {
     const totalPrice = booking.seats.reduce((total, seat) => total + seat.ticketPrice, 0)
@@ -27,6 +28,14 @@ const MemberBookingCard = ({ booking, isCurrent }: { booking: USERBOOKING; isCur
     }
 
     const groupedSeats = groupSeatsByRow(booking.seats)
+
+    const deleteBookingMutation = useDeleteBooking()
+
+    const handleDelete = () => {
+        const id = booking.bookingId.toString().trim()
+        console.log('Attempting to delete booking with ID:', id)
+        deleteBookingMutation.mutate(id)
+    }
 
     return (
         <Col key={booking.bookingId} xs={12} sm={12} md={6} lg={4} xxl={3} className="g-4">
@@ -95,7 +104,16 @@ const MemberBookingCard = ({ booking, isCurrent }: { booking: USERBOOKING; isCur
                     </div>
                     {isCurrent && (
                         <div className="d-grid mt-4">
-                            <Button className="mt-auto" variant="outline-danger">
+                            <Button
+                                className="mt-auto"
+                                variant="outline-danger"
+                                onClick={() => {
+                                    const isConfirmed = window.confirm('Är du säker på att du vill avboka?')
+                                    if (isConfirmed) {
+                                        handleDelete()
+                                    }
+                                }}
+                            >
                                 Avboka
                             </Button>
                         </div>
