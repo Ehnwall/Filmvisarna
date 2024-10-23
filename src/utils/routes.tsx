@@ -1,7 +1,14 @@
 // pages/routes
+import BookingPage from '../pages/booking/index'
 import StartPage from '../pages/startPage/StartPage'
+import IndividualMovie from '../pages/oneMoviePage'
 
-export default [{ path: '/', element: <StartPage />, menuLabel: 'Hem' }]
+export default [
+    { path: '/', element: <StartPage />, menuLabel: 'Hem' },
+    { path: '/film/:movieId', element: <IndividualMovie /> },
+
+    { path: '/boka-film/:showId', element: <BookingPage />, menuLabel: 'Boka' },
+]
 
 //Paths
 // startpage url: `/`

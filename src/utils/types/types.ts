@@ -16,3 +16,16 @@ type Description = {
     language: string[]
     year: number
 }
+
+export type SHOWS = {
+    showId: number
+    showTime: string
+    posterURL: string
+    genre: string[]
+    duration: number
+    agelimit: number
+    movieTitle: string
+    cinemaName: string
+    cinemaId: number
+}
+
