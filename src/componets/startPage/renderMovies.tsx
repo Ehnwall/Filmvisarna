@@ -64,7 +64,9 @@ export default function RenderMovies() {
                             ))}
                         </Dropdown.Menu>
                     </Dropdown>
-                    <h6>Ålder: {selectedAge}</h6>
+                    <h6 className="textpy-1 d-inline-flex align-items-center mt-2 ms-1">
+                        Ålder : <span className="ms-2">{selectedAge}</span>
+                    </h6>
                 </Stack>
 
                 <Row xs={2} xl={4} className="g-2 gy-2">
@@ -78,7 +80,7 @@ export default function RenderMovies() {
                                     </div>
                                     <Card.Body>
                                         <Card.Title>{movie.title}</Card.Title>
-                                        <Card.Text>{movie.description.genre}</Card.Text>
+                                        <Card.Text>{movie.description.genre.join(' ')}</Card.Text>
                                         <Stack direction="horizontal" gap={2} className="mx-auto card-badge">
                                             <Badge bg="none" className="border">
                                                 {hours} tim {minutes} min
