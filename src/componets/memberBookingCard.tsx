@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import { Card, Row, Col, Button } from 'react-bootstrap'
 import {
     BsReceipt,
@@ -12,7 +12,7 @@ import {
 } from 'react-icons/bs'
 import { USERBOOKING, SEAT } from '@/utils/types/types'
 import { useDeleteBooking } from '../utils/api/booking/useDeleteBookings'
-
+import ModalForDeleteBooking from './modalForDeleteBooking'
 const MemberBookingCard = ({ booking, isCurrent }: { booking: USERBOOKING; isCurrent: boolean }) => {
     const totalPrice = booking.seats.reduce((total, seat) => total + seat.ticketPrice, 0)
 
@@ -31,10 +31,12 @@ const MemberBookingCard = ({ booking, isCurrent }: { booking: USERBOOKING; isCur
 
     const deleteBookingMutation = useDeleteBooking()
 
+    const [showModal, setShowModal] = useState(false)
+
     const handleDelete = () => {
         const id = booking.bookingId.toString().trim()
-        console.log('Attempting to delete booking with ID:', id)
         deleteBookingMutation.mutate(id)
+        setShowModal(false)
     }
 
     return (
@@ -81,11 +83,11 @@ const MemberBookingCard = ({ booking, isCurrent }: { booking: USERBOOKING; isCur
                             <Col xs={12}>
                                 <ul className="list-unstyled m-0">
                                     {Object.keys(groupedSeats).map((row) => (
-                                        <li key={row} className="d-flex align-items-center mb-3 mb-md-0">
+                                        <li key={row} className=" align-items-center mb-3 mb-md-0">
                                             <BsBuildingDown size={18} className="text-primary me-2" />
                                             <span>Rad: {row}</span>
                                             <BsArrowRightShort size={18} className="text-primary mx-1" />
-                                            <div className="d-flex flex-wrap gap-2 mt-1">
+                                            <div className="d-flex flex-wrap gap-2 mt-1 mx-4">
                                                 {groupedSeats[parseInt(row)].map((seatNumber) => (
                                                     <span key={seatNumber} className="badge bg-primary text-black">
                                                         {seatNumber}
@@ -104,22 +106,14 @@ const MemberBookingCard = ({ booking, isCurrent }: { booking: USERBOOKING; isCur
                     </div>
                     {isCurrent && (
                         <div className="d-grid mt-4">
-                            <Button
-                                className="mt-auto"
-                                variant="outline-danger"
-                                onClick={() => {
-                                    const isConfirmed = window.confirm('Är du säker på att du vill avboka?')
-                                    if (isConfirmed) {
-                                        handleDelete()
-                                    }
-                                }}
-                            >
+                            <Button className="mt-auto" variant="outline-danger" onClick={() => setShowModal(true)}>
                                 Avboka
                             </Button>
                         </div>
                     )}
                 </Card.Body>
             </Card>
+            <ModalForDeleteBooking show={showModal} onHide={() => setShowModal(false)} onConfirm={handleDelete} />
         </Col>
     )
 }

@@ -16,18 +16,8 @@ const fetchBookings = async (): Promise<any> => {
         console.log('Fetched data:', data)
         return data
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            if (error.response?.status === 404) {
-                console.warn('No bookings found for this user')
-                return []
-            }
-            console.error('Axios error message:', error.message)
-            console.error('Response data:', error.response?.data)
-            throw new Error(`Could not fetch bookings: ${error.message}`)
-        } else {
-            console.error('Unexpected error:', error)
-            throw new Error('An unexpected error occurred')
-        }
+        console.error('Error fetching bookings:', error)
+        throw new Error('Could not fetch bookings')
     }
 }
 
