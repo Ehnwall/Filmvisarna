@@ -1,6 +1,4 @@
 import React from 'react'
-import { Container, Row, Col, Card, Stack, Accordion, Badge } from 'react-bootstrap'
-import { BsClock } from 'react-icons/bs'
 import { useGetOneMovie } from '../../utils/api/movies/useGetOneMovie'
 
 export function InfoMovieTrailer() {

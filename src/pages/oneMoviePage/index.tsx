@@ -1,4 +1,4 @@
-import { Container, Row, Col, Card, Stack, Accordion, Badge } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import Shows from '../../componets/onemovie/shows'
 import { InfoMovieTrailer } from '../../componets/onemovie/InfoMovieTrailer'
 import { InfoMovieDescription } from '../../componets/onemovie/InfoMovieDescription'
