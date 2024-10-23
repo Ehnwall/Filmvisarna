@@ -2,7 +2,7 @@ export type MOVIE = {
     id: number
     title: string
     durationMin: number
-    ageLimit: number
+    ageLimit: string
     description: Description
     trailerUrl: string
     posterUrl: string
@@ -16,6 +16,7 @@ type Description = {
     language: string[]
     year: number
 }
+
 export type SHOWS = {
     showId: number
     showTime: string
@@ -27,3 +28,4 @@ export type SHOWS = {
     cinemaName: string
     cinemaId: number
 }
+
