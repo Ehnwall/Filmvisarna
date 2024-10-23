@@ -15,7 +15,7 @@ const convertDuration = (duration: number) => {
 
 export default function RenderMovies() {
     const { data: movies, isLoading, isError } = useGetMovies()
-    const ages = ['6-12', '12-25', '25-65', 'Alla åldrar']
+    const ages = ['7', '11', '15', 'Alla åldrar']
     const [selectedAge, setSelectedAge] = useState('Alla åldrar')
 
     if (isLoading) {
@@ -34,13 +34,8 @@ export default function RenderMovies() {
         if (selectedAge === 'Alla åldrar') {
             return true
         }
-        return movie.ageLimit === selectedAge
+        return parseInt(movie.ageLimit) === parseInt(selectedAge)
     })
-
-    /*
-    const [minAge, maxAge] = selectedAge.split('-').map(Number)
-    ageLimit >= minAge && ageLimit <= maxAge
-    */
 
     return (
         <>
