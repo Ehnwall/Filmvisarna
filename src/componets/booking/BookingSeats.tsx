@@ -1,20 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form } from 'react-bootstrap'
 import { useGetSeats } from '../../utils/api/cinemas/useGetSeats'
+import { CINEMASEATS } from '@/utils/types/types'
 
 export default function BookingSeats() {
-    const { data: seats } = useGetSeats()
-    const rowSizes = [8, 9, 10, 10, 10, 10, 12, 13]
-    const seatArray = rowSizes.map(
-        (size) => new Array(size).fill(null).map(() => ({ booked: Math.random() < 0.3 })) // Randomly mark some seats as booked
-    )
+    const { data: seats = [] } = useGetSeats()
+
+    const seatsByRow = seats.reduce((acc: Record<number, CINEMASEATS[]>, seat: CINEMASEATS) => {
+        if (acc[seat.seatRow]) {
+            acc[seat.seatRow].push(seat)
+        } else {
+            acc[seat.seatRow] = [seat]
+        }
+        return acc
+    }, {})
+    const handleSeatChange = (seatNumber: number, seatRow: number) => {
+        console.log(`Clicked on seat: ${seatNumber} and row ${seatRow}`) // Log the clicked seat number
+    }
     return (
         <div className="seat-picker__container bg-body-tertiary py-5 rounded">
             <div className="mx-auto bg-light pb-4 mb-5 rounded-5 w-50 "></div>
-            {seatArray.map((row, rowIndex) => (
-                <div key={rowIndex} className="seat-row">
-                    {row.map((seat, seatIndex) => (
-                        <Form.Check key={seatIndex} type="checkbox" disabled={seat.booked} />
+            {Object.entries(seatsByRow).map(([row, seatsInRow]) => (
+                <div key={row} className="seat-row g-3">
+                    {seatsInRow.map((seat) => (
+                        <Form.Check
+                            key={seat.seatNumber}
+                            type="checkbox"
+                            onChange={() => handleSeatChange(seat.seatNumber, seat.seatRow)}
+                        />
                     ))}
                 </div>
             ))}

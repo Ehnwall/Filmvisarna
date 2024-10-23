@@ -3,7 +3,7 @@ import { BsCalendar, BsClock, BsPin, BsCreditCard2Back } from 'react-icons/bs'
 import { useGetShow } from '../../utils/api/booking/useGetShow'
 import ErrorBooking from './ErrorBooking'
 import LoadingBooking from './LoadingBooking'
-import BookingSeats from '../../componets/booking/bookingSeats'
+import BookingSeats from '../../componets/booking/BookingSeats'
 
 export default function BookingPage() {
     const getShow = useGetShow()
@@ -109,8 +109,10 @@ export default function BookingPage() {
                         </Card>
                     </Col>
                 </Row>
-                <div className="seat-picker rounded-3 overflow-auto my-5"></div>
-                <BookingSeats />
+                <div className="seat-picker rounded-3 overflow-auto my-5">
+                    <BookingSeats />
+                </div>
+
                 <Row className="gy-4">
                     <Card>
                         <Card.Header className="bg-primary ">
