@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { Form } from 'react-bootstrap'
 import { useGetSeats } from '../../utils/api/cinemas/useGetSeats'
-import { CINEMASEATS } from '../../utils/types/types'
+import { CINEMASEATS, SHOWS } from '../../utils/types/types'
 
-export default function BookingSeats() {
-    const { data: seats = [] } = useGetSeats()
+export default function BookingSeats({ show }: { show: SHOWS }) {
+    const cinemaId = show.cinemaId
+
+    const { data: seats = [] } = useGetSeats(cinemaId)
 
     const seatsByRow = seats.reduce((row: Record<number, CINEMASEATS[]>, seat: CINEMASEATS) => {
         if (row[seat.seatRow]) {
@@ -15,7 +17,6 @@ export default function BookingSeats() {
         return row
     }, {})
 
-    console.log(seatsByRow)
     const handleSeatChange = (seatNumber: number, seatRow: number) => {
         console.log(`Clicked on seat: ${seatNumber} and row ${seatRow}`)
     }

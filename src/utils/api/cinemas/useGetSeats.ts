@@ -4,9 +4,9 @@ import { CINEMASEATS } from '../../types/types'
 
 const SeatsQueryKeys = ['Seats']
 
-export const useGetSeats = () => {
+export const useGetSeats = (cinemaId: number) => {
     const fetchSeats = async (): Promise<CINEMASEATS[]> => {
-        const resp = await axios.get(`/api/cinemas/1/seats`)
+        const resp = await axios.get(`/api/cinemas/${cinemaId}/seats`)
         return resp.data
     }
 
