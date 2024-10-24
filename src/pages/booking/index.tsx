@@ -1,19 +1,60 @@
-import { Container, Row, Col, Image, Button, ButtonGroup, Card, Form } from 'react-bootstrap'
+import { useEffect, useState } from 'react'
+import { Container, Row, Col, Image, Button, ButtonGroup, Card, Form, Stack } from 'react-bootstrap'
 import { BsCalendar, BsClock, BsPin, BsCreditCard2Back } from 'react-icons/bs'
 import { useGetShow } from '../../utils/api/booking/useGetShow'
 import { useGetTickets } from '../../utils/api/booking/useGetTicket'
-import TicketTypeSelector from '../../componets/TicketTypeSelector'
 import ErrorBooking from './ErrorBooking'
 import LoadingBooking from './LoadingBooking'
+
+interface TicketAmount {
+    ticketId: number
+    amount: number
+}
 
 export default function BookingPage() {
     const { data: show, isLoading: isShowLoading, isError: isShowError } = useGetShow()
     const { data: tickets, isLoading: isTicketsLoading, isError: isTicketsError } = useGetTickets()
-    if (isShowLoading) return <LoadingBooking />
-    if (isShowError) return <ErrorBooking />
-    if (isTicketsLoading) return <LoadingBooking />
-    if (isTicketsError) return <ErrorBooking />
-    console.log(tickets)
+
+    if (isShowLoading || isTicketsLoading) return <LoadingBooking />
+    if (isShowError || isTicketsError) return <ErrorBooking />
+
+    if (!tickets) {
+        console.error('Tickets data is undefined')
+        return <ErrorBooking />
+    }
+    // const ticketAmount = tickets.map((ticket) => ({
+    //     ticketId: ticket.Id,
+    //     amount: 0,
+    // }))
+    const [amount, setAmount] = useState<TicketAmount[]>([])
+
+    const handleIncrease = (ticketId: number) => {
+        setAmount((prev) =>
+            prev.map((ticket) => (ticket.ticketId === ticketId ? { ...ticket, amount: ticket.amount + 1 } : ticket))
+        )
+    }
+    useEffect(() => {
+        if (tickets) {
+            const ticketAmount = tickets.map((ticket) => ({
+                ticketId: ticket.Id,
+                amount: 0,
+            }))
+            setAmount(ticketAmount)
+        }
+    }, [tickets])
+    const handleDecrease = (ticketId: number) => {
+        setAmount((prev) =>
+            prev.map((ticket) =>
+                ticket.ticketId === ticketId && ticket.amount > 0 ? { ...ticket, amount: ticket.amount - 1 } : ticket
+            )
+        )
+    }
+
+    const total = amount.reduce((acc, ticket) => {
+        const foundTicketType = tickets.find((t) => t.Id === ticket.ticketId)
+        return acc + (foundTicketType ? foundTicketType.price * ticket.amount : 0)
+    }, 0)
+
     const rowSizes = [8, 9, 10, 10, 10, 10, 12, 13]
     const seatArray = rowSizes.map(
         (size) => new Array(size).fill(null).map(() => ({ booked: Math.random() < 0.3 })) // Randomly mark some seats as booked
@@ -51,7 +92,64 @@ export default function BookingPage() {
                                 </Card>{' '}
                             </Col>
                             <Col xs={12}>
-                                <TicketTypeSelector ticketType={tickets} />
+                                <div>
+                                    <Card>
+                                        <Card.Header className="bg-primary">
+                                            <h3 className="mb-0 text-dark">Antal Biljetter</h3>
+                                        </Card.Header>
+                                        <Card.Body>
+                                            <Stack gap={2}>
+                                                {tickets.map((ticket, index) => (
+                                                    <Row key={ticket.ticketType} className="">
+                                                        <Col sm="2" xs="8" className="d-flex gap-1">
+                                                            <div className="mb-2">{ticket.ticketType} </div>
+                                                        </Col>
+                                                        <Col sm="2" xs="4">
+                                                            <div className="d-flex justify-content-center">
+                                                                {ticket.price} kr
+                                                            </div>
+                                                        </Col>
+                                                        <Col sm="3">
+                                                            <ButtonGroup className="btn-group-sm d-flex mb-4">
+                                                                <Button
+                                                                    className="btn-outline-primary px-3  btn-ticket-counter btn-ticket-counter-minus
+                                            "
+                                                                    variant="outline-primary"
+                                                                    onClick={() => handleDecrease(ticket.Id)}
+                                                                >
+                                                                    -
+                                                                </Button>
+                                                                <Button
+                                                                    className="bg-body-tertiary pb-2"
+                                                                    variant="outline-primary px-3"
+                                                                >
+                                                                    {
+                                                                        amount.find(
+                                                                            (ticketTypeChoosen) =>
+                                                                                ticketTypeChoosen.ticketId === ticket.Id
+                                                                        )?.amount
+                                                                    }
+                                                                </Button>
+                                                                <Button
+                                                                    className="btn-outline-primary px-3  btn-ticket-counter
+                                            "
+                                                                    variant="outline-primary px-3"
+                                                                    onClick={() => handleIncrease(ticket.Id)}
+                                                                >
+                                                                    +
+                                                                </Button>
+                                                            </ButtonGroup>
+                                                        </Col>
+                                                    </Row>
+                                                ))}
+                                                <div className="fw-bold" style={{ minWidth: '100px' }}>
+                                                    <BsCreditCard2Back size={18} className="text-primary me-2" />
+                                                    Total: {total} kr
+                                                </div>
+                                            </Stack>
+                                        </Card.Body>
+                                    </Card>
+                                </div>
                             </Col>
                         </Row>
                     </Col>
