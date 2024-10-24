@@ -39,3 +39,33 @@ html {
 .custom-box-shadow {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
 }
+
+/*i have some styles for shows date picker funktion*/
+
+/* Detta används alltid */
+.border {
+    border: 2px solid #ccc;
+}
+
+.card-dates {
+    border-radius: 5px;
+}
+/* Om datumet är i det förflutna */
+
+.bg-date-picker {
+    background-color: #a7a5a5;
+    color: black;
+}
+
+.text-muted {
+    color: #a1a1a1;
+}
+
+.hoverable {
+    transition: transform 0.3s;
+}
+
+.hoverable:hover {
+    transform: scale(1.03);
+    background-color: #e0e0e0;
+}
