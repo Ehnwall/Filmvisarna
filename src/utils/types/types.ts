@@ -7,6 +7,15 @@ export type MOVIE = {
     trailerUrl: string
     posterUrl: string
 }
+export type SIGNIN = {
+    email: string
+    password: string
+}
+export type SIGNINRESPONSE = {
+    bearer: string
+    firstName: string
+    lastName: string
+}
 type Description = {
     director: string
     cast: string[]
@@ -16,7 +25,6 @@ type Description = {
     language: string[]
     year: number
 }
-
 export type SHOWS = {
     showId: number
     showTime: string
