@@ -29,9 +29,9 @@ const Footer = () => {
                                     </Link>
                                 </li>
                                 <li className="mb-2">
-                                    <a className="btn btn-link p-0" href="" target="_blank">
+                                    <Link className="btn btn-link p-0" to="/innehall/Kundservice">
                                         Kundservice
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>
