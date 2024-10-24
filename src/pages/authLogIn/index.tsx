@@ -6,11 +6,6 @@ import { useAuth } from '../../context/authContext'
 export default function Login() {
     const navigate = useNavigate()
     const { user, token, signIn } = useAuth()
-    useEffect(() => {
-        if (user || token) {
-            navigate('/')
-        }
-    }, [user, token, navigate])
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -21,11 +16,19 @@ export default function Login() {
             signIn.mutate({ email, password })
         }
     }
+
+    useEffect(() => {
+        if (user || token) {
+            navigate('/medlem')
+        }
+    }, [user, token, navigate])
+
     useEffect(() => {
         if (signIn && signIn.isSuccess) {
-            navigate('/')
+            navigate('/medlem')
         }
     }, [signIn, navigate])
+
     return (
         <Container className="vh-100">
             <Row className="d-flex justify-content-center align-items-center vh-100">
@@ -62,18 +65,18 @@ export default function Login() {
                                     </Button>
                                 </div>
                                 <div className="d-flex justify-content-end ms-auto">
-                                    <a className="btn btn-link p-0" href="/forgot-password">
-                                        Glömt Lösenord?
+                                    <a className="btn btn-link p-0" href="/registera">
+                                        Ny här? Bli medlem
                                     </a>
                                 </div>
                             </Stack>
-                            <Row className="mt-3">
+                            {/* <Row className="mt-3">
                                 <Col>
-                                    <a className="btn btn-link p-0" href="/register">
-                                        Ny här? Bli medlem
+                                    <a className="btn btn-link p-0" href="/forgot-password">
+                                        Glömt Lösenord?
                                     </a>
                                 </Col>
-                            </Row>
+                            </Row> */}
                         </Form>
                     </div>
                 </Col>

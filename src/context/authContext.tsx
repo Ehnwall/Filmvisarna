@@ -16,7 +16,7 @@ const AuthContext = createContext<AuthContextType>({
     signOut: () => {},
 })
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<{ firstName: string; lastName: string } | null>(null)
     const [token, setToken] = useState<string | null>(null)
     const signIn = useSignIn()
