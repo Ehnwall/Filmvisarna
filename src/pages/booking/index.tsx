@@ -29,7 +29,7 @@ export default function BookingPage() {
         },
         {
             ticketId: 3,
-            amount: 1,
+            amount: 2,
         },
     ]
 

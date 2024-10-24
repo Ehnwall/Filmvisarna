@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap'
 import { useGetSeats } from '../../utils/api/cinemas/useGetSeats'
 import { CINEMASEATS, SHOWS } from '../../utils/types/types'
-import { TICKETS } from '@/pages/booking'
+import { TICKETS } from '../../pages/booking'
 
 export default function BookingSeats({ show, tickets }: { show: SHOWS; tickets: TICKETS }) {
+    const [seatIdArray, setSeatIdArray] = useState<number[]>([])
+    const [selectedSeats, setSelectedSeats] = useState<{ seatNumber: number }[]>([])
+
     const cinemaId = show.cinemaId
 
     const result = tickets.reduce(function (acc, obj) {
@@ -21,13 +24,11 @@ export default function BookingSeats({ show, tickets }: { show: SHOWS; tickets: 
         }
         return row
     }, {})
-    const [selectedRow, setSelectedRow] = useState<{ seatRow: number }[]>([])
-    const [selectedSeats, setSelectedSeats] = useState<{ seatNumber: number }[]>([])
 
     const seatClicked = selectedSeats.length
 
-    const handleSeatChange = (seatNumber: number, seatRow: number, isChecked: boolean) => {
-        console.log(`selected seats! seatNumber: ${seatNumber} and SeatRow: ${seatRow} `)
+    const handleSeatChange = (seatNumber: number, isChecked: boolean, seatId: number) => {
+        console.log(`selected seats! seatNumber: ${seatId}`)
         setSelectedSeats((prev) => {
             if (isChecked) {
                 return [...prev, { seatNumber }]
@@ -36,22 +37,30 @@ export default function BookingSeats({ show, tickets }: { show: SHOWS; tickets: 
             }
         })
 
-        setSelectedRow((prev) => {
+        setSeatIdArray((prev) => {
             if (isChecked) {
-                return [...prev, { seatRow }]
+                return [...prev, seatId]
             } else {
-                return prev.filter((seat) => seat.seatRow !== seatRow)
+                return prev.filter((seat) => seatId !== seatId)
             }
         })
     }
 
-    useEffect(() => {
-        const totalSeats = selectedSeats.map((seat, index) => {
-            return { seat: seat, row: selectedRow[index] }
-        })
+    let ticketsCopy = JSON.parse(JSON.stringify(tickets))
+    let toReqBody = []
 
-        console.log(totalSeats)
-    }, [selectedRow, selectedSeats])
+    for (let seatId of seatIdArray) {
+        let obj = { seatId }
+        for (let ticket of ticketsCopy) {
+            if (ticket.amount > 0) {
+                obj.ticketId = ticket.ticketId
+                ticket.amount--
+                break
+            }
+        }
+        toReqBody.push(obj)
+    }
+    console.log(toReqBody)
 
     return (
         <div className="seat-picker__container bg-body-tertiary py-5 rounded">
@@ -68,7 +77,7 @@ export default function BookingSeats({ show, tickets }: { show: SHOWS; tickets: 
                                 key={seat.seatNumber}
                                 type="checkbox"
                                 className={isInactive ? 'inactive' : ''}
-                                onChange={(e) => handleSeatChange(seat.seatNumber, seat.seatRow, e.target.checked)}
+                                onChange={(e) => handleSeatChange(seat.seatNumber, e.target.checked, seat.Id)}
                                 disabled={isInactive && checkSelectedSeats}
                             />
                         )
