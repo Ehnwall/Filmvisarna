@@ -6,14 +6,16 @@ import { CINEMASEATS } from '../../utils/types/types'
 export default function BookingSeats() {
     const { data: seats = [] } = useGetSeats()
 
-    const seatsByRow = seats.reduce((acc: Record<number, CINEMASEATS[]>, seat: CINEMASEATS) => {
-        if (acc[seat.seatRow]) {
-            acc[seat.seatRow].push(seat)
+    const seatsByRow = seats.reduce((row: Record<number, CINEMASEATS[]>, seat: CINEMASEATS) => {
+        if (row[seat.seatRow]) {
+            row[seat.seatRow].push(seat)
         } else {
-            acc[seat.seatRow] = [seat]
+            row[seat.seatRow] = [seat]
         }
-        return acc
+        return row
     }, {})
+
+    console.log(seatsByRow)
     const handleSeatChange = (seatNumber: number, seatRow: number) => {
         console.log(`Clicked on seat: ${seatNumber} and row ${seatRow}`)
     }
