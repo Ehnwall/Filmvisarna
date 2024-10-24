@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import ContactUs from './ContacUs'
-import OurCompany from './OurCompany'
+import OurCompany from '../OurCompany'
 import CustomerService from './CustomerService'
 import { Container } from 'react-bootstrap'
 

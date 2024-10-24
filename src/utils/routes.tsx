@@ -1,5 +1,5 @@
 // pages/routes
-import ContentFromFooter from '../componets/footer/ContentFromFooter'
+import ContentFromFooter from '../componets/footer/footerInformation/ContentFromFooter'
 import MemberPage from '../pages/memberPage/index'
 import StartPage from '../pages/startPage/StartPage'
 import SignIn from './api/auth/testAuth'
