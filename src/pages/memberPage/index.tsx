@@ -3,8 +3,12 @@ import { Container, Card, Row, Col, Spinner } from 'react-bootstrap'
 import { USERBOOKING } from '@/utils/types/types'
 import MemberBookingCard from '../../componets/member/memberBookingCard'
 import { BsTicket } from 'react-icons/bs'
-
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../context/authContext'
 const MemberPage = () => {
+    const navigate = useNavigate()
+    const { token } = useAuth()
     const { data: bookings = [], isLoading, error } = useGetBookings()
 
     const splitBookings = (bookings: USERBOOKING[]) => {
@@ -15,6 +19,11 @@ const MemberPage = () => {
     }
 
     const { currentBookings, pastBookings } = splitBookings(bookings)
+    useEffect(() => {
+        if (!token) {
+            navigate('/logga-in')
+        }
+    }, [token, navigate])
 
     return (
         <Container className="py-5">
