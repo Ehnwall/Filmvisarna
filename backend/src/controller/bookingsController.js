@@ -5,11 +5,7 @@ const getAllBookings = (req, res) => {
     const { email, role } = req.user
     try {
         const bookings = bookingsService.getBookings(email, role)
-        if (bookings.length > 0) {
-            res.status(200).json(bookings)
-        } else {
-            res.status(404).json({ msg: 'No bookings found for this user' })
-        }
+        res.status(200).json(bookings)
     } catch (error) {
         console.error('Error fetching bookings:', error)
         res.status(500).json({ error: 'Something went wrong' })
