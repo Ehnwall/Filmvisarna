@@ -4,12 +4,34 @@ import { useGetShow } from '../../utils/api/booking/useGetShow'
 import ErrorBooking from './ErrorBooking'
 import LoadingBooking from './LoadingBooking'
 import BookingSeats from '../../componets/booking/BookingSeats'
+import { useState } from 'react'
+
+type Ticket = {
+    ticketId: number
+    amount: number
+}
+export type TICKETS = Ticket[]
 
 export default function BookingPage() {
     const getShow = useGetShow()
     if (getShow.isLoading) return <LoadingBooking />
     if (getShow.isError) return <ErrorBooking />
     const show = getShow.data
+
+    const tickets: TICKETS = [
+        {
+            ticketId: 1,
+            amount: 2,
+        },
+        {
+            ticketId: 2,
+            amount: 2,
+        },
+        {
+            ticketId: 3,
+            amount: 1,
+        },
+    ]
 
     return (
         <>
@@ -109,7 +131,9 @@ export default function BookingPage() {
                         </Card>
                     </Col>
                 </Row>
-                <div className="seat-picker rounded-3 overflow-auto my-5">{show && <BookingSeats show={show} />}</div>
+                <div className="seat-picker rounded-3 overflow-auto my-5">
+                    {show && <BookingSeats show={show} tickets={tickets} />}
+                </div>
 
                 <Row className="gy-4">
                     <Card>
