@@ -1,38 +1,44 @@
-import { Container, Row, Col, Image, Button, ButtonGroup, Card, Form } from 'react-bootstrap'
+import { useEffect, useState } from 'react'
+import { Container, Row, Col, Image, Button, ButtonGroup, Card, Form, Stack } from 'react-bootstrap'
 import { BsCalendar, BsClock, BsPin, BsCreditCard2Back } from 'react-icons/bs'
 import { useGetShow } from '../../utils/api/booking/useGetShow'
+import { useGetTickets } from '../../utils/api/booking/useGetTicket'
 import ErrorBooking from './ErrorBooking'
 import LoadingBooking from './LoadingBooking'
+import TicketTypeSelector from '../../componets/TicketTypeSelector'
+import { TICKETAMOUNT } from '@/utils/types/types'
 import BookingSeats from '../../componets/booking/BookingSeats'
-import { useState } from 'react'
-
-type Ticket = {
-    ticketId: number
-    amount: number
-}
-export type TICKETS = Ticket[]
 
 export default function BookingPage() {
-    const getShow = useGetShow()
-    if (getShow.isLoading) return <LoadingBooking />
-    if (getShow.isError) return <ErrorBooking />
-    const show = getShow.data
+    const { data: show, isLoading: isShowLoading, isError: isShowError } = useGetShow()
+    const { data: tickets, isLoading: isTicketsLoading, isError: isTicketsError } = useGetTickets()
 
-    const tickets: TICKETS = [
-        {
-            ticketId: 1,
-            amount: 2,
-        },
-        {
-            ticketId: 2,
-            amount: 2,
-        },
-        {
-            ticketId: 3,
-            amount: 2,
-        },
-    ]
+    // if (isShowLoading) return <LoadingBooking />
 
+    // if (isShowLoading || isTicketsLoading) return <LoadingBooking />
+    // if (isShowError || isTicketsError) return <ErrorBooking />
+
+    // if (!tickets) {
+    //     console.error('Tickets data is undefined')
+    //     return <ErrorBooking />
+    // }
+
+    const [amount, setAmount] = useState<TICKETAMOUNT[]>([])
+
+    useEffect(() => {
+        if (tickets) {
+            const initialAmounts = tickets.map((ticket) => ({
+                ticketId: ticket.Id,
+                amount: 0,
+            }))
+            setAmount(initialAmounts)
+        }
+    }, [tickets])
+
+    const rowSizes = [8, 9, 10, 10, 10, 10, 12, 13]
+    const seatArray = rowSizes.map(
+        (size) => new Array(size).fill(null).map(() => ({ booked: Math.random() < 0.3 })) // Randomly mark some seats as booked
+    )
     return (
         <>
             <Container className="py-4">
@@ -63,65 +69,10 @@ export default function BookingPage() {
                                             <span className="me-2">{show?.cinemaName}</span>
                                         </div>
                                     </Card.Body>
-                                </Card>
-                                0{' '}
+                                </Card>{' '}
                             </Col>
                             <Col xs={12}>
-                                <Card>
-                                    <Card.Header className="bg-primary ">
-                                        <h3 className="mb-0 text-dark">Antal Biljetter</h3>
-                                    </Card.Header>
-                                    <Card.Body xs={4}>
-                                        <Row className="g-0">
-                                            <Col xs={12} lg={8} className="d-flex justify-content-left mb-3">
-                                                <div className="fw-bold" style={{ minWidth: '100px' }}>
-                                                    Barn
-                                                </div>
-                                                <div className="text-center">80 kr</div>
-                                                <ButtonGroup className="btn-group-sm ms-5">
-                                                    <Button variant="outline-primary px-3">-</Button>
-                                                    <Button
-                                                        className="bg-body-tertiary pb-2"
-                                                        variant="outline-primary px-3"
-                                                    >
-                                                        0
-                                                    </Button>
-                                                    <Button variant="outline-primary px-3">+</Button>
-                                                </ButtonGroup>
-                                            </Col>
-                                            <Col xs={12} lg={8} className="d-flex justify-content-left mb-3">
-                                                <div className="fw-bold" style={{ minWidth: '91px' }}>
-                                                    Pensionär
-                                                </div>
-                                                <div className="text-center ">120 kr</div>
-                                                <ButtonGroup className="btn-group-sm ms-5">
-                                                    <Button variant="outline-primary px-3">-</Button>
-                                                    <Button className="bg-body-tertiary" variant="outline-primary px-3">
-                                                        0
-                                                    </Button>
-                                                    <Button variant="outline-primary px-3">+</Button>
-                                                </ButtonGroup>
-                                            </Col>
-                                            <Col xs={12} lg={8} className="d-flex justify-content-left mb-3">
-                                                <div className="fw-bold" style={{ minWidth: '83px' }}>
-                                                    Vuxen
-                                                </div>
-                                                <div className="text-center ms-2">140 kr</div>
-                                                <ButtonGroup className="btn-group-sm ms-5">
-                                                    <Button variant="outline-primary px-3">-</Button>
-                                                    <Button className="bg-body-tertiary" variant="outline-primary px-3">
-                                                        0
-                                                    </Button>
-                                                    <Button variant="outline-primary px-3">+</Button>
-                                                </ButtonGroup>
-                                            </Col>
-                                            <div className="fw-bold" style={{ minWidth: '83px' }}>
-                                                <BsCreditCard2Back size={18} className="text-primary me-2" />
-                                                Total: 120 kr
-                                            </div>
-                                        </Row>
-                                    </Card.Body>
-                                </Card>
+                                <TicketTypeSelector ticketType={tickets || []} amount={amount} setAmount={setAmount} />
                             </Col>
                         </Row>
                     </Col>
