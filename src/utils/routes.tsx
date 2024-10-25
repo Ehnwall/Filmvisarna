@@ -9,7 +9,6 @@ import IndividualMovie from '../pages/oneMoviePage'
 export default [
     { path: '/', element: <StartPage />, menuLabel: 'Hem' },
     { path: '/medlem', element: <MemberPage />, menuLabel: 'Medlem' },
-    { path: '/sign-in', element: <SignIn />, menuLabel: 'Logga in' },
     { path: '/innehall/:content', element: <ContentFromFooter /> },
     { path: '/logga-in', element: <Login /> },
     { path: '/film/:movieId', element: <IndividualMovie /> },
