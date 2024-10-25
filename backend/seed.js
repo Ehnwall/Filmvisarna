@@ -178,6 +178,57 @@ const movies = [
             'https://d2iltjk184xms5.cloudfront.net/uploads/photo/file/268456/small_ba5f7a28f1a9e3889efaba9b76551d5f-504236.jpg',
         trailerUrl: 'FBaGXDRNnQI',
     },
+    {
+        title: 'Frankenweenie',
+        durationMin: 87,
+        ageLimit: 11,
+        description: {
+            director: ['Tim Burton'],
+            cast: ['Catherine O Hara', 'Martin Short', 'Martin Landau', 'Charlie Tahan'],
+            synopsis:
+                'När en pojkes älskade hund plötsligt går bort försöker han återuppliva djuret genom ett kraftfullt vetenskapligt experiment.',
+            genre: ['Animation', 'Familj', 'Drama', 'Komedi', 'Thriller'],
+            speech: ['Svenska', 'Engelska'],
+            language: ['Engelska', 'Svenska'],
+            year: 2012,
+        },
+        posterUrl: 'https://image.tmdb.org/t/p/original/vZULuYUKxe4iQNOacgcZlvz81jz.jpg',
+        trailerUrl: 'xrxEQPBbkjY',
+    },
+    {
+        title: 'Toy Story',
+        durationMin: 81,
+        ageLimit: 7,
+        description: {
+            director: ['John Lasseter'],
+            cast: ['Tom Hanks', 'Tim Allen', 'Don Rickles', 'Jim Varney', 'Wallace Shawn'],
+            synopsis:
+                'En cowboydocka känner sig djupt hotad och svartsjuk när en ny rymdactionfigur tar hans plats som den främsta leksaken i en pojkes sovrum.',
+            genre: ['Animation', 'Familj', 'Drama', 'Komedi', 'Fantasi'],
+            speech: ['Svenska', 'Engelska'],
+            language: ['Engelska', 'Svenska'],
+            year: 1995,
+        },
+        posterUrl: 'https://m.media-amazon.com/images/I/71aBLaC4TzL._AC_UF894,1000_QL80_.jpg',
+        trailerUrl: 'CxwTLktovTU',
+    },
+    {
+        title: 'Nightmare Before Christmas',
+        durationMin: 76,
+        ageLimit: 11,
+        description: {
+            director: ['Henry Selick'],
+            cast: ['Danny Elfman', 'Chris Sarandon', 'Catherine O Hara', 'William Hickey'],
+            synopsis:
+                'Jack Skellington, kungen av Halloween Town, upptäcker Christmas Town, men hans försök att föra julen till sitt hem orsakar förvirring.',
+            genre: ['Animation', 'Familj', 'Musikal', 'Fantasi'],
+            speech: ['Svenska', 'Engelska'],
+            language: ['Engelska', 'Svenska'],
+            year: 1993,
+        },
+        posterUrl: 'https://upload.wikimedia.org/wikipedia/en/9/9a/The_nightmare_before_christmas_poster.jpg',
+        trailerUrl: 'Y0xheV_0AKg',
+    },
 ]
 
 const movieQuery = `INSERT INTO
@@ -292,6 +343,8 @@ INSERT INTO shows (movieId, time, cinemaId) VALUES
     (2, '${getLocalISOString(1, '18', '30')}', 2),
     (1, '${getLocalISOString(2, '16', '30')}', 1),
     (3, '${getLocalISOString(2, '13', '30')}', 2),
+    (5, '${getLocalISOString(2, '18', '30')}', 1),
+    (10, '${getLocalISOString(2, '16', '30')}', 2),
     (4, '${getLocalISOString(2, '18', '30')}', 2);
 `
 
