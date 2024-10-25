@@ -1,11 +1,13 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { useSignIn } from '../utils/api/auth/useSignIn'
 import { UseMutationResult } from '@tanstack/react-query'
-import { SIGNIN, SIGNINRESPONSE } from '../utils/types/types'
+import { SIGNIN, SIGNINRESPONSE, SIGNUP, SIGNUPRESPONSE } from '../utils/types/types'
+import { useSignUp } from '../utils/api/auth/useSignUp'
 type AuthContextType = {
     user: { firstName: string; lastName: string } | null
     token: string | null
     signIn: UseMutationResult<SIGNINRESPONSE, Error, SIGNIN> | null
+    signUp: UseMutationResult<SIGNUPRESPONSE, Error, SIGNUP> | null
     signOut: () => void
 }
 
@@ -13,22 +15,19 @@ const AuthContext = createContext<AuthContextType>({
     user: null,
     token: null,
     signIn: null,
+    signUp: null,
     signOut: () => {},
 })
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const [user, setUser] = useState<{ firstName: string; lastName: string } | null>(null)
-    const [token, setToken] = useState<string | null>(null)
+    const [user, setUser] = useState<{ firstName: string; lastName: string } | null>(
+        sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user') as string) : null
+    )
+    const [token, setToken] = useState<string | null>(
+        sessionStorage.getItem('token') ? JSON.parse(sessionStorage.getItem('token') as string).token : null
+    )
     const signIn = useSignIn()
-
-    useEffect(() => {
-        const storedToken = sessionStorage.getItem('token')
-        const storedUser = sessionStorage.getItem('user')
-        if (storedToken && storedUser) {
-            setToken(JSON.parse(storedToken).token)
-            setUser(JSON.parse(storedUser))
-        }
-    }, [])
+    const signUp = useSignUp()
 
     const handleSignOut = () => {
         sessionStorage.removeItem('token')
@@ -42,6 +41,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             user,
             token,
             signIn,
+            signUp,
             signOut: handleSignOut,
         }),
         [user, token, signIn]

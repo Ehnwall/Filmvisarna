@@ -43,6 +43,16 @@ export type SIGNINRESPONSE = {
     firstName: string
     lastName: string
 }
+export type SIGNUP = {
+    firstName: string
+    lastName: string
+    email: string
+    password: string
+}
+export type SIGNUPRESPONSE = {
+    changes: string
+    lastInsertRowid: string
+}
 type Description = {
     director: string
     cast: string[]
@@ -63,4 +73,3 @@ export type SHOWS = {
     cinemaName: string
     cinemaId: number
 }
-
