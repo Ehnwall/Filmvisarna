@@ -32,3 +32,7 @@ export type TICKETS = {
     ticketType: string
     price: number
 }
+export type TICKETAMOUNT = {
+    ticketId: number
+    amount: number
+}
