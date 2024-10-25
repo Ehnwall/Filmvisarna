@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap'
 import { useGetSeats } from '../../utils/api/cinemas/useGetSeats'
-import { CINEMASEATS, SHOWS } from '../../utils/types/types'
-import { TICKETS } from '../../pages/booking'
+import { CINEMASEATS, SHOWS, TICKETAMOUNT } from '../../utils/types/types'
 
-export default function BookingSeats({ show, tickets }: { show: SHOWS; tickets: TICKETS }) {
+export default function BookingSeats({ show, tickets }: { show: SHOWS; tickets: TICKETAMOUNT[] }) {
     const [seatIdArray, setSeatIdArray] = useState<number[]>([])
-    const [selectedSeats, setSelectedSeats] = useState<{ seatNumber: number }[]>([])
-
     const cinemaId = show.cinemaId
 
-    const result = tickets.reduce(function (acc, obj) {
-        return acc + obj.amount
-    }, 0)
+    const result = tickets.reduce((acc, obj) => acc + obj.amount, 0)
 
     const { data: seats = [] } = useGetSeats(cinemaId)
 
@@ -25,23 +20,14 @@ export default function BookingSeats({ show, tickets }: { show: SHOWS; tickets: 
         return row
     }, {})
 
-    const seatClicked = selectedSeats.length
+    const seatClicked = seatIdArray.length
 
-    const handleSeatChange = (seatNumber: number, isChecked: boolean, seatId: number) => {
-        console.log(`selected seats! seatNumber: ${seatId}`)
-        setSelectedSeats((prev) => {
-            if (isChecked) {
-                return [...prev, { seatNumber }]
-            } else {
-                return prev.filter((seat) => seat.seatNumber !== seatNumber)
-            }
-        })
-
+    const handleSeatChange = (isChecked: boolean, seatId: number) => {
         setSeatIdArray((prev) => {
             if (isChecked) {
                 return [...prev, seatId]
             } else {
-                return prev.filter((seat) => seatId !== seatId)
+                return prev.filter((seat) => seat !== seatId)
             }
         })
     }
@@ -58,27 +44,39 @@ export default function BookingSeats({ show, tickets }: { show: SHOWS; tickets: 
                 break
             }
         }
+
         toReqBody.push(obj)
     }
-    console.log(toReqBody)
+
+    useEffect(() => {
+        const thisIsTheOne = toReqBody.filter((item) => item.ticketId !== undefined)
+
+        if (seatIdArray.length > thisIsTheOne.length) {
+            setSeatIdArray((seats) => {
+                return seats.slice(0, -1)
+            })
+        }
+    }, [toReqBody])
+
+    console.log('hejhej', toReqBody)
 
     return (
         <div className="seat-picker__container bg-body-tertiary py-5 rounded">
-            <div className="mx-auto bg-light pb-4 mb-5 rounded-5 w-50 "></div>
+            <div className="mx-auto bg-light pb-4 mb-5 rounded-5 w-50"></div>
             {Object.entries(seatsByRow).map(([row, seatsInRow]) => (
                 <div key={row} className="seat-row g-3">
                     {seatsInRow.map((seat) => {
-                        const checkSelectedSeats = !selectedSeats.some(
-                            (selected) => selected.seatNumber === seat.seatNumber
-                        )
-                        const isInactive = seatClicked >= result && checkSelectedSeats
+                        const isSeatSelected = seatIdArray.includes(seat.Id)
+                        const isInactive = seatClicked >= result && !isSeatSelected
+
                         return (
                             <Form.Check
-                                key={seat.seatNumber}
+                                key={seat.Id}
                                 type="checkbox"
                                 className={isInactive ? 'inactive' : ''}
-                                onChange={(e) => handleSeatChange(seat.seatNumber, e.target.checked, seat.Id)}
-                                disabled={isInactive && checkSelectedSeats}
+                                onChange={(e) => handleSeatChange(e.target.checked, seat.Id)}
+                                checked={isSeatSelected}
+                                disabled={isInactive}
                             />
                         )
                     })}

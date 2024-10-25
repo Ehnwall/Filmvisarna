@@ -83,7 +83,7 @@ export default function BookingPage() {
                     </Col>
                 </Row>
                 <div className="seat-picker rounded-3 overflow-auto my-5">
-                    {show && <BookingSeats show={show} tickets={tickets} />}
+                    {show && <BookingSeats show={show} tickets={amount} />}
                 </div>
 
                 <Row className="gy-4">
