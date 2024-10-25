@@ -42,11 +42,11 @@ const MoviesWithCinnema = () => {
             return showDate.getTime() === date.getTime()
         })
     }
-    function disabledShowClass(...classes) {
+    function disabledShowClass(...classes: (string | boolean | undefined)[]): string {
         return classes.filter(Boolean).join(' ')
     }
 
-    const handleWeekSelect = (weeksAhead) => {
+    const handleWeekSelect = (weeksAhead: number) => {
         setSelectedWeek(weeksAhead)
         setSelectedDate(null)
     }
@@ -57,12 +57,12 @@ const MoviesWithCinnema = () => {
             <Container>
                 <Dropdown className="py-2">
                     <Dropdown.Toggle className="btn-filter mb-3 mt-2" variant="primary" id="dropdown-basic">
-                        Vecka {selectedWeek + 7} <BsArrowDown />
+                        Vecka {selectedWeek + 43} <BsArrowDown />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         {[...Array(4)].map((_, weekIndex) => (
                             <Dropdown.Item key={weekIndex} onClick={() => handleWeekSelect(weekIndex)}>
-                                Vecka {weekIndex + 7}
+                                Vecka {weekIndex + 43}
                             </Dropdown.Item>
                         ))}
                     </Dropdown.Menu>
