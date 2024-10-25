@@ -17,7 +17,7 @@ const MoviesWithCinnema = () => {
 
     const today = new Date()
 
-    const isPastDay = (date) => {
+    const isPastDay = (date: any) => {
         return date < today.setHours(0, 0, 0, 0)
     }
 
@@ -33,7 +33,7 @@ const MoviesWithCinnema = () => {
         return { start: startOfThisWeek, end: endOfThisWeek }
     }
 
-    const getShowsForDate = (date) => {
+    const getShowsForDate = (date: any) => {
         if (!date) return []
         return shows?.filter((show) => {
             const showDate = new Date(show.showTime)
@@ -84,17 +84,18 @@ const MoviesWithCinnema = () => {
                                 <Card
                                     className={disabledShowClass(
                                         'border card-dates',
-                                        isPast && 'bg-date-picker text-muted',
-                                        !isPast && 'hoverable',
-                                        isSelected && 'bg-primary text-white'
+                                        isPast ? 'bg-date-picker text-muted no-hover' : 'hoverable',
+                                        isSelected ? 'bg-primary text-white' : ''
                                     )}
                                     onClick={() => !isPast && setSelectedDate(dayOfWeek)}
                                     style={{ cursor: isPast ? 'not-allowed' : 'pointer' }}
                                 >
                                     <Card.Body>
-                                        <Card.Title>{formattedDate}</Card.Title>
-                                        <Badge className="py-2 d-inline-flex align-items-center" bg="secondary">
-                                            <BsCalendar className="me-2" /> vilken dag passar dig
+                                        <Card.Title className="text-capitalize">
+                                            {formattedDate.split(' ')[0]}
+                                        </Card.Title>
+                                        <Badge className="py-2 d-inline-flex align-items-center p-3" bg="secondary">
+                                            <BsCalendar className="me-2" /> {formattedDate.split(' ')[1]}
                                         </Badge>
                                     </Card.Body>
                                 </Card>
@@ -111,12 +112,18 @@ const MoviesWithCinnema = () => {
                         {lillaSalongenShows &&
                             getShowsForDate(selectedDate)?.map((show) => (
                                 <Card key={show.showId} className="border card-horizontal__scroll ">
-                                    <div className="overflow-hidden rounded-bottom-0 rounded">
-                                        <Card.Img variant="top" src={show.posterURL} alt={show.movieTitle} />
+                                    <div className="overflow-hidden rounded-bottom-0 rounded img-fluid w-100 h-75 fixed-image">
+                                        <Card.Img
+                                            variant="top"
+                                            src={show.posterURL}
+                                            alt={show.movieTitle}
+                                            className="w-100 h-100"
+                                        />
                                     </div>
                                     <Card.Body>
                                         <Card.Title>{show.movieTitle}</Card.Title>
-                                        <Card.Text>{show.genre.join(' ')}</Card.Text>
+                                        <Card.Text className="d-flex flex-wrap">{show.genre.join(' ')}</Card.Text>
+
                                         <Badge className="py-1 d-inline-flex align-items-center" bg="secondary">
                                             <BsClock className="me-2" />
                                             {new Date(show.showTime).toLocaleTimeString('sv-SE', {
@@ -154,8 +161,13 @@ const MoviesWithCinnema = () => {
                         {storaSalongenShows &&
                             getShowsForDate(selectedDate)?.map((show) => (
                                 <Card key={show.showId} className="border card-horizontal__scroll">
-                                    <div className="overflow-hidden rounded-bottom-0 rounded">
-                                        <Card.Img variant="top" src={show.posterURL} alt={show.movieTitle} />
+                                    <div className="overflow-hidden rounded-bottom-0 rounded img-fluid w-100 h-75 fixed-image">
+                                        <Card.Img
+                                            variant="top"
+                                            src={show.posterURL}
+                                            alt={show.movieTitle}
+                                            className="w-100 h-100"
+                                        />
                                     </div>
                                     <Card.Body>
                                         <Card.Title>{show.movieTitle}</Card.Title>
