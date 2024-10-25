@@ -126,6 +126,58 @@ const movies = [
         posterUrl: 'https://media.ginza.se/Images/item_img_1200/18708.jpg',
         trailerUrl: 'yJMLO4oTmww',
     },
+    {
+        title: 'Joker',
+        durationMin: 122,
+        ageLimit: 15,
+        description: {
+            director: ['Todd Phillips'],
+            cast: ['Joaquin Phoenix', 'Robert De Niro', 'Zazie Beetz', 'Frances Conroy'],
+            synopsis:
+                'Arthur Fleck, en festclown och misslyckad ståuppkomiker, lever ett fattigt liv tillsammans med sin sjuka mor. När samhället stöter bort honom och kallar honom en "freak" bestämmer han sig för att omfamna ett liv i kaos i Gotham City.',
+            genre: ['Brott', 'Thriller', 'Drama', 'Tragedi'],
+            speech: ['Svenska', 'Engelska'],
+            language: ['Engelska', 'Svenska'],
+            year: 2019,
+        },
+        posterUrl: 'https://www.vintagemovieposters.co.uk/wp-content/uploads/2020/05/IMG_3693-scaled.jpeg',
+        trailerUrl: 't433PEQGErc',
+    },
+    {
+        title: 'Hotell Transylvanien',
+        durationMin: 91,
+        ageLimit: 7,
+        description: {
+            director: ['Genndy Tartakovsky'],
+            cast: ['Adam Sandler', 'Andy Samberg', 'Selena Gomez', 'Kevin James'],
+            synopsis:
+                'Dracula, som driver en lyxig resort långt bort från människovärlden, blir överbeskyddande när en pojke upptäcker resorten och blir förälskad i grevens tonårsdotter.',
+            genre: ['Animation', 'Komedi', 'Familj', 'Äventyr'],
+            speech: ['Svenska', 'Engelska'],
+            language: ['Engelska', 'Svenska'],
+            year: 2012,
+        },
+        posterUrl: 'https://m.media-amazon.com/images/I/71Fa5uSdoFL._AC_UF1000,1000_QL80_.jpg',
+        trailerUrl: 'q4RK3jY7AVk',
+    },
+    {
+        title: 'Landet för längesedan',
+        durationMin: 69,
+        ageLimit: 7,
+        description: {
+            director: ['Don Bluth'],
+            cast: ['Pat Hingle', 'Helen Shaver', 'Gabriel Damon', 'Kevin James'],
+            synopsis:
+                'En föräldralös brontosaurus slår sig ihop med andra unga dinosaurier för att återförenas med sina familjer i en dal.',
+            genre: ['Animation', 'Familj', 'Äventyr'],
+            speech: ['Svenska', 'Engelska'],
+            language: ['Engelska', 'Svenska'],
+            year: 1988,
+        },
+        posterUrl:
+            'https://d2iltjk184xms5.cloudfront.net/uploads/photo/file/268456/small_ba5f7a28f1a9e3889efaba9b76551d5f-504236.jpg',
+        trailerUrl: 'FBaGXDRNnQI',
+    },
 ]
 
 const movieQuery = `INSERT INTO
