@@ -1,12 +1,15 @@
 // pages/routes
+import MemberPage from '../pages/memberPage/index'
+import Login from '../pages/authLogIn'
 import BookingPage from '../pages/booking/index'
 import StartPage from '../pages/startPage/StartPage'
 import IndividualMovie from '../pages/oneMoviePage'
 
 export default [
     { path: '/', element: <StartPage />, menuLabel: 'Hem' },
+    { path: '/medlem', element: <MemberPage />, menuLabel: 'Medlem' },
+    { path: '/logga-in', element: <Login /> },
     { path: '/film/:movieId', element: <IndividualMovie /> },
-
     { path: '/boka-film/:showId', element: <BookingPage />, menuLabel: 'Boka' },
 ]
 
