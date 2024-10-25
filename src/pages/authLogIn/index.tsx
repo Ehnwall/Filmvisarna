@@ -23,12 +23,6 @@ export default function Login() {
         }
     }, [user, token, navigate])
 
-    useEffect(() => {
-        if (signIn && signIn.isSuccess) {
-            navigate('/medlem')
-        }
-    }, [signIn, navigate])
-
     return (
         <Container className="vh-100">
             <Row className="d-flex justify-content-center align-items-center vh-100">
