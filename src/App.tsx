@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import Footer from './componets/footer/footer'
 import { AuthProvider } from './context/authContext'
 
 export default function App() {
@@ -13,9 +14,11 @@ export default function App() {
         <>
             <QueryClientProvider client={queryClient}>
                 <AuthProvider>
+                <div>header</div>
                     <main>
                         <Outlet />
                     </main>
+                <Footer />
                 </AuthProvider>
             </QueryClientProvider>
         </>
