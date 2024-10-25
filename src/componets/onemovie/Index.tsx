@@ -1,0 +1,5 @@
+export * from '../onemovie/InfoMovieDescription'
+export * from '../onemovie/Shows'
+export * from '../onemovie/InfoMovieHeader'
+export * from '../onemovie/InfoMoviePoster'
+export * from '../onemovie/InfoMovieTrailer'

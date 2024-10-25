@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { BsArrowDown, BsArrowDownCircle, BsClock, BsCalendar, BsFilm } from 'react-icons/bs'
 import Badge from 'react-bootstrap/Badge'
-
+import RenderMovies from '../../componets/startPage/renderMovies'
 const movies = {
     avengers: {
         title: 'Avengers',
@@ -137,58 +137,7 @@ export default function StartPage() {
                     </Col>
                 </Row>
             </Container>
-
-            <Container className="py-4 " id="movies">
-                <div className="d-flex justify-content-center">
-                    <h3>Aktuella filmer på bio</h3>
-                </div>
-
-                <Stack className="mb-2 mt-3" direction="horizontal" gap={3}>
-                    <Dropdown>
-                        <Dropdown.Toggle
-                            className="btn-filter d-flex align-items-center"
-                            variant="primary"
-                            id="dropdown-basic"
-                        >
-                            Åldrar <BsArrowDown />
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            {ages.map((ages, index) => (
-                                <Dropdown.Item href="/" key={index}>
-                                    {ages}
-                                </Dropdown.Item>
-                            ))}
-                        </Dropdown.Menu>
-                    </Dropdown>
-                    <Button className="btn-filter" variant="secondary">
-                        Barnfilmer
-                    </Button>
-                </Stack>
-                <Row xs={2} xl={4} className="g-2 gy-2">
-                    {Object.values(movies).map((movie, idx) => (
-                        <Col key={idx}>
-                            <Card className="border h-100">
-                                <div className="overflow-hidden rounded-bottom-0 rounded h-100">
-                                    <Card.Img variant="top" src={movie.poster.stående} className="h-100" />
-                                </div>
-                                <Card.Body>
-                                    <Card.Title>{movie.title}</Card.Title>
-                                    <Card.Text>{movie.type}</Card.Text>
-                                    <Stack direction="horizontal" gap={2} className="mx-auto card-badge ">
-                                        <Badge bg="none" className="border">
-                                            {movie.timeHour} tim {movie.timeMin} min
-                                        </Badge>
-                                        <Badge bg="none" className="border">
-                                            Från {movie.age} År
-                                        </Badge>
-                                    </Stack>
-                                </Card.Body>
-                                <Card.Link className="stretched-link" href="/individual"></Card.Link>
-                            </Card>
-                        </Col>
-                    ))}
-                </Row>
-            </Container>
+            <RenderMovies />
             <Container className="py-5" id="book">
                 <h4 className="py-2 ps-2 bg-primary text-dark">Välj ett datum för bio </h4>
                 <Dropdown className="py-2">
