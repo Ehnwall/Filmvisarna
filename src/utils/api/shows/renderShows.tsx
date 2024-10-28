@@ -6,7 +6,7 @@ import { useState } from 'react'
 
 const MoviesWithCinnema = () => {
     const { data: shows, isLoading, error } = useGetShows()
-    const [selectedDate, setSelectedDate] = useState(null)
+    const [selectedDate, setSelectedDate] = useState(new Date())
     const [selectedWeek, setSelectedWeek] = useState(0)
 
     if (isLoading) return <div>Loading...</div>
@@ -21,7 +21,7 @@ const MoviesWithCinnema = () => {
         return date < today.setHours(0, 0, 0, 0)
     }
 
-    const getWeekInterval = (weeksAhead = 0) => {
+    const getWeekInterval = (weeksAhead: number) => {
         const today = new Date()
         const dayOfWeek = today.getDay()
         const dayDiff = (dayOfWeek + 6) % 7
@@ -48,7 +48,7 @@ const MoviesWithCinnema = () => {
 
     const handleWeekSelect = (weeksAhead: number) => {
         setSelectedWeek(weeksAhead)
-        setSelectedDate(null)
+        setSelectedDate(new Date())
     }
     const currentWeek = getWeekInterval(selectedWeek)
 
@@ -57,12 +57,12 @@ const MoviesWithCinnema = () => {
             <Container>
                 <Dropdown className="py-2">
                     <Dropdown.Toggle className="btn-filter mb-3 mt-2" variant="primary" id="dropdown-basic">
-                        Vecka {selectedWeek + 43} <BsArrowDown />
+                        Vecka {} <BsArrowDown />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         {[...Array(4)].map((_, weekIndex) => (
                             <Dropdown.Item key={weekIndex} onClick={() => handleWeekSelect(weekIndex)}>
-                                Vecka {weekIndex + 43}
+                                Vecka {weekIndex + 1}
                             </Dropdown.Item>
                         ))}
                     </Dropdown.Menu>
