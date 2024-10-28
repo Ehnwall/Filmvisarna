@@ -7,14 +7,15 @@ const moviesQueryKeys = {
 }
 
 export const useGetShows = () => {
-    const fetchShow = async (): Promise<SHOWS[]> => {
-        const { data } = await axios.get(`/api/shows`)
-        console.log(data)
+    const today = new Date()
 
+    const fetchShows = async (): Promise<SHOWS[]> => {
+        const { data } = await axios.get(`/api/shows?startDate=${today}&endDate=2025`)
         return data
     }
+
     return useQuery({
         queryKey: moviesQueryKeys.all,
-        queryFn: fetchShow,
+        queryFn: fetchShows,
     })
 }

@@ -70,7 +70,7 @@ const MoviesWithCinnema = () => {
 
                 <Row className="g-2">
                     {new Array(7).fill(null).map((_, index) => {
-                        const dayOfWeek = new Date(currentWeek.start)
+                        const dayOfWeek: any = new Date(currentWeek.start)
                         dayOfWeek.setDate(currentWeek.start.getDate() + index)
 
                         const options = { weekday: 'long', day: 'numeric', month: 'numeric' }
