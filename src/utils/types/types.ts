@@ -2,10 +2,46 @@ export type MOVIE = {
     id: number
     title: string
     durationMin: number
-    ageLimit: number
+    ageLimit: string
     description: Description
     trailerUrl: string
     posterUrl: string
+}
+
+export type SEAT = {
+    seatRow: number
+    seatNumber: number
+    ticketType: string
+    ticketPrice: number
+}
+
+export type USERBOOKING = {
+    bookingId: number
+    bookingNumberId: string
+    userId: number
+    userEmail: string
+    userFirstname: string
+    userLastname: string
+    showTime: string
+    cinemaName: string
+    movieTitle: string
+    movieUrl: string
+    seats: SEAT[]
+}
+
+export type CONFIRMDELETEMODALPROPS = {
+    show: boolean
+    onHide: () => void
+    onConfirm: () => void
+}
+export type SIGNIN = {
+    email: string
+    password: string
+}
+export type SIGNINRESPONSE = {
+    bearer: string
+    firstName: string
+    lastName: string
 }
 type Description = {
     director: string
@@ -27,6 +63,7 @@ export type SHOWS = {
     cinemaName: string
     cinemaId: number
 }
+
 export type TICKETS = {
     Id: number
     ticketType: string
@@ -43,3 +80,12 @@ export type CINEMASEATS = {
     seatRow: number
     seatNumber: number
 }
+
+export type SHOWSONMOVIE = {
+    showId: number
+    movieId: number
+    showTime: string
+    cinemaName: string
+    cinemaId: number
+}
+
