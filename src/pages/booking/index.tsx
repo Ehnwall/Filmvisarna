@@ -24,7 +24,7 @@ export default function BookingPage() {
     // }
 
     const [amount, setAmount] = useState<TICKETAMOUNT[]>([])
-
+    const [selectedSeats, setSelectedSeats] = useState<any[]>([])
     useEffect(() => {
         if (tickets) {
             const initialAmounts = tickets.map((ticket) => ({
@@ -83,7 +83,7 @@ export default function BookingPage() {
                     </Col>
                 </Row>
                 <div className="seat-picker rounded-3 overflow-auto my-5">
-                    {show && <BookingSeats show={show} tickets={amount} />}
+                    {show && <BookingSeats show={show} tickets={amount} onSeatsSelected={setSelectedSeats} />}
                 </div>
 
                 <Row className="gy-4">
@@ -108,9 +108,12 @@ export default function BookingPage() {
                         ))}
                     </div>
                     <Col className="d-flex justify-content-center">
-                        <a className="btn btn-outline-primary" href="/confirmation-page">
+                        <button
+                            className="btn btn-outline-primary"
+                            onClick={() => console.log({ showId: show?.showId, seats: selectedSeats })}
+                        >
                             Boka Platser
-                        </a>
+                        </button>
                     </Col>
                 </Row>
             </Container>

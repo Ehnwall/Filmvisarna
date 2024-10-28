@@ -31,10 +31,7 @@
 }
 
 .inactive {
-    color: gray;
-    pointer-events: none;
     opacity: 0.6;
-    border: none;
     pointer-events: auto;
     cursor: not-allowed;
 }

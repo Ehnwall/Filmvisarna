@@ -3,12 +3,20 @@ import { Form } from 'react-bootstrap'
 import { useGetSeats } from '../../utils/api/cinemas/useGetSeats'
 import { CINEMASEATS, SHOWS, TICKETAMOUNT } from '../../utils/types/types'
 
-export default function BookingSeats({ show, tickets }: { show: SHOWS; tickets: TICKETAMOUNT[] }) {
+export default function BookingSeats({
+    show,
+    tickets,
+    onSeatsSelected,
+}: {
+    show: SHOWS
+    tickets: TICKETAMOUNT[]
+    onSeatsSelected: (seats: any[]) => void
+}) {
     const [seatIdArray, setSeatIdArray] = useState<number[]>([])
     const cinemaId = show.cinemaId
+    const occupiedSeatsId = [1, 22, 23, 25, 26, 28]
 
     const result = tickets.reduce((acc, obj) => acc + obj.amount, 0)
-
     const { data: seats = [] } = useGetSeats(cinemaId)
 
     const seatsByRow = seats.reduce((row: Record<number, CINEMASEATS[]>, seat: CINEMASEATS) => {
@@ -32,33 +40,30 @@ export default function BookingSeats({ show, tickets }: { show: SHOWS; tickets: 
         })
     }
 
-    let ticketsCopy = JSON.parse(JSON.stringify(tickets))
-    let toReqBody = []
-
-    for (let seatId of seatIdArray) {
-        let obj = { seatId }
-        for (let ticket of ticketsCopy) {
-            if (ticket.amount > 0) {
-                obj.ticketId = ticket.ticketId
-                ticket.amount--
-                break
-            }
-        }
-
-        toReqBody.push(obj)
-    }
-
     useEffect(() => {
-        const thisIsTheOne = toReqBody.filter((item) => item.ticketId !== undefined)
+        let ticketsCopy = JSON.parse(JSON.stringify(tickets))
+        let newSeatsSelected = []
 
-        if (seatIdArray.length > thisIsTheOne.length) {
-            setSeatIdArray((seats) => {
-                return seats.slice(0, -1)
-            })
+        for (let seatId of seatIdArray) {
+            let obj = { seatId }
+            for (let ticket of ticketsCopy) {
+                if (ticket.amount > 0) {
+                    obj.ticketId = ticket.ticketId
+                    ticket.amount--
+                    break
+                }
+            }
+            newSeatsSelected.push(obj)
         }
-    }, [toReqBody])
 
-    console.log('hejhej', toReqBody)
+        const validSeats = newSeatsSelected.filter((item) => item.ticketId !== undefined)
+
+        if (validSeats.length < seatIdArray.length) {
+            setSeatIdArray((prev) => prev.slice(0, -1))
+        } else {
+            onSeatsSelected(validSeats)
+        }
+    }, [seatIdArray, tickets])
 
     return (
         <div className="seat-picker__container bg-body-tertiary py-5 rounded">
@@ -68,7 +73,7 @@ export default function BookingSeats({ show, tickets }: { show: SHOWS; tickets: 
                     {seatsInRow.map((seat) => {
                         const isSeatSelected = seatIdArray.includes(seat.Id)
                         const isInactive = seatClicked >= result && !isSeatSelected
-
+                        const isOccupied = occupiedSeatsId.includes(seat.Id)
                         return (
                             <Form.Check
                                 key={seat.Id}
