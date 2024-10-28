@@ -15,6 +15,7 @@
     },
     "dependencies": {
         "@tanstack/react-query": "^5.59.15",
+        "@tanstack/react-query-devtools": "^5.59.16",
         "axios": "^1.7.7",
         "bcryptjs": "^2.4.3",
         "better-sqlite3": "^11.3.0",
