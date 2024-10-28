@@ -12,7 +12,7 @@ export default [
     { path: '/innehall/:content', element: <ContentFromFooter /> },
     { path: '/logga-in', element: <Login /> },
     { path: '/film/:movieId', element: <IndividualMovie /> },
-    { path: '/boka-film/:showId', element: <BookingPage />, menuLabel: 'Boka' },
+    { path: '/boka-film/:showId', element: <BookingPage /> },
 ]
 
 //Paths
