@@ -5,9 +5,7 @@ import { Row, Container, Col, Form, Button } from 'react-bootstrap'
 export default function Register() {
     const [error, setError] = useState('')
     const passwordRegex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$', 'g')
-    const { signUp, token } = useAuth()
-
-    console.log(token)
+    const { signUp } = useAuth()
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()

@@ -65,7 +65,7 @@ export default function Login() {
                                     </Button>
                                 </div>
                                 <div className="d-flex justify-content-end ms-auto">
-                                    <a className="btn btn-link p-0" href="/registera">
+                                    <a className="btn btn-link p-0" href="/registrera">
                                         Ny här? Bli medlem
                                     </a>
                                 </div>
