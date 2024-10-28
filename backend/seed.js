@@ -443,6 +443,7 @@ SELECT
     users.firstName AS userFirstname,
     users.lastName AS userLastname,
     shows.time AS showTime,
+    movies.durationMin AS durationMin,
     cinemas.name AS cinemaName,
     movies.title AS movieTitle,
     movies.posterUrl AS moviePosterUrl,
