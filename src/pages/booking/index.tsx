@@ -35,10 +35,6 @@ export default function BookingPage() {
         }
     }, [tickets])
 
-    const rowSizes = [8, 9, 10, 10, 10, 10, 12, 13]
-    const seatArray = rowSizes.map(
-        (size) => new Array(size).fill(null).map(() => ({ booked: Math.random() < 0.3 })) // Randomly mark some seats as booked
-    )
     return (
         <>
             <Container className="py-4">

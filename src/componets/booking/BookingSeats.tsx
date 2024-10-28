@@ -14,7 +14,6 @@ export default function BookingSeats({
 }) {
     const [seatIdArray, setSeatIdArray] = useState<number[]>([])
     const cinemaId = show.cinemaId
-    const occupiedSeatsId = [1, 22, 23, 25, 26, 28]
 
     const result = tickets.reduce((acc, obj) => acc + obj.amount, 0)
     const { data: seats = [] } = useGetSeats(cinemaId)
@@ -73,7 +72,7 @@ export default function BookingSeats({
                     {seatsInRow.map((seat) => {
                         const isSeatSelected = seatIdArray.includes(seat.Id)
                         const isInactive = seatClicked >= result && !isSeatSelected
-                        const isOccupied = occupiedSeatsId.includes(seat.Id)
+
                         return (
                             <Form.Check
                                 key={seat.Id}
