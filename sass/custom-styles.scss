@@ -40,6 +40,20 @@ html {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
 }
 
+html,
+body,
+#root {
+    height: 100%;
+}
+#root {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex-grow: 1;
+}
+
 /*i have some styles for shows date picker funktion*/
 
 /* Detta används alltid */

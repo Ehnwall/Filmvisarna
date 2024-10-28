@@ -1,6 +1,9 @@
-import React from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import Footer from './componets/footer/footer'
+import Header from './componets/header'
+import { AuthProvider } from './context/authContext'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import MoviesWithCinnema from './utils/api/shows/renderShows'
 
 export default function App() {
@@ -13,10 +16,15 @@ export default function App() {
     return (
         <>
             <QueryClientProvider client={queryClient}>
-                <main>
-                    <MoviesWithCinnema />
-                    <Outlet />
-                </main>
+                <AuthProvider>
+                    <Header />
+                    <main>
+                        <MoviesWithCinnema />
+                        <Outlet />
+                    </main>
+                    <Footer />
+                </AuthProvider>
+                <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>
         </>
     )
