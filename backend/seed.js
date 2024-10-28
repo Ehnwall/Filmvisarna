@@ -343,7 +343,9 @@ INSERT INTO shows (movieId, time, cinemaId) VALUES
     (3, '${getLocalISOString(2, '13', '30')}', 2),
     (5, '${getLocalISOString(2, '18', '30')}', 1),
     (10, '${getLocalISOString(2, '16', '30')}', 2),
+      (10, '${getLocalISOString(7, '16', '30')}', 2),
     (4, '${getLocalISOString(2, '18', '30')}', 2);
+
 `
 
 const createUserTable = `

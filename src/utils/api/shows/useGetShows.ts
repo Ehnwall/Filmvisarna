@@ -6,7 +6,7 @@ const moviesQueryKeys = {
     all: ['shows'],
 }
 
-export const useGetShows = () => {
+function useGetShows() {
     const today = new Date()
 
     const fetchShows = async (): Promise<SHOWS[]> => {
@@ -19,3 +19,5 @@ export const useGetShows = () => {
         queryFn: fetchShows,
     })
 }
+
+export default useGetShows

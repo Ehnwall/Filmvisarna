@@ -4,7 +4,6 @@ import Footer from './componets/footer/footer'
 import Header from './componets/header'
 import { AuthProvider } from './context/authContext'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import MoviesWithCinnema from './utils/api/shows/renderShows'
 
 export default function App() {
     const queryClient = new QueryClient()
@@ -19,7 +18,6 @@ export default function App() {
                 <AuthProvider>
                     <Header />
                     <main>
-                        <MoviesWithCinnema />
                         <Outlet />
                     </main>
                     <Footer />

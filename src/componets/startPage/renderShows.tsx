@@ -1,8 +1,9 @@
 import { Container, Card, Badge, Stack, Row, Col } from 'react-bootstrap'
-import { useGetShows } from '../shows/useGetShows'
+import useGetShows from '../../utils/api/shows/useGetShows'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { BsArrowDown, BsClock, BsCalendar } from 'react-icons/bs'
 import { useState } from 'react'
+import { formatTime } from '../../utils/timeFormat'
 
 const MoviesWithCinnema = () => {
     const { data: shows, isLoading, error } = useGetShows()
@@ -13,7 +14,10 @@ const MoviesWithCinnema = () => {
     if (error) return <div>Error fetching shows</div>
 
     const lillaSalongenShows = shows?.filter((show) => show.cinemaName === 'Lilla salongen')
+    console.log({ lillaSalongenShows })
+
     const storaSalongenShows = shows?.filter((show) => show.cinemaName === 'Stora salongen')
+    console.log({ storaSalongenShows })
 
     const today = new Date()
 
@@ -33,7 +37,7 @@ const MoviesWithCinnema = () => {
         return { start: startOfThisWeek, end: endOfThisWeek }
     }
 
-    const getShowsForDate = (date: any) => {
+    const getShowsForDate = (date: any, shows: any[]) => {
         if (!date) return []
         return shows?.filter((show) => {
             const showDate = new Date(show.showTime)
@@ -48,21 +52,21 @@ const MoviesWithCinnema = () => {
 
     const handleWeekSelect = (weeksAhead: number) => {
         setSelectedWeek(weeksAhead)
-        setSelectedDate(new Date())
+        setSelectedDate(new Date(getWeekInterval(weeksAhead).start))
     }
     const currentWeek = getWeekInterval(selectedWeek)
-
+    let weekNumber = formatTime(new Date().toString()).getWeekNumber
     return (
         <>
             <Container>
                 <Dropdown className="py-2">
                     <Dropdown.Toggle className="btn-filter mb-3 mt-2" variant="primary" id="dropdown-basic">
-                        Vecka {} <BsArrowDown />
+                        Vecka <BsArrowDown />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         {[...Array(4)].map((_, weekIndex) => (
                             <Dropdown.Item key={weekIndex} onClick={() => handleWeekSelect(weekIndex)}>
-                                Vecka {weekIndex + 1}
+                                Vecka {weekNumber++}
                             </Dropdown.Item>
                         ))}
                     </Dropdown.Menu>
@@ -110,7 +114,7 @@ const MoviesWithCinnema = () => {
                 <div className="horizontal-scrollable">
                     <div className="g-3 py-2 rowcard">
                         {lillaSalongenShows &&
-                            getShowsForDate(selectedDate)?.map((show) => (
+                            getShowsForDate(selectedDate, lillaSalongenShows)?.map((show) => (
                                 <Card key={show.showId} className="border card-horizontal__scroll ">
                                     <div className="overflow-hidden rounded-bottom-0 rounded img-fluid w-100 h-75 fixed-image">
                                         <Card.Img
@@ -140,12 +144,12 @@ const MoviesWithCinnema = () => {
                                             </Badge>
                                         </Stack>
                                     </Card.Body>
-                                    <a className="btn btn-outline-primary mx-2 mb-2" href="/booking-page">
+                                    <a className="btn btn-outline-primary mx-2 mb-2" href={`/boka-film/${show.showId}`}>
                                         Boka
                                     </a>
                                 </Card>
                             ))}
-                        {lillaSalongenShows && getShowsForDate(selectedDate)?.length === 0 && (
+                        {lillaSalongenShows && getShowsForDate(selectedDate, lillaSalongenShows)?.length === 0 && (
                             <p className="bg-date-picker p-2 rounded ">
                                 Inga filmer tillgängliga för det valda datumet
                             </p>
@@ -159,7 +163,7 @@ const MoviesWithCinnema = () => {
                 <div className="horizontal-scrollable">
                     <div className="g-3 py-2 rowcard">
                         {storaSalongenShows &&
-                            getShowsForDate(selectedDate)?.map((show) => (
+                            getShowsForDate(selectedDate, storaSalongenShows)?.map((show) => (
                                 <Card key={show.showId} className="border card-horizontal__scroll">
                                     <div className="overflow-hidden rounded-bottom-0 rounded img-fluid w-100 h-75 fixed-image">
                                         <Card.Img
@@ -188,12 +192,12 @@ const MoviesWithCinnema = () => {
                                             </Badge>
                                         </Stack>
                                     </Card.Body>
-                                    <a className="btn btn-outline-primary mx-2 mb-2" href="/booking-page">
+                                    <a className="btn btn-outline-primary mx-2 mb-2" href={`/boka-film/${show.showId}`}>
                                         Boka
                                     </a>
                                 </Card>
                             ))}
-                        {storaSalongenShows && getShowsForDate(selectedDate)?.length === 0 && (
+                        {storaSalongenShows && getShowsForDate(selectedDate, storaSalongenShows)?.length === 0 && (
                             <p className="bg-date-picker p-2 rounded ">
                                 Inga filmer tillgängliga för det valda datumet
                             </p>
