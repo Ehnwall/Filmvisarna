@@ -331,9 +331,7 @@ function getLocalISOString(daysOffset, hours, minutes) {
     targetDate.setDate(now.getDate() + daysOffset)
     targetDate.setHours(hours, minutes, 0, 0)
 
-    // Adjust for timezone offset
-    const timezoneOffset = targetDate.getTimezoneOffset() * 60000
-    const localTargetDate = new Date(targetDate.getTime() - timezoneOffset)
+    const localTargetDate = new Date(targetDate.toLocaleString('sv-SE', { timeZone: 'Europe/Stockholm' }))
 
     return localTargetDate.toISOString()
 }
