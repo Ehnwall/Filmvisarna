@@ -14,10 +14,8 @@ const MoviesWithCinnema = () => {
     if (error) return <div>Error fetching shows</div>
 
     const lillaSalongenShows = shows?.filter((show) => show.cinemaName === 'Lilla salongen')
-    console.log({ lillaSalongenShows })
 
     const storaSalongenShows = shows?.filter((show) => show.cinemaName === 'Stora salongen')
-    console.log({ storaSalongenShows })
 
     const today = new Date()
 
