@@ -8,6 +8,7 @@ import LoadingBooking from './LoadingBooking'
 import TicketTypeSelector from '../../componets/TicketTypeSelector'
 import { TICKETAMOUNT } from '@/utils/types/types'
 import BookingSeats from '../../componets/booking/BookingSeats'
+import { postBooking } from '../../utils/api/booking/usePostBooking'
 
 export default function BookingPage() {
     const { data: show, isLoading: isShowLoading, isError: isShowError } = useGetShow()
@@ -35,6 +36,12 @@ export default function BookingPage() {
         }
     }, [tickets])
 
+    const handleSubmmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+        const seats = selectedSeats
+        const shows = show?.showId as any
+        postBooking.mutate({ shows: showid, seats: selectedSeats })
+    }
     return (
         <>
             <Container className="py-4">
@@ -104,10 +111,7 @@ export default function BookingPage() {
                         ))}
                     </div>
                     <Col className="d-flex justify-content-center">
-                        <button
-                            className="btn btn-outline-primary"
-                            onClick={() => console.log({ showId: show?.showId, seats: selectedSeats })}
-                        >
+                        <button className="btn btn-outline-primary" onClick={handleSubmmit}>
                             Boka Platser
                         </button>
                     </Col>

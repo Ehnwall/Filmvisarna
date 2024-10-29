@@ -89,3 +89,12 @@ export type SHOWSONMOVIE = {
     cinemaId: number
 }
 
+export type BOOKING = {
+    showId: number
+    seatId: SEATID[]
+}
+
+type SEATID = {
+    seatId: number
+    ticketType: number
+}
