@@ -90,7 +90,7 @@ export default function RenderMovies() {
                                             </Badge>
                                         </Stack>
                                     </Card.Body>
-                                    <Card.Link className="stretched-link" href="/individual"></Card.Link>
+                                    <Card.Link className="stretched-link" href={`/film/${movie.Id}`}></Card.Link>
                                 </Card>
                             </Col>
                         )

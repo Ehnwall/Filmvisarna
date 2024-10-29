@@ -1,5 +1,5 @@
 export type MOVIE = {
-    id: number
+    Id: number
     title: string
     durationMin: number
     ageLimit: string
@@ -88,4 +88,3 @@ export type SHOWSONMOVIE = {
     cinemaName: string
     cinemaId: number
 }
-

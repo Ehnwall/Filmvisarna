@@ -56,12 +56,14 @@ const MoviesWithCinnema = () => {
     }
     const currentWeek = getWeekInterval(selectedWeek)
     let weekNumber = formatTime(new Date().toString()).getWeekNumber
+
     return (
         <>
             <Container>
                 <Dropdown className="py-2">
                     <Dropdown.Toggle className="btn-filter mb-3 mt-2" variant="primary" id="dropdown-basic">
-                        Vecka <BsArrowDown />
+                        Vecka {weekNumber}
+                        <BsArrowDown />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         {[...Array(4)].map((_, weekIndex) => (
