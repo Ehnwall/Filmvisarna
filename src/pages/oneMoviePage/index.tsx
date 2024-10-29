@@ -5,7 +5,7 @@ import {
     InfoMoviePoster,
     InfoMovieTrailer,
     Shows,
-} from '../../componets/onemovie/index'
+} from '../../componets/onemovie/Index'
 export default function IndividualMovie() {
     return (
         <>

@@ -118,7 +118,7 @@ const MoviesWithCinnema = () => {
                         {lillaSalongenShows &&
                             getShowsForDate(selectedDate, lillaSalongenShows)?.map((show) => (
                                 <Card key={show.showId} className="border card-horizontal__scroll ">
-                                    <div className="overflow-hidden rounded-bottom-0 rounded img-fluid w-100 h-75 fixed-image">
+                                    <div className="overflow-hidden rounded-bottom-0 rounded img-fluid w-100 h-75 fixed-imag">
                                         <Card.Img
                                             variant="top"
                                             src={show.posterURL}
@@ -128,7 +128,17 @@ const MoviesWithCinnema = () => {
                                     </div>
                                     <Card.Body>
                                         <Card.Title>{show.movieTitle}</Card.Title>
-                                        <Card.Text className="d-flex flex-wrap">{show.genre.join(' ')}</Card.Text>
+                                        <Card.Text className="d-flex flex-wrap gap-2">
+                                            {show.genre.map((genre: string, index: any) => (
+                                                <span
+                                                    key={index}
+                                                    className="bg-primary text-black rounded px-1"
+                                                    style={{ backgroundColor: 'bg - primary' }}
+                                                >
+                                                    {genre}
+                                                </span>
+                                            ))}
+                                        </Card.Text>
 
                                         <Badge className="py-1 d-inline-flex align-items-center" bg="secondary">
                                             <BsClock className="me-2" />
@@ -177,7 +187,17 @@ const MoviesWithCinnema = () => {
                                     </div>
                                     <Card.Body>
                                         <Card.Title>{show.movieTitle}</Card.Title>
-                                        <Card.Text>{show.genre.join(' ')}</Card.Text>
+                                        <Card.Text className="d-flex flex-wrap gap-2">
+                                            {show.genre.map((genre: string, index: any) => (
+                                                <span
+                                                    key={index}
+                                                    className="bg-primary text-black rounded px-1"
+                                                    style={{ backgroundColor: 'bg - primary' }}
+                                                >
+                                                    {genre}
+                                                </span>
+                                            ))}
+                                        </Card.Text>
                                         <Badge className="py-1 d-inline-flex align-items-center" bg="secondary">
                                             <BsClock className="me-2" />
                                             {new Date(show.showTime).toLocaleTimeString('sv-SE', {
