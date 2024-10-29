@@ -9,6 +9,7 @@ const MoviesWithCinnema = () => {
     const { data: shows, isLoading, error } = useGetShows()
     const [selectedDate, setSelectedDate] = useState(new Date())
     const [selectedWeek, setSelectedWeek] = useState(0)
+    const [weekSelect, setWeekSelect] = useState(formatTime(new Date().toString()).getWeekNumber)
 
     if (isLoading) return <div>Loading...</div>
     if (error) return <div>Error fetching shows</div>
@@ -51,6 +52,7 @@ const MoviesWithCinnema = () => {
     const handleWeekSelect = (weeksAhead: number) => {
         setSelectedWeek(weeksAhead)
         setSelectedDate(new Date(getWeekInterval(weeksAhead).start))
+        setWeekSelect(formatTime(new Date(getWeekInterval(weeksAhead).start).toString()).getWeekNumber)
     }
     const currentWeek = getWeekInterval(selectedWeek)
     let weekNumber = formatTime(new Date().toString()).getWeekNumber
@@ -60,7 +62,7 @@ const MoviesWithCinnema = () => {
             <Container>
                 <Dropdown className="py-2">
                     <Dropdown.Toggle className="btn-filter mb-3 mt-2" variant="primary" id="dropdown-basic">
-                        Vecka {weekNumber}
+                        Vecka {weekSelect}
                         <BsArrowDown />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>

@@ -92,7 +92,7 @@ export default function RenderMovies() {
                                             {movie.description.genre.map((genre, index) => (
                                                 <span
                                                     key={index}
-                                                    className="bg-primary text-black rounded px-1"
+                                                    className="bg-primary text-black rounded px-2"
                                                     style={{
                                                         backgroundColor: 'bg - primary',
                                                     }}
