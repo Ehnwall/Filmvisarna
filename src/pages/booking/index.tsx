@@ -27,6 +27,7 @@ export default function BookingPage() {
 
     const [amount, setAmount] = useState<TICKETAMOUNT[]>([])
     const [selectedSeats, setSelectedSeats] = useState<SELECTEDSEATS[]>([])
+    const [alert, setAlert] = useState<string>('')
     useEffect(() => {
         if (tickets) {
             const initialAmounts = tickets.map((ticket) => ({
@@ -36,11 +37,20 @@ export default function BookingPage() {
             setAmount(initialAmounts)
         }
     }, [tickets])
-
+    useEffect(() => {
+        const totalTickets = amount.reduce((acc, ticket) => acc + ticket.amount, 0)
+        if (selectedSeats.length === totalTickets) {
+            setAlert('')
+        }
+    }, [amount, selectedSeats])
     const handleSubmmit = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
         const showId = show?.showId as number
-
+        const totalTickets = amount.reduce((acc, ticket) => acc + ticket.amount, 0)
+        if (totalTickets !== selectedSeats.length) {
+            setAlert('Du har inte valt rätt antal biljetter')
+            return
+        }
         makebooking.mutate({ showId, seats: selectedSeats })
     }
     return (
@@ -89,7 +99,6 @@ export default function BookingPage() {
                 <div className="seat-picker rounded-3 overflow-auto my-5">
                     {show && <BookingSeats show={show} tickets={amount} onSeatsSelected={setSelectedSeats} />}
                 </div>
-
                 <Row className="gy-4">
                     <Card>
                         <Card.Header className="bg-primary ">
@@ -117,6 +126,9 @@ export default function BookingPage() {
                         </button>
                     </Col>
                 </Row>
+                <div className=" d-flex justify-content-center align-items-center mt-3">
+                    {alert && <p className="text-center alert alert-danger w-75 text-white">{alert}</p>}
+                </div>
             </Container>
         </>
     )

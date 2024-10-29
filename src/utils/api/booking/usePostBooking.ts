@@ -16,5 +16,8 @@ export const useMakebooking = () => {
         onSuccess: (dataBooking) => {
             console.log(dataBooking)
         },
+        onError: (error) => {
+            console.log(error)
+        },
     })
 }
