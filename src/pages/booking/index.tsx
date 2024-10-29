@@ -9,6 +9,8 @@ import TicketTypeSelector from '../../componets/TicketTypeSelector'
 import { TICKETAMOUNT, SELECTEDSEATS } from '@/utils/types/types'
 import BookingSeats from '../../componets/booking/BookingSeats'
 import { useMakebooking } from '../../utils/api/booking/usePostBooking'
+import { Value } from 'sass'
+import { onChange } from 'react-toastify/dist/core/store'
 
 export default function BookingPage() {
     const { data: show, isLoading: isShowLoading, isError: isShowError } = useGetShow()
@@ -28,6 +30,9 @@ export default function BookingPage() {
     const [amount, setAmount] = useState<TICKETAMOUNT[]>([])
     const [selectedSeats, setSelectedSeats] = useState<SELECTEDSEATS[]>([])
     const [alert, setAlert] = useState<string>('')
+    const [email, setEmail] = useState<string>('')
+    const [firstName, setFirstName] = useState<string>('')
+    const [lastName, setLastName] = useState<string>('')
     useEffect(() => {
         if (tickets) {
             const initialAmounts = tickets.map((ticket) => ({
@@ -107,15 +112,19 @@ export default function BookingPage() {
                     </Card>
                     <div className="d-flex flex-column align-items-center">
                         {[
-                            { label: 'Namn', type: 'text' },
-                            { label: 'Efternamn', type: 'text' },
-                            { label: 'E-post', type: 'email' },
-                            { label: 'Telefon', type: 'tel' },
-                        ].map(({ label, type }) => (
+                            { label: 'E-post', type: 'email', value: email, onChange: setEmail },
+                            { label: 'Förnamn', type: 'text', value: firstName, onChange: setFirstName },
+                            { label: 'Efternamn', type: 'text', value: lastName, onChange: setLastName },
+                        ].map(({ label, type, value, onChange }) => (
                             <Col md={4} key={label}>
                                 <Form.Group className="mb-3">
                                     <Form.Label>{label}</Form.Label>
-                                    <Form.Control type={type} placeholder={`Ange ditt ${label.toLowerCase()}`} />
+                                    <Form.Control
+                                        type={type}
+                                        placeholder={`Ange ditt ${label.toLowerCase()}`}
+                                        value={value}
+                                        onChange={(e) => onChange(e.target.value)}
+                                    />
                                 </Form.Group>
                             </Col>
                         ))}
