@@ -47,7 +47,7 @@ export default function BookingSeats({
             let obj = { seatId }
             for (let ticket of ticketsCopy) {
                 if (ticket.amount > 0) {
-                    obj.ticketId = ticket.ticketId
+                    obj.ticketTypeId = ticket.ticketId
                     ticket.amount--
                     break
                 }
@@ -55,7 +55,7 @@ export default function BookingSeats({
             newSeatsSelected.push(obj)
         }
 
-        const validSeats = newSeatsSelected.filter((item) => item.ticketId !== undefined)
+        const validSeats = newSeatsSelected.filter((item) => item.ticketTypeId !== undefined)
 
         if (validSeats.length < seatIdArray.length) {
             setSeatIdArray((prev) => prev.slice(0, -1))

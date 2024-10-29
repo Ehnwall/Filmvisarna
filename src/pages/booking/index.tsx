@@ -6,13 +6,14 @@ import { useGetTickets } from '../../utils/api/booking/useGetTicket'
 import ErrorBooking from './ErrorBooking'
 import LoadingBooking from './LoadingBooking'
 import TicketTypeSelector from '../../componets/TicketTypeSelector'
-import { TICKETAMOUNT } from '@/utils/types/types'
+import { TICKETAMOUNT, SELECTEDSEATS } from '@/utils/types/types'
 import BookingSeats from '../../componets/booking/BookingSeats'
-import { postBooking } from '../../utils/api/booking/usePostBooking'
+import { useMakebooking } from '../../utils/api/booking/usePostBooking'
 
 export default function BookingPage() {
     const { data: show, isLoading: isShowLoading, isError: isShowError } = useGetShow()
     const { data: tickets, isLoading: isTicketsLoading, isError: isTicketsError } = useGetTickets()
+    const makebooking = useMakebooking()
 
     // if (isShowLoading) return <LoadingBooking />
 
@@ -25,7 +26,7 @@ export default function BookingPage() {
     // }
 
     const [amount, setAmount] = useState<TICKETAMOUNT[]>([])
-    const [selectedSeats, setSelectedSeats] = useState<any[]>([])
+    const [selectedSeats, setSelectedSeats] = useState<SELECTEDSEATS[]>([])
     useEffect(() => {
         if (tickets) {
             const initialAmounts = tickets.map((ticket) => ({
@@ -38,9 +39,9 @@ export default function BookingPage() {
 
     const handleSubmmit = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
-        const seats = selectedSeats
-        const shows = show?.showId as any
-        postBooking.mutate({ shows: showid, seats: selectedSeats })
+        const showId = show?.showId as number
+
+        makebooking.mutate({ showId, seats: selectedSeats })
     }
     return (
         <>

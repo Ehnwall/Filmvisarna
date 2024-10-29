@@ -91,10 +91,14 @@ export type SHOWSONMOVIE = {
 
 export type BOOKING = {
     showId: number
-    seatId: SEATID[]
+    seats: SELECTEDSEATS[]
+}
+export type BOOKINGRESP = {
+    msg: string
+    bookingId: number
 }
 
-type SEATID = {
+export type SELECTEDSEATS = {
     seatId: number
     ticketType: number
 }

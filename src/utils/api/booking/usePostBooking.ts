@@ -1,13 +1,20 @@
-import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import { BOOKING } from '../../types/types'
+import { BOOKING, BOOKINGRESP } from '../../types/types'
 import { useMutation } from '@tanstack/react-query'
 
 const QUERY_KEY = ['booking']
 
-export const postBooking = async (data: BOOKING) => {
-    console.log(data)
-    const resp = await axios.post(`/api/bookings`, data)
+const postBooking = async (dataBooking: BOOKING) => {
+    console.log(dataBooking)
+    const resp = await axios.post<BOOKINGRESP>('/api/bookings', dataBooking)
     return resp.data
 }
-export const createBooking = () => {}
+
+export const useMakebooking = () => {
+    return useMutation<BOOKINGRESP, Error, BOOKING>({
+        mutationFn: postBooking,
+        onSuccess: (dataBooking) => {
+            console.log(dataBooking)
+        },
+    })
+}
