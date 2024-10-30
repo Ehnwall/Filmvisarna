@@ -42,7 +42,6 @@ export default function BookingPage() {
             firstName,
             lastName,
         }
-        console.log(user)
         const showId = show?.showId as number
         const totalTickets = amount.reduce((acc, ticket) => acc + ticket.amount, 0)
         if (totalTickets !== selectedSeats.length) {
