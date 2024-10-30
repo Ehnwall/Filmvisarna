@@ -10,13 +10,17 @@ const MemberPage = () => {
     const navigate = useNavigate()
     const { token } = useAuth()
     const { data: bookings = [], isLoading, error } = useGetBookings()
-
     const splitBookings = (bookings: USERBOOKING[]) => {
         const currentDate = new Date()
         const currentBookings = bookings.filter((booking) => new Date(booking.showTime) >= currentDate)
         const pastBookings = bookings.filter((booking) => new Date(booking.showTime) < currentDate)
         return { currentBookings, pastBookings }
     }
+    useEffect(() => {
+        if (!token) {
+            navigate('/logga-in')
+        }
+    }, [token])
 
     const { currentBookings, pastBookings } = splitBookings(bookings)
     useEffect(() => {

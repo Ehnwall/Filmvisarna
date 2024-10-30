@@ -1,13 +1,18 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useContext, useMemo, useState, useEffect } from 'react'
 import { useSignIn } from '../utils/api/auth/useSignIn'
 import { UseMutationResult } from '@tanstack/react-query'
-import { SIGNIN, SIGNINRESPONSE } from '../utils/types/types'
-import axios from 'axios'
+import { SIGNIN, SIGNINRESPONSE, SIGNUP, SIGNUPRESPONSE } from '../utils/types/types'
+import { useSignUp } from '../utils/api/auth/useSignUp'
+import axios, { AxiosError } from 'axios'
+type ErrorTest = {
+    msg: string
+}
 
 type AuthContextType = {
     user: { firstName: string; lastName: string } | null
     token: string | null
     signIn: UseMutationResult<SIGNINRESPONSE, Error, SIGNIN> | null
+    signUp: UseMutationResult<SIGNUPRESPONSE, AxiosError<ErrorTest>, SIGNUP> | null
     signOut: () => void
 }
 
@@ -15,6 +20,7 @@ const AuthContext = createContext<AuthContextType>({
     user: null,
     token: null,
     signIn: null,
+    signUp: null,
     signOut: () => {},
 })
 
@@ -34,6 +40,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             delete axios.defaults.headers.common['Authorization']
         }
     }, [])
+    const signUp = useSignUp()
 
     const handleSignOut = () => {
         sessionStorage.removeItem('token')
@@ -47,6 +54,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             user,
             token,
             signIn,
+            signUp,
             signOut: handleSignOut,
         }),
         [user, token, signIn]
