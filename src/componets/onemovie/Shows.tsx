@@ -64,7 +64,7 @@ export function Shows() {
                                     </div>
                                     <Card.Link
                                         className="btn btn-outline-primary mt-auto w-100"
-                                        href="/boka-film/:showId"
+                                        href={`/boka-film/${show.showId}`}
                                     >
                                         Boka
                                     </Card.Link>

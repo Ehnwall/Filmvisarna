@@ -1,5 +1,5 @@
 export type MOVIE = {
-    id: number
+    Id: number
     title: string
     durationMin: number
     ageLimit: string
@@ -43,6 +43,16 @@ export type SIGNINRESPONSE = {
     firstName: string
     lastName: string
 }
+export type SIGNUP = {
+    firstName: string
+    lastName: string
+    email: string
+    password: string
+}
+export type SIGNUPRESPONSE = {
+    changes: string
+    lastInsertRowid: string
+}
 type Description = {
     director: string
     cast: string[]
@@ -58,7 +68,7 @@ export type SHOWS = {
     posterURL: string
     genre: string[]
     duration: number
-    agelimit: number
+    ageLimit: number
     movieTitle: string
     cinemaName: string
     cinemaId: number
@@ -112,3 +122,4 @@ export type USER = {
     firstName: string
     lastName: string
 }
+
