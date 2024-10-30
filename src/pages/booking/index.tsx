@@ -6,7 +6,7 @@ import { useGetTickets } from '../../utils/api/booking/useGetTicket'
 import ErrorBooking from './ErrorBooking'
 import LoadingBooking from './LoadingBooking'
 import TicketTypeSelector from '../../componets/TicketTypeSelector'
-import { TICKETAMOUNT, SELECTEDSEATS } from '@/utils/types/types'
+import { TICKETAMOUNT, SELECTEDSEATS, BOOKING, PARTIALBOOKING } from '@/utils/types/types'
 import BookingSeats from '../../componets/booking/BookingSeats'
 import { useMakebooking } from '../../utils/api/booking/usePostBooking'
 import { Value } from 'sass'
@@ -50,13 +50,21 @@ export default function BookingPage() {
     }, [amount, selectedSeats])
     const handleSubmmit = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
+
+        // const user = { email, firstName, lastName }
+
+        const partialBooking: PARTIALBOOKING = {
+            firstName: firstName,
+            lastName: lastName,
+        }
+        console.log(PARTIALBOOKING)
         const showId = show?.showId as number
         const totalTickets = amount.reduce((acc, ticket) => acc + ticket.amount, 0)
         if (totalTickets !== selectedSeats.length) {
             setAlert('Du har inte valt rätt antal biljetter')
             return
         }
-        makebooking.mutate({ showId, seats: selectedSeats })
+        makebooking.mutate({ showId, seats: selectedSeats, partialBooking })
     }
     return (
         <>

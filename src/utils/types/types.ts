@@ -89,10 +89,13 @@ export type SHOWSONMOVIE = {
     cinemaId: number
 }
 
-export type BOOKING = {
+export interface BOOKING {
     showId: number
     seats: SELECTEDSEATS[]
+    user: USER[]
 }
+export type PARTIALBOOKING = Partial<BOOKING>
+
 export type BOOKINGRESP = {
     msg: string
     bookingId: number
@@ -101,4 +104,10 @@ export type BOOKINGRESP = {
 export type SELECTEDSEATS = {
     seatId: number
     ticketType: number
+}
+
+export type USER = {
+    email: string
+    firstName: string
+    lastName: string
 }
