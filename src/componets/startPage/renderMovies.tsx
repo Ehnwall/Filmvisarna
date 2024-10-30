@@ -69,7 +69,7 @@ export default function RenderMovies() {
                     </h6>
                 </Stack>
 
-                <Row xs={2} xl={4} className="g-2 gy-2">
+                <Row xs={1} md={2} xl={4} className="g-2 gy-2">
                     {filteredMovies?.map((movie, idx) => {
                         const { hours, minutes } = convertDuration(movie.durationMin)
                         return (
