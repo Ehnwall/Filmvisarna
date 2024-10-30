@@ -1,16 +1,22 @@
 import { useMutation } from '@tanstack/react-query'
 import { SIGNUP, SIGNUPRESPONSE } from '../../types/types'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const signIn = async (userInformation: SIGNUP): Promise<SIGNUPRESPONSE> => {
     const response = await axios.post<SIGNUPRESPONSE>('/api/signup', userInformation)
     return response.data
 }
 export const useSignUp = () => {
-    return useMutation<SIGNUPRESPONSE, Error, SIGNUP>({
+    const navigate = useNavigate()
+    return useMutation<SIGNUPRESPONSE, AxiosError, SIGNUP>({
         mutationFn: signIn,
-        onSuccess: (data) => {
-            console.log('Success signing in', data)
+        onSuccess: () => {
+            navigate('/logga-in')
+            setTimeout(() => {
+                toast('Du är nu registrerad och kan logga in')
+            }, 500)
         },
         onError: (error) => {
             console.error('Error signing in', error)

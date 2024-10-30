@@ -1,13 +1,17 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useContext, useMemo, useState } from 'react'
 import { useSignIn } from '../utils/api/auth/useSignIn'
 import { UseMutationResult } from '@tanstack/react-query'
 import { SIGNIN, SIGNINRESPONSE, SIGNUP, SIGNUPRESPONSE } from '../utils/types/types'
 import { useSignUp } from '../utils/api/auth/useSignUp'
+import { AxiosError } from 'axios'
+type ErrorTest = {
+    msg: string
+}
 type AuthContextType = {
     user: { firstName: string; lastName: string } | null
     token: string | null
     signIn: UseMutationResult<SIGNINRESPONSE, Error, SIGNIN> | null
-    signUp: UseMutationResult<SIGNUPRESPONSE, Error, SIGNUP> | null
+    signUp: UseMutationResult<SIGNUPRESPONSE, AxiosError<ErrorTest>, SIGNUP> | null
     signOut: () => void
 }
 

@@ -1,8 +1,9 @@
-import { Row, Stack, Container, Col, Form, Button } from 'react-bootstrap'
+import { Row, Stack, Container, Col, Form, Button, Toast } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import Spinner from 'react-bootstrap/Spinner'
 import { useAuth } from '../../context/authContext'
+import { ToastContainer } from 'react-toastify'
 export default function Login() {
     const navigate = useNavigate()
     const { user, token, signIn } = useAuth()
@@ -31,6 +32,18 @@ export default function Login() {
 
     return (
         <Container className="vh-100">
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
             <Row className="d-flex justify-content-center align-items-center vh-100">
                 <Col xs={12} md={8} lg={6} xl={5}>
                     <div className="p-md-5 p-4 bg-body-tertiary custom-box-shadow rounded-3 ">

@@ -1,4 +1,7 @@
 $transition: 0.3s ease;
+:root {
+    --toastify-color-progress-dark: #d49537;
+}
 
 @each $color, $value in $theme-colors {
     .btn-#{$color} {

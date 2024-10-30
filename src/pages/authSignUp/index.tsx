@@ -1,9 +1,10 @@
 import { useAuth } from '../../context/authContext'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Row, Container, Col, Form, Button } from 'react-bootstrap'
 
 export default function Register() {
     const [error, setError] = useState('')
+    const [signUpError, setSignUpError] = useState('')
     const passwordRegex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$', 'g')
     const { signUp } = useAuth()
 
@@ -37,13 +38,36 @@ export default function Register() {
             return
         }
     }
+    const handleEmailBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+        if (!event.target.value) {
+            setError('')
+            return
+        }
+        setError('')
+        const emailRegex = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$', 'g')
+        if (!emailRegex.test(event.target.value)) {
+            setError('Ogiltig e-postadress')
+            return
+        }
+    }
+
+    useEffect(() => {
+        if (signUp?.isError) {
+            setSignUpError(signUp.error.response?.data.msg as string)
+        }
+    }, [signUp?.isError, signUp?.error])
     return (
         <Container className="vh-100">
             <Row className="d-flex justify-content-center align-items-center vh-100">
                 <Col xs={12} md={8} lg={6} xl={5}>
                     <div className="p-md-5 p-4 bg-body-tertiary custom-box-shadow rounded-3">
                         <h2 className="text-center h1">Bli medlem</h2>
-                        {error && <div className="alert alert-danger">{error}</div>}
+                        {(signUpError || error) && (
+                            <ul className="alert alert-danger ps-4">
+                                {signUpError && <li>{signUpError}</li>}
+                                {error && <li>{error}</li>}
+                            </ul>
+                        )}
                         <Form onSubmit={handleSubmit}>
                             <Form.Group className="mb-3" controlId="firstName">
                                 <Form.Label>Förnamn</Form.Label>
@@ -70,6 +94,8 @@ export default function Register() {
                                     name="email"
                                     type="email"
                                     placeholder="Ange din e-postadress"
+                                    onChange={() => setSignUpError('')}
+                                    onBlur={handleEmailBlur}
                                 />
                             </Form.Group>
 
