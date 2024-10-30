@@ -1,4 +1,5 @@
 // pages/routes
+import ContentFromFooter from '../componets/footer/footerInformation/ContentFromFooter'
 import MemberPage from '../pages/memberPage/index'
 import Login from '../pages/authLogIn'
 import BookingPage from '../pages/booking/index'
@@ -9,10 +10,11 @@ import Register from '../pages/authSignUp'
 export default [
     { path: '/', element: <StartPage />, menuLabel: 'Hem' },
     { path: '/medlem', element: <MemberPage />, menuLabel: 'Medlem' },
+    { path: '/innehall/:content', element: <ContentFromFooter /> },
     { path: '/logga-in', element: <Login /> },
     { path: '/registrera', element: <Register /> },
     { path: '/film/:movieId', element: <IndividualMovie /> },
-    { path: '/boka-film/:showId', element: <BookingPage />, menuLabel: 'Boka' },
+    { path: '/boka-film/:showId', element: <BookingPage /> },
 ]
 
 

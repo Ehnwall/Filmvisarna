@@ -2,13 +2,7 @@ import axios from 'axios'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 const deleteBooking = async (bookingId: string): Promise<void> => {
-    const token = localStorage.getItem('token')
-    await axios.delete(`/api/bookings/${bookingId}`, {
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token || ''}`,
-        },
-    })
+    await axios.delete(`/api/bookings/${bookingId}`)
 }
 const DELETE_QUERY_KEY = ['bookings']
 

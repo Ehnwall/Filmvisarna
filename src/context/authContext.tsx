@@ -1,12 +1,13 @@
-import { createContext, useContext, useMemo, useState } from 'react'
+import { createContext, useContext, useMemo, useState, useEffect } from 'react'
 import { useSignIn } from '../utils/api/auth/useSignIn'
 import { UseMutationResult } from '@tanstack/react-query'
 import { SIGNIN, SIGNINRESPONSE, SIGNUP, SIGNUPRESPONSE } from '../utils/types/types'
 import { useSignUp } from '../utils/api/auth/useSignUp'
-import { AxiosError } from 'axios'
+import axios, { AxiosError } from 'axios'
 type ErrorTest = {
     msg: string
 }
+
 type AuthContextType = {
     user: { firstName: string; lastName: string } | null
     token: string | null
@@ -31,6 +32,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         sessionStorage.getItem('token') ? JSON.parse(sessionStorage.getItem('token') as string).token : null
     )
     const signIn = useSignIn()
+
+    useEffect(() => {
+        if (token) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+        } else {
+            delete axios.defaults.headers.common['Authorization']
+        }
+    }, [])
     const signUp = useSignUp()
 
     const handleSignOut = () => {

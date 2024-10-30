@@ -1,5 +1,5 @@
 export type MOVIE = {
-    id: number
+    Id: number
     title: string
     durationMin: number
     ageLimit: string
@@ -68,8 +68,33 @@ export type SHOWS = {
     posterURL: string
     genre: string[]
     duration: number
-    agelimit: number
+    ageLimit: number
     movieTitle: string
+    cinemaName: string
+    cinemaId: number
+}
+
+export type TICKETS = {
+    Id: number
+    ticketType: string
+    price: number
+}
+export type TICKETAMOUNT = {
+    ticketId: number
+    amount: number
+}
+
+export type CINEMASEATS = {
+    Id: number
+    cinemaId: number
+    seatRow: number
+    seatNumber: number
+}
+
+export type SHOWSONMOVIE = {
+    showId: number
+    movieId: number
+    showTime: string
     cinemaName: string
     cinemaId: number
 }
