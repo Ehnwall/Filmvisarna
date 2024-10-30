@@ -88,4 +88,6 @@ export type SHOWSONMOVIE = {
     cinemaName: string
     cinemaId: number
 }
-
+export type OCCUPIEDSEATS = {
+    occupiedSeats: number[]
+}

@@ -9,7 +9,7 @@ interface Props {
     setAmount: React.Dispatch<React.SetStateAction<TICKETAMOUNT[]>>
 }
 
-export default function TicketTypeSelector({ ticketType, amount, setAmount }: Props) {
+export function TicketTypeSelector({ ticketType, amount, setAmount }: Props) {
     const handleIncrease = (ticketId: number) => {
         setAmount((prev) =>
             prev.map((ticket) => (ticket.ticketId === ticketId ? { ...ticket, amount: ticket.amount + 1 } : ticket))
