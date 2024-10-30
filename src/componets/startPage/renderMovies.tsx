@@ -69,18 +69,38 @@ export default function RenderMovies() {
                     </h6>
                 </Stack>
 
-                <Row xs={2} xl={4} className="g-2 gy-2">
+                <Row xs={1} md={2} xl={4} className="g-2 gy-2">
                     {filteredMovies?.map((movie, idx) => {
                         const { hours, minutes } = convertDuration(movie.durationMin)
                         return (
                             <Col key={idx}>
                                 <Card className="border h-100">
-                                    <div className="overflow-hidden rounded-bottom-0 rounded h-100">
-                                        <Card.Img variant="top" src={movie.posterUrl} className="h-100" />
+                                    <div className="overflow-hidden rounded-bottom-0 rounded img-starPage">
+                                        <Card.Img
+                                            variant="top"
+                                            src={movie.posterUrl}
+                                            className="w-100"
+                                            style={{
+                                                height: '500px',
+                                                objectFit: 'cover',
+                                            }}
+                                        />
                                     </div>
                                     <Card.Body>
                                         <Card.Title>{movie.title}</Card.Title>
-                                        <Card.Text>{movie.description.genre.join(' ')}</Card.Text>
+                                        <Card.Text className="d-flex flex-wrap gap-2">
+                                            {movie.description.genre.map((genre, index) => (
+                                                <span
+                                                    key={index}
+                                                    className="bg-primary text-black rounded px-2"
+                                                    style={{
+                                                        backgroundColor: 'bg - primary',
+                                                    }}
+                                                >
+                                                    {genre}
+                                                </span>
+                                            ))}
+                                        </Card.Text>
                                         <Stack direction="horizontal" gap={2} className="mx-auto card-badge">
                                             <Badge bg="none" className="border">
                                                 {hours} tim {minutes} min
@@ -90,7 +110,7 @@ export default function RenderMovies() {
                                             </Badge>
                                         </Stack>
                                     </Card.Body>
-                                    <Card.Link className="stretched-link" href="/individual"></Card.Link>
+                                    <Card.Link className="stretched-link" href={`/film/${movie.Id}`}></Card.Link>
                                 </Card>
                             </Col>
                         )

@@ -187,7 +187,7 @@ const movies = [
             cast: ['Catherine O Hara', 'Martin Short', 'Martin Landau', 'Charlie Tahan'],
             synopsis:
                 'När en pojkes älskade hund plötsligt går bort försöker han återuppliva djuret genom ett kraftfullt vetenskapligt experiment.',
-            genre: ['Animation', 'Familj', 'Drama', 'Komedi', 'Thriller'],
+            genre: ['Animation', 'Familj', 'Drama', 'Komedi'],
             speech: ['Svenska', 'Engelska'],
             language: ['Engelska', 'Svenska'],
             year: 2012,
@@ -204,7 +204,7 @@ const movies = [
             cast: ['Tom Hanks', 'Tim Allen', 'Don Rickles', 'Jim Varney', 'Wallace Shawn'],
             synopsis:
                 'En cowboydocka känner sig djupt hotad och svartsjuk när en ny rymdactionfigur tar hans plats som den främsta leksaken i en pojkes sovrum.',
-            genre: ['Animation', 'Familj', 'Drama', 'Komedi', 'Fantasi'],
+            genre: ['Animation', 'Familj', 'Drama', 'Komedi'],
             speech: ['Svenska', 'Engelska'],
             language: ['Engelska', 'Svenska'],
             year: 1995,
@@ -343,7 +343,9 @@ INSERT INTO shows (movieId, time, cinemaId) VALUES
     (3, '${getLocalISOString(2, '13', '30')}', 2),
     (5, '${getLocalISOString(2, '18', '30')}', 1),
     (10, '${getLocalISOString(2, '16', '30')}', 2),
+      (10, '${getLocalISOString(7, '16', '30')}', 2),
     (4, '${getLocalISOString(2, '18', '30')}', 2);
+
 `
 
 const createUserTable = `

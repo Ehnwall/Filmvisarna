@@ -1,5 +1,5 @@
 export type MOVIE = {
-    id: number
+    Id: number
     title: string
     durationMin: number
     ageLimit: string
@@ -58,7 +58,7 @@ export type SHOWS = {
     posterURL: string
     genre: string[]
     duration: number
-    agelimit: number
+    ageLimit: number
     movieTitle: string
     cinemaName: string
     cinemaId: number
@@ -88,4 +88,3 @@ export type SHOWSONMOVIE = {
     cinemaName: string
     cinemaId: number
 }
-
