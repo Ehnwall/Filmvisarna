@@ -98,3 +98,28 @@ export type SHOWSONMOVIE = {
     cinemaName: string
     cinemaId: number
 }
+
+export interface BOOKING {
+    showId: number
+    seats: SELECTEDSEATS[]
+    user: USER
+}
+
+export type PARTIALBOOKING = Partial<BOOKING>
+
+export type BOOKINGRESP = {
+    msg: string
+    bookingId: number
+}
+
+export type SELECTEDSEATS = {
+    seatId: number
+    ticketType: number
+}
+
+export type USER = {
+    email: string
+    firstName: string
+    lastName: string
+}
+

@@ -3,28 +3,23 @@ import { Container, Row, Col, Image, Button, ButtonGroup, Card, Form, Stack } fr
 import { BsCalendar, BsClock, BsPin, BsCreditCard2Back } from 'react-icons/bs'
 import { useGetShow } from '../../utils/api/booking/useGetShow'
 import { useGetTickets } from '../../utils/api/booking/useGetTicket'
-import ErrorBooking from './ErrorBooking'
-import LoadingBooking from './LoadingBooking'
 import TicketTypeSelector from '../../componets/TicketTypeSelector'
-import { TICKETAMOUNT } from '@/utils/types/types'
+import { TICKETAMOUNT, SELECTEDSEATS } from '@/utils/types/types'
 import BookingSeats from '../../componets/booking/BookingSeats'
+import { useMakebooking } from '../../utils/api/booking/usePostBooking'
+import { useAuth } from '../../context/authContext'
 
 export default function BookingPage() {
     const { data: show, isLoading: isShowLoading, isError: isShowError } = useGetShow()
     const { data: tickets, isLoading: isTicketsLoading, isError: isTicketsError } = useGetTickets()
-
-    // if (isShowLoading) return <LoadingBooking />
-
-    // if (isShowLoading || isTicketsLoading) return <LoadingBooking />
-    // if (isShowError || isTicketsError) return <ErrorBooking />
-
-    // if (!tickets) {
-    //     console.error('Tickets data is undefined')
-    //     return <ErrorBooking />
-    // }
-
+    const makebooking = useMakebooking()
+    const { token } = useAuth()
     const [amount, setAmount] = useState<TICKETAMOUNT[]>([])
-    const [selectedSeats, setSelectedSeats] = useState<any[]>([])
+    const [selectedSeats, setSelectedSeats] = useState<SELECTEDSEATS[]>([])
+    const [alert, setAlert] = useState<string>('')
+    const [email, setEmail] = useState<string>('')
+    const [firstName, setFirstName] = useState<string>('')
+    const [lastName, setLastName] = useState<string>('')
     useEffect(() => {
         if (tickets) {
             const initialAmounts = tickets.map((ticket) => ({
@@ -34,7 +29,32 @@ export default function BookingPage() {
             setAmount(initialAmounts)
         }
     }, [tickets])
-
+    useEffect(() => {
+        const totalTickets = amount.reduce((acc, ticket) => acc + ticket.amount, 0)
+        if (selectedSeats.length === totalTickets) {
+            setAlert('')
+        }
+    }, [amount, selectedSeats])
+    const handleSubmmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+        const user = {
+            email,
+            firstName,
+            lastName,
+        }
+        const showId = show?.showId as number
+        const totalTickets = amount.reduce((acc, ticket) => acc + ticket.amount, 0)
+        if (totalTickets !== selectedSeats.length) {
+            setAlert('Du har inte valt några platser')
+            return
+        }
+        if (selectedSeats.length < 1) {
+            setAlert('Du har inte valt några biljetter')
+            return
+        }
+        if (!token) makebooking.mutate({ showId, seats: selectedSeats, user })
+        else makebooking.mutate({ showId, seats: selectedSeats })
+    }
     return (
         <>
             <Container className="py-4">
@@ -55,7 +75,6 @@ export default function BookingPage() {
                                             <BsClock size={18} className="text-primary me-2" />
                                             <span className="me-2">{show?.showTime.split('T')[1]}</span>
                                         </div>
-                                        {/* //ändra till duration i korrekt format */}
                                         <div className="d-flex align-items-center py-1">
                                             <BsClock size={18} className="text-primary me-2" />
                                             <span>{show?.duration} min</span>
@@ -81,37 +100,49 @@ export default function BookingPage() {
                 <div className="seat-picker rounded-3 overflow-auto my-5">
                     {show && <BookingSeats show={show} tickets={amount} onSeatsSelected={setSelectedSeats} />}
                 </div>
-
                 <Row className="gy-4">
-                    <Card>
-                        <Card.Header className="bg-primary ">
-                            <h3 className="mb-0 text-dark text-center">Ange dina uppgifter</h3>
-                        </Card.Header>
-                    </Card>
-                    <div className="d-flex flex-column align-items-center">
-                        {[
-                            { label: 'Namn', type: 'text' },
-                            { label: 'Efternamn', type: 'text' },
-                            { label: 'E-post', type: 'email' },
-                            { label: 'Telefon', type: 'tel' },
-                        ].map(({ label, type }) => (
-                            <Col md={4} key={label}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>{label}</Form.Label>
-                                    <Form.Control type={type} placeholder={`Ange ditt ${label.toLowerCase()}`} />
-                                </Form.Group>
-                            </Col>
-                        ))}
-                    </div>
+                    {!token && (
+                        <>
+                            <Card>
+                                <Card.Header className="bg-primary ">
+                                    <h3 className="mb-0 text-dark text-center">Ange dina uppgifter</h3>
+                                </Card.Header>
+                            </Card>
+                            <div className="d-flex flex-column align-items-center">
+                                {[
+                                    { label: 'E-post', type: 'email', value: email, onChange: setEmail },
+                                    { label: 'Förnamn', type: 'text', value: firstName, onChange: setFirstName },
+                                    { label: 'Efternamn', type: 'text', value: lastName, onChange: setLastName },
+                                ].map(({ label, type, value, onChange }) => (
+                                    <Col md={4} key={label}>
+                                        <Form.Group className="mb-3">
+                                            <Form.Label>{label}</Form.Label>
+                                            <Form.Control
+                                                type={type}
+                                                placeholder={`Ange ditt ${label.toLowerCase()}`}
+                                                value={value}
+                                                onChange={(e) => onChange(e.target.value)}
+                                            />
+                                        </Form.Group>
+                                    </Col>
+                                ))}
+                            </div>
+                        </>
+                    )}
                     <Col className="d-flex justify-content-center">
-                        <button
-                            className="btn btn-outline-primary"
-                            onClick={() => console.log({ showId: show?.showId, seats: selectedSeats })}
-                        >
+                        <button className="btn btn-outline-primary" onClick={handleSubmmit}>
                             Boka Platser
                         </button>
                     </Col>
                 </Row>
+                <div className=" d-flex justify-content-center align-items-center mt-3">
+                    {alert && <p className="text-center alert alert-danger w-75 text-white">{alert}</p>}
+                    {makebooking.isError && (
+                        <p className="text-center alert alert-danger w-75 text-white">
+                            {makebooking.error.response?.data.msg}
+                        </p>
+                    )}
+                </div>
             </Container>
         </>
     )
