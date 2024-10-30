@@ -92,8 +92,9 @@ export type SHOWSONMOVIE = {
 export interface BOOKING {
     showId: number
     seats: SELECTEDSEATS[]
-    user: USER[]
+    user: USER
 }
+
 export type PARTIALBOOKING = Partial<BOOKING>
 
 export type BOOKINGRESP = {
