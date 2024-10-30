@@ -3,14 +3,10 @@ import { Container, Row, Col, Image, Button, ButtonGroup, Card, Form, Stack } fr
 import { BsCalendar, BsClock, BsPin, BsCreditCard2Back } from 'react-icons/bs'
 import { useGetShow } from '../../utils/api/booking/useGetShow'
 import { useGetTickets } from '../../utils/api/booking/useGetTicket'
-import ErrorBooking from './ErrorBooking'
-import LoadingBooking from './LoadingBooking'
 import TicketTypeSelector from '../../componets/TicketTypeSelector'
 import { TICKETAMOUNT, SELECTEDSEATS } from '@/utils/types/types'
 import BookingSeats from '../../componets/booking/BookingSeats'
 import { useMakebooking } from '../../utils/api/booking/usePostBooking'
-import { Value } from 'sass'
-import { onChange } from 'react-toastify/dist/core/store'
 import { useAuth } from '../../context/authContext'
 
 export default function BookingPage() {
@@ -76,7 +72,6 @@ export default function BookingPage() {
                                             <BsClock size={18} className="text-primary me-2" />
                                             <span className="me-2">{show?.showTime.split('T')[1]}</span>
                                         </div>
-                                        {/* //ändra till duration i korrekt format */}
                                         <div className="d-flex align-items-center py-1">
                                             <BsClock size={18} className="text-primary me-2" />
                                             <span>{show?.duration} min</span>
@@ -139,6 +134,11 @@ export default function BookingPage() {
                 </Row>
                 <div className=" d-flex justify-content-center align-items-center mt-3">
                     {alert && <p className="text-center alert alert-danger w-75 text-white">{alert}</p>}
+                    {makebooking.isError && (
+                        <p className="text-center alert alert-danger w-75 text-white">
+                            {makebooking.error.response?.data.msg}
+                        </p>
+                    )}
                 </div>
             </Container>
         </>

@@ -1,6 +1,10 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { BOOKING, BOOKINGRESP, PARTIALBOOKING } from '../../types/types'
 import { useMutation } from '@tanstack/react-query'
+
+type BookingError = {
+    msg: string
+}
 
 const postBooking = async (dataBooking: PARTIALBOOKING) => {
     console.log(dataBooking)
@@ -9,7 +13,7 @@ const postBooking = async (dataBooking: PARTIALBOOKING) => {
 }
 
 export const useMakebooking = () => {
-    return useMutation<BOOKINGRESP, Error, PARTIALBOOKING>({
+    return useMutation<BOOKINGRESP, AxiosError<BookingError>, PARTIALBOOKING>({
         mutationFn: postBooking,
         onSuccess: (dataBooking) => {
             console.log(dataBooking)
