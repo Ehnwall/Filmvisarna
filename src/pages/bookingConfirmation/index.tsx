@@ -12,6 +12,7 @@ import {
 } from 'react-icons/bs'
 import { useParams } from 'react-router-dom'
 import { SEAT } from '@/utils/types/types'
+import { formatTime, getDuration } from '../../utils/timeFormat'
 
 const ConfirmationPage = () => {
     const { bookingId } = useParams<{ bookingId: string }>()
@@ -22,7 +23,7 @@ const ConfirmationPage = () => {
         return <div>No booking found.</div>
     }
 
-    const totalPrice = booking.seats.reduce((total, seat) => total + seat.ticketPrice, 0)
+    const totalPrice = booking.seats.reduce((total: number, seat: SEAT) => total + seat.ticketPrice, 0)
 
     const groupSeatsByRow = (seats: SEAT[]) => {
         return seats.reduce((acc, seat) => {
@@ -36,6 +37,8 @@ const ConfirmationPage = () => {
     }
 
     const groupedSeats = groupSeatsByRow(booking.seats)
+
+    const { hours, minutes } = getDuration(booking.durationMin)
 
     return (
         <Container className="mt-5 p-3 mb-1 bg-body-tertiary">
@@ -60,7 +63,7 @@ const ConfirmationPage = () => {
                         <ul className="list-unstyled">
                             <li className="d-flex align-items-center justify-content-left my-1">
                                 <BsCalendar size={18} className="text-primary me-2" />
-                                <span>{booking.showTime}</span>
+                                <span>{formatTime(booking.showTime).getWeekdayWithDate}</span>
                             </li>
                             <li className="d-flex align-items-center justify-content-left my-1">
                                 <BsGeoAlt size={18} className="text-primary me-2" />
@@ -72,9 +75,13 @@ const ConfirmationPage = () => {
                             </li>
                             <li className="d-flex align-items-center justify-content-left my-1">
                                 <BsClock size={18} className="text-primary me-2" />
-                                <span>{booking.showTime}</span>{' '}
-                                <BsArrowRightShort size={18} className="text-primary mx-1" />{' '}
+                                <span>{formatTime(booking.showTime).getTime}</span>
+                                <BsArrowRightShort size={18} className="text-primary mx-1" />
+                                <span>
+                                    {hours} tim {minutes} min
+                                </span>
                             </li>
+
                             {Object.keys(groupedSeats).map((row) => (
                                 <li key={row} className="d-flex align-items-center justify-content-left my-1">
                                     <BsBuildingDown size={18} className="text-primary me-2" />
