@@ -70,7 +70,7 @@ const getSeatStatus = (showId) => {
     WHERE showId = ?
     `
     const occupiedSeatsStmt = db.prepare(getBookedSeats).all(showId)
-    return occupiedSeatsStmt.map((seat) => seat.seatNumber)
+    return occupiedSeatsStmt.map((seat) => seat.cinemaSeatsID)
 }
 
 export default { getAllShows, getSeatStatus, getShowById }

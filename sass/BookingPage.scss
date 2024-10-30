@@ -35,3 +35,6 @@
     pointer-events: auto;
     cursor: not-allowed;
 }
+.occupied > input:disabled {
+    background-color: $primary;
+}

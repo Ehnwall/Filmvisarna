@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap'
 import { useGetSeats } from '../../utils/api/cinemas/useGetSeats'
 import { CINEMASEATS, SHOWS, TICKETAMOUNT } from '../../utils/types/types'
+import { useGetOccupiedSeats } from '../../utils/api/cinemas/useGetOccupiedSeats'
 
 export default function BookingSeats({
     show,
@@ -13,11 +14,10 @@ export default function BookingSeats({
     onSeatsSelected: (seats: any[]) => void
 }) {
     const [seatIdArray, setSeatIdArray] = useState<number[]>([])
-    const cinemaId = show.cinemaId
 
     const result = tickets.reduce((acc, obj) => acc + obj.amount, 0)
-    const { data: seats = [] } = useGetSeats(cinemaId)
-
+    const { data: seats = [] } = useGetSeats(show.cinemaId)
+    const { data: occupiedSeats } = useGetOccupiedSeats()
     const seatsByRow = seats.reduce((row: Record<number, CINEMASEATS[]>, seat: CINEMASEATS) => {
         if (row[seat.seatRow]) {
             row[seat.seatRow].push(seat)
@@ -72,15 +72,16 @@ export default function BookingSeats({
                     {seatsInRow.map((seat) => {
                         const isSeatSelected = seatIdArray.includes(seat.Id)
                         const isInactive = seatClicked >= result && !isSeatSelected
+                        const isOccopied = occupiedSeats?.occupiedSeats.includes(seat.Id)
 
                         return (
                             <Form.Check
                                 key={seat.Id}
                                 type="checkbox"
-                                className={isInactive ? 'inactive' : ''}
+                                className={`${isInactive ? 'inactive' : ''} ${isOccopied ? 'occupied inactive' : ''}`}
                                 onChange={(e) => handleSeatChange(e.target.checked, seat.Id)}
                                 checked={isSeatSelected}
-                                disabled={isInactive}
+                                disabled={isInactive || isOccopied}
                             />
                         )
                     })}
