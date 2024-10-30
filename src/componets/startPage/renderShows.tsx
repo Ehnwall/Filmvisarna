@@ -60,7 +60,7 @@ const MoviesWithCinnema = () => {
     return (
         <>
             <Container>
-                <Dropdown className="py-2">
+                <Dropdown className="py-2" id="book">
                     <Dropdown.Toggle className="btn-filter mb-3 mt-2" variant="primary" id="dropdown-basic">
                         Vecka {weekSelect}
                         <BsArrowDown />
