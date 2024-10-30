@@ -46,7 +46,11 @@ export default function BookingPage() {
         const showId = show?.showId as number
         const totalTickets = amount.reduce((acc, ticket) => acc + ticket.amount, 0)
         if (totalTickets !== selectedSeats.length) {
-            setAlert('Du har inte valt rätt antal biljetter')
+            setAlert('Du har inte valt några platser')
+            return
+        }
+        if (selectedSeats.length < 1) {
+            setAlert('Du har inte valt några biljetter')
             return
         }
         if (!token) makebooking.mutate({ showId, seats: selectedSeats, user })
