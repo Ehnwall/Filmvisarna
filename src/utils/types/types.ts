@@ -1,5 +1,5 @@
 export type MOVIE = {
-    id: number
+    Id: number
     title: string
     durationMin: number
     ageLimit: string
@@ -43,6 +43,16 @@ export type SIGNINRESPONSE = {
     firstName: string
     lastName: string
 }
+export type SIGNUP = {
+    firstName: string
+    lastName: string
+    email: string
+    password: string
+}
+export type SIGNUPRESPONSE = {
+    changes: string
+    lastInsertRowid: string
+}
 type Description = {
     director: string
     cast: string[]
@@ -58,7 +68,7 @@ export type SHOWS = {
     posterURL: string
     genre: string[]
     duration: number
-    agelimit: number
+    ageLimit: number
     movieTitle: string
     cinemaName: string
     cinemaId: number
@@ -91,3 +101,27 @@ export type SHOWSONMOVIE = {
 export type OCCUPIEDSEATS = {
     occupiedSeats: number[]
 }
+export interface BOOKING {
+    showId: number
+    seats: SELECTEDSEATS[]
+    user: USER
+}
+
+export type PARTIALBOOKING = Partial<BOOKING>
+
+export type BOOKINGRESP = {
+    msg: string
+    bookingId: number
+}
+
+export type SELECTEDSEATS = {
+    seatId: number
+    ticketType: number
+}
+
+export type USER = {
+    email: string
+    firstName: string
+    lastName: string
+}
+

@@ -33,7 +33,7 @@ const create = async ({ email, firstName, lastName, password, role = 'user' }) =
 
     const stmt = db.prepare(checkIfUserExistsQuery).get(email.toLowerCase())
     if (stmt && stmt.role !== 'guest') {
-        throw new Error('User already exists')
+        throw new Error('En användare med denna email finns redan')
     }
 
     const salt = await bcrypt.genSalt(12)
