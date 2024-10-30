@@ -11,7 +11,7 @@ const fetchOccupiedSeats = async (showId: string) => {
     const { data } = await axios.get<OCCUPIEDSEATS>(`/api/occupiedSeats/${showId}/`)
     return data
 }
-const fetchSeats = async (cinemaId: string) => {
+const fetchSeats = async (cinemaId: number) => {
     const { data } = await axios.get<CINEMASEATS[]>(`/api/cinemas/${cinemaId}/seats`)
     return data
 }
@@ -32,7 +32,7 @@ export const useGetBookingInformation = () => {
         queryFn: () => fetchOccupiedSeats(showId),
     })
 
-    const cinemaId = showsQuery.data?.cinemaId
+    const cinemaId = showsQuery.data && showsQuery.data?.cinemaId as number
 
     const seatsQuery = useQuery({
         queryKey: ['seats', showId],

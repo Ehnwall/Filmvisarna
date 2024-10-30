@@ -40,8 +40,9 @@ export default function BookingPage() {
             firstName,
             lastName,
         }
-        const showId = showsQuery?.showId as number
+        const showId = showsQuery.data && (showsQuery?.data.showId as number)
         const totalTickets = amount.reduce((acc, ticket) => acc + ticket.amount, 0)
+        console.log({ showId, selectedSeats, user })
         if (totalTickets !== selectedSeats.length) {
             setAlert('Du har inte valt några platser')
             return
@@ -61,6 +62,7 @@ export default function BookingPage() {
                         <Row className="gy-4">
                             <Col xs={12}>
                                 {showsQuery.isLoading && <LoadingBooking />}
+                                {showsQuery.isError && <p>Hittade ingen show</p>}
                                 {showsQuery.data && <BookingInformation show={showsQuery.data} />}
                             </Col>
                         </Row>
