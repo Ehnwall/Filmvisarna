@@ -1,19 +1,60 @@
-import { Container, Row, Col, Image, Button, ButtonGroup, Card, Form } from 'react-bootstrap'
+import { useEffect, useState } from 'react'
+import { Container, Row, Col, Image, Button, ButtonGroup, Card, Form, Stack } from 'react-bootstrap'
 import { BsCalendar, BsClock, BsPin, BsCreditCard2Back } from 'react-icons/bs'
 import { useGetShow } from '../../utils/api/booking/useGetShow'
-import ErrorBooking from './ErrorBooking'
-import LoadingBooking from './LoadingBooking'
+import { useGetTickets } from '../../utils/api/booking/useGetTicket'
+import TicketTypeSelector from '../../componets/TicketTypeSelector'
+import { TICKETAMOUNT, SELECTEDSEATS } from '@/utils/types/types'
+import BookingSeats from '../../componets/booking/BookingSeats'
+import { useMakebooking } from '../../utils/api/booking/usePostBooking'
+import { useAuth } from '../../context/authContext'
 
 export default function BookingPage() {
-    const getShow = useGetShow()
-    console.log(getShow.data)
-    if (getShow.isLoading) return <LoadingBooking />
-    if (getShow.isError) return <ErrorBooking />
-    const show = getShow.data
-    const rowSizes = [8, 9, 10, 10, 10, 10, 12, 13]
-    const seatArray = rowSizes.map(
-        (size) => new Array(size).fill(null).map(() => ({ booked: Math.random() < 0.3 })) // Randomly mark some seats as booked
-    )
+    const { data: show, isLoading: isShowLoading, isError: isShowError } = useGetShow()
+    const { data: tickets, isLoading: isTicketsLoading, isError: isTicketsError } = useGetTickets()
+    const makebooking = useMakebooking()
+    const { token } = useAuth()
+    const [amount, setAmount] = useState<TICKETAMOUNT[]>([])
+    const [selectedSeats, setSelectedSeats] = useState<SELECTEDSEATS[]>([])
+    const [alert, setAlert] = useState<string>('')
+    const [email, setEmail] = useState<string>('')
+    const [firstName, setFirstName] = useState<string>('')
+    const [lastName, setLastName] = useState<string>('')
+    useEffect(() => {
+        if (tickets) {
+            const initialAmounts = tickets.map((ticket) => ({
+                ticketId: ticket.Id,
+                amount: 0,
+            }))
+            setAmount(initialAmounts)
+        }
+    }, [tickets])
+    useEffect(() => {
+        const totalTickets = amount.reduce((acc, ticket) => acc + ticket.amount, 0)
+        if (selectedSeats.length === totalTickets) {
+            setAlert('')
+        }
+    }, [amount, selectedSeats])
+    const handleSubmmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+        const user = {
+            email,
+            firstName,
+            lastName,
+        }
+        const showId = show?.showId as number
+        const totalTickets = amount.reduce((acc, ticket) => acc + ticket.amount, 0)
+        if (totalTickets !== selectedSeats.length) {
+            setAlert('Du har inte valt några platser')
+            return
+        }
+        if (selectedSeats.length < 1) {
+            setAlert('Du har inte valt några biljetter')
+            return
+        }
+        if (!token) makebooking.mutate({ showId, seats: selectedSeats, user })
+        else makebooking.mutate({ showId, seats: selectedSeats })
+    }
     return (
         <>
             <Container className="py-4">
@@ -34,7 +75,6 @@ export default function BookingPage() {
                                             <BsClock size={18} className="text-primary me-2" />
                                             <span className="me-2">{show?.showTime.split('T')[1]}</span>
                                         </div>
-                                        {/* //ändra till duration i korrekt format */}
                                         <div className="d-flex align-items-center py-1">
                                             <BsClock size={18} className="text-primary me-2" />
                                             <span>{show?.duration} min</span>
@@ -44,65 +84,10 @@ export default function BookingPage() {
                                             <span className="me-2">{show?.cinemaName}</span>
                                         </div>
                                     </Card.Body>
-                                </Card>
-                                0{' '}
+                                </Card>{' '}
                             </Col>
                             <Col xs={12}>
-                                <Card>
-                                    <Card.Header className="bg-primary ">
-                                        <h3 className="mb-0 text-dark">Antal Biljetter</h3>
-                                    </Card.Header>
-                                    <Card.Body xs={4}>
-                                        <Row className="g-0">
-                                            <Col xs={12} lg={8} className="d-flex justify-content-left mb-3">
-                                                <div className="fw-bold" style={{ minWidth: '100px' }}>
-                                                    Barn
-                                                </div>
-                                                <div className="text-center">80 kr</div>
-                                                <ButtonGroup className="btn-group-sm ms-5">
-                                                    <Button variant="outline-primary px-3">-</Button>
-                                                    <Button
-                                                        className="bg-body-tertiary pb-2"
-                                                        variant="outline-primary px-3"
-                                                    >
-                                                        0
-                                                    </Button>
-                                                    <Button variant="outline-primary px-3">+</Button>
-                                                </ButtonGroup>
-                                            </Col>
-                                            <Col xs={12} lg={8} className="d-flex justify-content-left mb-3">
-                                                <div className="fw-bold" style={{ minWidth: '91px' }}>
-                                                    Pensionär
-                                                </div>
-                                                <div className="text-center ">120 kr</div>
-                                                <ButtonGroup className="btn-group-sm ms-5">
-                                                    <Button variant="outline-primary px-3">-</Button>
-                                                    <Button className="bg-body-tertiary" variant="outline-primary px-3">
-                                                        0
-                                                    </Button>
-                                                    <Button variant="outline-primary px-3">+</Button>
-                                                </ButtonGroup>
-                                            </Col>
-                                            <Col xs={12} lg={8} className="d-flex justify-content-left mb-3">
-                                                <div className="fw-bold" style={{ minWidth: '83px' }}>
-                                                    Vuxen
-                                                </div>
-                                                <div className="text-center ms-2">140 kr</div>
-                                                <ButtonGroup className="btn-group-sm ms-5">
-                                                    <Button variant="outline-primary px-3">-</Button>
-                                                    <Button className="bg-body-tertiary" variant="outline-primary px-3">
-                                                        0
-                                                    </Button>
-                                                    <Button variant="outline-primary px-3">+</Button>
-                                                </ButtonGroup>
-                                            </Col>
-                                            <div className="fw-bold" style={{ minWidth: '83px' }}>
-                                                <BsCreditCard2Back size={18} className="text-primary me-2" />
-                                                Total: 120 kr
-                                            </div>
-                                        </Row>
-                                    </Card.Body>
-                                </Card>
+                                <TicketTypeSelector ticketType={tickets || []} amount={amount} setAmount={setAmount} />
                             </Col>
                         </Row>
                     </Col>
@@ -113,44 +98,51 @@ export default function BookingPage() {
                     </Col>
                 </Row>
                 <div className="seat-picker rounded-3 overflow-auto my-5">
-                    <div className="seat-picker__container bg-body-tertiary py-5 rounded">
-                        <div className="mx-auto bg-light pb-4 mb-5 rounded-5 w-50 "></div>
-                        {seatArray.map((row, rowIndex) => (
-                            <div key={rowIndex} className="seat-row">
-                                {row.map((seat, seatIndex) => (
-                                    <Form.Check key={seatIndex} type="checkbox" disabled={seat.booked} />
-                                ))}
-                            </div>
-                        ))}
-                    </div>
+                    {show && <BookingSeats show={show} tickets={amount} onSeatsSelected={setSelectedSeats} />}
                 </div>
                 <Row className="gy-4">
-                    <Card>
-                        <Card.Header className="bg-primary ">
-                            <h3 className="mb-0 text-dark text-center">Ange dina uppgifter</h3>
-                        </Card.Header>
-                    </Card>
-                    <div className="d-flex flex-column align-items-center">
-                        {[
-                            { label: 'Namn', type: 'text' },
-                            { label: 'Efternamn', type: 'text' },
-                            { label: 'E-post', type: 'email' },
-                            { label: 'Telefon', type: 'tel' },
-                        ].map(({ label, type }) => (
-                            <Col md={4} key={label}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>{label}</Form.Label>
-                                    <Form.Control type={type} placeholder={`Ange ditt ${label.toLowerCase()}`} />
-                                </Form.Group>
-                            </Col>
-                        ))}
-                    </div>
+                    {!token && (
+                        <>
+                            <Card>
+                                <Card.Header className="bg-primary ">
+                                    <h3 className="mb-0 text-dark text-center">Ange dina uppgifter</h3>
+                                </Card.Header>
+                            </Card>
+                            <div className="d-flex flex-column align-items-center">
+                                {[
+                                    { label: 'E-post', type: 'email', value: email, onChange: setEmail },
+                                    { label: 'Förnamn', type: 'text', value: firstName, onChange: setFirstName },
+                                    { label: 'Efternamn', type: 'text', value: lastName, onChange: setLastName },
+                                ].map(({ label, type, value, onChange }) => (
+                                    <Col md={4} key={label}>
+                                        <Form.Group className="mb-3">
+                                            <Form.Label>{label}</Form.Label>
+                                            <Form.Control
+                                                type={type}
+                                                placeholder={`Ange ditt ${label.toLowerCase()}`}
+                                                value={value}
+                                                onChange={(e) => onChange(e.target.value)}
+                                            />
+                                        </Form.Group>
+                                    </Col>
+                                ))}
+                            </div>
+                        </>
+                    )}
                     <Col className="d-flex justify-content-center">
-                        <a className="btn btn-outline-primary" href="/confirmation-page">
+                        <button className="btn btn-outline-primary" onClick={handleSubmmit}>
                             Boka Platser
-                        </a>
+                        </button>
                     </Col>
                 </Row>
+                <div className=" d-flex justify-content-center align-items-center mt-3">
+                    {alert && <p className="text-center alert alert-danger w-75 text-white">{alert}</p>}
+                    {makebooking.isError && (
+                        <p className="text-center alert alert-danger w-75 text-white">
+                            {makebooking.error.response?.data.msg}
+                        </p>
+                    )}
+                </div>
             </Container>
         </>
     )

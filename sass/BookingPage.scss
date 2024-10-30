@@ -7,12 +7,12 @@
 .form-check-input:hover {
     cursor: pointer;
 }
-.form-check-input:disabled {
-    background-color: rgb(184, 0, 0);
-    cursor: not-allowed;
-    border: none;
-    pointer-events: auto;
-}
+// .form-check-input:disabled {
+//     background-color: rgb(184, 0, 0);
+//     cursor: not-allowed;
+//     border: none;
+//     pointer-events: auto;
+// }
 
 .seat-picker__container {
     min-width: 35rem;
@@ -28,4 +28,13 @@
 }
 .form-check-input {
     font-size: 2rem;
+}
+
+.inactive {
+    opacity: 0.6;
+    pointer-events: auto;
+    cursor: not-allowed;
+}
+.occupied > input:disabled {
+    background-color: $primary;
 }
