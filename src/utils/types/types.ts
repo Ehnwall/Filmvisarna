@@ -98,7 +98,9 @@ export type SHOWSONMOVIE = {
     cinemaName: string
     cinemaId: number
 }
-
+export type OCCUPIEDSEATS = {
+    occupiedSeats: number[]
+}
 export interface BOOKING {
     showId: number
     seats: SELECTEDSEATS[]
