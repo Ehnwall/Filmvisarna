@@ -6,6 +6,7 @@ import BookingPage from '../pages/booking/index'
 import StartPage from '../pages/startPage/StartPage'
 import IndividualMovie from '../pages/oneMoviePage'
 import Register from '../pages/authSignUp'
+import ConfirmationPage from '../pages/bookingConfirmation'
 
 export default [
     { path: '/', element: <StartPage />, menuLabel: 'Hem' },
@@ -15,9 +16,8 @@ export default [
     { path: '/registrera', element: <Register /> },
     { path: '/film/:movieId', element: <IndividualMovie /> },
     { path: '/boka-film/:showId', element: <BookingPage /> },
+    { path: '/boknings-bekräftelse/:bookingId', element: <ConfirmationPage /> },
 ]
-
-
 
 //Paths
 // startpage url: `/`

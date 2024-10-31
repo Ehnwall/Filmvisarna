@@ -73,7 +73,6 @@ export function BookingSeats({
                             const isSeatSelected = seatIdArray.includes(seat.Id)
                             const isInactive = seatClicked >= result && !isSeatSelected
                             const isOccopied = occupiedSeats?.occupiedSeats.includes(seat.Id)
-
                             return (
                                 <Form.Check
                                     key={seat.Id}
