@@ -5,8 +5,8 @@ import Header from './componets/header'
 import { AuthProvider } from './context/authContext'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
+const queryClient = new QueryClient()
 export default function App() {
-    const queryClient = new QueryClient()
     // watch for route changes
     const { pathname } = useLocation()
 
