@@ -101,7 +101,7 @@ const MoviesWithCinnema = () => {
                                             {formattedDate.split(' ')[0]}
                                         </Card.Title>
                                         <Badge className="py-2 d-inline-flex align-items-center p-3" bg="secondary">
-                                            <BsCalendar className="me-2" /> {formattedDate.split(' ')[1]}
+                                            <BsCalendar className="me-2" /> {formatTime(dayOfWeek).getShortNumericDate}
                                         </Badge>
                                     </Card.Body>
                                 </Card>
@@ -130,13 +130,9 @@ const MoviesWithCinnema = () => {
                                         <Card.Title>{show.movieTitle}</Card.Title>
                                         <Card.Text className="d-flex flex-wrap gap-2">
                                             {show.genre.map((genre: string, index: any) => (
-                                                <span
-                                                    key={index}
-                                                    className="bg-primary text-black rounded px-1"
-                                                    style={{ backgroundColor: 'bg - primary' }}
-                                                >
+                                                <Badge key={index} bg="primary" className="text-black">
                                                     {genre}
-                                                </span>
+                                                </Badge>
                                             ))}
                                         </Card.Text>
 
@@ -189,13 +185,9 @@ const MoviesWithCinnema = () => {
                                         <Card.Title>{show.movieTitle}</Card.Title>
                                         <Card.Text className="d-flex flex-wrap gap-2">
                                             {show.genre.map((genre: string, index: any) => (
-                                                <span
-                                                    key={index}
-                                                    className="bg-primary text-black rounded px-1"
-                                                    style={{ backgroundColor: 'bg - primary' }}
-                                                >
+                                                <Badge key={index} bg="primary" className="text-black">
                                                     {genre}
-                                                </span>
+                                                </Badge>
                                             ))}
                                         </Card.Text>
                                         <Badge className="py-1 d-inline-flex align-items-center" bg="secondary">

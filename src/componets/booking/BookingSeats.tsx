@@ -78,7 +78,7 @@ export default function BookingSeats({
                             <Form.Check
                                 key={seat.Id}
                                 type="checkbox"
-                                className={`${isInactive ? 'inactive' : ''} ${isOccopied ? 'occupied inactive' : ''}`}
+                                className={`${isInactive ? 'inactive' : ''} ${isOccopied ? 'occupied inactive' : ''} `}
                                 onChange={(e) => handleSeatChange(e.target.checked, seat.Id)}
                                 checked={isSeatSelected}
                                 disabled={isInactive || isOccopied}

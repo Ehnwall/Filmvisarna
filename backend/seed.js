@@ -67,7 +67,7 @@ const movies = [
             cast: ['Marlon Brando', 'Al Pacino', 'James Caan', 'Richard S. Castellano'],
             synopsis:
                 'Den åldrande patriarken för en organiserad brottslig dynasti överlämnar kontrollen över sitt hemliga imperium till sin motvillige son.',
-            genre: ['Drama', 'Gangster', 'brottslighet'],
+            genre: ['Drama', 'Gangster', 'Brottslighet'],
             speech: ['Svenska', 'Engelska'],
             language: ['Engelska', 'Svenska'],
             year: 1972,
@@ -101,7 +101,7 @@ const movies = [
             cast: ['Amy Poehler', 'Maya Hawke', 'Kensington Tallman', 'Liza Lapira', 'Tony Hale'],
             synopsis:
                 'En uppföljare där Riley går in i puberteten och upplever helt nya, mer komplexa känslor som en följd. När Riley försöker anpassa sig till sina tonår, kämpar hennes gamla känslor med att anpassa sig till möjligheten att bli ersatta.',
-            genre: ['Drama', 'Komedi', 'Familj', 'Animation'],
+            genre: ['Drama', 'Komedi', 'Animation'],
             speech: ['Svenska', 'Engelska'],
             language: ['Engelska', 'Svenska'],
             year: 2024,
@@ -118,7 +118,7 @@ const movies = [
             cast: ['Steve Carell', 'Pierre Coffin', 'Will Ferrell', 'Sofía Vergara', 'Chris Renaud'],
             synopsis:
                 'Gru, Lucy, Margo, Edith och Agnes välkomnar en ny familjemedlem, Gru Jr., som är fast besluten att plåga sin pappa. Samtidigt ställs Gru inför en ny fiende, Maxime Le Mal, och hans flickvän Valentina, vilket tvingar hela familjen att fly och kämpa för att hålla sig ett steg före.',
-            genre: ['Drama', 'Komedi', 'Familj', 'Animation'],
+            genre: ['Drama', 'Komedi', 'Animation'],
             speech: ['Svenska', 'Engelska'],
             language: ['Engelska', 'Svenska'],
             year: 2024,
@@ -135,7 +135,7 @@ const movies = [
             cast: ['Joaquin Phoenix', 'Robert De Niro', 'Zazie Beetz', 'Frances Conroy'],
             synopsis:
                 'Arthur Fleck, en festclown och misslyckad ståuppkomiker, lever ett fattigt liv tillsammans med sin sjuka mor. När samhället stöter bort honom och kallar honom en "freak" bestämmer han sig för att omfamna ett liv i kaos i Gotham City.',
-            genre: ['Brott', 'Thriller', 'Drama', 'Tragedi'],
+            genre: ['Brott', 'Thriller', 'Drama'],
             speech: ['Svenska', 'Engelska'],
             language: ['Engelska', 'Svenska'],
             year: 2019,
@@ -152,7 +152,7 @@ const movies = [
             cast: ['Adam Sandler', 'Andy Samberg', 'Selena Gomez', 'Kevin James'],
             synopsis:
                 'Dracula, som driver en lyxig resort långt bort från människovärlden, blir överbeskyddande när en pojke upptäcker resorten och blir förälskad i grevens tonårsdotter.',
-            genre: ['Animation', 'Komedi', 'Familj', 'Äventyr'],
+            genre: ['Animation', 'Komedi', 'Familj'],
             speech: ['Svenska', 'Engelska'],
             language: ['Engelska', 'Svenska'],
             year: 2012,
@@ -187,7 +187,7 @@ const movies = [
             cast: ['Catherine O Hara', 'Martin Short', 'Martin Landau', 'Charlie Tahan'],
             synopsis:
                 'När en pojkes älskade hund plötsligt går bort försöker han återuppliva djuret genom ett kraftfullt vetenskapligt experiment.',
-            genre: ['Animation', 'Familj', 'Drama', 'Komedi'],
+            genre: ['Animation', 'Familj', 'Drama'],
             speech: ['Svenska', 'Engelska'],
             language: ['Engelska', 'Svenska'],
             year: 2012,
@@ -204,7 +204,7 @@ const movies = [
             cast: ['Tom Hanks', 'Tim Allen', 'Don Rickles', 'Jim Varney', 'Wallace Shawn'],
             synopsis:
                 'En cowboydocka känner sig djupt hotad och svartsjuk när en ny rymdactionfigur tar hans plats som den främsta leksaken i en pojkes sovrum.',
-            genre: ['Animation', 'Familj', 'Drama', 'Komedi'],
+            genre: ['Animation', 'Familj', 'Drama'],
             speech: ['Svenska', 'Engelska'],
             language: ['Engelska', 'Svenska'],
             year: 1995,
@@ -221,7 +221,7 @@ const movies = [
             cast: ['Danny Elfman', 'Chris Sarandon', 'Catherine O Hara', 'William Hickey'],
             synopsis:
                 'Jack Skellington, kungen av Halloween Town, upptäcker Christmas Town, men hans försök att föra julen till sitt hem orsakar förvirring.',
-            genre: ['Animation', 'Familj', 'Musikal', 'Fantasi'],
+            genre: ['Animation', 'Familj', 'Musikal'],
             speech: ['Svenska', 'Engelska'],
             language: ['Engelska', 'Svenska'],
             year: 1993,
@@ -335,18 +335,34 @@ function getLocalISOString(daysOffset, hours, minutes) {
 
     return localTargetDate.toISOString()
 }
-const showTestData = `
-INSERT INTO shows (movieId, time, cinemaId) VALUES
-    (1, '${getLocalISOString(1, '18', '30')}', 1),
-    (2, '${getLocalISOString(1, '18', '30')}', 2),
-    (1, '${getLocalISOString(2, '16', '30')}', 1),
-    (3, '${getLocalISOString(2, '13', '30')}', 2),
-    (5, '${getLocalISOString(2, '18', '30')}', 1),
-    (10, '${getLocalISOString(2, '16', '30')}', 2),
-      (10, '${getLocalISOString(7, '16', '30')}', 2),
-    (4, '${getLocalISOString(2, '18', '30')}', 2);
 
-`
+function getRandomElement(array) {
+    return array[Math.floor(Math.random() * array.length)]
+}
+
+function generateShowTestData() {
+    const shows = []
+    const movies = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    const cinemas = [1, 2]
+    const times = [
+        { hours: 18, minutes: 30 },
+        { hours: 16, minutes: 30 },
+        { hours: 13, minutes: 30 },
+    ]
+
+    for (let day = 0; day < 28; day++) {
+        for (const cinema of cinemas) {
+            for (const time of times) {
+                const movie = getRandomElement(movies)
+                shows.push({ movieId: movie, time: getLocalISOString(day, time.hours, time.minutes), cinemaId: cinema })
+            }
+        }
+    }
+
+    return shows
+}
+
+const showTestData = generateShowTestData()
 
 const createUserTable = `
     CREATE TABLE IF NOT EXISTS users (
@@ -430,7 +446,10 @@ db.exec(ticketTypeQuery)
 // INSERT cinemas
 db.exec(insertCinemasQuery)
 // INSERT shows
-db.exec(showTestData)
+const insertShow = db.prepare('INSERT INTO shows (movieId, time, cinemaId) VALUES (?, ?, ?)')
+showTestData.forEach((show) => {
+    insertShow.run(show.movieId, show.time, show.cinemaId)
+})
 // INSERT bookings
 db.exec(bookingTestData)
 

@@ -90,15 +90,9 @@ export default function RenderMovies() {
                                         <Card.Title>{movie.title}</Card.Title>
                                         <Card.Text className="d-flex flex-wrap gap-2">
                                             {movie.description.genre.map((genre, index) => (
-                                                <span
-                                                    key={index}
-                                                    className="bg-primary text-black rounded px-2"
-                                                    style={{
-                                                        backgroundColor: 'bg - primary',
-                                                    }}
-                                                >
+                                                <Badge key={index} bg="primary" className="text-black">
                                                     {genre}
-                                                </span>
+                                                </Badge>
                                             ))}
                                         </Card.Text>
                                         <Stack direction="horizontal" gap={2} className="mx-auto card-badge">
