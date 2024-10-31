@@ -6,6 +6,7 @@ import Badge from 'react-bootstrap/Badge'
 import { useGetMovies } from '../../utils/api/movies/useGetMovies'
 import { useState } from 'react'
 import MovieCard from './MovieCard'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const convertDuration = (duration: number) => {
     const hours = Math.floor(duration / 60)
@@ -71,9 +72,20 @@ export default function RenderMovies() {
                 </Stack>
 
                 <Row xs={2} md={4} xl={6} className="g-3">
-                    {filteredMovies?.map((movie) => (
-                        <MovieCard key={movie.Id} movie={movie} />
-                    ))}
+                    <AnimatePresence>
+                        {filteredMovies?.map((movie) => (
+                            <motion.div
+                                key={movie.Id}
+                                layout
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.8 }}
+                                transition={{ duration: 0.4, ease: 'backInOut' }}
+                            >
+                                <MovieCard movie={movie} />
+                            </motion.div>
+                        ))}
+                    </AnimatePresence>
                 </Row>
             </Container>
         </>
