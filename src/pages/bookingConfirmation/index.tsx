@@ -49,7 +49,7 @@ const ConfirmationPage = () => {
                     </Card.Title>
                     <Card.Text>
                         Du får en bokningsbekräftelse via e-post med information om din bokning. Ordernummer:{' '}
-                        {booking.bookingNumberId}
+                        <span className="text-primary">{booking.bookingNumberId}</span>
                     </Card.Text>
                 </Card.Body>
             </Card>
