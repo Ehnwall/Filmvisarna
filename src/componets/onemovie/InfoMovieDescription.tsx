@@ -4,6 +4,7 @@ import { useGetOneMovie } from '../../utils/api/movies/useGetOneMovie'
 
 export function InfoMovieDescription() {
     const { data: movie } = useGetOneMovie()
+
     return (
         <Accordion defaultActiveKey="0">
             <Accordion.Item eventKey="0">
@@ -24,17 +25,19 @@ export function InfoMovieDescription() {
                             </Col>
                             <Col sm={6} md={4}>
                                 <h5>Originaltitel</h5>
-                                <p>{movie?.title}</p>
+                                <p>{movie?.description?.originalTitle}</p>
                             </Col>
                             <Col sm={6} md={4}>
-                                <h5>Originalspråk</h5>
-                                {movie?.description?.language?.map((lang: string, index: number) => (
-                                    <p key={index}>{lang}</p>
-                                ))}
+                                <h5>Språk</h5>
+                                <p>{movie?.description?.language}</p>
                             </Col>
-                            <Col sm={12} md={8}>
+                            <Col sm={6} md={4}>
+                                <h5>Text</h5>
+                                <p>{movie?.description?.text}</p>
+                            </Col>
+                            <Col sm={6} md={4}>
                                 <h5>Åldersgräns</h5>
-                                <p>Från {movie?.ageLimit} år</p>
+                                <p>{Number(movie?.ageLimit) === 0 ? 'Barnfilm' : `Från ${movie?.ageLimit} År`} </p>
                             </Col>
                         </Row>
                     </Stack>

@@ -58,8 +58,9 @@ type Description = {
     cast: string[]
     synopsis: string
     genre: string[]
-    speech: string[]
-    language: string[]
+    text: string
+    language: string
+    originalTitle: string
     year: number
 }
 export type SHOWS = {
