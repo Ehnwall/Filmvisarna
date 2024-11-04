@@ -7,12 +7,6 @@
 .form-check-input:hover {
     cursor: pointer;
 }
-// .form-check-input:disabled {
-//     background-color: rgb(184, 0, 0);
-//     cursor: not-allowed;
-//     border: none;
-//     pointer-events: auto;
-// }
 
 .seat-picker__container {
     min-width: 35rem;
@@ -37,4 +31,14 @@
 }
 .occupied > input:disabled {
     background-color: $primary;
+}
+input[type='checkbox'] {
+    transition: background-color 0.3s ease;
+}
+.seat-row input:hover {
+    background-color: $primary;
+    opacity: 0.5;
+}
+.cinema-screen {
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
 }

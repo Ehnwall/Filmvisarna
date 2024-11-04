@@ -2,17 +2,19 @@ import { useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap'
 import { CINEMASEATS, OCCUPIEDSEATS, TICKETAMOUNT } from '../../utils/types/types'
 
-export function BookingSeats({
-    occupiedSeats,
-    seats,
-    tickets,
-    onSeatsSelected,
-}: {
+type Props = {
     occupiedSeats: OCCUPIEDSEATS
     seats: CINEMASEATS[]
     tickets: TICKETAMOUNT[]
     onSeatsSelected: (seats: any[]) => void
-}) {
+}
+
+type Seats = {
+    seatId: number
+    ticketTypeId: number | null
+}
+
+export function BookingSeats({ occupiedSeats, seats, tickets, onSeatsSelected }: Props) {
     const [seatIdArray, setSeatIdArray] = useState<number[]>([])
 
     const result = tickets.reduce((acc, obj) => acc + obj.amount, 0)
@@ -43,7 +45,7 @@ export function BookingSeats({
         let newSeatsSelected = []
 
         for (let seatId of seatIdArray) {
-            let obj = { seatId }
+            let obj: Seats = { seatId, ticketTypeId: null }
             for (let ticket of ticketsCopy) {
                 if (ticket.amount > 0) {
                     obj.ticketTypeId = ticket.ticketId
@@ -61,12 +63,17 @@ export function BookingSeats({
         } else {
             onSeatsSelected(validSeats)
         }
+        console.log({ tickets }, { newSeatsSelected })
+        const chosenTicketSum = newSeatsSelected.length
+        if (chosenTicketSum === result) {
+            console.log('You have chosen all the tickets')
+        }
     }, [seatIdArray, tickets])
 
     return (
         <div className="seat-picker rounded-3 overflow-auto my-5">
             <div className="seat-picker__container bg-body-tertiary py-5 rounded">
-                <div className="mx-auto bg-light pb-4 mb-5 rounded-5 w-50"></div>
+                <div className="mx-auto bg-light pb-4 mb-5 w-50 cinema-screen"></div>
                 {Object.entries(seatsByRow).map(([row, seatsInRow]) => (
                     <div key={row} className="seat-row g-3">
                         {seatsInRow.map((seat) => {
