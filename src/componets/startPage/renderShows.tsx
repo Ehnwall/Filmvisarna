@@ -5,6 +5,7 @@ import { BsArrowDown, BsClock, BsCalendar } from 'react-icons/bs'
 import { useState } from 'react'
 import { formatTime } from '../../utils/timeFormat'
 import ShowCard from './ShowCard'
+import { SHOWS } from '@/utils/types/types'
 
 const MoviesWithCinnema = () => {
     const { data: shows, isLoading, error } = useGetShows()
@@ -37,7 +38,7 @@ const MoviesWithCinnema = () => {
         return { start: startOfThisWeek, end: endOfThisWeek }
     }
 
-    const getShowsForDate = (date: any, shows: any[]) => {
+    const getShowsForDate = (date: Date, shows: SHOWS[]) => {
         if (!date) return []
         return shows?.filter((show) => {
             const showDate = new Date(show.showTime)
@@ -74,13 +75,16 @@ const MoviesWithCinnema = () => {
                         ))}
                     </Dropdown.Menu>
                 </Dropdown>
-
                 <Row className="g-2">
                     {new Array(7).fill(null).map((_, index) => {
                         const dayOfWeek: any = new Date(currentWeek.start)
                         dayOfWeek.setDate(currentWeek.start.getDate() + index)
 
-                        const options = { weekday: 'long', day: 'numeric', month: 'numeric' }
+                        const options: Intl.DateTimeFormatOptions = {
+                            weekday: 'long',
+                            day: 'numeric',
+                            month: 'numeric',
+                        }
                         const formattedDate = dayOfWeek.toLocaleDateString('sv-SE', options)
 
                         const isPast = isPastDay(dayOfWeek)

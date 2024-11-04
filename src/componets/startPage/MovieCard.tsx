@@ -19,8 +19,9 @@ export default function MovieCard({ movie }: { movie: MOVIE }) {
                         <Badge bg="none" className="border">
                             {hours} tim {minutes} min
                         </Badge>
+
                         <Badge bg="none" className="border">
-                            Från {movie.ageLimit} År
+                            {Number(movie.ageLimit) === 0 ? 'Barnfilm' : `Från ${movie.ageLimit} År`}
                         </Badge>
                     </Stack>
                 </Card.Body>
