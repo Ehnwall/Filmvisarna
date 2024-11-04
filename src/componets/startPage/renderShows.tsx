@@ -4,6 +4,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import { BsArrowDown, BsClock, BsCalendar } from 'react-icons/bs'
 import { useState } from 'react'
 import { formatTime } from '../../utils/timeFormat'
+import ShowCard from './ShowCard'
 
 const MoviesWithCinnema = () => {
     const { data: shows, isLoading, error } = useGetShows()
@@ -111,51 +112,13 @@ const MoviesWithCinnema = () => {
                 </Row>
             </Container>
 
-            <Container className="py-5">
+            <Container className="py-5 pb-2">
                 <h2>Lilla Salongen</h2>
                 <div className="horizontal-scrollable">
                     <div className="g-3 py-2 rowcard">
                         {lillaSalongenShows &&
                             getShowsForDate(selectedDate, lillaSalongenShows)?.map((show) => (
-                                <Card key={show.showId} className="border card-horizontal__scroll ">
-                                    <div className="overflow-hidden rounded-bottom-0 rounded img-fluid w-100 h-75 fixed-imag">
-                                        <Card.Img
-                                            variant="top"
-                                            src={show.posterURL}
-                                            alt={show.movieTitle}
-                                            className="w-100 h-100"
-                                        />
-                                    </div>
-                                    <Card.Body>
-                                        <Card.Title>{show.movieTitle}</Card.Title>
-                                        <Card.Text className="d-flex flex-wrap gap-2">
-                                            {show.genre.map((genre: string, index: any) => (
-                                                <Badge key={index} bg="primary" className="text-black">
-                                                    {genre}
-                                                </Badge>
-                                            ))}
-                                        </Card.Text>
-
-                                        <Badge className="py-1 d-inline-flex align-items-center" bg="secondary">
-                                            <BsClock className="me-2" />
-                                            {new Date(show.showTime).toLocaleTimeString('sv-SE', {
-                                                hour: '2-digit',
-                                                minute: '2-digit',
-                                            })}
-                                        </Badge>
-                                        <Stack direction="horizontal" gap={3} className="mt-2">
-                                            <Badge bg="none" className="border">
-                                                {Math.floor(show.duration / 60)} tim {show.duration % 60} min
-                                            </Badge>
-                                            <Badge bg="none" className="border">
-                                                Från {show.ageLimit} År
-                                            </Badge>
-                                        </Stack>
-                                    </Card.Body>
-                                    <a className="btn btn-outline-primary mx-2 mb-2" href={`/boka-film/${show.showId}`}>
-                                        Boka
-                                    </a>
-                                </Card>
+                                <ShowCard key={show.showId} show={show} />
                             ))}
                         {lillaSalongenShows && getShowsForDate(selectedDate, lillaSalongenShows)?.length === 0 && (
                             <p className="bg-date-picker p-2 rounded ">
@@ -166,50 +129,13 @@ const MoviesWithCinnema = () => {
                 </div>
             </Container>
 
-            <Container className="py-5">
+            <Container className="py-5 pt-2">
                 <h2>Stora Salongen</h2>
                 <div className="horizontal-scrollable">
                     <div className="g-3 py-2 rowcard">
                         {storaSalongenShows &&
                             getShowsForDate(selectedDate, storaSalongenShows)?.map((show) => (
-                                <Card key={show.showId} className="border card-horizontal__scroll">
-                                    <div className="overflow-hidden rounded-bottom-0 rounded img-fluid w-100 h-75 fixed-image">
-                                        <Card.Img
-                                            variant="top"
-                                            src={show.posterURL}
-                                            alt={show.movieTitle}
-                                            className="w-100 h-100"
-                                        />
-                                    </div>
-                                    <Card.Body>
-                                        <Card.Title>{show.movieTitle}</Card.Title>
-                                        <Card.Text className="d-flex flex-wrap gap-2">
-                                            {show.genre.map((genre: string, index: any) => (
-                                                <Badge key={index} bg="primary" className="text-black">
-                                                    {genre}
-                                                </Badge>
-                                            ))}
-                                        </Card.Text>
-                                        <Badge className="py-1 d-inline-flex align-items-center" bg="secondary">
-                                            <BsClock className="me-2" />
-                                            {new Date(show.showTime).toLocaleTimeString('sv-SE', {
-                                                hour: '2-digit',
-                                                minute: '2-digit',
-                                            })}
-                                        </Badge>
-                                        <Stack direction="horizontal" gap={3} className="mt-2">
-                                            <Badge bg="none" className="border">
-                                                {Math.floor(show.duration / 60)} tim {show.duration % 60} min
-                                            </Badge>
-                                            <Badge bg="none" className="border">
-                                                Från {show.ageLimit} År
-                                            </Badge>
-                                        </Stack>
-                                    </Card.Body>
-                                    <a className="btn btn-outline-primary mx-2 mb-2" href={`/boka-film/${show.showId}`}>
-                                        Boka
-                                    </a>
-                                </Card>
+                                <ShowCard key={show.showId} show={show} />
                             ))}
                         {storaSalongenShows && getShowsForDate(selectedDate, storaSalongenShows)?.length === 0 && (
                             <p className="bg-date-picker p-2 rounded ">

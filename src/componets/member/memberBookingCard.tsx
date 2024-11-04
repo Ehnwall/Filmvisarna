@@ -13,6 +13,7 @@ import {
 import { USERBOOKING, SEAT } from '@/utils/types/types'
 import { useDeleteBooking } from '../../utils/api/booking/useDeleteBookings'
 import ModalForDeleteBooking from './modalForDeleteBooking'
+import { formatTime } from '../../utils/timeFormat'
 
 const MemberBookingCard = ({ booking, isCurrent }: { booking: USERBOOKING; isCurrent: boolean }) => {
     const totalPrice = booking.seats.reduce((total, seat) => total + seat.ticketPrice, 0)
@@ -54,16 +55,11 @@ const MemberBookingCard = ({ booking, isCurrent }: { booking: USERBOOKING; isCur
                                     </li>
                                     <li className="mb-1 mb-sm-4 mb-md-1">
                                         <BsCalendar size={18} className="text-primary me-2" />
-                                        <span>{new Date(booking.showTime).toLocaleDateString()}</span>
+                                        <span>{formatTime(booking.showTime).getShortDate}</span>
                                     </li>
                                     <li className="mb-1 mb-sm-4 mb-md-1">
                                         <BsClock size={18} className="text-primary me-2" />
-                                        <span>
-                                            {new Date(booking.showTime).toLocaleTimeString([], {
-                                                hour: '2-digit',
-                                                minute: '2-digit',
-                                            })}
-                                        </span>
+                                        <span>{formatTime(booking.showTime).getTime}</span>
                                     </li>
                                     <li className="mb-1 mb-1 mb-sm-4 mb-md-1">
                                         <BsPin size={18} className="text-primary me-2" />

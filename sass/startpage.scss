@@ -12,12 +12,16 @@
     opacity: 0.4;
 }
 
-.horizontal-scrollable > .rowcard {
+.rowcard {
     display: flex;
     gap: 0.8rem;
     overflow-x: auto;
-    scroll-snap-type: mandatory;
+    scroll-snap-type: x mandatory;
     white-space: nowrap;
+}
+.rowcard > .card {
+    width: 15rem;
+    min-width: 15rem;
 }
 
 .card-horizontal__scroll {
@@ -33,9 +37,22 @@
     }
 }
 
-@include media-breakpoint-down(md) {
-    .card-badge {
-        flex-direction: column;
-        align-items: start;
-    }
+.img-background {
+    width: 100%;
+    background-size: cover;
+    aspect-ratio: 7/10;
+    background-position: center;
+    position: relative;
+}
+.img-background::after {
+    content: '';
+    inset: 0;
+    position: absolute;
+    background: inherit;
+    filter: blur(0px);
+    z-index: -1;
+    transition: filter 0.3s ease;
+}
+.card:hover > .img-background::after {
+    filter: blur(20px) !important;
 }

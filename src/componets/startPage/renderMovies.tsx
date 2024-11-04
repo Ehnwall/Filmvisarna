@@ -5,6 +5,8 @@ import { BsArrowDown } from 'react-icons/bs'
 import Badge from 'react-bootstrap/Badge'
 import { useGetMovies } from '../../utils/api/movies/useGetMovies'
 import { useState } from 'react'
+import MovieCard from './MovieCard'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const convertDuration = (duration: number) => {
     const hours = Math.floor(duration / 60)
@@ -69,46 +71,21 @@ export default function RenderMovies() {
                     </h6>
                 </Stack>
 
-                <Row xs={1} md={2} xl={4} className="g-2 gy-2">
-                    {filteredMovies?.map((movie, idx) => {
-                        const { hours, minutes } = convertDuration(movie.durationMin)
-                        return (
-                            <Col key={idx}>
-                                <Card className="border h-100">
-                                    <div className="overflow-hidden rounded-bottom-0 rounded img-starPage">
-                                        <Card.Img
-                                            variant="top"
-                                            src={movie.posterUrl}
-                                            className="w-100"
-                                            style={{
-                                                height: '500px',
-                                                objectFit: 'cover',
-                                            }}
-                                        />
-                                    </div>
-                                    <Card.Body>
-                                        <Card.Title>{movie.title}</Card.Title>
-                                        <Card.Text className="d-flex flex-wrap gap-2">
-                                            {movie.description.genre.map((genre, index) => (
-                                                <Badge key={index} bg="primary" className="text-black">
-                                                    {genre}
-                                                </Badge>
-                                            ))}
-                                        </Card.Text>
-                                        <Stack direction="horizontal" gap={2} className="mx-auto card-badge">
-                                            <Badge bg="none" className="border">
-                                                {hours} tim {minutes} min
-                                            </Badge>
-                                            <Badge bg="none" className="border">
-                                                Från {movie.ageLimit} År
-                                            </Badge>
-                                        </Stack>
-                                    </Card.Body>
-                                    <Card.Link className="stretched-link" href={`/film/${movie.Id}`}></Card.Link>
-                                </Card>
-                            </Col>
-                        )
-                    })}
+                <Row xs={2} md={4} xl={6} className="g-3">
+                    <AnimatePresence>
+                        {filteredMovies?.map((movie) => (
+                            <motion.div
+                                key={movie.Id}
+                                layout
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.8 }}
+                                transition={{ duration: 0.4, ease: 'backInOut' }}
+                            >
+                                <MovieCard movie={movie} />
+                            </motion.div>
+                        ))}
+                    </AnimatePresence>
                 </Row>
             </Container>
         </>
