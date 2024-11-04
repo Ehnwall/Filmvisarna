@@ -37,7 +37,7 @@ export function InfoMovieDescription() {
                             </Col>
                             <Col sm={6} md={4}>
                                 <h5>Åldersgräns</h5>
-                                <p>{Number(movie?.ageLimit) === 0 ? 'Barnfilm' : `Från ${movie?.ageLimit} År`} </p>
+                                <p>{Number(movie?.ageLimit) === 0 ? 'Barnfilm' : `Från ${movie?.ageLimit} år`} </p>
                             </Col>
                         </Row>
                     </Stack>
