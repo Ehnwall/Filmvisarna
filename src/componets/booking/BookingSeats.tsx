@@ -43,7 +43,7 @@ export function BookingSeats({
         let newSeatsSelected = []
 
         for (let seatId of seatIdArray) {
-            let obj = { seatId }
+            let obj: { seatId: number; ticketTypeId?: string } = { seatId, ticketTypeId: undefined }
             for (let ticket of ticketsCopy) {
                 if (ticket.amount > 0) {
                     obj.ticketTypeId = ticket.ticketId

@@ -1,5 +1,5 @@
 import { SHOWS } from '@/utils/types/types'
-import { Card, Placeholder } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import { BsCalendar, BsClock, BsPin } from 'react-icons/bs'
 import { formatTime, getDuration } from '../../utils/timeFormat'
 

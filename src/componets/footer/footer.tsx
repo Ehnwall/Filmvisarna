@@ -9,7 +9,7 @@ const Footer = () => {
                 <Row>
                     <Col md={4} sm={12} className="pb-3 d-flex flex-column align-items-md-center">
                         <div className="left">
-                            <h5>Om oss</h5>
+                            <h5 className="text-white">Om oss</h5>
                             <ul className="list-unstyled">
                                 <li className="mb-2">
                                     <Link className="btn btn-link p-0" to="/innehall/foretag">
@@ -21,7 +21,7 @@ const Footer = () => {
                     </Col>
                     <Col md={4} sm={12} className="pb-3 d-flex flex-column align-items-md-center ">
                         <div className="left">
-                            <h5>Kontakt</h5>
+                            <h5 className="text-white">Kontakt</h5>
                             <ul className="list-unstyled">
                                 <li className="mb-2">
                                     <Link className="btn btn-link p-0" to="/innehall/kontakt">
@@ -38,7 +38,7 @@ const Footer = () => {
                     </Col>
                     <Col md={4} sm={12} className="pb-3 d-flex flex-column align-items-md-center">
                         <div className="left">
-                            <h5>Sociala Medier</h5>
+                            <h5 className="text-white">Sociala Medier</h5>
                             <ul className="list-unstyled">
                                 <li className="mb-2">
                                     <a
