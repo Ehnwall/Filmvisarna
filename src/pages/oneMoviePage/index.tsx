@@ -11,10 +11,10 @@ export default function IndividualMovie() {
     return (
         <>
             <Container className="pt-5">
-                <InfoMovieHeader data={movie} />
+                <InfoMovieHeader />
                 <Row className="g-4">
                     <Col md={{ order: 'last' }} lg={3}>
-                        <InfoMoviePoster data={movie} />
+                        <InfoMoviePoster />
                     </Col>
                     <Col lg={9}>
                         <Row className="gy-4">
@@ -22,10 +22,10 @@ export default function IndividualMovie() {
                                 <Shows />
                             </Col>
                             <Col xs={12}>
-                                <InfoMovieDescription data={movie} />
+                                <InfoMovieDescription />
                             </Col>
                             <Col xs={12}>
-                                <InfoMovieTrailer data={movie} />
+                                <InfoMovieTrailer />
                             </Col>
                         </Row>
                     </Col>
