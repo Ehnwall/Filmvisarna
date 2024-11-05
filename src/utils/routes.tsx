@@ -10,13 +10,13 @@ import ConfirmationPage from '../pages/bookingConfirmation'
 
 export default [
     { path: '/', element: <StartPage />, menuLabel: 'Hem' },
-    { path: '/medlem', element: <MemberPage />, menuLabel: 'Medlemssida' },
+    { path: '/medlem', element: <MemberPage />, menuLabel: 'Medlemssida', title: 'Medlemssida' },
+    { path: '/logga-in', element: <Login />, title: 'Logga in' },
+    { path: '/registrera', element: <Register />, title: 'Registrera' },
+    { path: '/film/:movieId', element: <IndividualMovie />, title: `Film` },
+    { path: '/boka-film/:showId', element: <BookingPage />, title: 'Boka film' },
+    { path: '/boknings-bekreftelse/:bookingId', element: <ConfirmationPage />, title: 'Bokningsinfo' },
     { path: '/innehall/:content', element: <ContentFromFooter /> },
-    { path: '/logga-in', element: <Login /> },
-    { path: '/registrera', element: <Register /> },
-    { path: '/film/:movieId', element: <IndividualMovie /> },
-    { path: '/boka-film/:showId', element: <BookingPage /> },
-    { path: '/boknings-bekräftelse/:bookingId', element: <ConfirmationPage /> },
 ]
 
 //Paths

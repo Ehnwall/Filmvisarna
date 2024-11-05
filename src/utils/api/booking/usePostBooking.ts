@@ -18,7 +18,7 @@ export const useMakebooking = () => {
     return useMutation<BOOKINGRESP, AxiosError<BookingError>, PARTIALBOOKING>({
         mutationFn: postBooking,
         onSuccess: (dataBooking) => {
-            navigate(`/boknings-bekräftelse/${dataBooking.bookingId}`)
+            navigate(`/boknings-bekreftelse/${dataBooking.bookingId}`)
             console.log(dataBooking)
         },
         onError: (error) => {
