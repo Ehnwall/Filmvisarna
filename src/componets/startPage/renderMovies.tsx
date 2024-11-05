@@ -8,13 +8,6 @@ import { useState } from 'react'
 import MovieCard from './MovieCard'
 import { motion, AnimatePresence } from 'framer-motion'
 
-const convertDuration = (duration: number) => {
-    const hours = Math.floor(duration / 60)
-    const minutes = duration % 60
-
-    return { hours, minutes }
-}
-
 export default function RenderMovies() {
     const { data: movies, isLoading, isError } = useGetMovies()
     const ages = ['Barnfilmer', '7', '11', '15', 'Alla Filmer']
@@ -59,8 +52,8 @@ export default function RenderMovies() {
                             Åldrar <BsArrowDown />
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                            {ages.map((age, index) => (
-                                <Dropdown.Item key={index} onClick={() => handleAgeSelect(age)}>
+                            {ages.map((age) => (
+                                <Dropdown.Item key={age} onClick={() => handleAgeSelect(age)}>
                                     {age}
                                 </Dropdown.Item>
                             ))}

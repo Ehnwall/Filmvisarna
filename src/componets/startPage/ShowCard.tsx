@@ -7,7 +7,7 @@ export default function ShowCard({ show }: { show: SHOWS }) {
     const { hours, minutes } = getDuration(show.duration)
     return (
         <Card className="">
-            <div className="img-background h-100" style={{ backgroundImage: `url(${show.posterURL})` }}></div>
+            <div className="img-background h-100 " style={{ backgroundImage: `url(${show.posterURL})` }}></div>
             <Card.Body className="p-0 pt-2">
                 <Card.Title className="fs-6 text-truncate">{show.movieTitle}</Card.Title>
                 <Card.Text className="d-flex mb-2 flex-wrap gap-2">
