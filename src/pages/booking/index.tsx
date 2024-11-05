@@ -32,6 +32,13 @@ export default function BookingPage() {
         if (selectedSeats.length === totalTickets) {
             setAlert('')
         }
+        if (ticketTypeAmountSum > selectedSeats.length) {
+            setAlert(
+                `Du har ${ticketTypeAmountSum - selectedSeats.length} ${
+                    ticketTypeAmountSum - selectedSeats.length === 1 ? 'plats' : 'platser'
+                } kvar att välja`
+            )
+        }
     }, [amount, selectedSeats])
     const handleSubmmit = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
@@ -44,7 +51,11 @@ export default function BookingPage() {
         const totalTickets = amount.reduce((acc, ticket) => acc + ticket.amount, 0)
         console.log({ showId, selectedSeats, user })
         if (totalTickets !== selectedSeats.length) {
-            setAlert('Du har inte valt några platser')
+            setAlert(
+                `Du har ${ticketTypeAmountSum - selectedSeats.length} ${
+                    ticketTypeAmountSum - selectedSeats.length === 1 ? 'plats' : 'platser'
+                } kvar att välja`
+            )
             return
         }
         if (selectedSeats.length < 1) {
@@ -54,6 +65,8 @@ export default function BookingPage() {
         if (!token) makebooking.mutate({ showId, seats: selectedSeats, user })
         else makebooking.mutate({ showId, seats: selectedSeats })
     }
+    const ticketTypeAmountSum = amount.reduce((acc, ticketType) => acc + ticketType.amount, 0)
+    console.log(ticketTypeAmountSum, selectedSeats.length)
     return (
         <>
             <Container className="py-4">
@@ -121,6 +134,7 @@ export default function BookingPage() {
                             </div>
                         </>
                     )}
+
                     <Col className="d-flex justify-content-center">
                         <button className="btn btn-outline-primary" onClick={handleSubmmit}>
                             Boka Platser
