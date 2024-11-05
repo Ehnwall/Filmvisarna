@@ -11,7 +11,7 @@ export function Shows() {
     return (
         <Card className="border-primary">
             <Card.Header className="bg-primary">
-                <h2 className="h4 mb-0 text-dark">Biljetter</h2>
+                <h2 className="h4 mb-0 text-dark">Visningar</h2>
             </Card.Header>
             <Card.Body className="p-0 pt-3">
                 <Row className="g-3">
