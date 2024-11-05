@@ -6,14 +6,15 @@ import {
     InfoMovieTrailer,
     Shows,
 } from '../../componets/onemovie/Index'
+
 export default function IndividualMovie() {
     return (
         <>
             <Container className="pt-5">
-                <InfoMovieHeader />
+                <InfoMovieHeader data={movie} />
                 <Row className="g-4">
                     <Col md={{ order: 'last' }} lg={3}>
-                        <InfoMoviePoster />
+                        <InfoMoviePoster data={movie} />
                     </Col>
                     <Col lg={9}>
                         <Row className="gy-4">
@@ -21,10 +22,10 @@ export default function IndividualMovie() {
                                 <Shows />
                             </Col>
                             <Col xs={12}>
-                                <InfoMovieDescription />
+                                <InfoMovieDescription data={movie} />
                             </Col>
                             <Col xs={12}>
-                                <InfoMovieTrailer />
+                                <InfoMovieTrailer data={movie} />
                             </Col>
                         </Row>
                     </Col>
