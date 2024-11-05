@@ -63,11 +63,6 @@ export function BookingSeats({ occupiedSeats, seats, tickets, onSeatsSelected }:
         } else {
             onSeatsSelected(validSeats)
         }
-        console.log({ tickets }, { newSeatsSelected })
-        const chosenTicketSum = newSeatsSelected.length
-        if (chosenTicketSum === result) {
-            console.log('You have chosen all the tickets')
-        }
     }, [seatIdArray, tickets])
 
     return (
