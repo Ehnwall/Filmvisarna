@@ -16,7 +16,7 @@ export default [
     { path: '/registrera', element: <Register /> },
     { path: '/film/:movieId', element: <IndividualMovie /> },
     { path: '/boka-film/:showId', element: <BookingPage /> },
-    { path: '/boknings-bekräftelse/:bookingId', element: <ConfirmationPage /> },
+    { path: '/boknings-bekräftelse/:bookingNr', element: <ConfirmationPage /> },
 ]
 
 //Paths
