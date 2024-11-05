@@ -7,8 +7,8 @@ export default function MovieCard({ movie }: { movie: MOVIE }) {
     return (
         <Col>
             <Card className="">
-                <div className="img-background" style={{ backgroundImage: `url(${movie.posterUrl})` }}></div>
-                <Card.Body className="p-0 pt-2">
+                <div className="img-background" style={{ backgroundImage: `url(${movie.posterUrl}) ` }}></div>
+                <Card.Body className="p-0 pt-2 ">
                     <Card.Title className="fs-6 text-truncate">{movie.title}</Card.Title>
                     <Card.Text className="d-flex flex-wrap gap-2">
                         <Badge bg="primary" className="text-black">

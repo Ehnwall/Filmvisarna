@@ -22,8 +22,8 @@ const MoviesWithCinnema = () => {
 
     const today = new Date()
 
-    const isPastDay = (date: any) => {
-        return date < today.setHours(0, 0, 0, 0)
+    const isPastDay = (date: Date): boolean => {
+        return date.getTime() < today.setHours(0, 0, 0, 0)
     }
 
     const getWeekInterval = (weeksAhead: number) => {
@@ -77,7 +77,7 @@ const MoviesWithCinnema = () => {
                 </Dropdown>
                 <Row className="g-2">
                     {new Array(7).fill(null).map((_, index) => {
-                        const dayOfWeek: any = new Date(currentWeek.start)
+                        const dayOfWeek = new Date(currentWeek.start)
                         dayOfWeek.setDate(currentWeek.start.getDate() + index)
 
                         const options: Intl.DateTimeFormatOptions = {
@@ -106,7 +106,7 @@ const MoviesWithCinnema = () => {
                                             {formattedDate.split(' ')[0]}
                                         </Card.Title>
                                         <Badge className="py-2 d-inline-flex align-items-center p-3" bg="secondary">
-                                            <BsCalendar className="me-2" /> {formatTime(dayOfWeek).getShortNumericDate}
+                                            <BsCalendar className="me-2" /> {formatTime(dayOfWeek.toString()).getShortNumericDate}
                                         </Badge>
                                     </Card.Body>
                                 </Card>
