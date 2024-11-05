@@ -1,31 +1,18 @@
 import React from 'react'
 import { Row, Col, Badge } from 'react-bootstrap'
 import { BsClock } from 'react-icons/bs'
-import { useGetOneMovie } from '../../utils/api/movies/useGetOneMovie'
+import { MOVIE } from '../../utils/types/types'
+import { getDuration } from '../../utils/timeFormat'
 
-export function InfoMovieHeader() {
-    const { data: movie } = useGetOneMovie()
-
-    function convertMinutesToHoursAndMinutes(minutes: any) {
-        const hours = Math.floor(minutes / 60)
-        const remainingMinutes = minutes % 60
-        return {
-            hours,
-            minutes: remainingMinutes,
-        }
-    }
-
-    let min = movie?.durationMin
-
-    const time = convertMinutesToHoursAndMinutes(min)
-
+export function InfoMovieHeader({ movie }: Readonly<{ movie: MOVIE }>) {
+    const { hours, minutes } = getDuration(movie?.durationMin)
     return (
         <div>
             <h1 className="display-4 mb-1">{movie?.title}</h1>
             <div className="d-flex align-items-center mb-3">
                 <BsClock size={18} className="text-primary me-2" />
                 <span>
-                    {time.hours} tim {time.minutes} min
+                    {hours} tim {minutes} min
                 </span>
                 <span className="px-2">|</span>
                 <span>Från {movie?.ageLimit} år</span>

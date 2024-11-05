@@ -93,6 +93,7 @@ export type CINEMASEATS = {
 }
 
 export type SHOWSONMOVIE = {
+    [x: string]: any
     showId: number
     movieId: number
     showTime: string
