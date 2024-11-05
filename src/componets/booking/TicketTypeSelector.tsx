@@ -68,7 +68,7 @@ export function TicketTypeSelector({ ticketType, amount, setAmount }: Props) {
                                                 }
                                             </Button>
                                             <Button
-                                                className="btn-outline-primary px-3  btn-ticket-counter
+                                                className="btn-outline-primary px-3 btn-ticket-counter
                                             "
                                                 variant="outline-primary px-3"
                                                 onClick={() => handleIncrease(ticket.Id)}

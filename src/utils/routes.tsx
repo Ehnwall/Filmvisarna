@@ -10,7 +10,7 @@ import ConfirmationPage from '../pages/bookingConfirmation'
 
 export default [
     { path: '/', element: <StartPage />, menuLabel: 'Hem' },
-    { path: '/medlem', element: <MemberPage />, menuLabel: 'Medlem' },
+    { path: '/medlem', element: <MemberPage />, menuLabel: 'Medlemssida' },
     { path: '/innehall/:content', element: <ContentFromFooter /> },
     { path: '/logga-in', element: <Login /> },
     { path: '/registrera', element: <Register /> },

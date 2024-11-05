@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Footer from './componets/footer/footer'
-import Header from './componets/header'
+import Header from './componets/header/header'
 import { AuthProvider } from './context/authContext'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
