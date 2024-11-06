@@ -8,8 +8,8 @@ import { useGetBookingInformation } from '../../utils/api/booking/useGetBookingI
 import { useAuth } from '../../context/authContext'
 
 export default function BookingPage() {
-    const { showsQuery, occupiedSeatsQuery, seatsQuery, ticketsQuery } = useGetBookingInformation()
-
+    const { showsQuery, occupiedSeatsQuery, ticketsQuery } = useGetBookingInformation()
+    
     const makebooking = useMakebooking()
     const { token } = useAuth()
     const [amount, setAmount] = useState<TICKETAMOUNT[]>([])

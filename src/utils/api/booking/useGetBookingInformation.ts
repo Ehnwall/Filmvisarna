@@ -27,19 +27,19 @@ export const useGetBookingInformation = () => {
     }
     const showsQuery = useQuery({ queryKey: ['shows', showId], queryFn: () => fetchShows(showId) })
 
-    const occupiedSeatsQuery = useQuery({
-        queryKey: ['occupiedSeats', showId],
-        queryFn: () => fetchOccupiedSeats(showId),
-    })
+    // const occupiedSeatsQuery = useQuery({
+    //     queryKey: ['occupiedSeats', showId],
+    //     queryFn: () => fetchOccupiedSeats(showId),
+    // })
 
-    const cinemaId = showsQuery.data && showsQuery.data?.cinemaId as number
+    const cinemaId = showsQuery.data && (showsQuery.data?.cinemaId as number)
 
     const seatsQuery = useQuery({
         queryKey: ['seats', showId],
-        queryFn: () => fetchSeats(cinemaId),
+        queryFn: () => fetchSeats(cinemaId as number),
         enabled: !!cinemaId,
     })
     const ticketsQuery = useQuery({ queryKey: ['tickets'], queryFn: fetchTickets })
 
-    return { showsQuery, occupiedSeatsQuery, seatsQuery, ticketsQuery }
+    return { showsQuery, seatsQuery, ticketsQuery }
 }
