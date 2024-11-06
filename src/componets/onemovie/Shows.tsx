@@ -1,13 +1,11 @@
 import React from 'react'
-import { useGetShowsOnMovie } from '../../utils/api/movies/useGetShowsOnMovie'
+
 import { SHOWSONMOVIE } from '@/utils/types/types'
 import { Row, Col, Card, Badge } from 'react-bootstrap'
 import { BsCalendar, BsClock, BsPin } from 'react-icons/bs'
-import { formatTime, getDuration } from '../../utils/timeFormat'
+import { formatTime } from '../../utils/timeFormat'
 
-export function Shows() {
-    const { data: shows } = useGetShowsOnMovie()
-
+export function Shows({ shows }: Readonly<{ shows: SHOWSONMOVIE }>) {
     return (
         <Card className="border-primary">
             <Card.Header className="bg-primary">
@@ -15,7 +13,7 @@ export function Shows() {
             </Card.Header>
             <Card.Body className="p-0 pt-3">
                 <Row className="g-3">
-                    {shows?.slice(0, 7).map((show: SHOWSONMOVIE) => (
+                    {shows?.slice(0, 6).map((show: SHOWSONMOVIE) => (
                         <Col key={show.showId} xs={12} sm={6} md={4}>
                             <Card className="h-100 border-1">
                                 <Card.Body className="d-flex flex-column">
