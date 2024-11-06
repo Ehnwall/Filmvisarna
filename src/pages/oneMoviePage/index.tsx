@@ -9,6 +9,7 @@ import {
 
 import { useGetOneMovie } from '../../utils/api/movies/useGetOneMovie'
 import { useGetShowsOnMovie } from '../../utils/api/movies/useGetShowsOnMovie'
+
 export default function IndividualMovie() {
     const { data: movie } = useGetOneMovie()
     const { data: shows } = useGetShowsOnMovie()

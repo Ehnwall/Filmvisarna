@@ -113,7 +113,7 @@ export type PARTIALBOOKING = Partial<BOOKING>
 
 export type BOOKINGRESP = {
     msg: string
-    bookingId: number
+    bookingNr: number
 }
 
 export type SELECTEDSEATS = {
