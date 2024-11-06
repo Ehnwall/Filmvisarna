@@ -52,8 +52,8 @@ export default function RenderMovies() {
                             Åldrar <BsArrowDown />
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                            {ages.map((age, index) => (
-                                <Dropdown.Item key={index} onClick={() => handleAgeSelect(age)}>
+                            {ages.map((age) => (
+                                <Dropdown.Item key={age} onClick={() => handleAgeSelect(age)}>
                                     {age}
                                 </Dropdown.Item>
                             ))}
