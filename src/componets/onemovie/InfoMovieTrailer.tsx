@@ -1,8 +1,6 @@
 import React from 'react'
-import { useGetOneMovie } from '../../utils/api/movies/useGetOneMovie'
-
-export function InfoMovieTrailer() {
-    const { data: movie } = useGetOneMovie()
+import { MOVIE } from '@/utils/types/types'
+export function InfoMovieTrailer({ movie }: Readonly<{ movie: MOVIE }>) {
     return (
         <div className="ratio ratio-16x9">
             <iframe
