@@ -8,7 +8,6 @@ type BookingError = {
 }
 
 const postBooking = async (dataBooking: PARTIALBOOKING) => {
-    console.log(dataBooking)
     const resp = await axios.post<BOOKINGRESP>('/api/bookings', dataBooking)
     return resp.data
 }
@@ -19,7 +18,6 @@ export const useMakebooking = () => {
         mutationFn: postBooking,
         onSuccess: (dataBooking) => {
             navigate(`/boknings-bekräftelse/${dataBooking.bookingNr}`)
-            console.log(dataBooking)
         },
         onError: (error) => {
             console.log(error)
