@@ -1,14 +1,10 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import { useParams } from 'react-router-dom'
-
-type SSEData = {
-    occupiedSeats: number[]
-}
+import { OCCUPIEDSEATS } from '@/utils/types/types'
 
 export const useGetOccupiedSeats = () => {
     const { showId } = useParams<{ showId: string }>()
-    const [data, setData] = useState<SSEData | null>(null)
+    const [data, setData] = useState<OCCUPIEDSEATS | null>(null)
     const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
