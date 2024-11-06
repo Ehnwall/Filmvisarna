@@ -6,7 +6,7 @@ export function InfoMoviePoster() {
 
     return (
         <Card>
-            <img src={movie?.posterUrl} alt={movie?.title} />
+            <img className="rounded" src={movie?.posterUrl} alt={movie?.title} />
         </Card>
     )
 }

@@ -43,7 +43,6 @@
     aspect-ratio: 7/10;
     background-position: center;
     position: relative;
-    border-radius: 10px;
 }
 .img-background::after {
     content: '';
@@ -53,7 +52,7 @@
     filter: blur(0px);
     z-index: -1;
     transition: filter 0.3s ease;
-    border-radius: 10px;
+    border-radius: inherit;
 }
 .card:hover > .img-background::after {
     filter: blur(20px) !important;
