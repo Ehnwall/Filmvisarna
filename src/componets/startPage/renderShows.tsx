@@ -52,9 +52,13 @@ const MoviesWithCinnema = () => {
     }
 
     const handleWeekSelect = (weeksAhead: number) => {
-        setSelectedWeek(weeksAhead)
-        setSelectedDate(new Date(getWeekInterval(weeksAhead).start))
+        if (weeksAhead === 0) {
+            setSelectedDate(new Date())
+        } else {
+            setSelectedDate(new Date(getWeekInterval(weeksAhead).start))
+        }
         setWeekSelect(formatTime(new Date(getWeekInterval(weeksAhead).start).toString()).getWeekNumber)
+        setSelectedWeek(weeksAhead)
     }
     const currentWeek = getWeekInterval(selectedWeek)
     let weekNumber = formatTime(new Date().toString()).getWeekNumber
@@ -106,7 +110,8 @@ const MoviesWithCinnema = () => {
                                             {formattedDate.split(' ')[0]}
                                         </Card.Title>
                                         <Badge className="py-2 d-inline-flex align-items-center p-3" bg="secondary">
-                                            <BsCalendar className="me-2" /> {formatTime(dayOfWeek.toString()).getShortNumericDate}
+                                            <BsCalendar className="me-2" />{' '}
+                                            {formatTime(dayOfWeek.toString()).getShortNumericDate}
                                         </Badge>
                                     </Card.Body>
                                 </Card>
