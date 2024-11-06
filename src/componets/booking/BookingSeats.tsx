@@ -11,7 +11,7 @@ type Props = {
 
 type Seats = {
     seatId: number
-    ticketTypeId: number | null
+    ticketTypeId: number | undefined
 }
 
 export function BookingSeats({ occupiedSeats, seats, tickets, onSeatsSelected }: Props) {
@@ -45,7 +45,7 @@ export function BookingSeats({ occupiedSeats, seats, tickets, onSeatsSelected }:
         let newSeatsSelected = []
 
         for (let seatId of seatIdArray) {
-            let obj: Seats = { seatId, ticketTypeId: null }
+            let obj: Seats = { seatId, ticketTypeId: undefined }
             for (let ticket of ticketsCopy) {
                 if (ticket.amount > 0) {
                     obj.ticketTypeId = ticket.ticketId
