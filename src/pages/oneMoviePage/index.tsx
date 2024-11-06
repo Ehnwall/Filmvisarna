@@ -15,22 +15,16 @@ export default function IndividualMovie() {
 
     return (
         <Container className="pt-5">
-            <InfoMovieHeader movie={movie} />
+            {movie && <InfoMovieHeader movie={movie} />}
             <Row className="g-4">
                 <Col md={{ order: 'last' }} lg={3}>
-                    <InfoMoviePoster movie={movie} />
+                    {movie && <InfoMoviePoster movie={movie} />}
                 </Col>
                 <Col lg={9}>
                     <Row className="gy-4">
-                        <Col xs={12}>
-                            <Shows shows={shows} />
-                        </Col>
-                        <Col xs={12}>
-                            <InfoMovieDescription movie={movie} />
-                        </Col>
-                        <Col xs={12}>
-                            <InfoMovieTrailer movie={movie} />
-                        </Col>
+                        <Col xs={12}>{shows && <Shows shows={shows} />}</Col>
+                        <Col xs={12}>{movie && <InfoMovieDescription movie={movie} />}</Col>
+                        <Col xs={12}>{movie && <InfoMovieTrailer movie={movie} />}</Col>
                     </Row>
                 </Col>
             </Row>
