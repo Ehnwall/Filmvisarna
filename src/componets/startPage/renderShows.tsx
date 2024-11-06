@@ -63,9 +63,8 @@ const MoviesWithCinnema = () => {
         <>
             <Container>
                 <Dropdown className="py-2" id="book">
-                    <Dropdown.Toggle className="btn-filter mb-3 mt-2" variant="primary" id="dropdown-basic">
+                    <Dropdown.Toggle className="btn-filter mb-3 mt-2" variant="outline-primary" id="dropdown-basic">
                         Vecka {weekSelect}
-                        <BsArrowDown />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         {[...Array(4)].map((_, weekIndex) => (
@@ -106,7 +105,8 @@ const MoviesWithCinnema = () => {
                                             {formattedDate.split(' ')[0]}
                                         </Card.Title>
                                         <Badge className="py-2 d-inline-flex align-items-center p-3" bg="secondary">
-                                            <BsCalendar className="me-2" /> {formatTime(dayOfWeek.toString()).getShortNumericDate}
+                                            <BsCalendar className="me-2" />{' '}
+                                            {formatTime(dayOfWeek.toString()).getShortNumericDate}
                                         </Badge>
                                     </Card.Body>
                                 </Card>
