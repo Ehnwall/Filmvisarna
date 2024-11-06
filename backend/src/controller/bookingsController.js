@@ -21,10 +21,10 @@ const getAllTickets = (req, res) => {
     }
 }
 
-const getBookingsFromId = (req, res) => {
-    const { bookingId } = req.params
+const getBookingsFromNumber = (req, res) => {
+    const { bookingNr } = req.params
     try {
-        const specifikBooking = bookingsService.getBookingFs(bookingId)
+        const specifikBooking = bookingsService.getBookingFs(bookingNr)
         res.status(200).send(specifikBooking)
     } catch (error) {
         res.status(404).send({ msg: error.message })
@@ -45,7 +45,7 @@ const createBooking = (req, res) => {
             req.user.lastName = req.body.user.lastName
         }
         const newBooking = bookingsService.createBooking(showId, seats, req.user)
-        return res.status(200).send({ msg: 'Booking successfully created', bookingId: newBooking.lastInsertRowid })
+        return res.status(200).send({ msg: 'Booking successfully created', bookingNr: newBooking })
     } catch (e) {
         return res.status(400).send({ msg: e.message })
     }
@@ -65,4 +65,4 @@ const deleteBooking = (req, res) => {
     }
 }
 
-export default { getBookingsFromId, getAllTickets, getAllBookings, createBooking, deleteBooking }
+export default { getBookingsFromNumber, getAllTickets, getAllBookings, createBooking, deleteBooking }
