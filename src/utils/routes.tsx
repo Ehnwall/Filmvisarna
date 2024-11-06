@@ -7,6 +7,8 @@ import StartPage from '../pages/startPage/StartPage'
 import IndividualMovie from '../pages/oneMoviePage'
 import Register from '../pages/authSignUp'
 import ConfirmationPage from '../pages/bookingConfirmation'
+import PostMovies from '../componets/member/admin/postMovies'
+import Postshows from '../componets/member/admin/Postshows'
 
 export default [
     { path: '/', element: <StartPage />, menuLabel: 'Hem' },
@@ -17,6 +19,8 @@ export default [
     { path: '/film/:movieId', element: <IndividualMovie /> },
     { path: '/boka-film/:showId', element: <BookingPage /> },
     { path: '/boknings-bekräftelse/:bookingId', element: <ConfirmationPage /> },
+    { path: '/medlem-addmovies', element: <PostMovies /> },
+    { path: '/medlem-addshows', element: <Postshows /> },
 ]
 
 //Paths

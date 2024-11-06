@@ -11,7 +11,10 @@ export const useSignIn = () => {
         mutationFn: signIn,
         onSuccess: (data) => {
             sessionStorage.setItem('token', JSON.stringify({ token: data.bearer }))
-            sessionStorage.setItem('user', JSON.stringify({ firstName: data.firstName, lastName: data.lastName }))
+            sessionStorage.setItem(
+                'user',
+                JSON.stringify({ firstName: data.firstName, lastName: data.lastName, role: data.role })
+            )
             setTimeout(() => {
                 // tar bort alla tokens efter 1h
                 sessionStorage.removeItem('token')

@@ -42,6 +42,7 @@ export type SIGNINRESPONSE = {
     bearer: string
     firstName: string
     lastName: string
+    role: string
 }
 export type SIGNUP = {
     firstName: string
@@ -53,7 +54,7 @@ export type SIGNUPRESPONSE = {
     changes: string
     lastInsertRowid: string
 }
-type Description = {
+export type Description = {
     director: string
     cast: string[]
     synopsis: string
