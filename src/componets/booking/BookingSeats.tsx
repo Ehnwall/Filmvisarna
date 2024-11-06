@@ -4,7 +4,6 @@ import { CINEMASEATS, OCCUPIEDSEATS, TICKETAMOUNT } from '../../utils/types/type
 import { useGetOccupiedSeats } from '../../utils/api/booking/useGetOccupiedSeats'
 
 type Props = {
-    // occupiedSeats: OCCUPIEDSEATS
     seats: CINEMASEATS[]
     tickets: TICKETAMOUNT[]
     onSeatsSelected: (seats: any[]) => void
