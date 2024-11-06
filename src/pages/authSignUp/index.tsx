@@ -1,54 +1,52 @@
 import { useAuth } from '../../context/authContext'
 import { useEffect, useState } from 'react'
-import { Row, Container, Col, Form, Button } from 'react-bootstrap'
+import { Row, Container, Col, Form, Button, Card } from 'react-bootstrap'
 
 export default function Register() {
+    const [email, setEmail] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [password, setPassword] = useState('')
+    const [repeatedPassword, setRepetedPassword] = useState('')
+
     const [error, setError] = useState('')
     const [signUpError, setSignUpError] = useState('')
-    const passwordRegex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$', 'g')
+
+    const [emailError, setEmailError] = useState<string | null>(null)
+    const [firstNameError, setFirstNameError] = useState<string | null>(null)
+    const [lastNameError, setLastNameError] = useState<string | null>(null)
+
     const { signUp } = useAuth()
+    const passwordRegex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$', 'g')
+
+    const handleBlur = (field: string, value: string) => {
+        switch (field) {
+            case 'email':
+                setEmailError(value.includes('@') ? null : 'Ogiltig e-postadress')
+                break
+            case 'firstName':
+                setFirstNameError(value ? null : 'Förnamn får inte vara tomt')
+                break
+            case 'lastName':
+                setLastNameError(value ? null : 'Efternamn får inte vara tomt')
+                break
+            default:
+                break
+        }
+    }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         setError('')
-        const formData = new FormData(event.currentTarget)
-        const firstName = formData.get('firstName') as string
-        const lastName = formData.get('lastName') as string
-        const email = formData.get('email') as string
-        const password = formData.get('password') as string
-        const repetedPassword = formData.get('repetedPassword') as string
-        if (!firstName || !lastName || !email || !password || !repetedPassword) {
+        if (!firstName || !lastName || !email || !password || !repeatedPassword) {
             setError('Fyll i alla fält')
             return
         }
-        if (password !== repetedPassword) {
+        if (password !== repeatedPassword) {
             setError('Lösenorden matchar inte')
             return
         }
         signUp?.mutate({ firstName, lastName, email, password })
-    }
-    const handlePasswordBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-        if (!event.target.value) {
-            setError('')
-            return
-        }
-        setError('')
-        if (!passwordRegex.test(event.target.value)) {
-            setError('Lösenordet måste innehålla minst 8 tecken, en stor bokstav, en liten bokstav och en siffra')
-            return
-        }
-    }
-    const handleEmailBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-        if (!event.target.value) {
-            setError('')
-            return
-        }
-        setError('')
-        const emailRegex = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$', 'g')
-        if (!emailRegex.test(event.target.value)) {
-            setError('Ogiltig e-postadress')
-            return
-        }
     }
 
     useEffect(() => {
@@ -61,7 +59,11 @@ export default function Register() {
             <Row className="d-flex justify-content-center align-items-center vh-100">
                 <Col xs={12} md={8} lg={6} xl={5}>
                     <div className="p-md-5 p-4 bg-body-tertiary custom-box-shadow rounded-3">
-                        <h2 className="text-center h1">Bli medlem</h2>
+                        <Card>
+                            <Card.Header>
+                                <h3 className="text-center h1">Bli medlem</h3>
+                            </Card.Header>
+                        </Card>
                         {(signUpError || error) && (
                             <ul className="alert alert-danger ps-4">
                                 {signUpError && <li>{signUpError}</li>}
@@ -69,66 +71,86 @@ export default function Register() {
                             </ul>
                         )}
                         <Form onSubmit={handleSubmit}>
-                            <Form.Group className="mb-3" controlId="firstName">
-                                <Form.Label>Förnamn</Form.Label>
-                                <Form.Control
-                                    className="p-2"
-                                    name="firstName"
-                                    type="text"
-                                    placeholder="Ange din förnamn"
-                                />
-                            </Form.Group>
-                            <Form.Group className="mb-3" controlId="lastName">
-                                <Form.Label>Efternamn</Form.Label>
-                                <Form.Control
-                                    className="p-2"
-                                    name="lastName"
-                                    type="text"
-                                    placeholder="Ange ditt efternamn"
-                                />
-                            </Form.Group>
-                            <Form.Group className="mb-3" controlId="email">
-                                <Form.Label>Fyll i din Mejl</Form.Label>
-                                <Form.Control
-                                    className="p-2"
-                                    name="email"
-                                    type="email"
-                                    placeholder="Ange din e-postadress"
-                                    onChange={() => setSignUpError('')}
-                                    onBlur={handleEmailBlur}
-                                />
-                            </Form.Group>
-
+                            {[
+                                {
+                                    label: 'E-post',
+                                    type: 'email',
+                                    value: email,
+                                    onChange: setEmail,
+                                    onBlur: () => handleBlur('email', email),
+                                    error: emailError,
+                                },
+                                {
+                                    label: 'Förnamn',
+                                    type: 'text',
+                                    value: firstName,
+                                    onChange: setFirstName,
+                                    onBlur: () => handleBlur('firstName', firstName),
+                                    error: firstNameError,
+                                },
+                                {
+                                    label: 'Efternamn',
+                                    type: 'text',
+                                    value: lastName,
+                                    onChange: setLastName,
+                                    onBlur: () => handleBlur('lastName', lastName),
+                                    error: lastNameError,
+                                },
+                            ].map(({ label, type, value, onChange, onBlur, error }) => (
+                                <Form.Group className="mb-3" key={label}>
+                                    <Form.Label>{label}</Form.Label>
+                                    <Form.Control
+                                        type={type}
+                                        placeholder={`Ange ditt ${label.toLowerCase()}`}
+                                        value={value}
+                                        onChange={(e) => onChange(e.target.value)}
+                                        onBlur={onBlur}
+                                        isInvalid={!!error}
+                                    />
+                                    {error && <Form.Text className="invalid">{error}</Form.Text>}
+                                </Form.Group>
+                            ))}
                             <Form.Group className="mb-3" controlId="password">
                                 <Form.Label>Lösenord</Form.Label>
                                 <Form.Control
-                                    className="p-2"
-                                    name="password"
                                     type="password"
                                     placeholder="Ange Lösenord"
-                                    onBlur={handlePasswordBlur}
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    onBlur={() => {
+                                        if (!passwordRegex.test(password)) {
+                                            setError(
+                                                'Lösenordet måste innehålla minst 8 tecken, en stor bokstav, en liten bokstav och en siffra'
+                                            )
+                                        }
+                                    }}
+                                    isInvalid={!!error}
                                 />
+                                {error && <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>}
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="repetedPassword">
-                                <Form.Label id="repetedPasswordText">Upprepa Lösenord</Form.Label>
+                            <Form.Group className="mb-3" controlId="repeatedPassword">
+                                <Form.Label>Upprepa Lösenord</Form.Label>
                                 <Form.Control
-                                    className="p-2"
-                                    name="repetedPassword"
                                     type="password"
                                     placeholder="Upprepa Lösenord"
+                                    value={repeatedPassword}
+                                    onChange={(e) => setRepetedPassword(e.target.value)}
                                 />
                             </Form.Group>
                             <Row>
+                                {' '}
                                 <Col>
+                                    {' '}
                                     <Button type="submit" variant="outline-primary">
-                                        Bli medlem
-                                    </Button>
-                                </Col>
+                                        Bli medlem{' '}
+                                    </Button>{' '}
+                                </Col>{' '}
                                 <Col className="d-flex justify-content-end">
+                                    {' '}
                                     <a className="btn btn-link" href="/logga-in">
-                                        Logga in
-                                    </a>
-                                </Col>
+                                        Logga in{' '}
+                                    </a>{' '}
+                                </Col>{' '}
                             </Row>
                         </Form>
                     </div>
