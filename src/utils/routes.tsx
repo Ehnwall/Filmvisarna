@@ -7,10 +7,9 @@ import StartPage from '../pages/startPage/StartPage'
 import IndividualMovie from '../pages/oneMoviePage'
 import Register from '../pages/authSignUp'
 import ConfirmationPage from '../pages/bookingConfirmation'
-import PostMovies from '../componets/member/admin/postMovies'
-import Postshows from '../componets/member/admin/postshows'
+import PostMovies from '../componets/admin/postMovies'
 import ProtectedRoute from '../componets/ProtectedRoute'
-import Admin from '../componets/member/admin/admin'
+import Admin from '../componets/admin/admin'
 
 export default [
     { path: '/', element: <StartPage />, menuLabel: 'Hem' },
