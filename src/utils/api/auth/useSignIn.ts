@@ -20,7 +20,8 @@ export const useSignIn = () => {
                 sessionStorage.removeItem('token')
                 sessionStorage.removeItem('user')
             }, 1000 * 60 * 60)
-            window.location.replace('/medlem')
+            if (data.role === 'admin') window.location.replace('/admin')
+            else window.location.replace('/medlem')
         },
         onError: (error) => {
             console.error('Error signing in', error)

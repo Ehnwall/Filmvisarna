@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Card, Button, Row } from 'react-bootstrap'
+import { Card, Button, Row } from 'react-bootstrap'
 import { BiSolidCameraMovie, BiSlideshow } from 'react-icons/bi'
 import { MdDelete } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
@@ -8,7 +8,7 @@ export default function Admin() {
     const navigate = useNavigate()
 
     return (
-        <Container className="d-flex flex-column justify-content-center mt-4">
+        <>
             <Row>
                 <h2 className="text-center">Välkommen Admin!</h2>
                 <p className="text-center">Vad vill du göra?</p>
@@ -59,6 +59,6 @@ export default function Admin() {
                     </Card.Body>
                 </Card>
             </Row>
-        </Container>
+        </>
     )
 }

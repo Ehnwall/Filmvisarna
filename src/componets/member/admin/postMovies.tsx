@@ -16,13 +16,13 @@ type movie = {
 }
 
 export default function PostMovies() {
-    const navigate = useNavigate()
-    const { token } = useAuth()
-    useEffect(() => {
-        if (!token) {
-            navigate('/logga-in')
-        }
-    }, [token, navigate])
+    // const navigate = useNavigate()
+    // const { token } = useAuth()
+    // useEffect(() => {
+    //     if (!token) {
+    //         navigate('/logga-in')
+    //     }
+    // }, [token, navigate])
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
