@@ -8,10 +8,11 @@ const postOneShowController = (req, res) => {
     }
 
     try {
-        const result = showsController.addShow(movieId, cinemaId, time)
-        res.status(201).json(result)
+        const newShowResult = showService.addShow(movieId, cinemaId, time)
+        res.status(201).json(newShowResult)
     } catch (error) {
-        res.status(500).json({ error: error.message })
+        console.error(error)
+        res.status(500).json({ msg: error.message })
     }
 }
 
