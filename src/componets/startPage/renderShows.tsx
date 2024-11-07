@@ -52,9 +52,11 @@ const MoviesWithCinnema = () => {
     }
 
     const handleWeekSelect = (weeksAhead: number) => {
-        weeksAhead === 0
-            ? setWeekSelect(formatTime(new Date().toString()).getWeekNumber)
-            : setWeekSelect(formatTime(new Date().toString()).getWeekNumber + weeksAhead)
+        if (weeksAhead === 0) {
+            setSelectedDate(new Date())
+        } else {
+            setSelectedDate(new Date(getWeekInterval(weeksAhead).start))
+        }
         setWeekSelect(formatTime(new Date(getWeekInterval(weeksAhead).start).toString()).getWeekNumber)
         setSelectedWeek(weeksAhead)
     }
