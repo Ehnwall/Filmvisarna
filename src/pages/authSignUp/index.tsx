@@ -1,6 +1,6 @@
 import { useAuth } from '../../context/authContext'
 import { useEffect, useState } from 'react'
-import { Row, Container, Col, Form, Button, Card } from 'react-bootstrap'
+import { Row, Container, Col, Form, Button, Card, Spinner } from 'react-bootstrap'
 
 export default function Register() {
     const [email, setEmail] = useState('')
@@ -10,8 +10,7 @@ export default function Register() {
     const [repeatedPassword, setRepetedPassword] = useState('')
 
     const [error, setError] = useState('')
-    const [signUpError, setSignUpError] = useState('')
-
+    const [repeatedPasswordError, setRepeatedPasswordError] = useState('')
     const [emailError, setEmailError] = useState<string | null>(null)
     const [firstNameError, setFirstNameError] = useState<string | null>(null)
     const [lastNameError, setLastNameError] = useState<string | null>(null)
@@ -37,21 +36,19 @@ export default function Register() {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        setError('')
-        if (!firstName || !lastName || !email || !password || !repeatedPassword) {
-            setError('Fyll i alla fält')
-            return
-        }
         if (password !== repeatedPassword) {
-            setError('Lösenorden matchar inte')
+            setRepeatedPasswordError('Lösenorden matchar inte')
             return
+        } else {
+            setRepeatedPasswordError('')
         }
+        console.log({ firstName, lastName, email, password })
         signUp?.mutate({ firstName, lastName, email, password })
     }
 
     useEffect(() => {
         if (signUp?.isError) {
-            setSignUpError(signUp.error.response?.data.msg as string)
+            setEmailError(signUp.error.response?.data.msg as string)
         }
     }, [signUp?.isError, signUp?.error])
     return (
@@ -116,6 +113,8 @@ export default function Register() {
                                             setError(
                                                 'Lösenordet måste innehålla minst 8 tecken, en stor bokstav, en liten bokstav och en siffra'
                                             )
+                                        } else {
+                                            setError('')
                                         }
                                     }}
                                     isInvalid={!!error}
@@ -130,21 +129,22 @@ export default function Register() {
                                     value={repeatedPassword}
                                     onChange={(e) => setRepetedPassword(e.target.value)}
                                 />
+                                {repeatedPasswordError && <Form.Text>{repeatedPasswordError}</Form.Text>}
                             </Form.Group>
                             <Row>
-                                {' '}
                                 <Col>
-                                    {' '}
                                     <Button type="submit" variant="outline-primary">
-                                        Bli medlem{' '}
-                                    </Button>{' '}
-                                </Col>{' '}
+                                        Bli medlem
+                                        {signUp && signUp.isPending && (
+                                            <Spinner className="ms-2" animation="border" size="sm" />
+                                        )}
+                                    </Button>
+                                </Col>
                                 <Col className="d-flex justify-content-end">
-                                    {' '}
                                     <a className="btn btn-link" href="/logga-in">
-                                        Logga in{' '}
-                                    </a>{' '}
-                                </Col>{' '}
+                                        Logga in
+                                    </a>
+                                </Col>
                             </Row>
                         </Form>
                     </div>
