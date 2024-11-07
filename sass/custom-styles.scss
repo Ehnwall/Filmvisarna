@@ -6,14 +6,14 @@ $transition: 0.3s ease;
 @each $color, $value in $theme-colors {
     .btn-#{$color} {
         position: relative;
-        &::after {
+        &::before {
             content: '';
             z-index: -1;
             position: absolute;
             inset: -2px;
             transition: background-color $transition, filter $transition;
         }
-        &:hover::after {
+        &:hover::before {
             background-color: $value;
             filter: blur(0.5rem);
         }
