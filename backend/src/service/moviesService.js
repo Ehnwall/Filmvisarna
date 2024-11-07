@@ -28,7 +28,7 @@ const getShowsByMovie = (id, start, end) => {
             ON shows.movieId = movies.id
             INNER JOIN cinemas
             ON cinemas.id = shows.cinemaId
-            WHERE movies.Id = ? AND shows.time BETWEEN datetime(?) AND datetime(?)
+            WHERE movies.Id = ? AND shows.time BETWEEN ? AND ?
             `
             stmt = db.prepare(shows).all(id, start, end)
         } else {
