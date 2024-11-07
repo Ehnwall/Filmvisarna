@@ -1,12 +1,23 @@
 import { Row, Stack, Container, Col, Form, Button, Toast } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Spinner from 'react-bootstrap/Spinner'
 import { useAuth } from '../../context/authContext'
 import { ToastContainer } from 'react-toastify'
 export default function Login() {
     const navigate = useNavigate()
     const { user, token, signIn } = useAuth()
+    const [emailError, setEmailError] = useState<string | null>(null)
+
+    const handleBlur = (field: string, value: string) => {
+        switch (field) {
+            case 'email':
+                setEmailError(value.includes('@') ? null : 'Ogiltig e-postadress')
+                break
+            default:
+                break
+        }
+    }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -14,6 +25,7 @@ export default function Login() {
             const formData = new FormData(event.currentTarget)
             const email = formData.get('email') as string
             const password = formData.get('password') as string
+
             signIn.mutate({ email, password })
         }
     }
@@ -51,7 +63,9 @@ export default function Login() {
                                     className={`p-2 ${signIn && signIn.isError ? 'border-danger' : ''}`}
                                     type="email"
                                     placeholder="Ange din e-postadress"
+                                    onBlur={() => handleBlur('email', '')}
                                 />
+                                {emailError && <Form.Text className="invalid">{emailError}</Form.Text>}
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Lösenord</Form.Label>

@@ -64,12 +64,6 @@ export default function Register() {
                                 <h3 className="text-center h1">Bli medlem</h3>
                             </Card.Header>
                         </Card>
-                        {(signUpError || error) && (
-                            <ul className="alert alert-danger ps-4">
-                                {signUpError && <li>{signUpError}</li>}
-                                {error && <li>{error}</li>}
-                            </ul>
-                        )}
                         <Form onSubmit={handleSubmit}>
                             {[
                                 {
@@ -126,7 +120,7 @@ export default function Register() {
                                     }}
                                     isInvalid={!!error}
                                 />
-                                {error && <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>}
+                                {error && <Form.Text>{error}</Form.Text>}
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="repeatedPassword">
                                 <Form.Label>Upprepa Lösenord</Form.Label>
