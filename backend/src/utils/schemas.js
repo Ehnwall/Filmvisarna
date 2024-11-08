@@ -5,7 +5,7 @@ export const movieSchema = z.object({
     durationMin: z.number().int().positive(),
     ageLimit: z.number().int(),
     description: z.object({
-        director: z.string(),
+        director: z.array(z.string()),
         cast: z.array(z.string()),
         synopsis: z.string(),
         genre: z.array(z.string()),
