@@ -4,11 +4,13 @@ const postOneShowController = (req, res) => {
     const { movieId, cinemaId, time } = req.body
 
     if (!movieId || !cinemaId || !time) {
-        return res.status(400).json({ error: 'Missing required fields' })
+        return res.status(400).json({ msg: 'Missing required fields' })
     }
 
     try {
-        const newShowResult = showService.addShow(movieId, cinemaId, time)
+        const isoTime = new Date(time).toISOString()
+        const newShowResult = showService.addShow(movieId, cinemaId, isoTime)
+
         res.status(201).json(newShowResult)
     } catch (error) {
         console.error(error)
