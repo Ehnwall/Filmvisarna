@@ -12,7 +12,7 @@ export const movieSchema = z.object({
         language: z.string(),
         text: z.string(),
         originalTitle: z.string(),
-        year: z.number().int(),
+        year: z.string(),
     }),
     trailerUrl: z.string().min(11).max(11),
     posterUrl: z.string().url(),

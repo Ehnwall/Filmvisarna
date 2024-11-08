@@ -12,7 +12,7 @@ export default function MovieCard({ movie }: { movie: MOVIE }) {
                     <Card.Title className="fs-6 text-truncate">{movie.title}</Card.Title>
                     <Card.Text className="d-flex flex-wrap gap-2">
                         <Badge bg="primary" className="text-black">
-                            {movie.description.genre[1]}
+                            {movie.description.genre[0]}
                         </Badge>
                     </Card.Text>
                     <Stack direction="horizontal" gap={2} className="flex-wrap card-badge">

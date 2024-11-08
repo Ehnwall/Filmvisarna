@@ -2,35 +2,15 @@ import { Container, Button, Form, Row, Col } from 'react-bootstrap'
 import RenderMovies from '../PostMovie/renderPreview'
 import AddGroup from './addGroup'
 import React, { useState } from 'react'
-
-interface NewMovie {
-    movieTitle: string
-    ageLimit: number
-    durationMin: number
-
-    description: Description[]
-
-    posterUrl: string
-    trailerUrl: string
-}
-
-interface Description {
-    director: string[]
-    originalTitle: string
-    genre: string[]
-    cast: string[]
-    year: number
-    text: string
-    language: string
-    synopsis: string
-}
+import { DescriptionNewMovie, NEWMOVIE } from '../../../utils/types/types'
+import { usePostMovie } from '../../../utils/api/movies/usePostMovie'
 
 export default function PostMovies() {
     const [movieTitle, setMovieTitle] = useState('')
     const [ageLimit, setAgeLimit] = useState('')
     const [durationMin, setDurationMin] = useState('')
     const [originalTitle, setOriginalTitle] = useState('')
-    const [year, setYear] = useState('')
+    const [year, setYear] = useState(new Date().toDateString())
     const [language, setLanguage] = useState('')
     const [text, setText] = useState('')
     const [posterUrl, setPosterUrl] = useState('')
@@ -45,6 +25,8 @@ export default function PostMovies() {
     const castName: string = 'skådespelare'
     const genreName: string = 'genre'
     const directorName: string = 'filmregissör'
+
+    const postMovie = usePostMovie()
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         switch (event.target.name) {
@@ -91,8 +73,7 @@ export default function PostMovies() {
     const firstLetterCap = firstLetter.toUpperCase()
     const remainingLetters = movieTitle.slice(1)
     const capitalizedWord = firstLetterCap + remainingLetters
-
-    const yearNumber = +year
+    const yeardate = new Date(year).toISOString()
     const ageLimitNumber = +ageLimit
     const durationMinNumber = +durationMin
 
@@ -100,27 +81,27 @@ export default function PostMovies() {
         event.preventDefault()
         const trailerUrl = extractYouTubeId(trailerUrlInput)
 
-        const newMovie: NewMovie = {
-            movieTitle: capitalizedWord,
+        const description: DescriptionNewMovie = {
+            director: directorList,
+            originalTitle: originalTitle,
+            genre: genreList,
+            cast: castList,
+            year: yeardate,
+            text: text,
+            language: language,
+            synopsis: synopsis,
+        }
+
+        const newMovie: NEWMOVIE = {
+            title: capitalizedWord,
             ageLimit: ageLimitNumber,
             durationMin: durationMinNumber,
-            description: [
-                {
-                    director: directorList,
-                    originalTitle: originalTitle,
-                    genre: genreList,
-                    cast: castList,
-                    year: yearNumber,
-                    text: text,
-                    language: language,
-                    synopsis: synopsis,
-                },
-            ],
+            description: description,
             posterUrl: posterUrl,
             trailerUrl: trailerUrl,
         }
 
-        console.log(newMovie)
+        postMovie.mutate(newMovie)
     }
 
     return (
@@ -191,7 +172,7 @@ export default function PostMovies() {
                         <Form.Group className="mb-3" controlId="formBasicYear">
                             <Form.Label>Lägg till releasedatum</Form.Label>
                             <Form.Control
-                                type="number"
+                                type="date"
                                 placeholder="Lägg till releasedatum"
                                 name="year"
                                 onChange={handleChange}

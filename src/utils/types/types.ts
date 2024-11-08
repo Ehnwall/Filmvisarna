@@ -126,3 +126,33 @@ export type USER = {
     firstName: string
     lastName: string
 }
+
+export type NEWMOVIE = {
+    title: string
+    ageLimit: number
+    durationMin: number
+    description: DescriptionNewMovie
+    posterUrl: string
+    trailerUrl: string
+}
+
+export type POSTMOVIERESP = {
+    msg: string
+    movieTitle: string
+    movieId: number
+}
+
+export type MOVIEERROR = {
+    msg: string
+}
+
+export type DescriptionNewMovie = {
+    director: string[]
+    originalTitle: string
+    genre: string[]
+    cast: string[]
+    year: string
+    text: string
+    language: string
+    synopsis: string
+}

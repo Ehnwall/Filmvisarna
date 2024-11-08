@@ -42,7 +42,7 @@ const addMovie = (req, res) => {
     }
     try {
         const movie = service.addMovie(req.body)
-        res.status(201).send({ msg: 'Film tillagd', movieId: movie.lastInsertRowid })
+        res.status(201).send({ msg: 'Film tillagd', movieId: movie.info.lastInsertRowid, movieTitle: movie.title })
     } catch (error) {
         res.status(500).send({ msg: 'Misslyckades lägga till en film', error: error.message })
     }
