@@ -7,7 +7,7 @@ import StartPage from '../pages/startPage/StartPage'
 import IndividualMovie from '../pages/oneMoviePage'
 import Register from '../pages/authSignUp'
 import ConfirmationPage from '../pages/bookingConfirmation'
-import PostMovies from '../componets/admin/postMovies'
+import PostMovies from '../componets/admin/PostMovie/postMovies'
 import ProtectedRoute from '../componets/ProtectedRoute'
 import Admin from '../componets/admin/admin'
 

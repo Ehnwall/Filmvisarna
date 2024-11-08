@@ -29,7 +29,7 @@ export type USERBOOKING = {
     seats: SEAT[]
 }
 
-export type CONFIRMDELETEMODALPROPS = {
+export type CONFIRMMODALPROPS = {
     show: boolean
     onHide: () => void
     onConfirm: () => void
