@@ -1,5 +1,19 @@
 import { db } from '../../server.js'
 import { formatShow } from '../utils/formatShow.js'
+
+const addShow = (movieId, cinemaId, time) => {
+    const insertShow = `
+   INSERT INTO shows (movieId, cinemaId, time) VALUES (?,?,?)`
+
+    const newShowResult = db.prepare(insertShow).run(movieId, cinemaId, time)
+
+    if (newShowResult.changes === 0) {
+        throw new Error('Failed to add show')
+    }
+
+    return { success: true, showId: newShowResult.lastInsertRowid }
+}
+
 const getShowById = (id) => {
     const showById = `SELECT
     shows.Id AS showId,
@@ -73,4 +87,4 @@ const getSeatStatus = (showId) => {
     return occupiedSeatsStmt.map((seat) => seat.cinemaSeatsID)
 }
 
-export default { getAllShows, getSeatStatus, getShowById }
+export default { addShow, getAllShows, getSeatStatus, getShowById }
