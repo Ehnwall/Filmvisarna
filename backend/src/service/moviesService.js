@@ -28,7 +28,7 @@ const getShowsByMovie = (id, start, end) => {
             ON shows.movieId = movies.id
             INNER JOIN cinemas
             ON cinemas.id = shows.cinemaId
-            WHERE movies.Id = ? AND shows.time BETWEEN datetime(?) AND datetime(?)
+            WHERE movies.Id = ? AND shows.time BETWEEN ? AND ?
             `
             stmt = db.prepare(shows).all(id, start, end)
         } else {
@@ -65,5 +65,12 @@ const getMovieById = (id) => {
     }
     return result
 }
+const addMovie = ({ title, durationMin, ageLimit, description, trailerUrl, posterUrl }) => {
+    const insertMovie = db.prepare(
+        'INSERT INTO movies (title, durationMin, ageLimit, description, trailerUrl, posterUrl) VALUES (?, ?, ?, ?, ?, ?)'
+    )
+    const info = insertMovie.run(title, durationMin, ageLimit, JSON.stringify(description), trailerUrl, posterUrl)
+    return { info, title }
+}
 
-export default { getMovies, getShowsByMovie, getMovieById }
+export default { getMovies, getShowsByMovie, getMovieById, addMovie }

@@ -1,10 +1,8 @@
 import React from 'react'
 import { Row, Col, Stack, Accordion } from 'react-bootstrap'
-import { useGetOneMovie } from '../../utils/api/movies/useGetOneMovie'
+import { MOVIE } from '../../utils/types/types'
 
-export function InfoMovieDescription() {
-    const { data: movie } = useGetOneMovie()
-
+export function InfoMovieDescription({ movie }: Readonly<{ movie: MOVIE }>) {
     return (
         <Accordion defaultActiveKey="0">
             <Accordion.Item eventKey="0">
@@ -19,8 +17,8 @@ export function InfoMovieDescription() {
                             </Col>
                             <Col sm={6} md={4}>
                                 <h5>Skådespelare</h5>
-                                {movie?.description?.cast?.map((actor: string, index: number) => (
-                                    <p key={index}>{actor}</p>
+                                {movie?.description?.cast?.map((actor: string) => (
+                                    <p key={actor}>{actor}</p>
                                 ))}
                             </Col>
                             <Col sm={6} md={4}>

@@ -20,7 +20,7 @@ const Sidebar = () => {
                     </Accordion.Header>
                     <Accordion.Body>
                         <Nav.Item>
-                            <Nav.Link as={Link} to="/admin-deletemovies">
+                            <Nav.Link as={Link} to="/admin/add-movie" className="text-white">
                                 <BiSolidCameraMovie size={20} className="me-2" />
                                 Filmer
                             </Nav.Link>
@@ -40,13 +40,13 @@ const Sidebar = () => {
                     </Accordion.Header>
                     <Accordion.Body>
                         <Nav.Item>
-                            <Nav.Link as={Link} to="/admin-deletemovies">
+                            <Nav.Link as={Link} to="/admin-deletemovies" className="text-white">
                                 <BiSolidCameraMovie size={20} className="me-2" />
                                 Filmer
                             </Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link as={Link} to="/admin-deletemovies">
+                            <Nav.Link as={Link} to="/admin-deletemovies" className="text-white">
                                 <BiSlideshow size={20} className="me-2" />
                                 Visningar
                             </Nav.Link>

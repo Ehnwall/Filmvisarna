@@ -1,6 +1,6 @@
-import { Container, Row, Col, Card } from 'react-bootstrap'
+import { Container, Row, Col, Card, Button, ButtonGroup, Dropdown } from 'react-bootstrap'
 import Stack from 'react-bootstrap/Stack'
-import Dropdown from 'react-bootstrap/Dropdown'
+import { IoMdArrowDropdown } from 'react-icons/io'
 import { BsArrowDown } from 'react-icons/bs'
 import Badge from 'react-bootstrap/Badge'
 import { useGetMovies } from '../../utils/api/movies/useGetMovies'
@@ -45,23 +45,23 @@ export default function RenderMovies() {
                 <Stack className="mb-2 mt-3" direction="horizontal" gap={3}>
                     <Dropdown>
                         <Dropdown.Toggle
-                            className="btn-filter d-flex align-items-center"
-                            variant="primary"
+                            variant="outline-primary"
                             id="dropdown-basic"
+                            className="btn-filter text-center"
                         >
-                            Åldrar <BsArrowDown />
+                            {' '}
+                            {selectedAge === '7' || selectedAge === '11' || selectedAge === '15'
+                                ? `Från ${selectedAge}`
+                                : selectedAge}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                            {ages.map((age, index) => (
-                                <Dropdown.Item key={index} onClick={() => handleAgeSelect(age)}>
-                                    {age}
+                            {ages.map((age) => (
+                                <Dropdown.Item key={age} onClick={() => handleAgeSelect(age)}>
+                                    {age === '7' || age === '11' || age === '15' ? `Från ${age}` : age}
                                 </Dropdown.Item>
                             ))}
                         </Dropdown.Menu>
                     </Dropdown>
-                    <h6 className="textpy-1 d-inline-flex align-items-center mt-2 ms-1">
-                        Ålder : <span className="ms-2">{selectedAge}</span>
-                    </h6>
                 </Stack>
 
                 <Row xs={2} md={4} xl={6} className="g-3">

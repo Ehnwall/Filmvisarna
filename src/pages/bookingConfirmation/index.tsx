@@ -15,8 +15,8 @@ import { SEAT } from '@/utils/types/types'
 import { formatTime, getDuration } from '../../utils/timeFormat'
 
 const ConfirmationPage = () => {
-    const { bookingId } = useParams<{ bookingId: string }>()
-    const { data } = useGetBooking(bookingId || '')
+    const { bookingNr } = useParams<{ bookingNr: string }>()
+    const { data } = useGetBooking(bookingNr || '')
     const booking = Array.isArray(data) && data.length > 0 ? data[0] : null
 
     if (!booking) {
@@ -47,9 +47,9 @@ const ConfirmationPage = () => {
                     <Card.Title>
                         <h1>Din bokning är nu klar</h1>
                     </Card.Title>
+                    <Card.Text>Du får en bokningsbekräftelse via e-post med information om din bokning.</Card.Text>
                     <Card.Text>
-                        Du får en bokningsbekräftelse via e-post med information om din bokning. Ordernummer:{' '}
-                        <span className="text-primary">{booking.bookingNumberId}</span>
+                        Ordernummer: {'  '} <span className="text-primary fs-5">{booking.bookingNumberId}</span>
                     </Card.Text>
                 </Card.Body>
             </Card>

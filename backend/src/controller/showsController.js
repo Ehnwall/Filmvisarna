@@ -48,12 +48,26 @@ const getAllShowsController = (req, res) => {
 const getSeats = (req, res) => {
     const showId = req.params.Id
 
-    try {
-        const seatsCheck = showService.getSeatStatus(showId)
-        res.status(200).send({ occupiedSeats: seatsCheck })
-    } catch (e) {
-        res.status(404).send({ msg: e.message })
+    res.setHeader('Content-Type', 'text/event-stream')
+    res.setHeader('Cache-Control', 'no-cache')
+    res.setHeader('Connection', 'keep-alive')
+    const sendSeatsStatus = () => {
+        try {
+            const seatsCheck = showService.getSeatStatus(showId)
+            res.write(`data: ${JSON.stringify({ occupiedSeats: seatsCheck })}\n\n`)
+        } catch (e) {
+            res.write(`event: error\ndata: ${JSON.stringify({ msg: e.message })}\n\n`)
+        }
     }
+    res.write(': welcome\n\n')
+    sendSeatsStatus()
+
+    const intervalId = setInterval(sendSeatsStatus, 5000)
+
+    req.on('close', () => {
+        clearInterval(intervalId)
+        res.end()
+    })
 }
 
 export default { postOneShowController, getAllShowsController, getSeats, getShowById }

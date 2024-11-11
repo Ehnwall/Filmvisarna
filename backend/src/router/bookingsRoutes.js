@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.get('/api/bookings', authFilter.authourize(), bookingsController.getAllBookings)
 router.get('/api/tickets', bookingsController.getAllTickets)
-router.get('/api/bookings/:bookingId', bookingsController.getBookingsFromId)
+router.get('/api/bookings/:bookingNr', bookingsController.getBookingsFromNumber)
 router.post('/api/bookings', authFilter.authourize(['guest', 'user', 'admin']), bookingsController.createBooking)
 router.delete('/api/bookings/:id', authFilter.authourize(), bookingsController.deleteBooking)
 
