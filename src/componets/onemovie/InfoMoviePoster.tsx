@@ -1,12 +1,9 @@
 import { Card } from 'react-bootstrap'
-import { useGetOneMovie } from '../../utils/api/movies/useGetOneMovie'
-
-export function InfoMoviePoster() {
-    const { data: movie } = useGetOneMovie()
-
+import { MOVIE } from '@/utils/types/types'
+export function InfoMoviePoster({ movie }: Readonly<{ movie: MOVIE }>) {
     return (
         <Card>
-            <img src={movie?.posterUrl} alt={movie?.title} />
+            <img className="rounded" src={movie?.posterUrl} alt={movie?.title} />
         </Card>
     )
 }

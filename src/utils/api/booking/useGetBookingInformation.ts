@@ -1,4 +1,4 @@
-import { CINEMASEATS, OCCUPIEDSEATS, SHOWS, TICKETS } from '@/utils/types/types'
+import { CINEMASEATS, SHOWS, TICKETS } from '@/utils/types/types'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
@@ -6,10 +6,6 @@ import { useParams } from 'react-router-dom'
 const fetchShows = async (showId: string) => {
     const { data } = await axios.get<SHOWS[]>(`/api/shows/${showId}`)
     return data[0]
-}
-const fetchOccupiedSeats = async (showId: string) => {
-    const { data } = await axios.get<OCCUPIEDSEATS>(`/api/occupiedSeats/${showId}/`)
-    return data
 }
 const fetchSeats = async (cinemaId: number) => {
     const { data } = await axios.get<CINEMASEATS[]>(`/api/cinemas/${cinemaId}/seats`)
@@ -27,19 +23,14 @@ export const useGetBookingInformation = () => {
     }
     const showsQuery = useQuery({ queryKey: ['shows', showId], queryFn: () => fetchShows(showId) })
 
-    const occupiedSeatsQuery = useQuery({
-        queryKey: ['occupiedSeats', showId],
-        queryFn: () => fetchOccupiedSeats(showId),
-    })
-
-    const cinemaId = showsQuery.data && showsQuery.data?.cinemaId as number
+    const cinemaId = showsQuery.data && (showsQuery.data?.cinemaId as number)
 
     const seatsQuery = useQuery({
         queryKey: ['seats', showId],
-        queryFn: () => fetchSeats(cinemaId),
+        queryFn: () => fetchSeats(cinemaId as number),
         enabled: !!cinemaId,
     })
     const ticketsQuery = useQuery({ queryKey: ['tickets'], queryFn: fetchTickets })
 
-    return { showsQuery, occupiedSeatsQuery, seatsQuery, ticketsQuery }
+    return { showsQuery, seatsQuery, ticketsQuery }
 }

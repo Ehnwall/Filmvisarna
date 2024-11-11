@@ -94,6 +94,7 @@ export type CINEMASEATS = {
 }
 
 export type SHOWSONMOVIE = {
+    [x: string]: any
     showId: number
     movieId: number
     showTime: string
@@ -113,7 +114,7 @@ export type PARTIALBOOKING = Partial<BOOKING>
 
 export type BOOKINGRESP = {
     msg: string
-    bookingId: number
+    bookingNr: number
 }
 
 export type SELECTEDSEATS = {
