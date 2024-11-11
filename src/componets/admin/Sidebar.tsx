@@ -5,15 +5,15 @@ import { MdAddToPhotos, MdDashboard, MdDelete } from 'react-icons/md'
 
 const Sidebar = () => {
     return (
-        <Nav className="flex-column bg-body-tertiary p-3 h-100">
-            <Nav.Item>
-                <Nav.Link as={Link} to="/admin " className="text-white">
-                    <MdDashboard size={20} className="me-2" />
-                    Dashboard
+        <Nav className="d-flex flex-column flex-wrap bg-body-tertiary p-3 h-100 mt-4 ms-3 shadow rounded">
+            <Nav.Item className="shadow mb-3 mt-1 text-center rounded">
+                <Nav.Link as={Link} to="/admin">
+                    <MdDashboard size={30} className="me-2" />
+                    <h4 className="mt-2">Dashboard</h4>
                 </Nav.Link>
             </Nav.Item>
-            <Accordion flush alwaysOpen>
-                <Accordion.Item eventKey="0" className="text-white">
+            <Accordion flush alwaysOpen className="custom-accordion">
+                <Accordion.Item eventKey="0" className="mt-5">
                     <Accordion.Header>
                         <MdAddToPhotos size={20} className="me-2" />
                         Lägg till
@@ -33,7 +33,7 @@ const Sidebar = () => {
                         </Nav.Item>
                     </Accordion.Body>
                 </Accordion.Item>
-                <Accordion.Item eventKey="1">
+                <Accordion.Item eventKey="1" className="mt-2">
                     <Accordion.Header>
                         <MdDelete size={20} className="me-2" />
                         Ta bort

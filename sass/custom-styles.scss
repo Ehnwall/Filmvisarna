@@ -93,3 +93,20 @@ main {
     object-fit: cover;
     overflow: hidden;
 }
+
+/*Dashboard*/
+
+.custom-accordion .accordion-item {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border: none;
+    margin-bottom: 0.6rem;
+}
+
+.custom-accordion .accordion-header {
+    border-radius: 0.5rem;
+}
+
+.custom-accordion .accordion-header button {
+    border-radius: 0.5rem;
+}
