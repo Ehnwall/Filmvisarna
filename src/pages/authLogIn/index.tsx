@@ -1,12 +1,22 @@
-import { Row, Stack, Container, Col, Form, Button, Toast } from 'react-bootstrap'
+import { Row, Stack, Container, Col, Form, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Spinner from 'react-bootstrap/Spinner'
 import { useAuth } from '../../context/authContext'
 import { ToastContainer } from 'react-toastify'
 export default function Login() {
     const navigate = useNavigate()
     const { user, token, signIn } = useAuth()
+    const [emailError, setEmailError] = useState<string | null>(null)
+    const [passwordError, setPasswordError] = useState<string | null>(null)
+
+    const handleBlur = (field: string, value: string) => {
+        if (field === 'email') {
+            setEmailError(value.includes('@') ? null : 'Ogiltig e-postadress')
+        } else if (field === 'password') {
+            setPasswordError(value.length > 7 ? null : 'Lösenordet måste vara minst 8 tecken')
+        }
+    }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -42,16 +52,17 @@ export default function Login() {
                 <Col xs={12} md={8} lg={6} xl={5}>
                     <div className="p-md-5 p-4 bg-body-tertiary custom-box-shadow rounded-3 ">
                         <h2 className="text-center h1">Logga in</h2>
-                        {signIn && signIn.isError && <div className="alert alert-danger">Fel mejl eller lösenord</div>}
                         <Form onSubmit={handleSubmit}>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Fyll i din Mejl</Form.Label>
+                                <Form.Label>Fyll i din mail</Form.Label>
                                 <Form.Control
                                     name="email"
                                     className={`p-2 ${signIn && signIn.isError ? 'border-danger' : ''}`}
                                     type="email"
                                     placeholder="Ange din e-postadress"
+                                    onChange={(e) => handleBlur('email', e.target.value)}
                                 />
+                                {emailError && <Form.Text className="invalid">{emailError}</Form.Text>}
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Lösenord</Form.Label>
@@ -60,7 +71,9 @@ export default function Login() {
                                     className={`p-2 ${signIn && signIn.isError ? 'border-danger' : ''}`}
                                     type="password"
                                     placeholder="Ange lösenord"
+                                    onBlur={() => handleBlur('password', '')}
                                 />
+                                {passwordError && <Form.Text className="invalid">{passwordError}</Form.Text>}
                             </Form.Group>
                             <Stack direction="horizontal">
                                 <div>
@@ -77,13 +90,6 @@ export default function Login() {
                                     </a>
                                 </div>
                             </Stack>
-                            {/* <Row className="mt-3">
-                                <Col>
-                                    <a className="btn btn-link p-0" href="/forgot-password">
-                                        Glömt Lösenord?
-                                    </a>
-                                </Col>
-                            </Row> */}
                         </Form>
                     </div>
                 </Col>

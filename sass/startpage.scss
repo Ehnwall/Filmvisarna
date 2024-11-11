@@ -31,7 +31,7 @@
 
 .card-dates {
     cursor: pointer;
-    transition: background-color $transition;
+    transition: background-color $transition, transform $transition;
     &:hover {
         background-color: $primary;
     }
