@@ -1,7 +1,7 @@
 import { Button, Modal } from 'react-bootstrap'
-import { CONFIRMDELETEMODALPROPS } from '@/utils/types/types'
+import { CONFIRMMODALPROPS } from '@/utils/types/types'
 
-const modalForDeleteBooking = ({ show, onHide, onConfirm }: CONFIRMDELETEMODALPROPS) => {
+const modalForDeleteBooking = ({ show, onHide, onConfirm }: CONFIRMMODALPROPS) => {
     return (
         <Modal show={show} onHide={onHide} centered>
             <Modal.Header closeButton>

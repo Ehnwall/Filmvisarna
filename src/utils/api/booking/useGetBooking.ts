@@ -2,10 +2,9 @@ import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 import { USERBOOKING } from '@/utils/types/types'
 
-const fetchBooking = async (bookingId: string): Promise<USERBOOKING> => {
+const fetchBooking = async (bookingNr: string): Promise<USERBOOKING> => {
     try {
-        const { data } = await axios.get<USERBOOKING>(`/api/bookings/${bookingId}`)
-        console.log('Booking data:', data)
+        const { data } = await axios.get<USERBOOKING>(`/api/bookings/${bookingNr}`)
         return data
     } catch (error) {
         console.error('Error fetching booking:', error)
@@ -13,9 +12,9 @@ const fetchBooking = async (bookingId: string): Promise<USERBOOKING> => {
     }
 }
 
-export const useGetBooking = (bookingId: string) => {
+export const useGetBooking = (bookingNr: string) => {
     return useQuery({
-        queryKey: ['booking', bookingId],
-        queryFn: () => fetchBooking(bookingId),
+        queryKey: ['booking', bookingNr],
+        queryFn: () => fetchBooking(bookingNr),
     })
 }

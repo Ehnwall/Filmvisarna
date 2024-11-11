@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap'
 import { CINEMASEATS, OCCUPIEDSEATS, TICKETAMOUNT } from '../../utils/types/types'
+import { useGetOccupiedSeats } from '../../utils/api/booking/useGetOccupiedSeats'
 
 type Props = {
-    occupiedSeats: OCCUPIEDSEATS
     seats: CINEMASEATS[]
     tickets: TICKETAMOUNT[]
     onSeatsSelected: (seats: any[]) => void
@@ -11,11 +11,12 @@ type Props = {
 
 type Seats = {
     seatId: number
-    ticketTypeId: number | null
+    ticketTypeId: number | undefined
 }
 
-export function BookingSeats({ occupiedSeats, seats, tickets, onSeatsSelected }: Props) {
+export function BookingSeats({ seats, tickets, onSeatsSelected }: Props) {
     const [seatIdArray, setSeatIdArray] = useState<number[]>([])
+    const { data: occupiedSeats } = useGetOccupiedSeats()
 
     const result = tickets.reduce((acc, obj) => acc + obj.amount, 0)
 
@@ -45,7 +46,7 @@ export function BookingSeats({ occupiedSeats, seats, tickets, onSeatsSelected }:
         let newSeatsSelected = []
 
         for (let seatId of seatIdArray) {
-            let obj: Seats = { seatId, ticketTypeId: null }
+            let obj: Seats = { seatId, ticketTypeId: undefined }
             for (let ticket of ticketsCopy) {
                 if (ticket.amount > 0) {
                     obj.ticketTypeId = ticket.ticketId

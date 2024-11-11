@@ -40,15 +40,14 @@ const getAllShows = (startDate, endDate) => {
         let stmt
         if (startDate || endDate) {
             shows = `SELECT cinemas.name AS cinemaName, 
-                cinemas.Id AS cinemaId,
-                shows.Id AS showId, 
-                shows.time AS showTime, 
-                movies.*  
-                FROM shows 
-                INNER JOIN movies ON movieId = movies.id 
-                INNER JOIN cinemas ON shows.cinemaId = cinemas.id
-                WHERE shows.time BETWEEN datetime(?) AND datetime(?)
-                ORDER BY cinemas.name, shows.time`
+            cinemas.Id AS cinemaId,
+            shows.Id AS showId, 
+            shows.time AS showTime, 
+            movies.*  FROM shows 
+            INNER JOIN movies ON shows.movieId = movies.id 
+            INNER JOIN cinemas ON shows.cinemaId = cinemas.id
+            WHERE shows.time BETWEEN ? AND ?
+            ORDER BY cinemas.name, shows.time`
             stmt = db.prepare(shows).all(startDate, endDate)
         } else {
             shows = `SELECT cinemas.name AS cinemaName, 
