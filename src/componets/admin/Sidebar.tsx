@@ -26,7 +26,7 @@ const Sidebar = () => {
                             </Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link as={Link} to="/admin-deletemovies" className="text-white">
+                            <Nav.Link as={Link} to="/admin/add-show">
                                 <BiSlideshow size={20} className="me-2" />
                                 Visningar
                             </Nav.Link>

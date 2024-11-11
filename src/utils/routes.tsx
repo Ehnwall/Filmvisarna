@@ -10,6 +10,7 @@ import ConfirmationPage from '../pages/bookingConfirmation'
 import PostMovies from '../componets/admin/PostMovie/postMovies'
 import ProtectedRoute from '../componets/ProtectedRoute'
 import Admin from '../componets/admin/admin'
+import AddShow from '../componets/admin/add/AddShow'
 
 export default [
     { path: '/', element: <StartPage />, menuLabel: 'Hem' },
@@ -30,6 +31,10 @@ export default [
             {
                 path: '/admin/add-movie',
                 element: <PostMovies />,
+            },
+            {
+                path: '/admin/add-show',
+                element: <AddShow />,
             },
         ],
     },
