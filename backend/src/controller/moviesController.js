@@ -1,4 +1,5 @@
 import service from '../service/moviesService.js'
+import { movieSchema } from '../utils/schemas.js'
 
 const getAllMovies = (req, res) => {
     const movies = service.getMovies()
@@ -33,4 +34,18 @@ const getOneMovie = (req, res) => {
     }
 }
 
-export default { getAllMovies, getOneMovie, getShowByMovieId }
+const addMovie = (req, res) => {
+    try {
+        movieSchema.parse(req.body)
+    } catch (error) {
+        return res.status(400).send({ msg: error.errors })
+    }
+    try {
+        const movie = service.addMovie(req.body)
+        res.status(201).send({ msg: 'Film tillagd', movieId: movie.info.lastInsertRowid, movieTitle: movie.title })
+    } catch (error) {
+        res.status(500).send({ msg: 'Misslyckades lägga till en film', error: error.message })
+    }
+}
+
+export default { getAllMovies, getOneMovie, getShowByMovieId, addMovie }

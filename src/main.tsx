@@ -6,6 +6,7 @@ import '../sass/main.scss'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import routes from './utils/routes'
 import App from './App'
+import ProtectedRoute from './componets/ProtectedRoute'
 
 // set a title
 

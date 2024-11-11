@@ -29,7 +29,7 @@ export type USERBOOKING = {
     seats: SEAT[]
 }
 
-export type CONFIRMDELETEMODALPROPS = {
+export type CONFIRMMODALPROPS = {
     show: boolean
     onHide: () => void
     onConfirm: () => void
@@ -42,6 +42,7 @@ export type SIGNINRESPONSE = {
     bearer: string
     firstName: string
     lastName: string
+    role: string
 }
 export type SIGNUP = {
     firstName: string
@@ -53,7 +54,7 @@ export type SIGNUPRESPONSE = {
     changes: string
     lastInsertRowid: string
 }
-type Description = {
+export type Description = {
     director: string
     cast: string[]
     synopsis: string
@@ -125,4 +126,34 @@ export type USER = {
     email: string
     firstName: string
     lastName: string
+}
+
+export type NEWMOVIE = {
+    title: string
+    ageLimit: number
+    durationMin: number
+    description: DescriptionNewMovie
+    posterUrl: string
+    trailerUrl: string
+}
+
+export type POSTMOVIERESP = {
+    msg: string
+    movieTitle: string
+    movieId: number
+}
+
+export type MOVIEERROR = {
+    msg: string
+}
+
+export type DescriptionNewMovie = {
+    director: string[]
+    originalTitle: string
+    genre: string[]
+    cast: string[]
+    year: string
+    text: string
+    language: string
+    synopsis: string
 }
