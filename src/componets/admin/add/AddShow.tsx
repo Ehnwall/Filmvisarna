@@ -1,16 +1,19 @@
 import { useGetMovies } from '../../../utils/api/movies/useGetMovies'
 import { Form, Button, Card, Badge, Col, Stack } from 'react-bootstrap'
 import { useState } from 'react'
+import { usePostShow } from '../../../utils/api/shows/usePostShows'
+import { useMutation, useQuery } from 'react-query'
 import { MOVIE, SHOWS } from '../../../utils/types/types'
 import axios from 'axios'
 
-export default function AddShow() {
+export default function addShow() {
     const [movie, setMovie] = useState<MOVIE | null>(null)
     const [showTime, setShowTime] = useState<string>('')
     const [hall, setHall] = useState<number>()
     const [show, setShow] = useState<Partial<SHOWS>>()
 
     const { data: movies } = useGetMovies()
+    const addShow = usePostShow()
 
     const handleMovieChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedMovie = movies?.find((movie) => movie.Id === parseInt(event.target.value))
@@ -35,22 +38,26 @@ export default function AddShow() {
     }
 
     const handleSubmit = async (event: React.FormEvent) => {
+        console.log('film', movie)
+        console.log('visning', showTime, hall)
+        console.log('salong', hall)
         event.preventDefault()
         if (movie && showTime && hall) {
             try {
                 const newShow = {
                     movieId: movie.Id,
                     time: showTime,
-                    cinemaID: hall,
+                    cinemaId: hall,
                 }
-                const response = await axios.post('/api/shows', newShow)
+                addShow.mutate(newShow)
+                // const response = await axios.post('/api/shows', newShow)
 
-                if (response.status === 201) {
-                    setShow([...show, response.data])
-                    setShowTime('')
-                    setHall(1)
-                    setMovie(null)
-                }
+                // if (response.status === 201) {
+                //     setShow([...show, response.data])
+                //     setShowTime('')
+                //     setHall(1)
+                //     setMovie(null)
+                // }
             } catch (error) {
                 console.error('Gick inte att lägga till visning', error)
             }
