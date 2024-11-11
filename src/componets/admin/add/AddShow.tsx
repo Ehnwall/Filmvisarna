@@ -100,9 +100,11 @@ export default function AddShow() {
                                 <Badge bg="none" className="border">
                                     Från {show.ageLimit} år
                                 </Badge>
-                                <Badge bg="primary text-black" className="me-2 border">
-                                    {showTime.slice(0, 10)} {showTime.slice(11, 16)}
-                                </Badge>
+                                {showTime && (
+                                    <Badge bg="primary text-black" className="me-2 border">
+                                        {showTime.slice(0, 10)} {showTime.slice(11, 16)}
+                                    </Badge>
+                                )}
                             </Stack>
                         </Card.Body>
                     </Card>
