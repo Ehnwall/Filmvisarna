@@ -9,7 +9,7 @@ import { useAuth } from '../../context/authContext'
 import UserDetailsForm from '../../componets/booking/BookingForm'
 
 export default function BookingPage() {
-    const { showsQuery, occupiedSeatsQuery, seatsQuery, ticketsQuery } = useGetBookingInformation()
+    const { showsQuery, seatsQuery, ticketsQuery } = useGetBookingInformation()
 
     const makebooking = useMakebooking()
     const { token } = useAuth()
@@ -91,10 +91,10 @@ export default function BookingPage() {
                     {showsQuery.data && <BookingImage posterUrl={showsQuery.data.posterURL} />}
                 </Col>
             </Row>
-            {(occupiedSeatsQuery.isLoading || seatsQuery.isLoading) && <LoadingBooking />}
-            {seatsQuery.data && occupiedSeatsQuery.data && (
+            {seatsQuery.isLoading && <LoadingBooking />}
+            {seatsQuery.data && (
                 <BookingSeats
-                    occupiedSeats={occupiedSeatsQuery.data}
+                    // occupiedSeats={occupiedSeatsQuery.data}
                     seats={seatsQuery.data}
                     tickets={amount}
                     onSeatsSelected={setSelectedSeats}

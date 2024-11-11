@@ -5,7 +5,7 @@ import { Row, Col, Card, Badge } from 'react-bootstrap'
 import { BsCalendar, BsClock, BsPin } from 'react-icons/bs'
 import { formatTime } from '../../utils/timeFormat'
 
-export function Shows({ shows }: Readonly<{ shows: SHOWSONMOVIE }>) {
+export function Shows({ shows }: Readonly<{ shows: SHOWSONMOVIE[] }>) {
     return (
         <Card className="border-primary">
             <Card.Header className="bg-primary">

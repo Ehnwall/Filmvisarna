@@ -52,9 +52,13 @@ const MoviesWithCinnema = () => {
     }
 
     const handleWeekSelect = (weeksAhead: number) => {
-        setSelectedWeek(weeksAhead)
-        setSelectedDate(new Date(getWeekInterval(weeksAhead).start))
+        if (weeksAhead === 0) {
+            setSelectedDate(new Date())
+        } else {
+            setSelectedDate(new Date(getWeekInterval(weeksAhead).start))
+        }
         setWeekSelect(formatTime(new Date(getWeekInterval(weeksAhead).start).toString()).getWeekNumber)
+        setSelectedWeek(weeksAhead)
     }
     const currentWeek = getWeekInterval(selectedWeek)
     let weekNumber = formatTime(new Date().toString()).getWeekNumber
@@ -63,9 +67,8 @@ const MoviesWithCinnema = () => {
         <>
             <Container>
                 <Dropdown className="py-2" id="book">
-                    <Dropdown.Toggle className="btn-filter mb-3 mt-2" variant="primary" id="dropdown-basic">
+                    <Dropdown.Toggle className="btn-filter mb-3 mt-2" variant="outline-primary" id="dropdown-basic">
                         Vecka {weekSelect}
-                        <BsArrowDown />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         {[...Array(4)].map((_, weekIndex) => (
