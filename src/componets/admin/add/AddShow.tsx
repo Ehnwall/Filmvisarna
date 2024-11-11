@@ -1,15 +1,14 @@
 import { useGetMovies } from '../../../utils/api/movies/useGetMovies'
-import { Form, Button, Card } from 'react-bootstrap'
+import { Form, Button, Card, Badge, Col, Stack } from 'react-bootstrap'
 import { useState } from 'react'
 import { MOVIE, SHOWS } from '../../../utils/types/types'
 import axios from 'axios'
-import ShowCard from '../../../componets/startPage/ShowCard'
 
 export default function AddShow() {
     const [movie, setMovie] = useState<MOVIE | null>(null)
-    const [showTime, setshowTime] = useState<string>('')
-    const [hall, setHall] = useState<string>('')
-    const [show, setShow] = useState<SHOWS>()
+    const [showTime, setShowTime] = useState<string>('')
+    const [hall, setHall] = useState<number>()
+    const [show, setShow] = useState<Partial<SHOWS>>()
 
     const { data: movies } = useGetMovies()
 
@@ -21,11 +20,20 @@ export default function AddShow() {
                 genre: selectedMovie?.description.genre,
                 posterURL: selectedMovie?.posterUrl,
                 duration: selectedMovie?.durationMin,
-                showId: 1,
+                ageLimit: selectedMovie.ageLimit,
             })
         }
         setMovie(selectedMovie || null)
     }
+
+    const handleShowTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setShowTime(event.target.value)
+    }
+
+    const handleHallChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setHall(parseInt(event.target.value))
+    }
+
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault()
         if (movie && showTime && hall) {
@@ -39,8 +47,8 @@ export default function AddShow() {
 
                 if (response.status === 201) {
                     setShow([...show, response.data])
-                    setshowTime('')
-                    setHall('1')
+                    setShowTime('')
+                    setHall(1)
                     setMovie(null)
                 }
             } catch (error) {
@@ -52,7 +60,6 @@ export default function AddShow() {
     return (
         <div>
             <h2>Lägg till en ny visning</h2>
-
             <Form.Select onChange={handleMovieChange} value={movie?.Id || ''}>
                 <option>Välj en film</option>
                 {movies?.map((movie) => (
@@ -65,15 +72,11 @@ export default function AddShow() {
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label className="mt-3">Tid för visning</Form.Label>
-                        <Form.Control
-                            type="datetime-local"
-                            value={showTime}
-                            onChange={(e) => setshowTime(e.target.value)}
-                        />
+                        <Form.Control type="datetime-local" value={showTime} onChange={handleShowTimeChange} />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                         <Form.Label>Salong för visning</Form.Label>
-                        <Form.Select>
+                        <Form.Select value={hall} onChange={handleHallChange}>
                             <option value="1">Stora salongen</option>
                             <option value="2">Lilla salongen</option>
                         </Form.Select>
@@ -81,9 +84,30 @@ export default function AddShow() {
                     <Button type="submit">Lägg till visning</Button>
                 </Form>
             )}
-            <div className="mt-4">
-                <h3>Kommande visningar</h3>
-            </div>
+            {show && (
+                <Col>
+                    <Card className="">
+                        <Card.Body>
+                            <Card.Img className="rounded" src={show?.posterURL} style={{ width: '14rem' }} />
+                            <Card.Title className="fs-5 text-truncate mt-3">{show.movieTitle}</Card.Title>
+                            <Card.Text className="d-flex flex-wrap gap-2">
+                                <span className="border badge bg-primary text-black">{show?.genre[1]}</span>
+                            </Card.Text>
+                            <Stack direction="horizontal" gap={1} className="flex-wrap card badge">
+                                <Badge bg="none" className="border">
+                                    {Math.floor(show?.duration / 60)} tim {show?.duration % 60} min
+                                </Badge>
+                                <Badge bg="none" className="border">
+                                    Från {show.ageLimit} år
+                                </Badge>
+                                <Badge bg="primary text-black" className="me-2 border">
+                                    {showTime.slice(0, 10)} {showTime.slice(11, 16)}
+                                </Badge>
+                            </Stack>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            )}
         </div>
     )
 }
