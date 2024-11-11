@@ -7,9 +7,6 @@ import StartPage from '../pages/startPage/StartPage'
 import IndividualMovie from '../pages/oneMoviePage'
 import Register from '../pages/authSignUp'
 import ConfirmationPage from '../pages/bookingConfirmation'
-import PostMovies from '../componets/admin/PostMovie/postMovies'
-import ProtectedRoute from '../componets/ProtectedRoute'
-import Admin from '../componets/admin/admin'
 
 export default [
     { path: '/', element: <StartPage />, menuLabel: 'Hem' },
@@ -19,29 +16,7 @@ export default [
     { path: '/registrera', element: <Register /> },
     { path: '/film/:movieId', element: <IndividualMovie /> },
     { path: '/boka-film/:showId', element: <BookingPage /> },
-    { path: '/boknings-bekräftelse/:bookingId', element: <ConfirmationPage /> },
-    {
-        element: <ProtectedRoute role="admin" />,
-        children: [
-            {
-                path: '/admin',
-                element: <Admin />,
-            },
-            {
-                path: '/admin/add-movie',
-                element: <PostMovies />,
-            },
-        ],
-    },
-    {
-        element: <ProtectedRoute role="user" />,
-        children: [
-            {
-                path: '/medlem',
-                element: <MemberPage />,
-            },
-        ],
-    },
+    { path: '/boknings-bekräftelse/:bookingNr', element: <ConfirmationPage /> },
 ]
 
 //Paths

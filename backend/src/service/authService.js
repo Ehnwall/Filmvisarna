@@ -18,7 +18,7 @@ const exists = async ({ email, password }) => {
                     email: email.toLowerCase(),
                     role: user.role,
                 })
-                resolve({ token, firstName: user.firstName, lastName: user.lastName, role: user.role })
+                resolve({ token, firstName: user.firstName, lastName: user.lastName })
             } else {
                 reject(new Error('Invalid password'))
             }

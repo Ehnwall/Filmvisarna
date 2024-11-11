@@ -11,9 +11,9 @@ import {
     BsCreditCard2Back,
 } from 'react-icons/bs'
 import { USERBOOKING, SEAT } from '@/utils/types/types'
-import { useDeleteBooking } from '../../../utils/api/booking/useDeleteBookings'
+import { useDeleteBooking } from '../../utils/api/booking/useDeleteBookings'
 import ModalForDeleteBooking from './modalForDeleteBooking'
-import { formatTime } from '../../../utils/timeFormat'
+import { formatTime } from '../../utils/timeFormat'
 
 const MemberBookingCard = ({ booking, isCurrent }: { booking: USERBOOKING; isCurrent: boolean }) => {
     const totalPrice = booking.seats.reduce((total, seat) => total + seat.ticketPrice, 0)

@@ -20,9 +20,7 @@ const login = async (req, res) => {
         const result = await authService.exists({ email, password })
         console.log(result)
 
-        return res
-            .status(200)
-            .send({ bearer: result.token, firstName: result.firstName, lastName: result.lastName, role: result.role })
+        return res.status(200).send({ bearer: result.token, firstName: result.firstName, lastName: result.lastName })
     } catch (e) {
         return res.status(400).send({ msg: e.message })
     }
