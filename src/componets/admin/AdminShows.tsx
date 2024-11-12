@@ -68,7 +68,7 @@ export default function AdminShows() {
             <Row>
                 <Col>
                     <Form onSubmit={handleSubmit}>
-                        <InputGroup className="mb-3 " style={{ width: '25rem' }}>
+                        <InputGroup className="mb-3 w-50 ">
                             <Form.Control
                                 type="text"
                                 placeholder="Sök bokningsnummer"
