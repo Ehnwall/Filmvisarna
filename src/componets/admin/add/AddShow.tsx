@@ -2,9 +2,7 @@ import { useGetMovies } from '../../../utils/api/movies/useGetMovies'
 import { Form, Button, Card, Badge, Col, Stack } from 'react-bootstrap'
 import { useState } from 'react'
 import { usePostShow } from '../../../utils/api/shows/usePostShows'
-import { useMutation, useQuery } from 'react-query'
 import { MOVIE, SHOWS } from '../../../utils/types/types'
-import axios from 'axios'
 
 export default function addShow() {
     const [movie, setMovie] = useState<MOVIE | null>(null)
@@ -38,9 +36,6 @@ export default function addShow() {
     }
 
     const handleSubmit = async (event: React.FormEvent) => {
-        console.log('film', movie)
-        console.log('visning', showTime, hall)
-        console.log('salong', hall)
         event.preventDefault()
         if (movie && showTime && hall) {
             try {
@@ -50,14 +45,6 @@ export default function addShow() {
                     cinemaId: hall,
                 }
                 addShow.mutate(newShow)
-                // const response = await axios.post('/api/shows', newShow)
-
-                // if (response.status === 201) {
-                //     setShow([...show, response.data])
-                //     setShowTime('')
-                //     setHall(1)
-                //     setMovie(null)
-                // }
             } catch (error) {
                 console.error('Gick inte att lägga till visning', error)
             }
@@ -120,19 +107,3 @@ export default function addShow() {
         </div>
     )
 }
-
-//När användaren klickar på "lägg till visning", så vill jag att den visningen läggs till i databasen (POST) och renderar ut den på sidan(preview)som ett card med tillhörande bagde för visningar
-
-//jag behöver en onSubmit som sparar visningen
-//jag behöver spara den i databasen
-//jag behöver rendera ut den på sidan
-//poster
-// dag, tid och salong för visningen
-
-// - when the form is submitted, the show should be created in the database
-// - when the cancel button is clicked, the form should be hidden
-// - the form should be hidden by default
-// - the form should be displayed when a movie is selected
-// - the form should be hidden when the movie is unselected
-// - the form should be hidden when the cancel button is clicked
-// - the form should be hidden when the submit button is clicked
