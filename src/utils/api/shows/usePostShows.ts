@@ -28,7 +28,7 @@ export const usePostShow = () => {
             console.log(newShow)
             navigate(`/admin`)
             setTimeout(() => {
-                toast(`Visningen ${newShow.showId} lyckades läggas till i databasen`)
+                toast(`Visningen ${newShow.showId.} lyckades läggas till i databasen`)
             }, 500)
         },
         onError: (error) => {

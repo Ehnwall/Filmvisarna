@@ -2,6 +2,7 @@ import React from 'react'
 import { Card, Button, Row } from 'react-bootstrap'
 import { BiSolidCameraMovie, BiSlideshow } from 'react-icons/bi'
 import { MdDelete } from 'react-icons/md'
+import { ToastContainer } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 
 export default function Admin() {
@@ -9,6 +10,18 @@ export default function Admin() {
 
     return (
         <>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
             <Row>
                 <h2 className="text-center">Välkommen Admin!</h2>
                 <p className="text-center">Vad vill du göra?</p>

@@ -7,7 +7,7 @@ import { MOVIE, SHOWS } from '../../../utils/types/types'
 export default function addShow() {
     const [movie, setMovie] = useState<MOVIE | null>(null)
     const [showTime, setShowTime] = useState<string>('')
-    const [hall, setHall] = useState<number>(1)
+    const [hall, setHall] = useState<number>()
     const [show, setShow] = useState<Partial<SHOWS>>()
 
     const { data: movies } = useGetMovies()
@@ -44,7 +44,6 @@ export default function addShow() {
                     time: showTime,
                     cinemaId: hall,
                 }
-
                 addShow.mutate(newShow)
             } catch (error) {
                 console.error('Gick inte att lägga till visning', error)
@@ -86,15 +85,11 @@ export default function addShow() {
                             <Card.Img className="rounded" src={show?.posterURL} style={{ width: '14rem' }} />
                             <Card.Title className="fs-5 text-truncate mt-3">{show.movieTitle}</Card.Title>
                             <Card.Text className="d-flex flex-wrap gap-2">
-                                <span className="border badge bg-primary text-black">
-                                    {show?.genre ? show.genre[0] : 'Genre okänd'}
-                                </span>
+                                <span className="border badge bg-primary text-black">{show?.genre[1]}</span>
                             </Card.Text>
                             <Stack direction="horizontal" gap={1} className="flex-wrap card badge">
                                 <Badge bg="none" className="border">
-                                    {show?.duration
-                                        ? `${Math.floor(show.duration / 60)} tim ${show.duration % 60} min`
-                                        : 'Varaktighet okänd'}
+                                    {Math.floor(show?.duration / 60)} tim {show?.duration % 60} min
                                 </Badge>
                                 <Badge bg="none" className="border">
                                     Från {show.ageLimit} år
