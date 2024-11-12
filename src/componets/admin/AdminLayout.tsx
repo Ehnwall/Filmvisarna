@@ -1,6 +1,8 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import Sidebar from './Sidebar'
+import AdminShows from './AdminShows'
+
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -10,7 +12,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                     <Sidebar />
                 </Col>
                 <Col xs={10}>
-                    <Container className="m-0 mt-4">{children}</Container>
+                    <Container className="m-0 mt-4">{children}<AdminShows/></Container>
                 </Col>
             </Row>
         </Container>
