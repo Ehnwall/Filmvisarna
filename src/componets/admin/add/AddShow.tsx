@@ -85,11 +85,15 @@ export default function addShow() {
                             <Card.Img className="rounded" src={show?.posterURL} style={{ width: '14rem' }} />
                             <Card.Title className="fs-5 text-truncate mt-3">{show.movieTitle}</Card.Title>
                             <Card.Text className="d-flex flex-wrap gap-2">
-                                <span className="border badge bg-primary text-black">{show?.genre[1]}</span>
+                                <span className="border badge bg-primary text-black">
+                                    {show?.genre ? show.genre[0] : 'Genre okänd'}
+                                </span>
                             </Card.Text>
                             <Stack direction="horizontal" gap={1} className="flex-wrap card badge">
                                 <Badge bg="none" className="border">
-                                    {Math.floor(show?.duration / 60)} tim {show?.duration % 60} min
+                                    {show?.duration
+                                        ? `${Math.floor(show.duration / 60)} tim ${show.duration % 60} min`
+                                        : 'Varaktighet okänd'}
                                 </Badge>
                                 <Badge bg="none" className="border">
                                     Från {show.ageLimit} år
