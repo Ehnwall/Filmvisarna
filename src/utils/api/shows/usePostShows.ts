@@ -1,6 +1,5 @@
 import axios, { AxiosError } from 'axios'
 import { useMutation } from '@tanstack/react-query'
-import { SHOWS } from '@/utils/types/types'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -37,18 +36,3 @@ export const usePostShow = () => {
         },
     })
 }
-// export const usePostMovie = () => {
-//     const navigate = useNavigate()
-//     return useMutation<showResp, AxiosError<showErrorMSG>, NEWMOVIE>({
-//         mutationFn: postMovie,
-//         onSuccess: (newMovie) => {
-//             navigate(`/admin/add-show`)
-//             setTimeout(() => {
-//                 toast(`Filmen ${newMovie.movieTitle} lyckades läggas till i databasen`)
-//             }, 500)
-//         },
-//         onError: (error) => {
-//             console.log(error)
-//         },
-//     })
-// }
