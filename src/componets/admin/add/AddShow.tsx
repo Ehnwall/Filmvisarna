@@ -3,6 +3,7 @@ import { Form, Button, Card, Badge, Col, Stack } from 'react-bootstrap'
 import { useState } from 'react'
 import { usePostShow } from '../../../utils/api/shows/usePostShows'
 import { MOVIE, SHOWS } from '../../../utils/types/types'
+import { ToastContainer } from 'react-toastify'
 
 export default function addShow() {
     const [movie, setMovie] = useState<MOVIE | null>(null)
@@ -53,6 +54,18 @@ export default function addShow() {
 
     return (
         <div>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
             <h2>Lägg till en ny visning</h2>
             <Form.Select onChange={handleMovieChange} value={movie?.Id || ''}>
                 <option>Välj en film</option>
