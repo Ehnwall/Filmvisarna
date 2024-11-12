@@ -19,7 +19,7 @@ type showErrorMsg = {
 type showType = {
     movieId: number
     time: string
-    cinemaID: number
+    cinemaId: number
 }
 export const usePostShow = () => {
     const navigate = useNavigate()
