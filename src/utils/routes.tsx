@@ -9,7 +9,7 @@ import Register from '../pages/authSignUp'
 import ConfirmationPage from '../pages/bookingConfirmation'
 import PostMovies from '../componets/admin/PostMovie/postMovies'
 import ProtectedRoute from '../componets/ProtectedRoute'
-import DashBoard from '../componets/admin/dashBoard'
+import DashBoard from '../componets/admin/DashBoard'
 import AddShow from '../componets/admin/add/AddShow'
 
 export default [
