@@ -53,11 +53,6 @@ export default function AdminShows() {
 
         setBookingNr(bookingNrString)
     }
-    useEffect(() => {
-        if (bookingNr) {
-            console.log('Fetching data for:', bookingNr)
-        }
-    }, [bookingNr])
 
     useEffect(() => {}, [todaysShows])
 
@@ -85,7 +80,12 @@ export default function AdminShows() {
             </Row>
             <Row>
                 <Col>
-                    {booking ? <BookingView data={booking} /> : <p className="text-danger">Ingen bokning hittades</p>}
+                    {bookingNr &&
+                        (booking ? (
+                            <BookingView data={booking} />
+                        ) : (
+                            <p className="text-danger">Ingen bokning hittades</p>
+                        ))}
                 </Col>
             </Row>
 

@@ -3,7 +3,6 @@ import { Container, Row, Col } from 'react-bootstrap'
 import Sidebar from './Sidebar'
 import AdminShows from './AdminShows'
 
-
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
     return (
         <Container className="h-100" fluid>
@@ -12,7 +11,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                     <Sidebar />
                 </Col>
                 <Col xs={10}>
-                    <Container className="m-0 mt-4">{children}<AdminShows/></Container>
+                    <Container className="m-0 mt-4">{children}</Container>
                 </Col>
             </Row>
         </Container>
