@@ -17,7 +17,6 @@ type showType = {
 }
 
 const postShow = async (newShow: showType) => {
-    console.log(newShow)
     const resp = await axios.post('/api/shows', newShow)
     return resp.data
 }
@@ -26,14 +25,13 @@ export const usePostShow = () => {
     return useMutation<showResp, AxiosError<showErrorMsg>, showType>({
         mutationFn: postShow,
         onSuccess: (newShow) => {
-            console.log(newShow)
             navigate(`/admin`)
             setTimeout(() => {
                 toast(`Visningen ${newShow.showId} lyckades läggas till i databasen`)
             }, 500)
         },
         onError: (error) => {
-            console.log(error)
+            console.error(error)
         },
     })
 }

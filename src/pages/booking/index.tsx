@@ -50,7 +50,6 @@ export default function BookingPage() {
         }
         const showId = showsQuery.data && (showsQuery?.data.showId as number)
         const totalTickets = amount.reduce((acc, ticket) => acc + ticket.amount, 0)
-        console.log({ showId, selectedSeats, user })
         if (totalTickets !== selectedSeats.length) {
             setAlert(
                 `Du har ${ticketTypeAmountSum - selectedSeats.length} ${
@@ -67,7 +66,6 @@ export default function BookingPage() {
         else makebooking.mutate({ showId, seats: selectedSeats })
     }
     const ticketTypeAmountSum = amount.reduce((acc, ticketType) => acc + ticketType.amount, 0)
-    console.log(ticketTypeAmountSum, selectedSeats.length)
     return (
         <Container className="py-4">
             <Row>

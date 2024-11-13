@@ -42,7 +42,6 @@ export default function Register() {
         } else {
             setRepeatedPasswordError('')
         }
-        console.log({ firstName, lastName, email, password })
         signUp?.mutate({ firstName, lastName, email, password })
     }
 

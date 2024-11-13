@@ -9,7 +9,7 @@ type ErrorTest = {
 }
 
 type AuthContextType = {
-    user: { firstName: string; lastName: string } | null
+    user: { firstName: string; lastName: string; role: string } | null
     token: string | null
     signIn: UseMutationResult<SIGNINRESPONSE, Error, SIGNIN> | null
     signUp: UseMutationResult<SIGNUPRESPONSE, AxiosError<ErrorTest>, SIGNUP> | null
@@ -25,7 +25,7 @@ const AuthContext = createContext<AuthContextType>({
 })
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const [user, setUser] = useState<{ firstName: string; lastName: string } | null>(
+    const [user, setUser] = useState<{ firstName: string; lastName: string; role: string } | null>(
         sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user') as string) : null
     )
     const [token, setToken] = useState<string | null>(

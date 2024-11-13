@@ -20,7 +20,7 @@ export const useMakebooking = () => {
             navigate(`/boknings-bekräftelse/${dataBooking.bookingNr}`)
         },
         onError: (error) => {
-            console.log(error)
+            console.error(error)
         },
     })
 }
