@@ -8,7 +8,7 @@ import { ToastContainer } from 'react-toastify'
 export default function addShow() {
     const [movie, setMovie] = useState<MOVIE | null>(null)
     const [showTime, setShowTime] = useState<string>('')
-    const [hall, setHall] = useState<number>()
+    const [hall, setHall] = useState<number>(1)
     const [show, setShow] = useState<Partial<SHOWS>>()
 
     const { data: movies } = useGetMovies()

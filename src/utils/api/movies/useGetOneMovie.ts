@@ -3,11 +3,6 @@ import axios from 'axios'
 import { MOVIE } from '../../types/types'
 import { useParams } from 'react-router-dom'
 
-const movieQueryKeys = {
-    all: ['movie'],
-    byId: (id: string) => [...movieQueryKeys.all, id],
-}
-
 export const useGetOneMovie = () => {
     const { movieId } = useParams()
     const fetchOneMovie = async (): Promise<MOVIE> => {
@@ -16,7 +11,7 @@ export const useGetOneMovie = () => {
     }
 
     return useQuery({
-        queryKey: [movieQueryKeys.byId, movieId],
+        queryKey: [['movie'], movieId],
         queryFn: fetchOneMovie,
     })
 }
