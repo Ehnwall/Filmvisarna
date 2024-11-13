@@ -20,7 +20,7 @@ const Sidebar = () => {
                     </Accordion.Header>
                     <Accordion.Body>
                         <Nav.Item>
-                            <Nav.Link as={Link} to="/admin/add-movie" className="text-white">
+                            <Nav.Link as={Link} to="/admin/add-movie">
                                 <BiSolidCameraMovie size={20} className="me-2" />
                                 Filmer
                             </Nav.Link>
