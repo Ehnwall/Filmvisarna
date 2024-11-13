@@ -16,5 +16,6 @@ export const useGetBooking = (bookingNr: string) => {
     return useQuery({
         queryKey: ['booking', bookingNr],
         queryFn: () => fetchBooking(bookingNr),
+        enabled: !!bookingNr,
     })
 }

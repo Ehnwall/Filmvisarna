@@ -9,7 +9,7 @@ import Register from '../pages/authSignUp'
 import ConfirmationPage from '../pages/bookingConfirmation'
 import PostMovies from '../componets/admin/PostMovie/postMovies'
 import ProtectedRoute from '../componets/ProtectedRoute'
-import Admin from '../componets/admin/admin'
+import DashBoard from '../componets/admin/DashBoard'
 import AddShow from '../componets/admin/add/AddShow'
 
 export default [
@@ -26,7 +26,7 @@ export default [
         children: [
             {
                 path: '/admin',
-                element: <Admin />,
+                element: <DashBoard />,
             },
             {
                 path: '/admin/add-movie',

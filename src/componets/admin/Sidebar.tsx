@@ -33,26 +33,6 @@ const Sidebar = () => {
                         </Nav.Item>
                     </Accordion.Body>
                 </Accordion.Item>
-                <Accordion.Item eventKey="1" className="mt-2">
-                    <Accordion.Header>
-                        <MdDelete size={20} className="me-2" />
-                        Ta bort
-                    </Accordion.Header>
-                    <Accordion.Body>
-                        <Nav.Item>
-                            <Nav.Link as={Link} to="/admin-deletemovies" className="text-white">
-                                <BiSolidCameraMovie size={20} className="me-2" />
-                                Filmer
-                            </Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link as={Link} to="/admin-deletemovies" className="text-white">
-                                <BiSlideshow size={20} className="me-2" />
-                                Visningar
-                            </Nav.Link>
-                        </Nav.Item>
-                    </Accordion.Body>
-                </Accordion.Item>
             </Accordion>
         </Nav>
     )

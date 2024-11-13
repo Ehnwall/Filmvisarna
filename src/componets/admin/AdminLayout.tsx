@@ -1,6 +1,7 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import Sidebar from './Sidebar'
+import AdminShows from './AdminShows'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
     return (
