@@ -1,29 +1,29 @@
-import { useEffect, useState } from 'react';
-import { OCCUPIEDSEATS } from '@/utils/types/types';
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { OCCUPIEDSEATS } from '@/utils/types/types'
 
-export const useGetOccupiedSeats = (showId: number) => {
-  const [data, setData] = useState<OCCUPIEDSEATS | null>(null);
-  const [error, setError] = useState<string | null>(null);
+export const useGetOccupiedSeats = () => {
+    const { showId } = useParams<{ showId: string }>()
+    const [data, setData] = useState<OCCUPIEDSEATS | null>(null)
+    const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    if (!showId) return;
+    useEffect(() => {
+        const eventSource = new EventSource(`/api/occupiedSeats/${showId}`)
 
-    const eventSource = new EventSource(`/api/occupiedSeats/${showId}`);
+        eventSource.onmessage = (event) => {
+            const parsedData = JSON.parse(event.data)
+            setData(parsedData)
+        }
 
-    eventSource.onmessage = (event) => {
-      const parsedData = JSON.parse(event.data);
-      setData(parsedData);
-    };
+        eventSource.onerror = (event) => {
+            setError('Error occurred while receiving SSE data')
+            eventSource.close()
+        }
 
-    eventSource.onerror = (event) => {
-      setError('Error occurred while receiving SSE data');
-      eventSource.close();
-    };
+        return () => {
+            eventSource.close()
+        }
+    }, [showId])
 
-    return () => {
-      eventSource.close();
-    };
-  }, [showId]);
-
-  return { data, error };
-};
+    return { data, error }
+}
