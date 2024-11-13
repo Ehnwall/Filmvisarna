@@ -66,12 +66,5 @@ const getMovieById = (id) => {
     }
     return result
 }
-const addMovie = ({ title, durationMin, ageLimit, description, trailerUrl, posterUrl }) => {
-    const insertMovie = db.prepare(
-        'INSERT INTO movies (title, durationMin, ageLimit, description, trailerUrl, posterUrl) VALUES (?, ?, ?, ?, ?, ?)'
-    )
-    const info = insertMovie.run(title, durationMin, ageLimit, JSON.stringify(description), trailerUrl, posterUrl)
-    return { info, title }
-}
 
-export default { getMovies, getShowsByMovie, getMovieById, addMovie }
+export default { getMovies, getShowsByMovie, getMovieById }

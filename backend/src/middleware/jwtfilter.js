@@ -10,9 +10,6 @@ const authourize = (allowedRoles) => (req, res, next) => {
         try {
             const token = jwtfilter.verify(bearer.split(' ')[1])
             req.user = token
-            if (!allowedRoles.includes(token.role)) {
-                return res.status(403).send({ msg: 'Forbidden' })
-            }
         } catch (err) {
             if (err.name == 'JsonWebTokenError') {
                 return res.status(400).send({ err: 'Invalid authorization signature' })
