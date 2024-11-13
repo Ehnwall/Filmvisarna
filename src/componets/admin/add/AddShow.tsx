@@ -1,16 +1,18 @@
 import { useGetMovies } from '../../../utils/api/movies/useGetMovies'
 import { Form, Button, Card, Badge, Col, Stack } from 'react-bootstrap'
 import { useState } from 'react'
+import { usePostShow } from '../../../utils/api/shows/usePostShows'
 import { MOVIE, SHOWS } from '../../../utils/types/types'
-import axios from 'axios'
+import { ToastContainer } from 'react-toastify'
 
-export default function AddShow() {
+export default function addShow() {
     const [movie, setMovie] = useState<MOVIE | null>(null)
     const [showTime, setShowTime] = useState<string>('')
-    const [hall, setHall] = useState<number>()
+    const [hall, setHall] = useState<number>(1)
     const [show, setShow] = useState<Partial<SHOWS>>()
 
     const { data: movies } = useGetMovies()
+    const addShow = usePostShow()
 
     const handleMovieChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedMovie = movies?.find((movie) => movie.Id === parseInt(event.target.value))
@@ -41,16 +43,9 @@ export default function AddShow() {
                 const newShow = {
                     movieId: movie.Id,
                     time: showTime,
-                    cinemaID: hall,
+                    cinemaId: hall,
                 }
-                const response = await axios.post('/api/shows', newShow)
-
-                if (response.status === 201) {
-                    setShow([...show, response.data])
-                    setShowTime('')
-                    setHall(1)
-                    setMovie(null)
-                }
+                addShow.mutate(newShow)
             } catch (error) {
                 console.error('Gick inte att lägga till visning', error)
             }
@@ -59,6 +54,18 @@ export default function AddShow() {
 
     return (
         <div>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
             <h2>Lägg till en ny visning</h2>
             <Form.Select onChange={handleMovieChange} value={movie?.Id || ''}>
                 <option>Välj en film</option>
@@ -91,11 +98,15 @@ export default function AddShow() {
                             <Card.Img className="rounded" src={show?.posterURL} style={{ width: '14rem' }} />
                             <Card.Title className="fs-5 text-truncate mt-3">{show.movieTitle}</Card.Title>
                             <Card.Text className="d-flex flex-wrap gap-2">
-                                <span className="border badge bg-primary text-black">{show?.genre[1]}</span>
+                                <span className="border badge bg-primary text-black">
+                                    {show?.genre ? show.genre[0] : 'Genre okänd'}
+                                </span>
                             </Card.Text>
                             <Stack direction="horizontal" gap={1} className="flex-wrap card badge">
                                 <Badge bg="none" className="border">
-                                    {Math.floor(show?.duration / 60)} tim {show?.duration % 60} min
+                                    {show?.duration
+                                        ? `${Math.floor(show.duration / 60)} tim ${show.duration % 60} min`
+                                        : 'Varaktighet okänd'}
                                 </Badge>
                                 <Badge bg="none" className="border">
                                     Från {show.ageLimit} år
@@ -113,19 +124,3 @@ export default function AddShow() {
         </div>
     )
 }
-
-//När användaren klickar på "lägg till visning", så vill jag att den visningen läggs till i databasen (POST) och renderar ut den på sidan(preview)som ett card med tillhörande bagde för visningar
-
-//jag behöver en onSubmit som sparar visningen
-//jag behöver spara den i databasen
-//jag behöver rendera ut den på sidan
-//poster
-// dag, tid och salong för visningen
-
-// - when the form is submitted, the show should be created in the database
-// - when the cancel button is clicked, the form should be hidden
-// - the form should be hidden by default
-// - the form should be displayed when a movie is selected
-// - the form should be hidden when the movie is unselected
-// - the form should be hidden when the cancel button is clicked
-// - the form should be hidden when the submit button is clicked
