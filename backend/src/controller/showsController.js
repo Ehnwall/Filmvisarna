@@ -1,5 +1,23 @@
 import showService from '../service/showsService.js'
 
+const postOneShowController = (req, res) => {
+    const { movieId, cinemaId, time } = req.body
+
+    if (!movieId || !cinemaId || !time) {
+        return res.status(400).json({ msg: 'Missing required fields' })
+    }
+
+    try {
+        const isoTime = new Date(time).toISOString()
+        const newShowResult = showService.addShow(movieId, cinemaId, isoTime)
+
+        res.status(201).json(newShowResult)
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ msg: error.message })
+    }
+}
+
 const getShowById = (req, res) => {
     const id = parseInt(req.params.id)
 
@@ -52,4 +70,4 @@ const getSeats = (req, res) => {
     })
 }
 
-export default { getAllShowsController, getSeats, getShowById }
+export default { postOneShowController, getAllShowsController, getSeats, getShowById }
