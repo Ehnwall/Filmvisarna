@@ -96,7 +96,6 @@ export default function AdminShows() {
                         const formattedDate = formatTime(show.showTime).getWeekdayWithDate
                         const formattedTime = formatTime(show.showTime).getTime
                         const occupiedSeatsCount = occupiedSeatsMap[show.showId] || 0
-
                         return (
                             <Col key={show.showId} md={4} lg={3}>
                                 <Card className="h-100 border">
