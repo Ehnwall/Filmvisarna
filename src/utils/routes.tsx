@@ -14,13 +14,13 @@ import AddShow from '../componets/admin/add/AddShow'
 
 export default [
     { path: '/', element: <StartPage />, menuLabel: 'Hem' },
-    { path: '/medlem', element: <MemberPage />, menuLabel: 'Medlemssida' },
+    { path: '/medlem', element: <MemberPage />, menuLabel: 'Medlemssida', title: 'Medlemssida' },
+    { path: '/logga-in', element: <Login />, title: 'Logga in' },
+    { path: '/registrera', element: <Register />, title: 'Registrera' },
+    { path: '/film/:movieId', element: <IndividualMovie />, title: `Film` },
+    { path: '/boka-film/:showId', element: <BookingPage />, title: 'Boka film' },
+    { path: '/boknings-bekreftelse/:bookingNr', element: <ConfirmationPage />, title: 'Bokningsinfo' },
     { path: '/innehall/:content', element: <ContentFromFooter /> },
-    { path: '/logga-in', element: <Login /> },
-    { path: '/registrera', element: <Register /> },
-    { path: '/film/:movieId', element: <IndividualMovie /> },
-    { path: '/boka-film/:showId', element: <BookingPage /> },
-    { path: '/boknings-bekräftelse/:bookingNr', element: <ConfirmationPage /> },
     {
         element: <ProtectedRoute role="admin" />,
         children: [

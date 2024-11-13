@@ -4,13 +4,21 @@ import Footer from './componets/footer/footer'
 import Header from './componets/header/header'
 import { AuthProvider } from './context/authContext'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import routes from './utils/routes'
+import { useEffect } from 'react'
 
 const queryClient = new QueryClient()
 export default function App() {
-    // watch for route changes
+    document.title = 'Filmvisarna'
     const { pathname } = useLocation()
-
-    // scroll to top on route changes
+    // watch for route changes
+    useEffect(() => {
+        const page = routes.find((route) => route.path.split('/')[1] === pathname.split('/')[1])
+        if (page && page.title) {
+            document.title = `${page.title} | Filmvisarna`
+        }
+        console.log(routes[7].path.split('/')[1], pathname.split('/')[1])
+    }, [pathname])
 
     return (
         <>
