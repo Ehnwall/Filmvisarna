@@ -7,7 +7,6 @@ const QUERY_KEY = ['tickets']
 export const useGetTickets = () => {
     const fetchTickets = async () => {
         const resp = await axios.get(`/api/tickets`)
-        console.log(resp)
         return resp.data
     }
     return useQuery<TICKETS[], Error>({

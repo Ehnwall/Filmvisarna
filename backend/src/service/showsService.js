@@ -1,5 +1,19 @@
 import { db } from '../../server.js'
 import { formatShow } from '../utils/formatShow.js'
+
+const addShow = (movieId, cinemaId, time) => {
+    const insertShow = `
+   INSERT INTO shows (movieId, cinemaId, time) VALUES (?,?,?)`
+
+    const newShowResult = db.prepare(insertShow).run(movieId, cinemaId, time)
+
+    if (newShowResult.changes === 0) {
+        throw new Error('Failed to add show')
+    }
+
+    return { success: true, showId: newShowResult.lastInsertRowid }
+}
+
 const getShowById = (id) => {
     const showById = `SELECT
     shows.Id AS showId,
@@ -26,15 +40,14 @@ const getAllShows = (startDate, endDate) => {
         let stmt
         if (startDate || endDate) {
             shows = `SELECT cinemas.name AS cinemaName, 
-                cinemas.Id AS cinemaId,
-                shows.Id AS showId, 
-                shows.time AS showTime, 
-                movies.*  
-                FROM shows 
-                INNER JOIN movies ON movieId = movies.id 
-                INNER JOIN cinemas ON shows.cinemaId = cinemas.id
-                WHERE shows.time BETWEEN datetime(?) AND datetime(?)
-                ORDER BY cinemas.name, shows.time`
+            cinemas.Id AS cinemaId,
+            shows.Id AS showId, 
+            shows.time AS showTime, 
+            movies.*  FROM shows 
+            INNER JOIN movies ON shows.movieId = movies.id 
+            INNER JOIN cinemas ON shows.cinemaId = cinemas.id
+            WHERE shows.time BETWEEN ? AND ?
+            ORDER BY cinemas.name, shows.time`
             stmt = db.prepare(shows).all(startDate, endDate)
         } else {
             shows = `SELECT cinemas.name AS cinemaName, 
@@ -73,4 +86,4 @@ const getSeatStatus = (showId) => {
     return occupiedSeatsStmt.map((seat) => seat.cinemaSeatsID)
 }
 
-export default { getAllShows, getSeatStatus, getShowById }
+export default { addShow, getAllShows, getSeatStatus, getShowById }

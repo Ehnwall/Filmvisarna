@@ -37,14 +37,14 @@ const getAllTickets = () => {
     return stmt
 }
 
-const getBookingFs = (bookingId) => {
+const getBookingFs = (bookingNr) => {
     const getSpecificBooking = `
     SELECT *
         FROM userBookings
     WHERE
-    bookingId = ?`
+    bookingNumberId = ?`
 
-    const statement = db.prepare(getSpecificBooking).all(bookingId)
+    const statement = db.prepare(getSpecificBooking).all(bookingNr)
     if (statement.length === 0) {
         throw new Error('no booking found')
     }
@@ -142,7 +142,7 @@ const createBooking = (showId, seats, user) => {
 
     confirmMail.sendBookingConfirm(confirmed, bookingNr, user.email)
 
-    return booking
+    return bookingNr
 }
 
 const deleteBookingById = (bookingId, email, role) => {

@@ -23,8 +23,8 @@ const getShortDate = (date: Date) => {
     return fullDate.split('.')[0]
 }
 const getTime = (date: Date) => {
-    const time = date.getHours()
-    const min = date.getMinutes()
+    const time = date.getHours().toString().padStart(2, '0')
+    const min = date.getMinutes().toString().padStart(2, '0')
     const fullTime = `${time}:${min}`
     return fullTime
 }

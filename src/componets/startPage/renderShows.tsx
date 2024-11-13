@@ -5,6 +5,7 @@ import { BsArrowDown, BsClock, BsCalendar } from 'react-icons/bs'
 import { useState } from 'react'
 import { formatTime } from '../../utils/timeFormat'
 import ShowCard from './ShowCard'
+import { SHOWS } from '@/utils/types/types'
 
 const MoviesWithCinnema = () => {
     const { data: shows, isLoading, error } = useGetShows()
@@ -21,8 +22,8 @@ const MoviesWithCinnema = () => {
 
     const today = new Date()
 
-    const isPastDay = (date: any) => {
-        return date < today.setHours(0, 0, 0, 0)
+    const isPastDay = (date: Date): boolean => {
+        return date.getTime() < today.setHours(0, 0, 0, 0)
     }
 
     const getWeekInterval = (weeksAhead: number) => {
@@ -37,7 +38,7 @@ const MoviesWithCinnema = () => {
         return { start: startOfThisWeek, end: endOfThisWeek }
     }
 
-    const getShowsForDate = (date: any, shows: any[]) => {
+    const getShowsForDate = (date: Date, shows: SHOWS[]) => {
         if (!date) return []
         return shows?.filter((show) => {
             const showDate = new Date(show.showTime)
@@ -51,9 +52,13 @@ const MoviesWithCinnema = () => {
     }
 
     const handleWeekSelect = (weeksAhead: number) => {
-        setSelectedWeek(weeksAhead)
-        setSelectedDate(new Date(getWeekInterval(weeksAhead).start))
+        if (weeksAhead === 0) {
+            setSelectedDate(new Date())
+        } else {
+            setSelectedDate(new Date(getWeekInterval(weeksAhead).start))
+        }
         setWeekSelect(formatTime(new Date(getWeekInterval(weeksAhead).start).toString()).getWeekNumber)
+        setSelectedWeek(weeksAhead)
     }
     const currentWeek = getWeekInterval(selectedWeek)
     let weekNumber = formatTime(new Date().toString()).getWeekNumber
@@ -62,9 +67,8 @@ const MoviesWithCinnema = () => {
         <>
             <Container>
                 <Dropdown className="py-2" id="book">
-                    <Dropdown.Toggle className="btn-filter mb-3 mt-2" variant="primary" id="dropdown-basic">
+                    <Dropdown.Toggle className="btn-filter mb-3 mt-2" variant="outline-primary" id="dropdown-basic">
                         Vecka {weekSelect}
-                        <BsArrowDown />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         {[...Array(4)].map((_, weekIndex) => (
@@ -74,13 +78,16 @@ const MoviesWithCinnema = () => {
                         ))}
                     </Dropdown.Menu>
                 </Dropdown>
-
                 <Row className="g-2">
                     {new Array(7).fill(null).map((_, index) => {
-                        const dayOfWeek: any = new Date(currentWeek.start)
+                        const dayOfWeek = new Date(currentWeek.start)
                         dayOfWeek.setDate(currentWeek.start.getDate() + index)
 
-                        const options = { weekday: 'long', day: 'numeric', month: 'numeric' }
+                        const options: Intl.DateTimeFormatOptions = {
+                            weekday: 'long',
+                            day: 'numeric',
+                            month: 'numeric',
+                        }
                         const formattedDate = dayOfWeek.toLocaleDateString('sv-SE', options)
 
                         const isPast = isPastDay(dayOfWeek)
@@ -102,7 +109,8 @@ const MoviesWithCinnema = () => {
                                             {formattedDate.split(' ')[0]}
                                         </Card.Title>
                                         <Badge className="py-2 d-inline-flex align-items-center p-3" bg="secondary">
-                                            <BsCalendar className="me-2" /> {formatTime(dayOfWeek).getShortNumericDate}
+                                            <BsCalendar className="me-2" />{' '}
+                                            {formatTime(dayOfWeek.toString()).getShortNumericDate}
                                         </Badge>
                                     </Card.Body>
                                 </Card>
