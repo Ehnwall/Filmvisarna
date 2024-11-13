@@ -10,7 +10,7 @@ interface RenderPreviewProps {
     genreList: string[]
 }
 
-export default function renderPreview({ posterUrl, movieTitle, durationMin, ageLimit, genreList }: RenderPreviewProps) {
+export default function RenderPreview({ posterUrl, movieTitle, durationMin, ageLimit, genreList }: RenderPreviewProps) {
     let numberDurationMin = +durationMin
     const { hours, minutes } = getDuration(numberDurationMin)
     return (

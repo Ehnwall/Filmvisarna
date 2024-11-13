@@ -14,7 +14,7 @@ interface AddGroupProps {
     setGroupList: React.Dispatch<React.SetStateAction<string[]>>
 }
 
-const addGroup: React.FC<AddGroupProps> = ({ groupName, GroupList, setGroupList, setGroup, name }) => {
+const AddGroup: React.FC<AddGroupProps> = ({ groupName, GroupList, setGroupList, setGroup, name }) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setGroup(event.target.value)
     }
@@ -61,4 +61,4 @@ const addGroup: React.FC<AddGroupProps> = ({ groupName, GroupList, setGroupList,
     )
 }
 
-export default addGroup
+export default AddGroup

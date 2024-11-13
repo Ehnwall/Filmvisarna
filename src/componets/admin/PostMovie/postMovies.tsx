@@ -1,6 +1,6 @@
 import { Container, Button, Form, Row, Col } from 'react-bootstrap'
-import RenderMovies from '../PostMovie/renderPreview'
-import AddGroup from './addGroup'
+import RenderPreview from './RenderPreview'
+import AddGroup from './AddGroup'
 import React, { useState } from 'react'
 import { DescriptionNewMovie, NEWMOVIE } from '../../../utils/types/types'
 import { usePostMovie } from '../../../utils/api/movies/usePostMovie'
@@ -270,7 +270,7 @@ export default function PostMovies() {
                         </Form.Group>
                     </Col>
                     <Col>
-                        <RenderMovies
+                        <RenderPreview
                             movieTitle={capitalizedWord}
                             durationMin={durationMin}
                             posterUrl={posterUrl}
