@@ -1,8 +1,4 @@
-import React from 'react'
-import { Card, Button, Row } from 'react-bootstrap'
-import { BiSolidCameraMovie, BiSlideshow } from 'react-icons/bi'
-import { MdDelete } from 'react-icons/md'
-import { useNavigate } from 'react-router-dom'
+import { Row } from 'react-bootstrap'
 import AdminShows from './AdminShows'
 import { ToastContainer } from 'react-toastify'
 
