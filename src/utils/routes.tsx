@@ -9,7 +9,7 @@ import Register from '../pages/authSignUp'
 import ConfirmationPage from '../pages/bookingConfirmation'
 import PostMovies from '../componets/admin/PostMovie/postMovies'
 import ProtectedRoute from '../componets/ProtectedRoute'
-import Admin from '../componets/admin/admin'
+import DashBoard from '../componets/admin/DashBoard'
 import AddShow from '../componets/admin/add/AddShow'
 
 export default [
@@ -20,13 +20,13 @@ export default [
     { path: '/registrera', element: <Register /> },
     { path: '/film/:movieId', element: <IndividualMovie /> },
     { path: '/boka-film/:showId', element: <BookingPage /> },
-    { path: '/boknings-bekräftelse/:bookingId', element: <ConfirmationPage /> },
+    { path: '/boknings-bekräftelse/:bookingNr', element: <ConfirmationPage /> },
     {
         element: <ProtectedRoute role="admin" />,
         children: [
             {
                 path: '/admin',
-                element: <Admin />,
+                element: <DashBoard />,
             },
             {
                 path: '/admin/add-movie',
