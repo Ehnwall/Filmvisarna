@@ -13,11 +13,10 @@ export default function App() {
     const { pathname } = useLocation()
     // watch for route changes
     useEffect(() => {
-        const page = routes.find((route) => route.path.split('/')[1] === pathname.split('/')[1])
+        const page = routes.find((route) => route.path.split('/')[1] === pathname.split('/')[0])
         if (page && page.title) {
             document.title = `${page.title} | Filmvisarna`
         }
-        console.log(routes[7].path.split('/')[1], pathname.split('/')[1])
     }, [pathname])
 
     return (

@@ -1,7 +1,15 @@
 import { USERBOOKING, SEAT } from '@/utils/types/types'
 import React from 'react'
 import { Card, Container, Row, Col, Form, InputGroup } from 'react-bootstrap'
-import { BsBuildingDown, BsArrowRightShort, BsCreditCard2Back, BsEnvelope, BsFilePerson } from 'react-icons/bs'
+import {
+    BsBuildingDown,
+    BsArrowRightShort,
+    BsCreditCard2Back,
+    BsEnvelope,
+    BsFilePerson,
+    BsCameraReels,
+    BsCalendar,
+} from 'react-icons/bs'
 
 export default function BookingView({ data }: { data: USERBOOKING }) {
     const totalPrice = data.seats.reduce((total, seat) => total + seat.ticketPrice, 0)
@@ -16,7 +24,6 @@ export default function BookingView({ data }: { data: USERBOOKING }) {
             return acc
         }, {} as Record<number, number[]>)
     }
-
     const groupedSeats = groupSeatsByRow(data.seats)
     return (
         <div>
@@ -25,6 +32,32 @@ export default function BookingView({ data }: { data: USERBOOKING }) {
                     <Card.Title>
                         Bokningsnummer: <span className="text-primary">{data.bookingNumberId}</span>
                     </Card.Title>
+                    <Card.Img />
+
+                    <Row>
+                        <Col>
+                            <p>
+                                <BsBuildingDown size={18} className="text-primary me-2" />
+                                {data.cinemaName}
+                            </p>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <p>
+                                <BsCalendar size={18} className="text-primary me-2" />
+                                {data.showTime.split('T')[0]} {data.showTime.split('T')[1].slice(0, 5)}
+                            </p>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <p>
+                                <BsCameraReels size={18} className="text-primary me-2" />
+                                {data.movieTitle}
+                            </p>
+                        </Col>
+                    </Row>
                     <Card.Text>
                         <Row>
                             <Col>
