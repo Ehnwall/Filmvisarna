@@ -92,7 +92,6 @@ export default function BookingPage() {
             {seatsQuery.isLoading && <LoadingBooking />}
             {seatsQuery.data && (
                 <BookingSeats
-                    // occupiedSeats={occupiedSeatsQuery.data}
                     seats={seatsQuery.data}
                     tickets={amount}
                     onSeatsSelected={setSelectedSeats}

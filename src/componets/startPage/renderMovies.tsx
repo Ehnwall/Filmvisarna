@@ -30,9 +30,9 @@ export default function RenderMovies() {
             return true
         }
         if (selectedAge === 'Barnfilmer') {
-            return parseInt(movie.ageLimit) === 0
+            return movie.ageLimit === 0
         }
-        return parseInt(movie.ageLimit) === parseInt(selectedAge)
+        return movie.ageLimit === parseInt(selectedAge)
     })
 
     return (

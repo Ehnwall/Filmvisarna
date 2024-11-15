@@ -10,7 +10,7 @@ const signIn = async (userInformation: SIGNUP): Promise<SIGNUPRESPONSE> => {
 }
 export const useSignUp = () => {
     const navigate = useNavigate()
-    return useMutation<SIGNUPRESPONSE, AxiosError, SIGNUP>({
+    return useMutation<SIGNUPRESPONSE, AxiosError<{ msg: string }>, SIGNUP>({
         mutationFn: signIn,
         onSuccess: () => {
             navigate('/logga-in')
