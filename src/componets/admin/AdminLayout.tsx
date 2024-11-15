@@ -1,9 +1,8 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import Sidebar from './Sidebar'
-import AdminShows from './AdminShows'
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default function AdminLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
         <Container className="h-100" fluid>
             <Row className="h-100">

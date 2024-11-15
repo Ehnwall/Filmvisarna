@@ -1,5 +1,5 @@
 import { useGetBooking } from '../../utils/api/booking/useGetBooking'
-import { Container, Row, Col, Button, Image, Card } from 'react-bootstrap'
+import { Container, Row, Col, Image, Card } from 'react-bootstrap'
 import {
     BsCalendar,
     BsCreditCard2Back,
@@ -16,7 +16,7 @@ import { formatTime, getDuration } from '../../utils/timeFormat'
 
 const ConfirmationPage = () => {
     const { bookingNr } = useParams<{ bookingNr: string }>()
-    const { data } = useGetBooking(bookingNr || '')
+    const { data } = useGetBooking(bookingNr ?? '')
     const booking = Array.isArray(data) && data.length > 0 ? data[0] : null
 
     if (!booking) {

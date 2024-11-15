@@ -1,9 +1,9 @@
 import { USERBOOKING, SEAT } from '@/utils/types/types'
 import React from 'react'
-import { Card, Container, Row, Col, Form, InputGroup } from 'react-bootstrap'
+import { Card, Row, Col } from 'react-bootstrap'
 import { BsBuildingDown, BsArrowRightShort, BsCreditCard2Back, BsEnvelope, BsFilePerson } from 'react-icons/bs'
 
-export default function BookingView({ data }: { data: USERBOOKING }) {
+export default function BookingView({ data }: Readonly<{ data: USERBOOKING }>) {
     const totalPrice = data.seats.reduce((total, seat) => total + seat.ticketPrice, 0)
 
     const groupSeatsByRow = (seats: SEAT[]) => {

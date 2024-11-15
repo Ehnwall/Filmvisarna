@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios'
-import { BOOKING, BOOKINGRESP, PARTIALBOOKING } from '../../types/types'
+import { BOOKINGRESP, PARTIALBOOKING } from '../../types/types'
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 
