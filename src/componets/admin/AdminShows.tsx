@@ -54,11 +54,10 @@ export default function AdminShows() {
     return (
         <Container className="py-4">
             <h2>Sök efter biljett</h2>
-
             <Row>
                 <Col>
                     <Form onSubmit={handleSubmit}>
-                        <InputGroup className="mb-3 w-50 ">
+                        <InputGroup className="mb-3">
                             <Form.Control
                                 type="text"
                                 placeholder="Sök bokningsnummer"
@@ -77,7 +76,7 @@ export default function AdminShows() {
                 <Col>
                     {bookingNr || userEmail ? (
                         Array.isArray(bookingdata) && bookingdata.length > 0 ? (
-                            bookingdata.map((booking) => <BookingView key={booking.bookingId} data={booking} />)
+                            <BookingView data={bookingdata} />
                         ) : (
                             <p className="text-danger">Ingen bokning hittades</p>
                         )
