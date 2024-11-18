@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Col, Card, Badge, Stack } from 'react-bootstrap'
+import { Col, Card, Badge, Stack } from 'react-bootstrap'
 import { getDuration } from '../../../utils/timeFormat'
 
 interface RenderPreviewProps {
@@ -10,7 +10,13 @@ interface RenderPreviewProps {
     genreList: string[]
 }
 
-export default function RenderPreview({ posterUrl, movieTitle, durationMin, ageLimit, genreList }: RenderPreviewProps) {
+export default function RenderPreview({
+    posterUrl,
+    movieTitle,
+    durationMin,
+    ageLimit,
+    genreList,
+}: Readonly<RenderPreviewProps>) {
     let numberDurationMin = +durationMin
     const { hours, minutes } = getDuration(numberDurationMin)
     return (
@@ -23,7 +29,7 @@ export default function RenderPreview({ posterUrl, movieTitle, durationMin, ageL
                         <Card.Title className="fs-6 text-truncate">{movieTitle}</Card.Title>
                         <Card.Text className="d-flex flex-wrap gap-2">
                             {genreList.map((genre) => (
-                                <Badge bg="primary" className="text-black">
+                                <Badge key={genre} bg="primary" className="text-black">
                                     {genre}
                                 </Badge>
                             ))}

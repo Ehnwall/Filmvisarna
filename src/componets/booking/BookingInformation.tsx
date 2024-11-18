@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap'
 import { BsCalendar, BsClock, BsPin } from 'react-icons/bs'
 import { formatTime, getDuration } from '../../utils/timeFormat'
 
-export function BookingInformation({ show }: { show: SHOWS }) {
+export function BookingInformation({ show }: Readonly<{ show: SHOWS }>) {
     const { hours, minutes } = getDuration(show.duration)
     return (
         <Card>

@@ -7,13 +7,14 @@ import StartPage from '../pages/startPage/StartPage'
 import IndividualMovie from '../pages/oneMoviePage'
 import Register from '../pages/authSignUp'
 import ConfirmationPage from '../pages/bookingConfirmation'
-import PostMovies from '../componets/admin/PostMovie/PostMovies'
+import PostMovies from '../../src/componets/admin/PostMovie/postMovies'
 import ProtectedRoute from '../componets/ProtectedRoute'
 import DashBoard from '../componets/admin/DashBoard'
 import AddShow from '../componets/admin/add/AddShow'
 
 export default [
     { path: '/', element: <StartPage />, menuLabel: 'Hem' },
+    { path: '*', element: <StartPage /> },
     { path: '/medlem', element: <MemberPage />, menuLabel: 'Medlemssida', title: 'Medlemssida' },
     { path: '/logga-in', element: <Login />, title: 'Logga in' },
     { path: '/registrera', element: <Register />, title: 'Registrera' },
@@ -48,13 +49,3 @@ export default [
         ],
     },
 ]
-
-//Paths
-// startpage url: `/`
-// bookingpage url:´/boka-film/:showId`
-// confirmationpage url:´/boknings-bekräftelse/:bookingId`
-// member url:´/medlem`
-// individual movie  url:´/film/:movieId`
-// sign-in url:´/registrera`
-// sign-up url:´/logga-in`
-// bookingpage url:´/boka-film/:showId`

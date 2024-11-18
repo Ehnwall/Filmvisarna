@@ -2,7 +2,7 @@ import { MOVIE } from '@/utils/types/types'
 import { Badge, Card, Col, Stack } from 'react-bootstrap'
 import { getDuration } from '../../utils/timeFormat'
 
-export default function MovieCard({ movie }: { movie: MOVIE }) {
+export default function MovieCard({ movie }: Readonly<{ movie: MOVIE }>) {
     const { hours, minutes } = getDuration(movie.durationMin)
     return (
         <Col>

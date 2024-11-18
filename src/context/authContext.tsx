@@ -11,7 +11,7 @@ type ErrorTest = {
 type AuthContextType = {
     user: { firstName: string; lastName: string; role: string } | null
     token: string | null
-    signIn: UseMutationResult<SIGNINRESPONSE, Error, SIGNIN> | null
+    signIn: UseMutationResult<SIGNINRESPONSE, AxiosError<ErrorTest>, SIGNIN> | null
     signUp: UseMutationResult<SIGNUPRESPONSE, AxiosError<ErrorTest>, SIGNUP> | null
     signOut: () => void
 }
