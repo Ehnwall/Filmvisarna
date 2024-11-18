@@ -1,4 +1,3 @@
-import { useGetOccupiedSeats } from '../../utils/api/booking/useGetOccupiedSeats'
 import React, { useEffect, useState } from 'react'
 import { Card, Container, Row, Col, Form, InputGroup, Button } from 'react-bootstrap'
 import { IoSearchOutline } from 'react-icons/io5'

@@ -1,6 +1,6 @@
 import { Container, Button, Form, Row, Col } from 'react-bootstrap'
-import RenderPreview from './RenderPreview'
-import AddGroup from './AddGroup'
+import RenderPreview from './renderPreview'
+import AddGroup from './addGroup'
 import React, { useState } from 'react'
 import { DescriptionNewMovie, NEWMOVIE } from '../../../utils/types/types'
 import { usePostMovie } from '../../../utils/api/movies/usePostMovie'

@@ -3,7 +3,7 @@ import { Badge, Card, Stack } from 'react-bootstrap'
 import { getDuration, formatTime } from '../../utils/timeFormat'
 import { BsClock } from 'react-icons/bs'
 
-export default function ShowCard({ show }: { show: SHOWS }) {
+export default function ShowCard({ show }: Readonly<{ show: SHOWS }>) {
     const { hours, minutes } = getDuration(show.duration)
     return (
         <Card className="">
@@ -13,7 +13,7 @@ export default function ShowCard({ show }: { show: SHOWS }) {
                 <Card.Text className="d-flex mb-2 flex-wrap gap-2">
                     <Stack direction="horizontal" gap={2} className="flex-wrap card-badge">
                         <Badge bg="primary" className="text-black ">
-                            {show.genre[1]}
+                            {show.genre[0]}
                         </Badge>
                         <Badge bg="secondary">
                             <BsClock className="me-2" />

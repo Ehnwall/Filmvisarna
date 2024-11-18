@@ -15,7 +15,7 @@ export function InfoMovieHeader({ movie }: Readonly<{ movie: MOVIE }>) {
                     {hours} tim {minutes} min
                 </span>
                 <span className="px-2">|</span>
-                <span>Från {movie?.ageLimit} år</span>
+                <span> {movie?.ageLimit > 0 ? `Från ${movie?.ageLimit} år` : 'Barnfilm'} </span>
             </div>
             <Row className="g-1">
                 {movie?.description?.genre?.map((genre: string) => (

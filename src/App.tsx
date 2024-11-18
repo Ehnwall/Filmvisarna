@@ -13,24 +13,22 @@ export default function App() {
     const { pathname } = useLocation()
     // watch for route changes
     useEffect(() => {
-        const page = routes.find((route) => route.path.split('/')[1] === pathname.split('/')[0])
-        if (page && page.title) {
+        const page = routes.find((route) => route.path?.split('/')[1] === pathname.split('/')[1])
+        if (page?.title) {
             document.title = `${page.title} | Filmvisarna`
         }
     }, [pathname])
 
     return (
-        <>
-            <QueryClientProvider client={queryClient}>
-                <AuthProvider>
-                    <Header />
-                    <main>
-                        <Outlet />
-                    </main>
-                    <Footer />
-                </AuthProvider>
-                <ReactQueryDevtools initialIsOpen={false} />
-            </QueryClientProvider>
-        </>
+        <QueryClientProvider client={queryClient}>
+            <AuthProvider>
+                <Header />
+                <main>
+                    <Outlet />
+                </main>
+                <Footer />
+            </AuthProvider>
+            <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
     )
 }

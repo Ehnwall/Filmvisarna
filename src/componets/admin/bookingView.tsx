@@ -13,7 +13,7 @@ import Badge from 'react-bootstrap/Badge'
 import ListGroup from 'react-bootstrap/ListGroup'
 import { formatTime } from '../../utils/timeFormat'
 
-export default function BookingView({ data }: { data: USERBOOKING[] }) {
+export default function BookingView({ data }: Readonly<{ data: USERBOOKING[] }>) {
     return (
         <Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
             <Row>
