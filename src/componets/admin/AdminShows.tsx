@@ -84,7 +84,7 @@ export default function AdminShows() {
                 </Col>
             </Row>
 
-            <h2 className="mb-4">Dagens Föreställningar</h2>
+            <h2 className="my-4">Dagens Föreställningar</h2>
             {todaysShows && todaysShows.length > 0 ? (
                 <Row className="g-4">
                     {todaysShows.map((show) => {
