@@ -48,7 +48,7 @@ export default function BookingPage() {
             firstName,
             lastName,
         }
-        const showId = showsQuery.data && (showsQuery?.data.showId as number)
+        const showId = showsQuery.data && showsQuery?.data.showId
         const totalTickets = amount.reduce((acc, ticket) => acc + ticket.amount, 0)
         if (totalTickets !== selectedSeats.length) {
             setAlert(
@@ -91,12 +91,7 @@ export default function BookingPage() {
             </Row>
             {seatsQuery.isLoading && <LoadingBooking />}
             {seatsQuery.data && (
-                <BookingSeats
-                    // occupiedSeats={occupiedSeatsQuery.data}
-                    seats={seatsQuery.data}
-                    tickets={amount}
-                    onSeatsSelected={setSelectedSeats}
-                />
+                <BookingSeats seats={seatsQuery.data} tickets={amount} onSeatsSelected={setSelectedSeats} />
             )}
 
             <Row className="gy-4">

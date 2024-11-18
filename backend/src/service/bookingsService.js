@@ -97,7 +97,7 @@ const createBooking = (showId, seats, user) => {
         const checkIfUserExistsQuery = 'SELECT * FROM users WHERE email = ?'
         const stmt = db.prepare(checkIfUserExistsQuery).get(user.email.toLowerCase())
 
-        if (stmt && !(stmt.role === 'guest')) {
+        if (stmt && stmt.role !== 'guest') {
             throw new Error('User already has an acoount')
         }
         const insertUser = `

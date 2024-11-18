@@ -25,11 +25,7 @@ export default function CheckMember() {
     }, [token])
     const { currentBookings, pastBookings } = splitBookings(bookings)
 
-    useEffect(() => {
-        if (!token) {
-            navigate('/logga-in')
-        }
-    }, [token, navigate])
+    console.log(currentBookings)
     return (
         <Container className="py-5">
             <h1 className="text-center pb-4">Medlemssida</h1>
@@ -39,26 +35,29 @@ export default function CheckMember() {
                 </Card.Header>
                 <Card.Body className="p-0">
                     <Row>
-                        {isLoading ? (
+                        {isLoading && (
                             <Col className="text-center py-4">
-                                <Spinner animation="border" role="status"></Spinner>
+                                <Spinner animation="border"></Spinner>
                             </Col>
-                        ) : error ? (
+                        )}
+                        {error && (
                             <Col className="text-center py-4">
                                 <span>Kunde inte ladda aktuella bokningar. Försök igen senare.</span>
                             </Col>
-                        ) : currentBookings.length > 0 ? (
-                            currentBookings.map((booking: USERBOOKING) => (
-                                <MemberBookingCard key={booking.bookingId} booking={booking} isCurrent={true} />
-                            ))
-                        ) : (
-                            <Col className="text-center py-4">
-                                <div className="d-flex flex-column align-items-center">
-                                    <BsTicket size={50} className="text-muted mb-3" />
-                                    <p className="text-muted">Inga aktuella bokningar</p>
-                                </div>
-                            </Col>
                         )}
+                        {currentBookings.length > 0
+                            ? currentBookings.map((booking: USERBOOKING) => (
+                                  <MemberBookingCard key={booking.bookingId} booking={booking} isCurrent={true} />
+                              ))
+                            : !isLoading &&
+                              !error && (
+                                  <Col className="text-center py-4">
+                                      <div className="d-flex flex-column align-items-center">
+                                          <BsTicket size={50} className="text-muted mb-3" />
+                                          <p className="text-muted">Inga aktuella bokningar</p>
+                                      </div>
+                                  </Col>
+                              )}
                     </Row>
                 </Card.Body>
             </Card>
@@ -68,26 +67,29 @@ export default function CheckMember() {
                 </Card.Header>
                 <Card.Body className="p-0">
                     <Row>
-                        {isLoading ? (
+                        {isLoading && (
                             <Col className="text-center py-4">
-                                <Spinner animation="border" role="status"></Spinner>
+                                <Spinner animation="border"></Spinner>
                             </Col>
-                        ) : error ? (
+                        )}
+                        {error && (
                             <Col className="text-center py-4">
                                 <span>Kunde inte ladda bokningshistorik. Försök igen senare.</span>
                             </Col>
-                        ) : pastBookings.length > 0 ? (
-                            pastBookings.map((booking: USERBOOKING) => (
-                                <MemberBookingCard key={booking.bookingId} booking={booking} isCurrent={false} />
-                            ))
-                        ) : (
-                            <Col className="text-center py-4">
-                                <div className="d-flex flex-column align-items-center">
-                                    <BsTicket size={50} className="text-muted mb-3" />
-                                    <p className="text-muted">Ingen bokningshistorik</p>
-                                </div>
-                            </Col>
                         )}
+                        {pastBookings.length > 0
+                            ? pastBookings.map((booking: USERBOOKING) => (
+                                  <MemberBookingCard key={booking.bookingId} booking={booking} isCurrent={false} />
+                              ))
+                            : !isLoading &&
+                              !error && (
+                                  <Col className="text-center py-4">
+                                      <div className="d-flex flex-column align-items-center">
+                                          <BsTicket size={50} className="text-muted mb-3" />
+                                          <p className="text-muted">Ingen bokningshistorik</p>
+                                      </div>
+                                  </Col>
+                              )}
                     </Row>
                 </Card.Body>
             </Card>

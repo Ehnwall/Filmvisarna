@@ -57,3 +57,6 @@
 .card:hover > .img-background::after {
     filter: blur(20px) !important;
 }
+.card:has(.img-background) {
+    background-color: transparent;
+}

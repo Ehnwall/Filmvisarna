@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap'
-import { CINEMASEATS, OCCUPIEDSEATS, TICKETAMOUNT } from '../../utils/types/types'
+import { CINEMASEATS, TICKETAMOUNT } from '../../utils/types/types'
 import { useGetOccupiedSeats } from '../../utils/api/booking/useGetOccupiedSeats'
 
 type Props = {
@@ -14,7 +14,7 @@ type Seats = {
     ticketTypeId: number | undefined
 }
 
-export function BookingSeats({ seats, tickets, onSeatsSelected }: Props) {
+export function BookingSeats({ seats, tickets, onSeatsSelected }: Readonly<Props>) {
     const [seatIdArray, setSeatIdArray] = useState<number[]>([])
     const { data: occupiedSeats } = useGetOccupiedSeats()
 
