@@ -1,8 +1,11 @@
 import { Row } from 'react-bootstrap'
 import AdminShows from './AdminShows'
 import { ToastContainer } from 'react-toastify'
+import { useAuth } from '../../context/authContext'
 
 export default function DashBoard() {
+    const { user } = useAuth()
+
     return (
         <>
             <Row>
@@ -18,7 +21,7 @@ export default function DashBoard() {
                     pauseOnHover
                     theme="dark"
                 />
-                <h2 className="text-center">Välkommen Admin!</h2>
+                {/* <h2 className="text-center">Välkommen {user?.firstName}</h2> */}
                 <AdminShows />
             </Row>
         </>
