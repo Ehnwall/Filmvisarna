@@ -1,4 +1,4 @@
-import { Container, Row, Dropdown } from 'react-bootstrap'
+import { Container, Row, Dropdown, Button, ButtonGroup } from 'react-bootstrap'
 import Stack from 'react-bootstrap/Stack'
 import { useGetMovies } from '../../utils/api/movies/useGetMovies'
 import { useState } from 'react'
@@ -39,13 +39,13 @@ export default function RenderMovies() {
             </div>
 
             <Stack className="mb-2 mt-3" direction="horizontal" gap={3}>
-                <Dropdown>
-                    <Dropdown.Toggle variant="outline-primary" id="dropdown-basic" className="btn-filter text-center">
-                        {' '}
+                <Dropdown as={ButtonGroup}>
+                    <Button variant="outline-primary" className="btn-filter text-center">
                         {selectedAge === '7' || selectedAge === '11' || selectedAge === '15'
                             ? `Från ${selectedAge}`
                             : selectedAge}
-                    </Dropdown.Toggle>
+                    </Button>
+                    <Dropdown.Toggle split variant="outline-primary" id="dropdown-split-basic" />
                     <Dropdown.Menu>
                         {ages.map((age) => (
                             <Dropdown.Item key={age} onClick={() => handleAgeSelect(age)}>

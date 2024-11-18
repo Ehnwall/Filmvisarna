@@ -2,9 +2,13 @@ import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 import { USERBOOKING } from '@/utils/types/types'
 
-const fetchBooking = async (bookingNr: string): Promise<USERBOOKING> => {
+const fetchBooking = async (identifier: string): Promise<USERBOOKING[]> => {
+    const trimmed = identifier.trim()
     try {
-        const { data } = await axios.get<USERBOOKING>(`/api/bookings/${bookingNr}`)
+        const isEmail = trimmed.includes('@')
+        const { data } = await axios.get<USERBOOKING[]>(
+            isEmail ? `/api/bookings/email/${trimmed}` : `/api/bookings/${trimmed}`
+        )
         return data
     } catch (error) {
         console.error('Error fetching booking:', error)
@@ -12,10 +16,10 @@ const fetchBooking = async (bookingNr: string): Promise<USERBOOKING> => {
     }
 }
 
-export const useGetBooking = (bookingNr: string) => {
+export const useGetBooking = (identifier: string) => {
     return useQuery({
-        queryKey: ['booking', bookingNr],
-        queryFn: () => fetchBooking(bookingNr),
-        enabled: !!bookingNr,
+        queryKey: ['booking', identifier],
+        queryFn: () => fetchBooking(identifier),
+        enabled: !!identifier,
     })
 }
