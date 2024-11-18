@@ -61,7 +61,7 @@ export default function AdminShows() {
                         <InputGroup className="mb-3 w-50 ">
                             <Form.Control
                                 type="text"
-                                placeholder="Sök bokningsnummer"
+                                placeholder="Sök bokningsnummer eller e-post"
                                 aria-label="Booknings Nummer"
                                 aria-describedby="basic-addon2"
                                 name="bookingNr"
