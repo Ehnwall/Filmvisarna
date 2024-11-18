@@ -1,4 +1,3 @@
-import { useGetOccupiedSeats } from '../../utils/api/booking/useGetOccupiedSeats'
 import React, { useEffect, useState } from 'react'
 import { Card, Container, Row, Col, Form, InputGroup, Button } from 'react-bootstrap'
 import { IoSearchOutline } from 'react-icons/io5'
@@ -9,7 +8,8 @@ import BookingView from './bookingView'
 
 export default function AdminShows() {
     const [bookingNr, setBookingNr] = useState<string | undefined>(undefined)
-    const { data: bookingdata } = useGetBooking(bookingNr || '')
+    const [userEmail, setUserEmail] = useState<string | undefined>('')
+    const { data: bookingdata } = useGetBooking(bookingNr || userEmail || '')
     const { data: shows, isLoading: isShowsLoading, error: showsError } = useGetShows()
     const booking = Array.isArray(bookingdata) && bookingdata.length > 0 ? bookingdata[0] : null
 
@@ -24,12 +24,28 @@ export default function AdminShows() {
         return showDate.getTime() === today.getTime()
     })
 
+    // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    //     event.preventDefault()
+    //     const formData = new FormData(event.currentTarget)
+    //     const bookingNrString = formData.get('bookingNr') as string
+
+    //     setBookingNr(bookingNrString)
+    // }
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
-        const bookingNrString = formData.get('bookingNr') as string
+        const input = formData.get('bookingNr') as string
 
-        setBookingNr(bookingNrString)
+        if (input.includes('@')) {
+            // Behandla som e-postadress
+            setBookingNr(undefined)
+            setUserEmail(input)
+        } else {
+            // Behandla som bokningsnummer
+            setUserEmail(undefined)
+            setBookingNr(input)
+        }
     }
 
     useEffect(() => {}, [todaysShows])
@@ -37,14 +53,13 @@ export default function AdminShows() {
     return (
         <Container className="py-4">
             <h2>Sök efter biljett</h2>
-
             <Row>
                 <Col>
                     <Form onSubmit={handleSubmit}>
-                        <InputGroup className="mb-3 w-50 ">
+                        <InputGroup className="mb-3">
                             <Form.Control
                                 type="text"
-                                placeholder="Sök bokningsnummer"
+                                placeholder="Sök bokningsnummer eller e-post"
                                 aria-label="Booknings Nummer"
                                 aria-describedby="basic-addon2"
                                 name="bookingNr"
@@ -58,12 +73,13 @@ export default function AdminShows() {
             </Row>
             <Row>
                 <Col>
-                    {bookingNr &&
-                        (booking ? (
-                            <BookingView data={booking} />
+                    {bookingNr || userEmail ? (
+                        Array.isArray(bookingdata) && bookingdata.length > 0 ? (
+                            <BookingView data={bookingdata} />
                         ) : (
                             <p className="text-danger">Ingen bokning hittades</p>
-                        ))}
+                        )
+                    ) : null}
                 </Col>
             </Row>
 

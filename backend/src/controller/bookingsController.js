@@ -7,7 +7,6 @@ const getAllBookings = (req, res) => {
         const bookings = bookingsService.getBookings(email, role)
         res.status(200).json(bookings)
     } catch (error) {
-        console.error('Error fetching bookings:', error)
         res.status(500).json({ error: 'Something went wrong' })
     }
 }
@@ -25,6 +24,15 @@ const getBookingsFromNumber = (req, res) => {
     const { bookingNr } = req.params
     try {
         const specifikBooking = bookingsService.getBookingFs(bookingNr)
+        res.status(200).send(specifikBooking)
+    } catch (error) {
+        res.status(404).send({ msg: error.message })
+    }
+}
+const getBookingsFromEmail = (req, res) => {
+    const { userEmail } = req.params
+    try {
+        const specifikBooking = bookingsService.getBookingFromEmail(userEmail)
         res.status(200).send(specifikBooking)
     } catch (error) {
         res.status(404).send({ msg: error.message })
@@ -65,4 +73,11 @@ const deleteBooking = (req, res) => {
     }
 }
 
-export default { getBookingsFromNumber, getAllTickets, getAllBookings, createBooking, deleteBooking }
+export default {
+    getBookingsFromNumber,
+    getBookingsFromEmail,
+    getAllTickets,
+    getAllBookings,
+    createBooking,
+    deleteBooking,
+}

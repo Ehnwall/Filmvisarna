@@ -1,7 +1,7 @@
 import { Accordion, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { BiSolidCameraMovie, BiSlideshow } from 'react-icons/bi'
-import { MdAddToPhotos, MdDashboard, MdDelete } from 'react-icons/md'
+import { MdAddToPhotos, MdDashboard } from 'react-icons/md'
 
 const Sidebar = () => {
     return (

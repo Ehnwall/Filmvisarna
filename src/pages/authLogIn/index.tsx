@@ -11,10 +11,12 @@ export default function Login() {
     const [passwordError, setPasswordError] = useState<string | null>(null)
 
     const handleBlur = (field: string, value: string) => {
+        console.log(value)
         if (field === 'email') {
             setEmailError(value.includes('@') ? null : 'Ogiltig e-postadress')
         } else if (field === 'password') {
             setPasswordError(value.length > 7 ? null : 'Lösenordet måste vara minst 8 tecken')
+            console.log('passwordError', passwordError)
         }
     }
 
@@ -61,6 +63,7 @@ export default function Login() {
                                     type="email"
                                     placeholder="Ange din e-postadress"
                                     onChange={(e) => handleBlur('email', e.target.value)}
+                                    formNoValidate
                                 />
                                 {emailError && <Form.Text className="invalid">{emailError}</Form.Text>}
                             </Form.Group>
@@ -71,7 +74,7 @@ export default function Login() {
                                     className={`p-2 ${signIn && signIn.isError ? 'border-danger' : ''}`}
                                     type="password"
                                     placeholder="Ange lösenord"
-                                    onBlur={() => handleBlur('password', '')}
+                                    onBlur={(e) => handleBlur('password', e.target.value)}
                                 />
                                 {passwordError && <Form.Text className="invalid">{passwordError}</Form.Text>}
                             </Form.Group>

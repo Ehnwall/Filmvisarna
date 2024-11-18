@@ -50,6 +50,23 @@ const getBookingFs = (bookingNr) => {
     }
     return mapBookings(statement)
 }
+const getBookingFromEmail = (email) => {
+    console.log('getBookingsFromEmail')
+    const getSpecificBooking = `
+        SELECT
+        *
+        FROM userBookings
+WHERE userEmail = ?
+ORDER BY showTime DESC
+    `
+
+    const statement = db.prepare(getSpecificBooking).all(email)
+    console.log('Raw SQL Result:', statement)
+    if (statement.length === 0) {
+        throw new Error('no booking found' + email)
+    }
+    return mapBookings(statement)
+}
 
 const createBooking = (showId, seats, user) => {
     // Check if seats are already booked
@@ -97,7 +114,7 @@ const createBooking = (showId, seats, user) => {
         const checkIfUserExistsQuery = 'SELECT * FROM users WHERE email = ?'
         const stmt = db.prepare(checkIfUserExistsQuery).get(user.email.toLowerCase())
 
-        if (stmt && !(stmt.role === 'guest')) {
+        if (stmt && stmt.role !== 'guest') {
             throw new Error('User already has an acoount')
         }
         const insertUser = `
@@ -177,4 +194,4 @@ const deleteBookingById = (bookingId, email, role) => {
     return { bookingId }
 }
 
-export default { getBookingFs, getAllTickets, getBookings, createBooking, deleteBookingById }
+export default { getBookingFs, getBookingFromEmail, getAllTickets, getBookings, createBooking, deleteBookingById }

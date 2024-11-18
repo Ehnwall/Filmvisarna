@@ -3,8 +3,8 @@ import AdminShows from './AdminShows'
 import { ToastContainer } from 'react-toastify'
 
 export default function DashBoard() {
+
     return (
-        <>
             <Row>
                 <ToastContainer
                     position="top-center"
@@ -18,9 +18,7 @@ export default function DashBoard() {
                     pauseOnHover
                     theme="dark"
                 />
-                <h2 className="text-center">Välkommen Admin!</h2>
                 <AdminShows />
             </Row>
-        </>
     )
 }
