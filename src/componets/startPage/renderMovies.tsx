@@ -1,4 +1,4 @@
-import { Container, Row, Dropdown } from 'react-bootstrap'
+import { Container, Row, Dropdown, Button, ButtonGroup } from 'react-bootstrap'
 import Stack from 'react-bootstrap/Stack'
 import { useGetMovies } from '../../utils/api/movies/useGetMovies'
 import { useState } from 'react'
@@ -38,23 +38,23 @@ export default function RenderMovies() {
                 <h3>Aktuella filmer på bio</h3>
             </div>
 
-                <Stack className="mb-2 mt-3" direction="horizontal" gap={3}>
-                    <Dropdown as={ButtonGroup}>
-                        <Button variant="outline-primary" className="btn-filter text-center">
-                            {selectedAge === '7' || selectedAge === '11' || selectedAge === '15'
-                                ? `Från ${selectedAge}`
-                                : selectedAge}
-                        </Button>
-                        <Dropdown.Toggle split variant="outline-primary" id="dropdown-split-basic" />
-                        <Dropdown.Menu>
-                            {ages.map((age) => (
-                                <Dropdown.Item key={age} onClick={() => handleAgeSelect(age)}>
-                                    {age === '7' || age === '11' || age === '15' ? `Från ${age}` : age}
-                                </Dropdown.Item>
-                            ))}
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </Stack>
+            <Stack className="mb-2 mt-3" direction="horizontal" gap={3}>
+                <Dropdown as={ButtonGroup}>
+                    <Button variant="outline-primary" className="btn-filter text-center">
+                        {selectedAge === '7' || selectedAge === '11' || selectedAge === '15'
+                            ? `Från ${selectedAge}`
+                            : selectedAge}
+                    </Button>
+                    <Dropdown.Toggle split variant="outline-primary" id="dropdown-split-basic" />
+                    <Dropdown.Menu>
+                        {ages.map((age) => (
+                            <Dropdown.Item key={age} onClick={() => handleAgeSelect(age)}>
+                                {age === '7' || age === '11' || age === '15' ? `Från ${age}` : age}
+                            </Dropdown.Item>
+                        ))}
+                    </Dropdown.Menu>
+                </Dropdown>
+            </Stack>
 
             <Row xs={2} md={4} xl={6} className="g-3">
                 <AnimatePresence>
