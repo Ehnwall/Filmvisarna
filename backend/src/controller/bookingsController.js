@@ -5,13 +5,8 @@ const getAllBookings = (req, res) => {
     const { email, role } = req.user
     try {
         const bookings = bookingsService.getBookings(email, role)
-        if (bookings.length > 0) {
-            res.status(200).json(bookings)
-        } else {
-            res.status(404).json({ msg: 'No bookings found for this user' })
-        }
+        res.status(200).json(bookings)
     } catch (error) {
-        console.error('Error fetching bookings:', error)
         res.status(500).json({ error: 'Something went wrong' })
     }
 }
@@ -25,10 +20,19 @@ const getAllTickets = (req, res) => {
     }
 }
 
-const getBookingsFromId = (req, res) => {
-    const { bookingId } = req.params
+const getBookingsFromNumber = (req, res) => {
+    const { bookingNr } = req.params
     try {
-        const specifikBooking = bookingsService.getBookingFs(bookingId)
+        const specifikBooking = bookingsService.getBookingFs(bookingNr)
+        res.status(200).send(specifikBooking)
+    } catch (error) {
+        res.status(404).send({ msg: error.message })
+    }
+}
+const getBookingsFromEmail = (req, res) => {
+    const { userEmail } = req.params
+    try {
+        const specifikBooking = bookingsService.getBookingFromEmail(userEmail)
         res.status(200).send(specifikBooking)
     } catch (error) {
         res.status(404).send({ msg: error.message })
@@ -49,7 +53,7 @@ const createBooking = (req, res) => {
             req.user.lastName = req.body.user.lastName
         }
         const newBooking = bookingsService.createBooking(showId, seats, req.user)
-        return res.status(200).send({ msg: 'Booking successfully created', bookingId: newBooking.lastInsertRowid })
+        return res.status(200).send({ msg: 'Booking successfully created', bookingNr: newBooking })
     } catch (e) {
         return res.status(400).send({ msg: e.message })
     }
@@ -69,4 +73,11 @@ const deleteBooking = (req, res) => {
     }
 }
 
-export default { getBookingsFromId, getAllTickets, getAllBookings, createBooking, deleteBooking }
+export default {
+    getBookingsFromNumber,
+    getBookingsFromEmail,
+    getAllTickets,
+    getAllBookings,
+    createBooking,
+    deleteBooking,
+}

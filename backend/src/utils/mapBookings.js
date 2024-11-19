@@ -22,6 +22,7 @@ function mapBookings(result) {
                 cinemaName: booking.cinemaName,
                 movieTitle: booking.movieTitle,
                 movieUrl: booking.moviePosterUrl,
+                durationMin: booking.durationMin,
                 seats: [
                     {
                         seatRow: parseInt(booking.seatRow, 10),

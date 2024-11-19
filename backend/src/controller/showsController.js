@@ -1,5 +1,23 @@
 import showService from '../service/showsService.js'
 
+const postOneShowController = (req, res) => {
+    const { movieId, cinemaId, time } = req.body
+
+    if (!movieId || !cinemaId || !time) {
+        return res.status(400).json({ msg: 'Missing required fields' })
+    }
+
+    try {
+        const isoTime = new Date(time).toISOString()
+        const newShowResult = showService.addShow(movieId, cinemaId, isoTime)
+
+        res.status(201).json(newShowResult)
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ msg: error.message })
+    }
+}
+
 const getShowById = (req, res) => {
     const id = parseInt(req.params.id)
 
@@ -30,12 +48,26 @@ const getAllShowsController = (req, res) => {
 const getSeats = (req, res) => {
     const showId = req.params.Id
 
-    try {
-        const seatsCheck = showService.getSeatStatus(showId)
-        res.status(200).send({ occupiedSeats: seatsCheck })
-    } catch (e) {
-        res.status(404).send({ msg: e.message })
+    res.setHeader('Content-Type', 'text/event-stream')
+    res.setHeader('Cache-Control', 'no-cache')
+    res.setHeader('Connection', 'keep-alive')
+    const sendSeatsStatus = () => {
+        try {
+            const seatsCheck = showService.getSeatStatus(showId)
+            res.write(`data: ${JSON.stringify({ occupiedSeats: seatsCheck })}\n\n`)
+        } catch (e) {
+            res.write(`event: error\ndata: ${JSON.stringify({ msg: e.message })}\n\n`)
+        }
     }
+    res.write(': welcome\n\n')
+    sendSeatsStatus()
+
+    const intervalId = setInterval(sendSeatsStatus, 5000)
+
+    req.on('close', () => {
+        clearInterval(intervalId)
+        res.end()
+    })
 }
 
-export default { getAllShowsController, getSeats, getShowById }
+export default { postOneShowController, getAllShowsController, getSeats, getShowById }

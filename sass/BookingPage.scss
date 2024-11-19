@@ -1,0 +1,44 @@
+.seat-row {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.form-check-input:hover {
+    cursor: pointer;
+}
+
+.seat-picker__container {
+    min-width: 35rem;
+}
+
+.cinema.cinema {
+    margin-bottom: 5rem;
+}
+.seats {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+.form-check-input {
+    font-size: 2rem;
+}
+
+.inactive {
+    opacity: 0.6;
+    pointer-events: auto;
+    cursor: not-allowed;
+}
+.occupied > input:disabled {
+    background-color: $primary;
+}
+input[type='checkbox'] {
+    transition: background-color 0.3s ease;
+}
+.seat-row input:hover {
+    background-color: $primary;
+    opacity: 0.5;
+}
+.cinema-screen {
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+}
