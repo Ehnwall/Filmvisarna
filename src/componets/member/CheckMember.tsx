@@ -25,7 +25,6 @@ export default function CheckMember() {
     }, [token])
     const { currentBookings, pastBookings } = splitBookings(bookings)
 
-    console.log(currentBookings)
     return (
         <Container className="py-5">
             <h1 className="text-center pb-4">Medlemssida</h1>

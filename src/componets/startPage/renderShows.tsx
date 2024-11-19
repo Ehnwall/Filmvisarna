@@ -99,9 +99,15 @@ const MoviesWithCinnema = () => {
                                     className={disabledShowClass(
                                         'border card-dates',
                                         isPast ? 'bg-date-picker text-muted no-hover' : 'hoverable',
-                                        isSelected ? 'bg-primary text-white' : ''
+                                        isSelected ? 'bg-primary text-black' : ''
                                     )}
+                                    tabIndex={isPast ? -1 : 0}
                                     onClick={() => !isPast && setSelectedDate(dayOfWeek)}
+                                    onKeyDown={(e) => {
+                                        if (!isPast && (e.key === 'Enter' || e.key === ' ')) {
+                                            setSelectedDate(dayOfWeek)
+                                        }
+                                    }}
                                     style={{ cursor: isPast ? 'not-allowed' : 'pointer' }}
                                 >
                                     <Card.Body>

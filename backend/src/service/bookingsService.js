@@ -51,7 +51,6 @@ const getBookingFs = (bookingNr) => {
     return mapBookings(statement)
 }
 const getBookingFromEmail = (email) => {
-    console.log('getBookingsFromEmail')
     const getSpecificBooking = `
         SELECT
         *
@@ -61,7 +60,6 @@ ORDER BY showTime DESC
     `
 
     const statement = db.prepare(getSpecificBooking).all(email)
-    console.log('Raw SQL Result:', statement)
     if (statement.length === 0) {
         throw new Error('no booking found' + email)
     }

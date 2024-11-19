@@ -25,6 +25,7 @@ export type USERBOOKING = {
     showTime: string
     cinemaName: string
     movieTitle: string
+    durationMin: number
     movieUrl: string
     seats: SEAT[]
 }

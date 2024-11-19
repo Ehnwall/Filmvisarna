@@ -11,12 +11,10 @@ export default function Login() {
     const [passwordError, setPasswordError] = useState<string | null>(null)
 
     const handleBlur = (field: string, value: string) => {
-        console.log(value)
         if (field === 'email') {
             setEmailError(value.includes('@') ? null : 'Ogiltig e-postadress')
         } else if (field === 'password') {
             setPasswordError(value.length > 7 ? null : 'Lösenordet måste vara minst 8 tecken')
-            console.log('passwordError', passwordError)
         }
     }
 
