@@ -1,0 +1,65 @@
+.carusel-header {
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    bottom: unset !important;
+}
+
+.carousel-item > img {
+    width: 100%;
+    aspect-ratio: 16/7;
+    object-fit: cover;
+    opacity: 0.4;
+}
+
+.rowcard {
+    display: flex;
+    gap: 0.8rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    white-space: nowrap;
+}
+.rowcard > .card {
+    width: 15rem;
+    min-width: 15rem;
+}
+
+.card-horizontal__scroll {
+    min-width: 13rem;
+    max-width: 20rem;
+}
+
+.card-dates {
+    cursor: pointer;
+    transition: background-color $transition, transform $transition;
+    &:hover {
+        background-color: $primary;
+    }
+}
+
+.img-background {
+    width: 100%;
+    background-size: cover;
+    aspect-ratio: 7/10;
+    background-position: center;
+    position: relative;
+}
+.img-background::after {
+    content: '';
+    inset: 0;
+    position: absolute;
+    background: inherit;
+    filter: blur(0px);
+    z-index: -1;
+    transition: filter 0.3s ease;
+    border-radius: inherit;
+}
+.card:hover > .img-background::after {
+    filter: blur(20px) !important;
+}
+.card:has(.img-background) {
+    background-color: transparent;
+}
+.card:has(.stretched-link:focus) > .img-background::after {
+    filter: blur(20px) !important;
+}

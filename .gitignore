@@ -1,6 +1,7 @@
 # Database
-db/live/db.sqlite3
-
+../../db/live/db.sqlite3
+#Secrets
+.env
 # Logs
 logs
 *.log
