@@ -25,7 +25,11 @@ export default function MovieCard({ movie }: Readonly<{ movie: MOVIE }>) {
                         </Badge>
                     </Stack>
                 </Card.Body>
-                <Card.Link className="stretched-link" href={`/film/${movie.Id}`}></Card.Link>
+                <Card.Link
+                    title={`Läs mer om ${movie.title}`}
+                    className="stretched-link"
+                    href={`/film/${movie.Id}`}
+                ></Card.Link>
             </Card>
         </Col>
     )

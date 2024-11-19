@@ -60,3 +60,6 @@
 .card:has(.img-background) {
     background-color: transparent;
 }
+.card:has(.stretched-link:focus) > .img-background::after {
+    filter: blur(20px) !important;
+}

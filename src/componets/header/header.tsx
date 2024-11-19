@@ -9,7 +9,7 @@ export default function Header() {
                 <Navbar.Brand href="/">Filmvisarna</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="ms-auto">
+                    <Nav as="ul" className="ms-auto">
                         {routes
                             .filter((x) => x.menuLabel)
                             .map(({ path, menuLabel }, i) => (

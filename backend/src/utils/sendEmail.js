@@ -32,7 +32,7 @@ function sendBookingConfirm(confirmed, bookingNr, email) {
 
     const mailOptions = {
         from: emailAdress,
-        to: '',
+        to: email,
         subject: 'Din boking är bekräftad från Filmvisarna',
         html: `
     <body style="height: 100%; width: 100%; background-color: #0D1B2A; color: #ebe9e4; display: flex; justify-content: center; align-items: center; text-align: center;">

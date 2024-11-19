@@ -504,4 +504,4 @@ bookingXSeatsXTicketData.forEach((data) => {
     db.prepare(insertBookingXSeatsXTicketQuery).run(data.bookingID, data.cinemaSeatsID, data.ticketTypeID)
 })
 db.close()
-console.log('Seat data inserted successfully.')
+console.log('Seed data inserted successfully.')
