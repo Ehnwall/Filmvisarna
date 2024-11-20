@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Card, Container, Row, Col, Form, InputGroup, Button } from 'react-bootstrap'
 import { IoSearchOutline } from 'react-icons/io5'
 import { formatTime } from '../../utils/timeFormat'
@@ -11,9 +11,6 @@ export default function AdminShows() {
     const [userEmail, setUserEmail] = useState<string | undefined>('')
     const { data: bookingdata } = useGetBooking(bookingNr || userEmail || '')
     const { data: shows, isLoading: isShowsLoading, error: showsError } = useGetShows()
-    const booking = Array.isArray(bookingdata) && bookingdata.length > 0 ? bookingdata[0] : null
-
-    const [occupiedSeatsMap, setOccupiedSeatsMap] = useState<{ [key: number]: number }>({})
 
     const today = new Date()
     today.setHours(0, 0, 0, 0)
@@ -23,14 +20,6 @@ export default function AdminShows() {
         showDate.setHours(0, 0, 0, 0)
         return showDate.getTime() === today.getTime()
     })
-
-    // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    //     event.preventDefault()
-    //     const formData = new FormData(event.currentTarget)
-    //     const bookingNrString = formData.get('bookingNr') as string
-
-    //     setBookingNr(bookingNrString)
-    // }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -47,9 +36,6 @@ export default function AdminShows() {
             setBookingNr(input)
         }
     }
-
-    useEffect(() => {}, [todaysShows])
-
     return (
         <Container className="py-4">
             <h2>Sök efter biljett</h2>
