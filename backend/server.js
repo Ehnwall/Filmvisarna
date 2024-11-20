@@ -15,7 +15,11 @@ const __dirname = path.dirname(__filename)
 
 export const db = betterSqlite('./backend/db/db.sqlite3')
 
-const port = 4000
+if (process.env.MODE === 'production' && !process.env.PORT) {
+    console.log('Please set the PORT environment variable')
+}
+
+const port = process.env.PORT || 4000
 const app = express()
 
 app.use(express.static(path.join(__dirname, '../dist')))
@@ -26,6 +30,15 @@ app.use(cinemaRouter)
 app.use(bookingRouter)
 app.use(showsRouter)
 app.use(authRouter)
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../dist', 'index.html'))
+})
+
 app.listen(port, async () => {
-    console.log(`Server is alive at http://localhost:${port}`)
+    if (process.env.MODE === 'production') {
+        console.log(`Server is live at port ${port}`)
+    } else {
+        console.log(`Server is alive at http://localhost:${port}`)
+    }
 })
