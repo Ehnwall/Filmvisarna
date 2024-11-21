@@ -13,7 +13,9 @@ dotenv.config()
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-export const db = betterSqlite('./backend/db/db.sqlite3')
+export const dbPath = path.join(__dirname, '/db/db.sqlite3')
+
+export const db = betterSqlite(dbPath)
 
 if (process.env.MODE === 'production' && !process.env.PORT) {
     console.log('Please set the PORT environment variable')
