@@ -135,3 +135,7 @@ dist
 
 # Mac specific
 .DS_Store
+
+starter.cjs
+
+backend/db
